@@ -12,6 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Tupa" />    
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="~/Content/main.css" />
     
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -21,13 +25,18 @@
 <body>
     <!-- HEADER -->
     <header class="navigation">
-        <nav>
+        <div class="container">
             <div class="logo">
                 <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/Logo.svg" />
             </div>
 
-            <asp:HyperLink ID="hlHome" runat="server" NavigateUrl="~/View/Home/Home.aspx">Home</asp:HyperLink>
-        </nav>
+            <nav>
+                <asp:HyperLink ID="hlHome" runat="server" NavigateUrl="~/View/Home/Home.aspx">Inicio</asp:HyperLink>
+                <asp:HyperLink ID="hlMap" runat="server" NavigateUrl="~/View/Map/Map.aspx">Mapa</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/View/History/History.aspx">Histórico</asp:HyperLink>
+                <asp:HyperLink ID="hlLogin" runat="server" NavigateUrl="~/View/Login/Login.aspx" CssClass="button-secondary">Entrar</asp:HyperLink>
+            </nav>
+        </div>
     </header>
 
     <!-- CONTENT -->
