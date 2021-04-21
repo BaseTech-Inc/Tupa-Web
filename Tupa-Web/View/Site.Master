@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tupa_Web.View.Site" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Tupa" />    
+
+    <link rel="stylesheet" type="text/css" href="~/Content/main.css" />
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="navigation">
+        <nav>
+            <div class="logo">
+                <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/Logo.svg" />
+            </div>
+
+            <asp:HyperLink ID="hlHome" runat="server" NavigateUrl="~/View/Home/Home.aspx">Home</asp:HyperLink>
+        </nav>
+    </header>
+
+    <!-- CONTENT -->
+    <form id="frmContentPlaceHolder" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <!-- FOOTER -->
+    <footer>
+
+    </footer>
+</body>
+</html>
