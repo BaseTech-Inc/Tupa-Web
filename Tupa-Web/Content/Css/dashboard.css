@@ -1,0 +1,191 @@
+.dashboard {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard > .left {
+    min-width: 65%;
+    margin-right: 24px;
+}
+
+.dashboard > .left > div,
+.dashboard > .right > div {
+    padding: 24px 48px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.dashboard .left .atual {    
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.dashboard .left .atual p {
+    font-size: var(--body_2_font_size);
+    margin-bottom: 8px;
+}
+
+.dashboard .left .atual h2 {
+    margin-bottom: 4px;
+}
+
+.dashboard .left .atual img {
+    width: 200px;
+}
+
+.dashboard .left .atual h1 {
+    font-size: 72px;
+    margin-bottom: 12px;
+}
+
+.dashboard .left .previsao header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.dashboard .left .previsao header .navigation {
+    display: flex;
+    align-items: center;
+    background: var(--background_color);
+    border-radius: 16px;
+    padding: 4px;
+}
+
+.dashboard .left .previsao header .navigation li { 
+    padding: 4px 32px;
+    cursor: pointer;
+}
+
+.dashboard .left .previsao header .navigation li p {
+    font-size: var(--body_2_font_size);
+}
+
+.dashboard .left .previsao header .navigation li.target {
+    background: var(--primary-color);
+    border-radius: 12px;
+    box-shadow: 0 3px 6px var(--shadow-primary-color);  
+}
+
+.dashboard .left .previsao header .navigation li.target p {
+    color: #ffffff;
+}
+
+.dashboard .right {
+    width: 100%;
+}
+
+.dashboard .right .search {
+    width: calc(100% - 76px);
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.dashboard .right .search label {
+    position: absolute;
+    margin: 0 20px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.dashboard .right .search input {
+    width: 100%;
+    padding: 12px 20px 12px 56px;
+    border-radius: 12px;
+    background: var(--background_color);
+}
+
+.dashboard .right .alertas p {
+    font-size: var(--body_2_font_size);
+    margin-bottom: 8px;
+}
+
+.dashboard .right .alertas {
+    position: relative;
+}
+
+.dashboard .right .alertas .list {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.dashboard .right .alertas .list::-webkit-scrollbar {
+    background-color:var(--surface_color);
+    width: 16px;
+    transition: .4s ease;
+}
+
+.dashboard .right .alertas .list::-webkit-scrollbar-track {
+    background-color: var(--surface_color);
+}
+
+.dashboard .right .alertas .list::-webkit-scrollbar-thumb {
+    background-color:var(--border-color);
+    border-radius: 12px;
+    border: 5px solid var(--surface_color);
+}
+
+.dashboard .right .alertas .list::-webkit-scrollbar-thumb:hover {
+    border-left: 3.2px solid var(--surface_color);
+    border-right: 3.2px solid var(--surface_color);
+}
+
+.dashboard .right .alertas .list > .card {
+    width: calc(100% - 50px);
+    border-radius: 12px;
+    padding: 16px 24px;
+    display: flex;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.dashboard .right .alertas .list > .card .icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-color);
+    border: 1px solid var(--border-variant-color);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 6px var(--shadow-primary-color);
+    margin-right: 12px;
+    float: left;
+}
+
+.dashboard .right .alertas .list > .card .icon span {
+    color: #E7F2FE;
+}
+
+.dashboard .right .alertas .list > .card .title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.dashboard .right .alertas .list > .card .line {
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    margin-bottom: 16px;
+}
+.dashboard .right .alertas .list > .card .time p {
+    font-size: var(--body_2_font_size);
+    white-space: nowrap;
+    position: absolute;
+    right: 24px;
+    top: 12px;
+}
+
+.dashboard .right .alertas .list >.card .title .description h4 {
+    text-overflow: ellipsis;
+    width: 60%;
+    height: 1em;
+    overflow: hidden; 
+    white-space: nowrap;
+    margin-bottom: 4px;
+}

@@ -4,52 +4,180 @@
 
 <html>
 <head runat="server">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TupaWeb">
     <title></title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#2485F3">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Tupa" />    
+    <meta property="og:title" content="Tupã: Previsões, alertas e mapas meteorologicos">
+    <meta property="og:image" content="https://guilhermeivo.github.io/tcc-web-design/content/tupa-social.png">
+    <meta property="og:description" content="Alertas de enchentes em locais de risco e alterações climáticas, com monitoriamento da sua localização atual ou regiões salvadas como favoritas.">
+    <meta property="og:url" content="https://guilhermeivo.github.io/tcc-web-design/">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://guilhermeivo.github.io/tcc-web-design/">
+    <meta name="twitter:title" content="Tupã: Previsões, alertas e mapas meteorologicos">
+    <meta name="twitter:description" content="Alertas de enchentes em locais de risco e alterações climáticas, com monitoriamento da sua localização atual ou regiões salvadas como favoritas.">
+    <meta name="twitter:image" content="https://guilhermeivo.github.io/tcc-web-design/content/tupa-social.png">
 
-    <link rel="stylesheet" type="text/css" href="~/Content/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|" rel="stylesheet">
+
+    <link rel="stylesheet" href="/Content/Css/reset.css">
+    <link rel="stylesheet" href="/Content/Css/main.css">
+    <link rel="stylesheet" href="/Content/Css/variables.css">
     
     <asp:ContentPlaceHolder ID="head" runat="server">
         
     </asp:ContentPlaceHolder>
 </head>
-<body>
-    <!-- HEADER -->
-    <header class="navigation">
-        <div class="container">
+<body data-theme="white">
+    <!-- Header -->
+    <header class="home container card">
+        <div class="menu container_wrapper">
             <div class="logo">
-                <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/Logo.svg" />
+                <a href="~/View/Home/Home.aspx">
+                    <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/logo.png" />
+                </a>
             </div>
-
             <nav>
-                <asp:HyperLink ID="hlHome" runat="server" NavigateUrl="~/View/Home/Home.aspx">Inicio</asp:HyperLink>
-                <asp:HyperLink ID="hlMap" runat="server" NavigateUrl="~/View/Map/Map.aspx">Mapa</asp:HyperLink>
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/View/History/History.aspx">Histórico</asp:HyperLink>
-                <asp:HyperLink ID="hlLogin" runat="server" NavigateUrl="~/View/Login/Login.aspx" CssClass="button-secondary">Entrar</asp:HyperLink>
+                <ul>
+                    <li class="target">
+                        <a href="./index.html">Início</a>
+                    </li>
+                    <li>
+                        <a href="./pages/mapa.html">Mapa</a>
+                    </li>
+                    <li>
+                        <a href="./pages/locais.html">Locais</a>
+                    </li>
+                    <li>
+                        <a href="./pages/dashboard.html">Dashboard</a>
+                    </li>
+                </ul>
             </nav>
+            <div class="user">
+                <a href="./pages/login.html">Entrar</a>
+                <a href="./pages/register.html" class="primary-button">Seja um Bro!</a>
+                <div class="menu-bar">
+                    <span class="material-icons">
+                        menu
+                    </span>
+
+                    <ul class="menu-dropdown card">
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/configuarcoes.html">
+                                Perfil
+                            </a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/configuarcoes.html">
+                                Editar Perfil
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/configuarcoes.html">
+                                <span class="material-icons-outlined">
+                                    settings
+                                </span>
+                                Configurações
+                            </a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/configuarcoes.html">
+                                <span class="material-icons-outlined">
+                                    dark_mode
+                                </span>
+                                Temas
+                            </a>
+                        </li>
+                        <hr>
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/configuarcoes.html" class="blue">Planos</a>
+                        </li>
+                        <hr>
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/terms.html">Termos de serviço</a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a href="./pages/privacy.html">Política de privacidade</a>
+                        </li>
+                        <hr>
+                        <li class="menu-dropdown-item">
+                            <a href="#">Sair</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="responsive">
+                <span class="material-icons">
+                    menu
+                </span>
+            </div>
         </div>
     </header>
 
-    <!-- CONTENT -->
+    <!-- Content -->
     <form id="frmContentPlaceHolder" runat="server">
-        <div>
+        <main>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-        </div>
+        </main>
     </form>
 
-    <!-- FOOTER -->
-    <footer>
+    <!-- Footer -->    
+    <footer class="container">
+        <div class="container_wrapper">
+            <div class="up">
+                <div class="logo">
+                    <a href="./index.html">
+                        <asp:Image ID="imgLogoWhite" runat="server" ImageUrl="~/Content/Images/logo-white.png" />
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="./index.html">Início</a>
+                        </li>
+                        <li>
+                            <a href="./pages/mapa.html">Mapa</a>
+                        </li>
+                        <li>
+                            <a href="./pages/locais.html">Locais</a>
+                        </li>
+                        <li>
+                            <a href="./pages/dashboard.html">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="./pages/login.html">Entrar</a>
+                        </li>
+                        <li>
+                            <a href="./pages/register.html">Registrar</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="down">
+                <p>©BaseTech, Inc</p>
 
+                <ul>
+                    <li>
+                        <a href="./pages/terms.html">Termos de serviço</a>
+                    </li>
+                    <li>
+                        <a href="./pages/privacy.html">Política de privacidade</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

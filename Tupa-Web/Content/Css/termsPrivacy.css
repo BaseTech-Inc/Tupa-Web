@@ -1,0 +1,72 @@
+.terms .list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.terms .list hr {
+    background: var(--border-color);
+    width: 100%;
+    height: 1px;
+    border: 0;
+    display: block;
+}
+
+.terms .list-item {
+    padding: 24px;
+}
+
+.terms .list-item.target {
+    background-color: var(--surface_color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 6px var(--shadow-variant-color);
+}
+
+.terms .list-item.target:nth-child(1) {
+    border-top: 0;
+}
+
+.terms .list-item .list-item-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.terms .title {
+    min-width: 35%;
+}
+
+.terms .title h1 {
+    margin-bottom: 12px;
+}
+
+.terms .description h2,
+.terms .description h3 {
+    margin-bottom: 32px;
+}
+
+.terms .description p,
+.terms .description ol,
+.terms .description ul {
+    margin-bottom: 24px;
+}
+
+.terms .description ol,
+.terms .description ul {
+    list-style: none;
+}
+  
+.terms .description li {
+    margin-left: 24px;
+}
+
+.terms .description ol li::before,
+.terms .description ul li::before {
+    content: "\2022";  
+    color: var(--primary-variant-color);
+    font-size: 24px;
+    
+    font-weight: bold; 
+    display: inline-block; 
+    width: 1em; 
+    margin-left: -1em; 
+}
