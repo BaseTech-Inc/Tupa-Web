@@ -412,8 +412,8 @@
     color: var(--primary-variant-color);
 }
 
-.iti__flag {background-image: url("../../content/flags.png");}
+.iti__flag {background-image: url("/Content/Images/flags.png");}
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {background-image: url("../../content/flags@2x.png");}
+  .iti__flag {background-image: url("/Content/Images/flags@2x.png");}
 }

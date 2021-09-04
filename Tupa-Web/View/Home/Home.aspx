@@ -209,4 +209,18 @@
             </div>                               
         </div>
     </div>
+
+    <script src="/Scripts/intlTelInput.min.js"></script>
+    <script src="/Scripts/Carousel.js"></script>
+    <script>
+        Carousel.Setup(
+            Carousel.types.Move, 
+            false)
+
+        var input = document.querySelector("#phone")
+
+        window.intlTelInput(input, {
+            // any initialisation options go here
+        })
+    </script>
 </asp:Content>

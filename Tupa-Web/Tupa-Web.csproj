@@ -94,14 +94,48 @@
     <Content Include="Content\Images\phone.png" />
     <Content Include="Content\Images\tupa-social.png" />
     <Content Include="Content\Images\twitter-brands.svg" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\Carousel.js" />
+    <Content Include="Scripts\intlTelInput.min.js" />
+    <Content Include="Scripts\PasswordEyes.js" />
+    <Content Include="Scripts\TermsPrivacy.js" />
+    <Content Include="View\Configuracoes\Configuracoes.aspx" />
+    <Content Include="View\Dashboard\Dashboard.aspx" />
+    <Content Include="View\Error\Error.aspx" />
     <Content Include="View\Home\Home.aspx" />
+    <Content Include="View\Locais\Locais.aspx" />
+    <Content Include="View\Login\Login.aspx" />
+    <Content Include="View\Mapa\Mapa.aspx" />
+    <Content Include="View\Privacy\Privacy.aspx" />
+    <Content Include="View\Terms\Terms.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\WeatherForecastController.cs" />
     <Compile Include="Model\WeatherForecast.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Configuracoes\Configuracoes.aspx.cs">
+      <DependentUpon>Configuracoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Configuracoes.aspx.designer.cs">
+      <DependentUpon>Configuracoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dashboard\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Dashboard\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Error\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Error\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Home\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -109,12 +143,47 @@
     <Compile Include="View\Home\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Locais\Locais.aspx.cs">
+      <DependentUpon>Locais.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Locais\Locais.aspx.designer.cs">
+      <DependentUpon>Locais.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Mapa\Mapa.aspx.cs">
+      <DependentUpon>Mapa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Mapa\Mapa.aspx.designer.cs">
+      <DependentUpon>Mapa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Privacy\Privacy.aspx.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Privacy\Privacy.aspx.designer.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="View\Terms\Terms.aspx.cs">
+      <DependentUpon>Terms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Terms\Terms.aspx.designer.cs">
+      <DependentUpon>Terms.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +196,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Register\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

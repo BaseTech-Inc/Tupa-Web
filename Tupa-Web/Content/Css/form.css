@@ -1,15 +1,15 @@
-form .button_icon_left {
+.form .button_icon_left {
     position: relative;
 }
 
-form .button_icon_left img {
+.form .button_icon_left img {
     position: absolute;
     width: 24px;
     top: 50%;
     transform: translate(0, -50%);
     left: 12px;
 }
-form .inputs input {
+.form .inputs input {
     background: #ffffff;
     border: 1px solid var(--border-color);
     padding: 10px 12px;
@@ -17,28 +17,28 @@ form .inputs input {
     border-bottom: none;
 }
 
-.login_content .login form .inputs .input:first-child input {
+.login_content .login .form .inputs .input:first-child input {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     border-bottom: none;
 }
 
-.login_content .login form .inputs .input:last-child input {
+.login_content .login .form .inputs .input:last-child input {
     border: 1px solid var(--border-color);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
 }
 
-form .input_icon_right {
+.form .input_icon_right {
     position: relative;
 }
 
-form .input_icon_right input {
+.form .input_icon_right input {
     width: calc(100% - 54px);
     padding: 10px 42px 10px 12px;
 }
 
-form .input_icon_right label {
+.form .input_icon_right label {
     position: absolute;
     margin: 0 12px;
     right: 0;
@@ -47,7 +47,7 @@ form .input_icon_right label {
     cursor: pointer;    
 }
 
-form .input_icon_right label span {
+.form .input_icon_right label span {
     font-size: 21px;
     color: var(--medium_emphasis_color);
 }
