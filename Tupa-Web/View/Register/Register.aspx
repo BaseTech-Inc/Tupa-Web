@@ -9,7 +9,7 @@
     <div class="login_content">
         <div class="login">
             <div class="menu">
-                <a href="../index.html">
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/">
                     <div class="return">
                         <div class="icon card">
                             <span class="material-icons-outlined">
@@ -17,7 +17,7 @@
                             </span>
                         </div>  
                     </div>
-                </a>                
+                </asp:HyperLink>         
 
                 <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl="~/Content/Images/logo.png"/>
 

@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tupa_Web.View.Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tupa_Web.View.Site"  %>
 
 <!DOCTYPE html>
 
@@ -138,7 +138,7 @@
     </form>
 
     <!-- Footer -->    
-    <% if (Page.Title != "Mapa" && Page.Title != "Login" && Page.Title != "Register") { %>
+    <% if (Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Mapa") { %>
     <footer class="container">
         <div class="container_wrapper">
             <div class="up">

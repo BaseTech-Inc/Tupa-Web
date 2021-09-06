@@ -15,6 +15,15 @@ namespace Tupa_Web.View.Register
     {
 
         /// <summary>
+        /// Controle HyperLink1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+
+        /// <summary>
         /// Controle Image1.
         /// </summary>
         /// <remarks>
