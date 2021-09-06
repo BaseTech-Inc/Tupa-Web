@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="TupaWeb">
-    <title></title>
+    <title><%: Page.Title %></title>
 
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="theme-color" content="#2485F3">
 
     <meta property="og:title" content="Tupã: Previsões, alertas e mapas meteorologicos">
@@ -40,33 +40,39 @@
 </head>
 <body data-theme="white">
     <!-- Header -->
-    <% if(Page.Title != "Login") { %>
+    <% if(Page.Title != "Login" && Page.Title != "Register") { %>
     <header class="home container card">
         <div class="menu container_wrapper">
             <div class="logo">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/View/Home/Home.aspx">
-                    <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/logo.png" />
+                <asp:HyperLink 
+                    ID="HyperLink1" 
+                    runat="server" 
+                    NavigateUrl="~/">
+                    <asp:Image 
+                        ID="imgLogo" 
+                        runat="server" 
+                        ImageUrl="~/Content/Images/logo.png" />
                 </asp:HyperLink>
             </div>
             <nav>
                 <ul>
                     <li class="target">
-                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/View/Home/Home.aspx">Início</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/View/Mapa/Mapa.aspx">Mapa</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/View/Locais/Locais.aspx">Locais</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Locate">Locais</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/View/Dashboard/Dashboard.aspx">Dashboard</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
                     </li>
                 </ul>
             </nav>
             <div class="user">
-                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/View/Login/Login.aspx">Entrar</asp:HyperLink>
-                <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/View/Register/Register.aspx" CssClass="primary-button">Seja um Bro!</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Login">Entrar</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Register" CssClass="primary-button">Seja um Bro!</asp:HyperLink>
                 <div class="menu-bar">
                     <span class="material-icons">
                         menu
@@ -74,14 +80,14 @@
 
                     <ul class="menu-dropdown card">
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/View/Configuracoes/Configuracoes.aspx">Perfil</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Settings">Perfil</asp:HyperLink>
                         </li>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/View/Configuracoes/Configuracoes.aspx">Editar Perfil</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">Editar Perfil</asp:HyperLink>
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/View/Configuracoes/Configuracoes.aspx">
+                            <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Settings">
                                 <span class="material-icons-outlined">
                                     settings
                                 </span>
@@ -89,7 +95,7 @@
                             </asp:HyperLink>
                         </li>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/View/Configuracoes/Configuracoes.aspx">
+                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings">
                                 <span class="material-icons-outlined">
                                     dark_mode
                                 </span>
@@ -98,14 +104,14 @@
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/View/Configuracoes/Configuracoes.aspx" CssClass="blue">Planos</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Settings" CssClass="blue">Planos</asp:HyperLink>
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/View/Terms/Terms.aspx">Termos de serviço</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Terms">Termos de serviço</asp:HyperLink>
                         </li>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/View/Privacy/Privacy.aspx">Política de privacidade</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/Privacy">Política de privacidade</asp:HyperLink>
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
@@ -132,34 +138,34 @@
     </form>
 
     <!-- Footer -->    
-    <% if (Page.Title != "Mapa" && Page.Title != "Login") { %>
+    <% if (Page.Title != "Mapa" && Page.Title != "Login" && Page.Title != "Register") { %>
     <footer class="container">
         <div class="container_wrapper">
             <div class="up">
                 <div class="logo">
-                    <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/View/Home/Home.aspx">
+                    <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/">
                         <asp:Image ID="imgLogoWhite" runat="server" ImageUrl="~/Content/Images/logo-white.png" />
                     </asp:HyperLink>
                 </div>
                 <nav>
                     <ul>
                         <li>
-                            <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/View/Home/Home.aspx">Início</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink17" runat="server" NavigateUrl="~/View/Mapa/Mapa.aspx">Mapa</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink17" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/View/Locais/Locais.aspx">Locais</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/Locate">Locais</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="~/View/Dashboard/Dashboard.aspx">Dashboard</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink20" runat="server" NavigateUrl="~/View/Login/Login.aspx">Entrar</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink20" runat="server" NavigateUrl="~/Login">Entrar</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl="~/View/Register/Register.aspx">Registrar</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl="~/Register">Registrar</asp:HyperLink>
                         </li>
                     </ul>
                 </nav>
@@ -169,10 +175,10 @@
 
                 <ul>
                     <li>
-                        <asp:HyperLink ID="HyperLink22" runat="server" NavigateUrl="~/View/Terms/Terms.aspx">Termos de serviço</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink22" runat="server" NavigateUrl="~/Terms">Termos de serviço</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink23" runat="server" NavigateUrl="~/View/Privacy/Privacy.aspx">Política de privacidade</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink23" runat="server" NavigateUrl="~/Privacy">Política de privacidade</asp:HyperLink>
                     </li>
                 </ul>
             </div>

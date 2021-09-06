@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Tupa_Web.View.Login.Login" %>
+﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Tupa_Web.View.Register.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/login.css">
@@ -9,7 +9,7 @@
     <div class="login_content">
         <div class="login">
             <div class="menu">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/">
+                <a href="../index.html">
                     <div class="return">
                         <div class="icon card">
                             <span class="material-icons-outlined">
@@ -17,16 +17,29 @@
                             </span>
                         </div>  
                     </div>
-                </asp:HyperLink>           
+                </a>                
 
                 <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl="~/Content/Images/logo.png"/>
 
                 <div></div>
-            </div>            
-
+            </div>   
 
             <div class="form">
-                <h1>Bem vindo, Bro!</h1>
+                <div class="progress">
+                    <div class="ball target card">
+                        <h3>1</h3>
+                    </div>
+                    <div class="line target"></div>
+                    <div class="ball card">
+                        <h3>2</h3>
+                    </div>
+                    <div class="line"></div>
+                    <div class="ball card">
+                        <h3>3</h3>
+                    </div>
+                </div>
+
+                <h1>Torne-se um Bro!</h1>
                 
                 <div class="google_button button_icon_left">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
@@ -40,22 +53,35 @@
 
                 <div class="inputs">
                     <div class="input">
-                        <input type="text" name="" id="" placeholder="Usuário">
+                        <input type="text" name="" id="Usuário" placeholder="Usuário">
+                    </div>                    
+
+                    <div class="input">
+                        <input type="text" name="" id="Email" placeholder="Email">
                     </div>
 
                     <div class="input_icon_right input">
-                        <label for="" onClick="PasswordEyes.PasswordEyesEvent(this)" >
+                        <label for="Senha" onClick="PasswordEyes.PasswordEyesEvent(this)">
                             <span class="material-icons-outlined">
                                 visibility
                             </span>
                         </label>
-                        <input type="password" name="" id="" placeholder="Senha">
-                    </div>                    
+                        <input type="password" name="" id="Senha" placeholder="Senha">
+                    </div>    
+                    
+                    <div class="input_icon_right input">
+                        <label for="ConfirmarSenha" onClick="PasswordEyes.PasswordEyesEvent(this)">
+                            <span class="material-icons-outlined">
+                                visibility
+                            </span>
+                        </label>
+                        <input type="password" name="" id="ConfirmarSenha" placeholder="Confirmar senha">
+                    </div>  
                 </div>
 
-                <p class="caption">Você tem <a href="./register.html" class="caption">Cadastro</a>?</p>
+                <p class="caption">Você já tem <a href="./login.html" class="caption">Cadastro</a>?</p>
 
-                <input type="button" class="button secondary-button" value="Entre Bro!">
+                <input type="button" class="button secondary-button" value="Tornar um Bro!!">
             </div>
             
 

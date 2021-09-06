@@ -26,7 +26,7 @@
                         <span class="tag">Nublado</span>
                     </div>
                         
-                    <img src="../content/day_cloudy.png" alt="day_cloud">
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/day_cloudy.png" />
                 </div>
                 <div class="previsao card">
                     <header>

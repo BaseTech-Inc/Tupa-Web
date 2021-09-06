@@ -11,7 +11,7 @@
             <div class="description">
                 <h1>OPS!! PAGE NOT FOUND, BRO!!</h1>
                 <p>Acho que você escolheu a página errada, porque eu não consegui dar uma olhada na que você está procurando.</p>
-                <a href="../index.html" class="primary-button">Voltar ao Inicío</a>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/" CssClass="primary-button">Voltar ao Inicío</asp:HyperLink>
             </div>
         </div>
 </asp:Content>

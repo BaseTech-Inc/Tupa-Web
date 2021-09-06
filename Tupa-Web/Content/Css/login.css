@@ -268,7 +268,7 @@ footer p {
     color: #ffffff;
 }
 
-.login_content .login form .progress .line {
+.login_content .login .form .progress .line {
     width: 100px;
     height: 1.2px;
     background: var(--border-color);
@@ -276,7 +276,7 @@ footer p {
     position: relative;
 }
 
-.login_content .login form .progress .line.target::after {
+.login_content .login .form .progress .line.target::after {
     content: "";
     position: absolute;
     min-width: 50%;
@@ -286,7 +286,7 @@ footer p {
     background: var(--border-variant-color);
 }
 
-.login_content .login form .progress .line.target-full {
+.login_content .login .form .progress .line.target-full {
     background: var(--border-variant-color);
 }
 
