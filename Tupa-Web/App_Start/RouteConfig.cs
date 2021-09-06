@@ -11,6 +11,11 @@ namespace Tupa_Web.App_Start
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapPageRoute(
+                "Default",
+                "",
+                "~/View/Home/Home.aspx"
+            );
         }
     }
 }
