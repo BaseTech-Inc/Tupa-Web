@@ -1,11 +1,10 @@
 .header {
-    min-height: 100vh;
+    min-height: calc(100vh - 160px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: calc(-80px - 32px);
     z-index: -1;
-    margin-bottom: 48px;
+    margin-bottom: calc(48px + 40px);
 }
 
 .header > div {
