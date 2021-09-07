@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audios\clown-horn.mp3" />
     <Content Include="Content\Css\dashboard.css" />
     <Content Include="Content\Css\error.css" />
     <Content Include="Content\Css\form.css" />
@@ -128,6 +129,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\AudioHorn.js" />
     <Content Include="Scripts\Carousel.js" />
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\PasswordEyes.js" />

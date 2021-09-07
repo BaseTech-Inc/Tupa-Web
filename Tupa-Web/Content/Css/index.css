@@ -416,3 +416,8 @@
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {background-image: url("/Content/Images/flags@2x.png");}
 }
+
+.press {
+    transform: scale(0.9);
+    transition: .1s ease;
+}

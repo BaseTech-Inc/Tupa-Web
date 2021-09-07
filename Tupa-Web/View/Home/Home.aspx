@@ -212,6 +212,7 @@
 
     <script src="/Scripts/intlTelInput.min.js"></script>
     <script src="/Scripts/Carousel.js"></script>
+    <script src="/Scripts/AudioHorn.js"></script>
     <script>
         Carousel.Setup(
             Carousel.types.Move, 
@@ -222,5 +223,9 @@
         window.intlTelInput(input, {
             // any initialisation options go here
         })
+
+        let horn = document.querySelector('.PlayAudio')
+
+        AudioHorn.Setup(horn)
     </script>
 </asp:Content>

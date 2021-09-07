@@ -44,15 +44,28 @@
     <header class="home container card">
         <div class="menu container_wrapper">
             <div class="logo">
+                <% if (Page.Title == "Inicío")
+                    { %>
+                <asp:HyperLink 
+                    ID="HyperLink24" 
+                    runat="server">                    
+                        <asp:Image 
+                            ID="imgLogo" 
+                            runat="server" 
+                            ImageUrl="~/Content/Images/logo.png"
+                            CssClass="PlayAudio"/>   
+                </asp:HyperLink>
+                <% } else { %>
                 <asp:HyperLink 
                     ID="HyperLink1" 
                     runat="server" 
-                    NavigateUrl="~/">
-                    <asp:Image 
-                        ID="imgLogo" 
-                        runat="server" 
-                        ImageUrl="~/Content/Images/logo.png" />
+                    NavigateUrl="~/">                    
+                        <asp:Image 
+                            ID="Image1" 
+                            runat="server" 
+                            ImageUrl="~/Content/Images/logo.png"/>   
                 </asp:HyperLink>
+                <% } %>
             </div>
             <nav>
                 <ul>
