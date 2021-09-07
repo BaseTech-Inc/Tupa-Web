@@ -13,7 +13,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
 - [ ] Design
     - [ ] Perfil/Configurações
     - [ ] Menu de navegação
-    - [ ] Carrousel celular
+    - [ ] Carrossel celular
 
 ## Começando
 
