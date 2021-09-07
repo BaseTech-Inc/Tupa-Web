@@ -30,12 +30,14 @@
                         <h3>1</h3>
                     </div>
                     <div class="line target"></div>
-                    <div class="ball card">
+                    <div class="ball card tooltip">
                         <h3>2</h3>
+                        <span class="tooltiptext card">Escolher Plano</span>
                     </div>
                     <div class="line"></div>
-                    <div class="ball card">
+                    <div class="ball card tooltip">
                         <h3>3</h3>
+                        <span class="tooltiptext card">Verificar E-mail</span>
                     </div>
                 </div>
 
