@@ -13,7 +13,7 @@
                         <h1>Política Privacidade</h1>
                     </div>
                     <div class="description">
-                        <p>A sua privacidade é importante para nós. É política do Tupã respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <a href=>Tupã</a>, e outros sites que possuímos e operamos.</p> 
+                        <p>A sua privacidade é importante para nós. É política do Tupã respeitar a sua privacidade em relação a qualquer informação sua que possamos coletar no site <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/" class="land__link">Tupã</asp:HyperLink>, e outros sites que possuímos e operamos.</p> 
 
                         <p>Solicitamos informações pessoais apenas quando realmente precisamos delas para lhe fornecer um serviço. Fazemo-lo por meios justos e legais, com o seu conhecimento e consentimento. Também informamos por que estamos coletando e como será usado. </p> 
 
@@ -21,7 +21,7 @@
 
                         <p>Não compartilhamos informações de identificação pessoal publicamente ou com terceiros, exceto quando exigido por lei.</p> 
 
-                        <p>O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas <a href='https://politicaprivacidade.com'='_BLANK'>políticas de privacidade</a>. </p> 
+                        <p>O nosso site pode ter links para sites externos que não são operados por nós. Esteja ciente de que não temos controle sobre o conteúdo e práticas desses sites e não podemos aceitar responsabilidade por suas respectivas <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Privacy" class="land__link">políticas de privacidade</asp:HyperLink>. </p> 
 
                         <p>Você é livre para recusar a nossa solicitação de informações pessoais, entendendo que talvez não possamos fornecer alguns dos serviços desejados.</p>
 
@@ -84,7 +84,7 @@
                             <li> Este site oferece facilidades de comércio eletrônico ou pagamento e alguns cookies são essenciais para garantir que seu pedido seja lembrado entre as páginas, para que possamos processá-lo adequadamente.</li> 
                             <li> Periodicamente, oferecemos pesquisas e questionários para fornecer informações interessantes, ferramentas úteis ou para entender nossa base de usuários com mais precisão. Essas pesquisas podem usar cookies para lembrar quem já participou numa pesquisa ou para fornecer resultados precisos após a alteração das páginas.</li>
                             <li> Quando você envia dados por meio de um formulário como os encontrados nas páginas de contacto ou nos formulários de comentários, os cookies podem ser configurados para lembrar os detalhes do usuário para correspondência futura.</li> 
-                            <li> Cookies de preferências do site<br><br> Para proporcionar uma ótima experiência neste site, fornecemos a funcionalidade para definir suas preferências de como esse site é executado quando você o usa. Para lembrar suas preferências, precisamos definir cookies para que essas informações possam ser chamadas sempre que você interagir com uma página for afetada por suas preferências.</li> 
+                            <li> Para proporcionar uma ótima experiência neste site, fornecemos a funcionalidade para definir suas preferências de como esse site é executado quando você o usa. Para lembrar suas preferências, precisamos definir cookies para que essas informações possam ser chamadas sempre que você interagir com uma página for afetada por suas preferências.</li> 
                         </ul> 
                     </div>
                 </div>
@@ -125,7 +125,7 @@
 
                         <ul> 
                             <li>A) Não se envolver em atividades que sejam ilegais ou contrárias à boa fé a à ordem pública;</li> 
-                            <li>B) Não difundir propaganda ou conteúdo de natureza racista, xenofóbica, ou apostas online (ex.:<a href='https://ondeapostar.pt/review/betano/'> Betano</a>), jogos de sorte e azar, qualquer tipo de pornografia ilegal, de apologia ao terrorismo ou contra os direitos humanos;</li> 
+                            <li>B) Não difundir propaganda ou conteúdo de natureza racista, xenofóbica, ou apostas online (ex.:<a href='https://ondeapostar.pt/review/betano/' class="land__link"> Betano</a>), jogos de sorte e azar, qualquer tipo de pornografia ilegal, de apologia ao terrorismo ou contra os direitos humanos;</li> 
                             <li>C) Não causar danos aos sistemas físicos (hardwares) e lógicos (softwares) do Tupã, de seus fornecedores ou terceiros, para introduzir ou disseminar vírus informáticos ou quaisquer outros sistemas de hardware ou software que sejam capazes de causar danos anteriormente mencionados.</li> 
                         </ul> 
                     </div>

@@ -15,7 +15,7 @@
 
             <p>Previsões meteorologicas de até 5 dias baseadas na sua localização atual ou regiões buscadas.</p>
 
-            <a href="#" class="secondary-button">Descobrir</a>
+            <a href="#" class="secondary-button">Crie a sua conta</a>
         </div>
 
         <asp:Image ID="imgGlobe" runat="server" ImageUrl="~/Content/Images/globe.png" />

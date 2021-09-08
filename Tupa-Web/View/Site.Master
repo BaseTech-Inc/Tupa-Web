@@ -88,7 +88,7 @@
                 <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Register" CssClass="primary-button">Seja um Bro!</asp:HyperLink>
                 <div class="menu-bar">
                     <span class="material-icons">
-                        menu
+                        more_horiz
                     </span>
 
                     <ul class="menu-dropdown card">

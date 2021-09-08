@@ -13,7 +13,7 @@
                         <h1>Termos</h1>
                     </div>
                     <div class="description">
-                        <p>Ao acessar ao site <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/">Tupã</asp:HyperLink>, concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis ​​e concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não concordar com algum desses termos, está proibido de usar ou acessar este site. Os materiais contidos neste site são protegidos pelas leis de direitos autorais e marcas comerciais aplicáveis.</p> 
+                        <p>Ao acessar ao site <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/" class="land__link">Tupã</asp:HyperLink>, concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis ​​e concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não concordar com algum desses termos, está proibido de usar ou acessar este site. Os materiais contidos neste site são protegidos pelas leis de direitos autorais e marcas comerciais aplicáveis.</p> 
                     </div>
                 </div>                    
             </div>
