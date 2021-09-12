@@ -10,10 +10,16 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Design
-    - [ ] Perfil/Configurações
-    - [ ] Menu de navegação
-    - [ ] Carrossel celular
+- [ ] Login/Register
+- [ ] Mapa
+- [ ] Locais
+    - [ ] Mais pesquisados
+    - [ ] Histórico
+- [ ] Dashboard
+    - [ ] Forecast
+    - [ ] Alertas
+    - [ ] Gráfico
+- [ ] Configurações de Usuário
 
 ## Começando
 

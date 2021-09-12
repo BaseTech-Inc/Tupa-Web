@@ -69,7 +69,7 @@
             </div>
             <nav>
                 <ul>
-                    <li class="target">
+                    <li>
                         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
                     </li>
                     <li>
