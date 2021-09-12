@@ -10,16 +10,16 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Login/Register
-- [ ] Mapa
-- [ ] Locais
+- [ ] Login/Register - Ivo
+- [ ] Mapa - Juntos
+- [ ] Locais - Costa
     - [ ] Mais pesquisados
     - [ ] Histórico
 - [ ] Dashboard
-    - [ ] Forecast
-    - [ ] Alertas
-    - [ ] Gráfico
-- [ ] Configurações de Usuário
+    - [ ] Forecast - Ivo
+    - [ ] Alertas - Ivo
+    - [ ] Gráfico - Juntos
+- [ ] Configurações de Usuário - Costa
 
 ## Começando
 
