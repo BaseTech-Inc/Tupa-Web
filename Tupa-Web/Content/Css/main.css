@@ -160,6 +160,13 @@ header .user > * {
     
 }
 
+header .user .photo_user {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background: var(--primary-variant-color)
+}
+
 header .user a {
     color: var(--high_emphasis_color);
     text-decoration: none;

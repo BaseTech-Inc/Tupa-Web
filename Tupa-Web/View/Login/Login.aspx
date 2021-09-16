@@ -27,6 +27,17 @@
 
             <div class="form">
                 <h1>Bem vindo, Bro!</h1>
+
+                <div class="error disabled" runat="server" id="errorMessage">
+                    <div class="error_wrapper">
+                        <p runat="server" id="textErrorMessage" title="Incorrect username or password.">Error na criação do usuário</p>
+                        <span class="close_button">
+                            <span class="material-icons">
+                            close
+                            </span>
+                        </span>
+                    </div>                    
+                </div>
                 
                 <div class="google_button button_icon_left">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
@@ -40,7 +51,7 @@
 
                 <div class="inputs">
                     <div class="input">
-                        <input type="text" name="" id="" placeholder="Usuário">
+                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
                     </div>
 
                     <div class="input_icon_right input">
@@ -49,15 +60,19 @@
                                 visibility
                             </span>
                         </label>
-                        <input type="password" name="" id="" placeholder="Senha">
+                        <asp:TextBox ID="txtSenha" runat="server" placeholder="Senha" TextMode="Password"></asp:TextBox>
                     </div>                    
                 </div>
 
                 <p class="caption">Você tem <a href="./register.html" class="caption">Cadastro</a>?</p>
-
-                <input type="button" class="button secondary-button" value="Entre Bro!">
-            </div>
-            
+                
+                <asp:Button 
+                    ID="btnLogin"
+                    Text="Entre Bro!"
+                    OnClick="btnLogin_Click"
+                    runat="server"
+                    CssClass="button secondary-button"  />
+            </div>            
 
             <div></div>
         </div>
@@ -133,5 +148,14 @@
         Carousel.Setup(
             Carousel.types.Opacity, 
             true)
+
+        let close_button = document.querySelector('.close_button')
+        let errorMessage = document.querySelector('.error')
+
+        console.log(errorMessage)
+
+        close_button.addEventListener('click', () => {
+            errorMessage.className += " disabled"
+        })
     </script>
 </asp:Content>

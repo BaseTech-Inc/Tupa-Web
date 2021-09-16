@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
@@ -61,7 +62,7 @@ namespace Tupa_Web.Common.Models
 
         private static readonly HttpClient client = new HttpClient();
 
-        public static async Task<T> ProcessHttpClient<T>(
+        public static async Task<T> ProcessHttpClientGet<T>(
             string url,
             JsonSerializerOptions options = null,
             string mediaType = "application/json")
@@ -77,7 +78,7 @@ namespace Tupa_Web.Common.Models
             return objectResult;
         }
 
-        public static async Task<String> ProcessHttpClient(
+        public static async Task<String> ProcessHttpClientGet(
             string url,
             string mediaType = "application/json")
         {
@@ -89,6 +90,26 @@ namespace Tupa_Web.Common.Models
             var streamTask = client.GetStringAsync(url);
 
             return await streamTask;
+        }
+
+        public static async Task<string> ProcessHttpClientPost(
+            string url,
+            JsonSerializerOptions options = null,
+            string mediaType = "application/json")
+        {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue(mediaType));
+
+            var content = new StringContent("", Encoding.UTF8, "text/json");
+
+            var response = Task.Run(() => client.PostAsync(url, content));
+            response.Wait();
+
+            var streamTask = await response.Result.Content.ReadAsStringAsync();
+
+            return streamTask;
         }
     }
 }

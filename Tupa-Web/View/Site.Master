@@ -75,36 +75,55 @@
                     <li>
                         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
                     </li>
+                     <%var cookie = Request.Cookies["token"];
+                       if (cookie != null)
+                       { %>
                     <li>
                         <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Locate">Locais</asp:HyperLink>
                     </li>
+                    <% } %>
                     <li>
                         <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
                     </li>
                 </ul>
             </nav>
             <div class="user">
+                <% if (cookie == null)
+                   { %>
+
                 <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Login">Entrar</asp:HyperLink>
                 <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Register" CssClass="primary-button">Seja um Bro!</asp:HyperLink>
+                
+                <% } else { %>
+
+                <div class="photo_user"></div>
+
+                <% } %>
                 <div class="menu-bar">
                     <span class="material-icons">
                         more_horiz
                     </span>
 
                     <ul class="menu-dropdown card">
+                        <% if (cookie != null)
+                        { %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Settings">Perfil</asp:HyperLink>
                         </li>
+                        <% } %>
+                        <% if (cookie != null)
+                        { %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">Editar Perfil</asp:HyperLink>
                         </li>
                         <hr>
+                        <% } %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Settings">
                                 <span class="material-icons-outlined">
                                     settings
                                 </span>
-                                Editar Perfil
+                                Editar configurações
                             </asp:HyperLink>
                         </li>
                         <li class="menu-dropdown-item">
@@ -126,10 +145,13 @@
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/Privacy">Política de privacidade</asp:HyperLink>
                         </li>
+                        <% if (cookie != null)
+                        { %>
                         <hr>
                         <li class="menu-dropdown-item">
                             <a href="#">Sair</a>
                         </li>
+                        <% } %>
                     </ul>
                 </div>
             </div>
