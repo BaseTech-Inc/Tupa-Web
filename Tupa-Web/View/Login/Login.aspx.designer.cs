@@ -69,6 +69,15 @@ namespace Tupa_Web.View.Login
         protected global::System.Web.UI.WebControls.TextBox txtSenha;
 
         /// <summary>
+        /// Controle HyperLink4.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink4;
+
+        /// <summary>
         /// Controle btnLogin.
         /// </summary>
         /// <remarks>

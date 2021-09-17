@@ -409,6 +409,9 @@ footer .container_wrapper .down ul li a {
     border-radius: 12px;
 }
 
+.search input:focus {
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
+}
 
 .error-message {
     margin-bottom: 24px;

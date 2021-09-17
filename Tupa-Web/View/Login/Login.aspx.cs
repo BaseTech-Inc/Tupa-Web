@@ -21,9 +21,7 @@ namespace Tupa_Web.View.Login
         private string senha { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            btnLogin.Click += new EventHandler(this.btnLogin_Click);
-        }
+        { }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
@@ -62,7 +60,6 @@ namespace Tupa_Web.View.Login
                 else
                 {
                     // Mostra uma mensagem de erro
-
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error, 
                         result.message);

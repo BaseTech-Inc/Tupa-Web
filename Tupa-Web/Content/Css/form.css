@@ -16,6 +16,7 @@
     width: calc(100% - 24px);
     border-bottom: none;
     transition: .2s ease-in-out;
+    color: var(--high_emphasis_color)
 }
 
 .login_content .login .form .inputs .input:first-child input {

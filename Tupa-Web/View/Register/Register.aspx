@@ -42,6 +42,9 @@
                 </div>
 
                 <h1>Torne-se um Bro!</h1>
+
+                <div class="error" runat="server" id="errorMessage">                  
+                </div>
                 
                 <div class="google_button button_icon_left">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
@@ -55,37 +58,41 @@
 
                 <div class="inputs">
                     <div class="input">
-                        <input type="text" name="" id="Usuário" placeholder="Usuário">
+                        <asp:TextBox ID="txtUser" runat="server" placeholder="Usuário"></asp:TextBox>
                     </div>                    
 
                     <div class="input">
-                        <input type="text" name="" id="Email" placeholder="Email">
+                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
                     </div>
 
                     <div class="input_icon_right input">
-                        <label for="Senha" onClick="PasswordEyes.PasswordEyesEvent(this)">
+                        <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)">
                             <span class="material-icons-outlined">
                                 visibility
                             </span>
                         </label>
-                        <input type="password" name="" id="Senha" placeholder="Senha">
+                        <asp:TextBox ID="txtSenha" name="txtSenha" runat="server" placeholder="Senha" TextMode="Password"></asp:TextBox>
                     </div>    
                     
                     <div class="input_icon_right input">
-                        <label for="ConfirmarSenha" onClick="PasswordEyes.PasswordEyesEvent(this)">
+                        <label for="txtConfirmarSenha" onClick="PasswordEyes.PasswordEyesEvent(this)">
                             <span class="material-icons-outlined">
                                 visibility
                             </span>
                         </label>
-                        <input type="password" name="" id="ConfirmarSenha" placeholder="Confirmar senha">
+                        <asp:TextBox ID="txtConfirmarSenha" name="txtConfirmarSenha" runat="server" placeholder="Confirmar senha" TextMode="Password"></asp:TextBox>
                     </div>  
                 </div>
 
-                <p class="caption">Você já tem <a href="./login.html" class="caption">Cadastro</a>?</p>
+                <p class="caption">Você já tem <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Login" class="caption">login</asp:HyperLink>?</p>
 
-                <input type="button" class="button secondary-button" value="Tornar um Bro!!">
-            </div>
-            
+                <asp:Button 
+                    ID="btnRegister"
+                    Text="Tornar um Bro!!"
+                    OnClick="btnRegister_Click"
+                    runat="server"
+                    CssClass="button secondary-button"  />
+            </div>            
 
             <div></div>
         </div>

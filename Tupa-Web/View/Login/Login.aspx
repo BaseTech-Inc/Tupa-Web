@@ -47,16 +47,16 @@
                     </div>
 
                     <div class="input_icon_right input">
-                        <label for="" onClick="PasswordEyes.PasswordEyesEvent(this)" >
+                        <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
                             <span class="material-icons-outlined">
                                 visibility
                             </span>
                         </label>
-                        <asp:TextBox ID="txtSenha" runat="server" placeholder="Senha" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtSenha" name="txtSenha" runat="server" placeholder="Senha" TextMode="Password"></asp:TextBox>
                     </div>                    
                 </div>
 
-                <p class="caption">Você tem <a href="./register.html" class="caption">Cadastro</a>?</p>
+                <p class="caption">Você tem <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Register" class="caption">Cadastro</asp:HyperLink>?</p>
                 
                 <asp:Button 
                     ID="btnLogin"
