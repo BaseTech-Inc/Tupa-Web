@@ -13,6 +13,8 @@ namespace Tupa_Web.Common.Models
 {
     public static class HttpRequestUrl
     {
+        public static readonly string baseUrlTupa = "https://tupaserver.azurewebsites.net/";
+
         /// <summary>
         /// Define o endereço padrão.
         /// </summary>

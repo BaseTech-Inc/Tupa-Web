@@ -216,10 +216,11 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Common\Helpers\ErrorMessageHelpers.cs" />
+    <Compile Include="Common\Enumerations\EnumTypeError.cs" />
     <Compile Include="Common\Models\HttpRequestUrl.cs" />
     <Compile Include="Common\Models\Response.cs" />
     <Compile Include="Common\Security\LoginResponse.cs" />
-    <Compile Include="Controller\WeatherForecastController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

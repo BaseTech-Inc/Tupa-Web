@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.WebPages;
+using Tupa_Web.Common.Enumerations;
+using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
 using Tupa_Web.Common.Security;
 
@@ -14,9 +16,8 @@ namespace Tupa_Web.View.Login
 {
     public partial class Login : Page
     {
-        private readonly string baseUrl = "https://localhost:5001/";
-
         private string email { get; set; }
+
         private string senha { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -29,15 +30,55 @@ namespace Tupa_Web.View.Login
             email = txtEmail.Text.ToString();
             senha = txtSenha.Text.ToString();
 
+            // verificação se os campos estão vazios
             if (!email.IsEmpty() && !senha.IsEmpty())
             {
-                PostLogin().GetAwaiter().GetResult();
+                var resultLogin = Task.Run(() => PostLogin());
+                resultLogin.Wait();
+
+                var result = resultLogin.GetAwaiter().GetResult();
+
+                if (result.succeeded)
+                {
+                    var data = result.data;
+
+                    // em caso de sucesso cria-se um Cookie com o access_token, token_type e expiration
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie == null)
+                    {
+                        cookie = new HttpCookie("token");
+
+                        cookie.Values.Add("access_token", data.access_token);
+                        cookie.Values.Add("token_type", data.token_type);
+                        cookie.Values.Add("expiration", data.expiration.ToString());
+                        cookie.HttpOnly = true;
+
+                        this.Page.Response.AppendCookie(cookie);
+                    }
+
+                    Response.Redirect("~/");
+                }
+                else
+                {
+                    // Mostra uma mensagem de erro
+
+                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                        EnumTypeError.error, 
+                        result.message);
+                }
+            } else {
+                // Mostra uma mensagem de erro
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.warning, 
+                    "Insira os valores no campo");
             }
         }
 
-        private async Task PostLogin()
+        private async Task<Response<LoginResponse>> PostLogin()
         {
-            string url = baseUrl
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
                 .AddPath("api/Account/login")
                 .SetQueryParams(new
                 {
@@ -45,34 +86,12 @@ namespace Tupa_Web.View.Login
                     password = senha
                 });
 
-            var loginResult = await HttpRequestUrl.ProcessHttpClientPost(url);
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
 
-            var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(loginResult);
+            var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(stringResult);
 
-            if (jsonResult.succeeded)
-            {
-                errorMessage.Attributes["class"] = errorMessage.Attributes["class"] + " disabled";
-
-                var cookie = Request.Cookies["token"];
-
-                if (cookie == null)
-                {
-                    cookie = new HttpCookie("token");
-
-                    cookie.Values.Add("access_token", jsonResult.data.access_token);
-                    cookie.Values.Add("token_type", jsonResult.data.token_type);
-                    cookie.Values.Add("expiration", jsonResult.data.expiration.ToString());
-                    cookie.HttpOnly = true;
-
-                    this.Page.Response.AppendCookie(cookie);
-                }
-
-                Response.Redirect("~/");
-            } else {
-                errorMessage.Attributes["class"] = errorMessage.Attributes["class"].Replace("disabled", "").Trim();
-                textErrorMessage.InnerText = jsonResult.message;
-                textErrorMessage.Attributes["title"] = jsonResult.message;
-            }
+            return jsonResult;
         }
     }
 }

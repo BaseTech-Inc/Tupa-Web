@@ -15,6 +15,7 @@
     padding: 10px 12px;
     width: calc(100% - 24px);
     border-bottom: none;
+    transition: .2s ease-in-out;
 }
 
 .login_content .login .form .inputs .input:first-child input {
@@ -27,6 +28,14 @@
     border: 1px solid var(--border-color);
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
+}
+
+.login_content .login .form .inputs .input input:focus {
+    border-radius: 6px;
+    border: 1px solid var(--primary-variant-color) !important;
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
+    position: relative;
+    z-index: 1000
 }
 
 .form .input_icon_right {
@@ -45,9 +54,10 @@
     top: 50%;
     transform: translate(0, -50%);
     cursor: pointer;    
+    z-index: 1001;
 }
 
 .form .input_icon_right label span {
-    font-size: 21px;
+    font-size: 21px;    
     color: var(--medium_emphasis_color);
 }

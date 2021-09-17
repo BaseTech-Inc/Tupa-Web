@@ -60,6 +60,11 @@ textarea {
     color: var(--primary-variant-color);
     padding: 10px 12px;
     border-radius: 6px;
+    transition: .2s ease-in-out;
+}
+
+.primary-button:focus {
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
 }
 
 .secondary-button {
@@ -68,6 +73,16 @@ textarea {
     color: #ffffff;
     padding: 10px 12px;
     border-radius: 6px;
+    transition: .2s ease-in-out;
+    outline: none
+}
+
+.secondary-button:hover {
+    background: var(--primary-color);
+}
+
+.secondary-button:focus {
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
 }
 
 .tag {
@@ -392,4 +407,47 @@ footer .container_wrapper .down ul li a {
     width: 100%;
     padding: 12px 20px 12px 56px;
     border-radius: 12px;
+}
+
+
+.error-message {
+    margin-bottom: 24px;
+    font-size: 13px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+}
+
+.error-message.error {
+    color: #c9d1d9;
+    background: rgba(248, 81, 73, 0.15);
+    border-color: rgb(248, 81, 73, .4);
+}
+
+.error-message.warning {
+    color: #c9d1d9;
+    background: rgba(241, 196, 15, 0.25);
+    border-color: rgba(241, 196, 15, 0.6);
+}
+
+.error-message .error_wrapper {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-message .error_wrapper a {
+    display: flex;
+    color: #c9d1d9;
+    align-items: center;
+    text-decoration: none
+}
+
+.error-message.disabled {
+    display: none
+}
+
+.close_button {
+    cursor: pointer
 }

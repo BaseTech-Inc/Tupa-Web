@@ -28,15 +28,7 @@
             <div class="form">
                 <h1>Bem vindo, Bro!</h1>
 
-                <div class="error disabled" runat="server" id="errorMessage">
-                    <div class="error_wrapper">
-                        <p runat="server" id="textErrorMessage" title="Incorrect username or password.">Error na criação do usuário</p>
-                        <span class="close_button">
-                            <span class="material-icons">
-                            close
-                            </span>
-                        </span>
-                    </div>                    
+                <div class="error" runat="server" id="errorMessage">                  
                 </div>
                 
                 <div class="google_button button_icon_left">
@@ -148,14 +140,5 @@
         Carousel.Setup(
             Carousel.types.Opacity, 
             true)
-
-        let close_button = document.querySelector('.close_button')
-        let errorMessage = document.querySelector('.error')
-
-        console.log(errorMessage)
-
-        close_button.addEventListener('click', () => {
-            errorMessage.className += " disabled"
-        })
     </script>
 </asp:Content>

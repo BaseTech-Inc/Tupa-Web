@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Tupa_Web.Common.Models
 {
+    /// <summary>
+    /// Resposta padronizada pelo servidor Tupã, contendo informações importantes.
+    /// </summary>
     public class Response<T>
     {
         public Response()
