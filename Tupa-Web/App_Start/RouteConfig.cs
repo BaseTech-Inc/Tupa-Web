@@ -72,6 +72,11 @@ namespace Tupa_Web.App_Start
                 "Register",
                 "Register",
                 "~/View/Register/Register.aspx");
+
+            routes.MapPageRoute(
+                "Register_Plan",
+                "Register - Plan",
+                "~/View/Register/Register__Plan.aspx");
         }
     }
 }
