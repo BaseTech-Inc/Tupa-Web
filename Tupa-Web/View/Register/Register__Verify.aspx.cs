@@ -7,18 +7,18 @@ using System.Web.UI.WebControls;
 
 namespace Tupa_Web.View.Register
 {
-    public partial class Register__Plan : System.Web.UI.Page
+    public partial class Register__Verify : System.Web.UI.Page
     {
         private string uid { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        { 
+        {
             uid = Request.QueryString["uid"];
         }
 
-        protected void btnContinuar_Click(object sender, EventArgs e)
+        protected void btnAbrirLogin_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Register/Verify?uid=" + uid);
+            Response.Redirect("~/Login");
         }
     }
 }

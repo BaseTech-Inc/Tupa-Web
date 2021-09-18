@@ -275,6 +275,10 @@ footer p {
     color: #ffffff;
 }
 
+.login_content .login .form > .center {
+    text-align: center
+}
+
 .login_content .login .form .progress .line {
     width: 100px;
     height: 1.2px;

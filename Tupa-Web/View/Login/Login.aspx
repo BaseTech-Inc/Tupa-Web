@@ -33,7 +33,12 @@
                 
                 <div class="google_button button_icon_left">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
-                    <input type="button" class="primary-button" value="Entre pelo Google">
+                    <asp:Button 
+                        ID="btnGoogle2"
+                        Text="Entre pelo Google"
+                        OnClick="btnRegisterGoogle2_Click"
+                        runat="server"
+                        CssClass="primary-button"  />
                 </div>
                
                 <div class="line">

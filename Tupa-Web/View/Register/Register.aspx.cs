@@ -26,6 +26,14 @@ namespace Tupa_Web.View.Register
         protected void Page_Load(object sender, EventArgs e)
         { }
 
+        protected void btnRegisterGoogle_Click(object sender, EventArgs e)
+        {
+            // Mostra uma mensagem de erro
+            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                EnumTypeError.information,
+                "Desculpe, mas essa Feature ainda não está disponível.");
+        }
+
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             nome = txtUser.Text.ToString();
@@ -38,22 +46,32 @@ namespace Tupa_Web.View.Register
             {
                 if (confirmarSenha == senha)
                 {
-                    var resultLogin = Task.Run(() => PostRegister());
-                    resultLogin.Wait();
-
-                    var result = resultLogin.GetAwaiter().GetResult();
-
-                    if (result.succeeded)
+                    try
                     {
-                        // Redirect to verify email page
-                    }
-                    else
-                    {
+                        var resultLogin = Task.Run(() => PostRegister());
+                        resultLogin.Wait();
+
+                        var result = resultLogin.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            // Redirect to verify email page
+                            Response.Redirect("~/Register/Plan?uid=" + result.data);
+                        }
+                        else
+                        {
+                            // Mostra uma mensagem de erro
+                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                EnumTypeError.error,
+                                result.message);
+                        }
+                    } catch (Exception) {
                         // Mostra uma mensagem de erro
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                             EnumTypeError.error,
-                            result.message);
+                            "Ocorreu um erro, tente novamente mais tarde.");
                     }
+                    
                 } else {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(

@@ -433,6 +433,12 @@ footer .container_wrapper .down ul li a {
     border-color: rgba(241, 196, 15, 0.6);
 }
 
+.error-message.information {
+    color: var(--medium_emphasis_color);
+    background: var(--surface_color);
+    border-color: var(--border-color);
+}
+
 .error-message .error_wrapper {
     padding: 15px 20px;
     display: flex;

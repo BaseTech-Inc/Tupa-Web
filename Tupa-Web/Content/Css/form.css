@@ -62,75 +62,83 @@
     font-size: 21px;    
     color: var(--medium_emphasis_color);
 }
-/* a */
 
-.wrapper{
-  display: inline-flex;
-  background: #fff;
-  height: 100px;
-  width: 400px;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 5px;
-  padding: 20px 15px;
-  box-shadow: 5px 5px 30px rgba(0,0,0,0.2);
+.radio-buttons input[type="radio"] {
+    display: none;
 }
-.wrapper .option{
-  background: #fff;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 0 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0 10px;
-  border: 2px solid lightgrey;
-  transition: all 0.3s ease;
+
+.radio-buttons .option {
+    width: calc(100% - 48px);
+    cursor: pointer;
+    background-color: var(--surface_color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 6px var(--shadow-variant-color);
+    border-radius: 6px;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 12px 0;
+    transition: .2s ease-in-out;
 }
-.wrapper .option .dot{
-  height: 20px;
-  width: 20px;
-  background: #d9d9d9;
-  border-radius: 50%;
-  position: relative;
+
+.radio-buttons input[type="radio"]:disabled + .option {
+    cursor: no-drop;
+    
 }
-.wrapper .option .dot::before{
-  position: absolute;
-  content: "";
-  top: 4px;
-  left: 4px;
-  width: 12px;
-  height: 12px;
-  background: #0069d9;
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(1.5);
-  transition: all 0.3s ease;
+
+.radio-buttons input[type="radio"]:disabled + .option h3 {
+    color: var(--disabled-color)
 }
-input[type="radio"]{
-  display: none;
+
+.radio-buttons input[type="radio"]:disabled + .option p {
+    color: var(--disabled-color)
 }
-#option-1:checked:checked ~ .option-1,
-#option-2:checked:checked ~ .option-2{
-  border-color: #0069d9;
-  background: #0069d9;
+
+.radio-buttons .option .description h3 {
+    margin-bottom: 8px
 }
-#option-1:checked:checked ~ .option-1 .dot,
-#option-2:checked:checked ~ .option-2 .dot{
-  background: #fff;
+
+.radio-buttons .option .description h3 span {
+    font-size: var(--caption_font_size);
+    margin-left: 6px
 }
-#option-1:checked:checked ~ .option-1 .dot::before,
-#option-2:checked:checked ~ .option-2 .dot::before{
-  opacity: 1;
-  transform: scale(1);
+
+.radio-buttons .option .dot {
+    height: 24px;
+    width: 24px;
+    background: none;
+    border-radius: 50%;
+    position: relative;
 }
-.wrapper .option span{
-  font-size: 20px;
-  color: #808080;
+
+.radio-buttons .option .dot::before {
+    position: absolute;
+    content: "done";
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background: var(--primary-variant-color);
+    border-radius: 50%;
+    font-size: 18px;
+    opacity: 0;
+    transform: scale(1);
+    color: #fff;
 }
-#option-1:checked:checked ~ .option-1 span,
-#option-2:checked:checked ~ .option-2 span{
-  color: #fff;
+
+.radio-buttons input[type="radio"]:checked ~ .option {
+    border: 1px solid var(--primary-variant-color) !important;
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
+}
+
+.radio-buttons input[type="radio"]:checked ~ .option .description h3 {
+    color: var(--primary-variant-color);
+}
+
+.radio-buttons input[type="radio"]:checked ~ .option .dot::before {
+    opacity: 1;
 }

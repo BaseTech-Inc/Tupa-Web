@@ -211,6 +211,7 @@
     <Content Include="View\Privacy\Privacy.aspx" />
     <Content Include="View\Register\Register.aspx" />
     <Content Include="View\Register\Register__Plan.aspx" />
+    <Content Include="View\Register\Register__Verify.aspx" />
     <Content Include="View\Terms\Terms.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -296,6 +297,13 @@
     </Compile>
     <Compile Include="View\Register\Register__Plan.aspx.designer.cs">
       <DependentUpon>Register__Plan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Register\Register__Verify.aspx.cs">
+      <DependentUpon>Register__Verify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Register\Register__Verify.aspx.designer.cs">
+      <DependentUpon>Register__Verify.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

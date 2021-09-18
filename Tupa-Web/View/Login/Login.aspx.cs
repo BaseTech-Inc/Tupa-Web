@@ -23,6 +23,14 @@ namespace Tupa_Web.View.Login
         protected void Page_Load(object sender, EventArgs e)
         { }
 
+        protected void btnRegisterGoogle2_Click(object sender, EventArgs e)
+        {
+            // Mostra uma mensagem de erro
+            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                EnumTypeError.information,
+                "Desculpe, mas essa Feature ainda não está disponível.");
+        }
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             email = txtEmail.Text.ToString();
@@ -31,39 +39,47 @@ namespace Tupa_Web.View.Login
             // verificação se os campos estão vazios
             if (!email.IsEmpty() && !senha.IsEmpty())
             {
-                var resultLogin = Task.Run(() => PostLogin());
-                resultLogin.Wait();
-
-                var result = resultLogin.GetAwaiter().GetResult();
-
-                if (result.succeeded)
+                try
                 {
-                    var data = result.data;
+                    var resultLogin = Task.Run(() => PostLogin());
+                    resultLogin.Wait();
 
-                    // em caso de sucesso cria-se um Cookie com o access_token, token_type e expiration
-                    var cookie = Request.Cookies["token"];
+                    var result = resultLogin.GetAwaiter().GetResult();
 
-                    if (cookie == null)
+                    if (result.succeeded)
                     {
-                        cookie = new HttpCookie("token");
+                        var data = result.data;
 
-                        cookie.Values.Add("access_token", data.access_token);
-                        cookie.Values.Add("token_type", data.token_type);
-                        cookie.Values.Add("expiration", data.expiration.ToString());
-                        cookie.HttpOnly = true;
+                        // em caso de sucesso cria-se um Cookie com o access_token, token_type e expiration
+                        var cookie = Request.Cookies["token"];
 
-                        this.Page.Response.AppendCookie(cookie);
+                        if (cookie == null)
+                        {
+                            cookie = new HttpCookie("token");
+
+                            cookie.Values.Add("access_token", data.access_token);
+                            cookie.Values.Add("token_type", data.token_type);
+                            cookie.Values.Add("expiration", data.expiration.ToString());
+                            cookie.HttpOnly = true;
+
+                            this.Page.Response.AppendCookie(cookie);
+                        }
+
+                        Response.Redirect("~/");
                     }
-
-                    Response.Redirect("~/");
-                }
-                else
-                {
+                    else
+                    {
+                        // Mostra uma mensagem de erro
+                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.error,
+                            result.message);
+                    }
+                } catch (Exception) {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                        EnumTypeError.error, 
-                        result.message);
-                }
+                        EnumTypeError.error,
+                        "Ocorreu um erro, tente novamente mais tarde.");
+                } 
             } else {
                 // Mostra uma mensagem de erro
                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(

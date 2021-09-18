@@ -48,7 +48,12 @@
                 
                 <div class="google_button button_icon_left">
                     <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
-                    <input type="button" class="primary-button" value="Entre pelo Google">
+                    <asp:Button 
+                        ID="btnGoogle"
+                        Text="Entre pelo Google"
+                        OnClick="btnRegisterGoogle_Click"
+                        runat="server"
+                        CssClass="primary-button"  />
                 </div>
                
                 <div class="line">
@@ -58,11 +63,11 @@
 
                 <div class="inputs">
                     <div class="input">
-                        <asp:TextBox ID="txtUser" runat="server" placeholder="Usuário"></asp:TextBox>
+                        <asp:TextBox ID="txtUser" runat="server" placeholder="Usuário" autocomplete="off"></asp:TextBox>
                     </div>                    
 
                     <div class="input">
-                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" autocomplete="off"></asp:TextBox>
                     </div>
 
                     <div class="input_icon_right input">

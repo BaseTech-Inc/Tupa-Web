@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Planos" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register__Plan.aspx.cs" Inherits="Tupa_Web.View.Register.Register__Plan" %>
+﻿<%@ Page Title="Verificar" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register__Verify.aspx.cs" Inherits="Tupa_Web.View.Register.Register__Verify" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/login.css">
@@ -22,53 +22,29 @@
                         <h3>1</h3>
                     </div>
                     <div class="line target-full"></div>
-                    <div class="ball  target card">
+                    <div class="ball target card">
                         <h3>2</h3>
                     </div>
-                    <div class="line target"></div>
-                    <div class="ball card tooltip">
+                    <div class="line target target-full"></div>
+                    <div class="ball card target">
                         <h3>3</h3>
-                        <span class="tooltiptext card">Verificar E-mail</span>
                     </div>
                 </div>
 
-                <h1>Escolha um plano</h1>
+                <h1>Verificar E-mail</h1>
+                <p class="center">Para usar o Tupã, clique no botão de verificação no e-mail que enviamos para você.</p>
 
                 <div class="error" runat="server" id="errorMessage">                  
                 </div>
-                
-                <div class="radio-buttons">
-                    <div>
-                        <input type="radio" name="select" id="optBasic" checked>
-                        <label for="optBasic" class="option">
-                        <div class="description">
-                            <h3>Based  <span class="tag">FREE</span></h3>
-                            <p>Plano básico.</p>
-                        </div>                        
-                        
-                        <div class="dot material-icons-outlined"></div>
-                    </label>
-                    </div>
-                    <div>
-                        <input type="radio" name="select" id="optPremium" disabled>
-                    
-                        <label for="optPremium" class="option">
-                            <div class="description">
-                                <h3>Poggers <span class="tag">R$ 99,00</span></h3>
-                                <p>Plano feito e customizado para você.</p>
-                            </div>                        
-                        
-                            <div class="dot material-icons-outlined"></div>
-                        </label>
-                    </div>                    
-                </div>
 
                 <asp:Button 
-                    ID="btnContinuar"
-                    Text="Continuar"
-                    OnClick="btnContinuar_Click"
+                    ID="btnAbrirLogin"
+                    Text="Login"
+                    OnClick="btnAbrirLogin_Click"
                     runat="server"
                     CssClass="button secondary-button"  />
+
+                <p class="caption center">Não recebeu o e-mail?</p>
             </div>            
 
             <div></div>

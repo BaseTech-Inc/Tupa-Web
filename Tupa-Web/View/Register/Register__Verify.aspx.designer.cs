@@ -7,21 +7,12 @@
 // </gerado automaticamente>
 //------------------------------------------------------------------------------
 
-namespace Tupa_Web.View.Login
+namespace Tupa_Web.View.Register
 {
 
 
-    public partial class Login
+    public partial class Register__Verify
     {
-
-        /// <summary>
-        /// Controle HyperLink1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
 
         /// <summary>
         /// Controle Image1.
@@ -42,58 +33,13 @@ namespace Tupa_Web.View.Login
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
 
         /// <summary>
-        /// Controle Image2.
+        /// Controle btnAbrirLogin.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
-
-        /// <summary>
-        /// Controle btnGoogle2.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGoogle2;
-
-        /// <summary>
-        /// Controle txtEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
-
-        /// <summary>
-        /// Controle txtSenha.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSenha;
-
-        /// <summary>
-        /// Controle HyperLink4.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink4;
-
-        /// <summary>
-        /// Controle btnLogin.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogin;
+        protected global::System.Web.UI.WebControls.Button btnAbrirLogin;
 
         /// <summary>
         /// Controle Image3.
