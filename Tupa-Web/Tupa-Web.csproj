@@ -178,10 +178,12 @@
     <Content Include="Content\Css\reset.css" />
     <Content Include="Content\Css\termsPrivacy.css" />
     <Content Include="Content\Css\variables.css" />
+    <Content Include="Content\Images\abraham.jpg" />
     <Content Include="Content\Images\cellphone_ilustraion_white_theme.svg" />
     <Content Include="Content\Images\clock_ilustraion_white_theme.svg" />
     <Content Include="Content\Images\day_cloudy.png" />
     <Content Include="Content\Images\draw.svg" />
+    <Content Include="Content\Images\features.svg" />
     <Content Include="Content\Images\flags%402x.png" />
     <Content Include="Content\Images\flags.png" />
     <Content Include="Content\Images\globe.png" />
@@ -190,9 +192,13 @@
     <Content Include="Content\Images\logo-white.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\map_ilustration_white_theme.svg" />
+    <Content Include="Content\Images\nelson.jpg" />
+    <Content Include="Content\Images\oprah.jpg" />
+    <Content Include="Content\Images\orbit.svg" />
     <Content Include="Content\Images\phone.png" />
     <Content Include="Content\Images\tupa-social.png" />
     <Content Include="Content\Images\twitter-brands.svg" />
+    <Content Include="Content\Images\walt.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\app.js" />
