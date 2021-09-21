@@ -144,6 +144,8 @@
             Carousel.types.Opacity, 
             true)
 
+        var auth2;
+
         function start() {
             gapi.load('auth2', function () {
                 auth2 = gapi.auth2.init({
