@@ -12,6 +12,9 @@ using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
 using Tupa_Web.Common.Security;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.Web.Configuration;
 
 namespace Tupa_Web.View.Register
 {
@@ -25,6 +28,8 @@ namespace Tupa_Web.View.Register
 
         private string confirmarSenha { get; set; }
 
+        private string code { get; set; }
+
         private string idToken { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -36,7 +41,7 @@ namespace Tupa_Web.View.Register
 
             if (targetCtrl != null && targetCtrl != string.Empty)
             {
-                idToken = parameter;
+                code = parameter;
 
                 // Fire event
                 btnRegisterGoogle_Click(this, new EventArgs());
@@ -45,29 +50,91 @@ namespace Tupa_Web.View.Register
 
         protected void btnRegisterGoogle_Click(object sender, EventArgs e)
         {
-            var resultLogin = Task.Run(() => PostGetCode());
-            resultLogin.Wait();
+            try
+            {
+                var resultGoogleTask = Task.Run(() => PostGetCode());
+                resultGoogleTask.Wait();
 
-            var result = resultLogin.GetAwaiter().GetResult();
+                var resultGoogle = resultGoogleTask.GetAwaiter().GetResult();
+
+                idToken = resultGoogle.id_token;
+
+                var resultLoginTask = Task.Run(() => PostRegisterGoogle());
+                resultLoginTask.Wait();
+
+                var resultLogin = resultLoginTask.GetAwaiter().GetResult();
+
+                if (resultLogin.succeeded)
+                {
+                    var data = resultLogin.data;
+
+                    // em caso de sucesso cria-se um Cookie com o access_token, token_type e expiration
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie == null)
+                    {
+                        cookie = new HttpCookie("token");
+
+                        cookie.Values.Add("access_token", data.access_token);
+                        cookie.Values.Add("token_type", data.token_type);
+                        cookie.Values.Add("expiration", data.expiration.ToString());
+                        cookie.HttpOnly = true;
+
+                        this.Page.Response.AppendCookie(cookie);
+                    }
+
+                    Response.Redirect("~/");
+                } else
+                {
+                    // Mostra uma mensagem de erro
+                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                        EnumTypeError.error,
+                        resultLogin.message);
+                }
+            } catch {
+                // Mostra uma mensagem de erro
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.error,
+                    "Ocorreu um erro, tente novamente mais tarde.");
+            }
         }
 
-        private async Task<Response<string>> PostGetCode()
+        private async Task<GoogleResponse> PostGetCode()
         {
+            var client_secret = WebConfigurationManager.AppSettings["client_secret"];
+
             // https://developers.google.com/identity/protocols/oauth2/web-server#httprest_3
             // criando a url para comunicar entre o servidor
             string url = "https://oauth2.googleapis.com/token"
                 .SetQueryParams(new
                 {
-                    code = idToken,
+                    code = code,
                     client_id = "924539222128-2dd6ug7m4g6b33v2sh1t6r9hghfegk5t.apps.googleusercontent.com",
-                    client_secret = "NzP_mnOHogbb7I1yyWpUzQwK",
-                    redirect_uri = "https%3A//localhost%3A44381/code&",
+                    client_secret = client_secret,
+                    redirect_uri = HttpUtility.UrlEncode("https://localhost:44381"),
                     grant_type = "authorization_code"
+                });
+            
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url, mediaType: "application/x-www-form-urlencoded");
+            var jsonResult = JsonSerializer.Deserialize<GoogleResponse>(stringResult);
+
+            return jsonResult;
+        }
+
+        private async Task<Response<LoginResponse>> PostRegisterGoogle()
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/Account/login-google")
+                .SetQueryParams(new
+                {
+                    idToken = idToken
                 });
 
             // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url, mediaType: "application/x-www-form-urlencoded");
-            var jsonResult = JsonSerializer.Deserialize<Response<string>>(stringResult);
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
+            var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(stringResult);
 
             return jsonResult;
         }

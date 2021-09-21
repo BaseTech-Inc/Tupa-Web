@@ -44,7 +44,9 @@
                 <div class="error" runat="server" id="errorMessage">                  
                 </div>
                 
-                <button type="button" class="primary-button" id="signinButton">Sign in with Google</button>
+                <div class="google_button">
+                    <button type="button" class="primary-button" id="signinButton">Entre pelo Google</button>
+                </div>
                
                 <div class="line">
                     <div></div>
@@ -178,14 +180,12 @@
         let signinButton = document.querySelector('#signinButton')
 
         signinButton.addEventListener('click', () => {
-            // signInCallback defined in step 6.
             auth2.grantOfflineAccess().then(signInCallback);
         })
 
         function signInCallback(authResult) {
             if (authResult['code']) {
                 DoPostBack('signinButton', authResult['code'])
-
             } else {
                 // There was an error.
             }

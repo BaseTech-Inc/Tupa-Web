@@ -32,6 +32,18 @@ $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
 
 ### Configurando ambiente
 
+- Para inicializar os [valores secretos](https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-add-app-config-file?view=vs-2019) é nescessário criar o arquivo `secrets.xml` dentro da pasta App_Data.
+    É nescessário inserir os seguindes valores:
+    ```xml
+    <?xml version="1.0" encoding="utf-8" ?>
+
+    <root>
+      <secrets ver="1.0">
+        <secret name="client_secret" value="client_secret" />
+      </secrets>
+    </root>
+    ```
+
 <img src="https://github.githubassets.com/images/mona-whisper.gif" align="right" />
 
 ## Licença
