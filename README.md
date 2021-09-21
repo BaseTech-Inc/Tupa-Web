@@ -10,7 +10,7 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Login/Register
+- [x] Login/Register
 - [ ] Mapa
 - [ ] Locais
     - [ ] Mais pesquisados
@@ -42,6 +42,7 @@ $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
     <root>
       <secrets ver="1.0">
         <secret name="client_secret" value="client_secret" />
+        <secret name="redirect_uri" value="redirect_uri" />
       </secrets>
     </root>
     ```
