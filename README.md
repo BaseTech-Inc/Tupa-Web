@@ -35,6 +35,7 @@ $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
 - Para inicializar os [valores secretos](https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-add-app-config-file?view=vs-2019) é nescessário criar o arquivo `secrets.xml` dentro da pasta `App_Data`.
     <br/>
     É nescessário inserir os seguindes valores:
+    <br/>
 
     ```xml
     <?xml version="1.0" encoding="utf-8" ?>
