@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Tupa_Web.View.Register.Register" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+    </script>
+
     <link rel="stylesheet" href="/Content/Css/login.css">
     <link rel="stylesheet" href="/Content/Css/form.css">
 </asp:Content>
@@ -9,15 +12,10 @@
     <div class="login_content">
         <div class="login">
             <div class="menu">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/">
-                    <div class="return">
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/"> <div class="return">
                         <div class="icon card">
                             <span class="material-icons-outlined">
-                                chevron_left
-                            </span>
-                        </div>  
-                    </div>
-                </asp:HyperLink>         
+                                chevron_left </span></div></div></asp:HyperLink>         
 
                 <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl="~/Content/Images/logo.png"/>
 
@@ -46,15 +44,7 @@
                 <div class="error" runat="server" id="errorMessage">                  
                 </div>
                 
-                <div class="google_button button_icon_left">
-                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
-                    <asp:Button 
-                        ID="btnGoogle"
-                        Text="Entre pelo Google"
-                        OnClick="btnRegisterGoogle_Click"
-                        runat="server"
-                        CssClass="primary-button"  />
-                </div>
+                <button type="button" class="primary-button" id="signinButton">Sign in with Google</button>
                
                 <div class="line">
                     <div></div>
@@ -169,9 +159,40 @@
 
     <script src="/Scripts/PasswordEyes.js"></script>
     <script src="/Scripts/Carousel.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <script>
         Carousel.Setup(
             Carousel.types.Opacity, 
             true)
+
+        function start() {
+            gapi.load('auth2', function () {
+                auth2 = gapi.auth2.init({
+                    client_id: '924539222128-2dd6ug7m4g6b33v2sh1t6r9hghfegk5t.apps.googleusercontent.com'
+                    // Scopes to request in addition to 'profile' and 'email'
+                    //scope: 'additional_scope'
+                });
+            });
+        }
+
+        let signinButton = document.querySelector('#signinButton')
+
+        signinButton.addEventListener('click', () => {
+            // signInCallback defined in step 6.
+            auth2.grantOfflineAccess().then(signInCallback);
+        })
+
+        function signInCallback(authResult) {
+            if (authResult['code']) {
+                DoPostBack('signinButton', authResult['code'])
+
+            } else {
+                // There was an error.
+            }
+        }
+
+        function DoPostBack(obj, parameter = "") {
+            __doPostBack(obj.id, parameter)
+        }
     </script>
 </asp:Content>

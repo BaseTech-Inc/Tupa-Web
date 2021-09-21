@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
@@ -10,6 +11,7 @@ using System.Web.WebPages;
 using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
+using Tupa_Web.Common.Security;
 
 namespace Tupa_Web.View.Register
 {
@@ -23,15 +25,51 @@ namespace Tupa_Web.View.Register
 
         private string confirmarSenha { get; set; }
 
+        private string idToken { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
-        { }
+        {
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
+            string parameter = Request["__EVENTARGUMENT"];
+
+            if (targetCtrl != null && targetCtrl != string.Empty)
+            {
+                idToken = parameter;
+
+                // Fire event
+                btnRegisterGoogle_Click(this, new EventArgs());
+            }
+        }
 
         protected void btnRegisterGoogle_Click(object sender, EventArgs e)
         {
-            // Mostra uma mensagem de erro
-            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                EnumTypeError.information,
-                "Desculpe, mas essa Feature ainda não está disponível.");
+            var resultLogin = Task.Run(() => PostGetCode());
+            resultLogin.Wait();
+
+            var result = resultLogin.GetAwaiter().GetResult();
+        }
+
+        private async Task<Response<string>> PostGetCode()
+        {
+            // https://developers.google.com/identity/protocols/oauth2/web-server#httprest_3
+            // criando a url para comunicar entre o servidor
+            string url = "https://oauth2.googleapis.com/token"
+                .SetQueryParams(new
+                {
+                    code = idToken,
+                    client_id = "924539222128-2dd6ug7m4g6b33v2sh1t6r9hghfegk5t.apps.googleusercontent.com",
+                    client_secret = "NzP_mnOHogbb7I1yyWpUzQwK",
+                    redirect_uri = "https%3A//localhost%3A44381/code&",
+                    grant_type = "authorization_code"
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url, mediaType: "application/x-www-form-urlencoded");
+            var jsonResult = JsonSerializer.Deserialize<Response<string>>(stringResult);
+
+            return jsonResult;
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
