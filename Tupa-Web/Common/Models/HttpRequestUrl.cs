@@ -8,12 +8,13 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 
 namespace Tupa_Web.Common.Models
 {
     public static class HttpRequestUrl
     {
-        public static readonly string baseUrlTupa = "https://tupaserver.azurewebsites.net/";
+        public static readonly string baseUrlTupa = WebConfigurationManager.AppSettings["base_url_server"];
 
         /// <summary>
         /// Define o endereço padrão.

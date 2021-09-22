@@ -171,6 +171,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\secrets.xml" />
     <Content Include="Content\Audios\clown-horn.mp3" />
     <Content Include="Content\Css\dashboard.css" />
     <Content Include="Content\Css\error.css" />
@@ -340,7 +341,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="View\Site.Master" />
-    <Content Include="App_Data\secrets.xml" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\TupaWeb - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">

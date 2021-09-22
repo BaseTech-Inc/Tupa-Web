@@ -34,6 +34,7 @@ namespace Tupa_Web.View.Register
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Post Back usando Javascript evento
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
             string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
@@ -52,6 +53,7 @@ namespace Tupa_Web.View.Register
         {
             try
             {
+                // Get code
                 var resultGoogleTask = Task.Run(() => PostGetCode());
                 resultGoogleTask.Wait();
 
@@ -59,6 +61,7 @@ namespace Tupa_Web.View.Register
 
                 idToken = resultGoogle.id_token;
 
+                // Registra a conta no servidor
                 var resultLoginTask = Task.Run(() => PostRegisterGoogle());
                 resultLoginTask.Wait();
 
@@ -101,8 +104,11 @@ namespace Tupa_Web.View.Register
 
         private async Task<GoogleResponse> PostGetCode()
         {
-            var client_secret = WebConfigurationManager.AppSettings["client_secret"];
-            var redirect_uri = WebConfigurationManager.AppSettings["redirect_uri"];
+            var appSettings = WebConfigurationManager.AppSettings;
+
+            var client_id = appSettings["client_id"];
+            var client_secret = appSettings["client_secret"];
+            var redirect_uri = appSettings["redirect_uri"];            
 
             // https://developers.google.com/identity/protocols/oauth2/web-server#httprest_3
             // criando a url para comunicar entre o servidor
@@ -110,7 +116,7 @@ namespace Tupa_Web.View.Register
                 .SetQueryParams(new
                 {
                     code = code,
-                    client_id = "924539222128-2dd6ug7m4g6b33v2sh1t6r9hghfegk5t.apps.googleusercontent.com",
+                    client_id = client_id,
                     client_secret = client_secret,
                     redirect_uri = HttpUtility.UrlEncode(redirect_uri),
                     grant_type = "authorization_code"

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Tupa_Web.View.Login.Login" %>
+<%@ Import Namespace="System.Web.Configuration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
@@ -34,7 +35,8 @@
                 <div class="error" runat="server" id="errorMessage">                  
                 </div>
                 
-                <div class="google_button">
+                <div class="google_button button_icon_left">
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/google.png" />
                     <button type="button" class="primary-button" id="signinButton">Entre pelo Google</button>
                 </div>
                
@@ -138,18 +140,18 @@
 
     <script src="/Scripts/PasswordEyes.js"></script>
     <script src="/Scripts/Carousel.js"></script>
-     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
     <script>
         Carousel.Setup(
             Carousel.types.Opacity, 
             true)
 
-        var auth2;
+        let auth2;
 
         function start() {
             gapi.load('auth2', function () {
                 auth2 = gapi.auth2.init({
-                    client_id: '924539222128-2dd6ug7m4g6b33v2sh1t6r9hghfegk5t.apps.googleusercontent.com'
+                    client_id: '<% Response.Write(WebConfigurationManager.AppSettings["client_id"]); %>'
                     // Scopes to request in addition to 'profile' and 'email'
                     //scope: 'additional_scope'
                 });
