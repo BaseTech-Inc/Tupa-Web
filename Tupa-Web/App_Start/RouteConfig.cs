@@ -32,10 +32,8 @@ namespace Tupa_Web.App_Start
             // Dashboard
             routes.MapPageRoute(
                 "Dashboard",
-                "Dashboard/{locate}",
-                "~/View/Dashboard/Dashboard.aspx", 
-                false,
-                new RouteValueDictionary { { "locate", "São Paulo" } });
+                "Dashboard/{locale}",
+                "~/View/Dashboard/Dashboard.aspx");
 
             // Locate
             routes.MapPageRoute(
