@@ -102,10 +102,6 @@
     margin-bottom: 8px;
 }
 
-.dashboard .right .alertas {
-    position: relative;
-}
-
 .dashboard .right .alertas .list {
     max-height: 50vh;
     overflow-y: auto;
@@ -132,7 +128,7 @@
     border-right: 3.2px solid var(--surface_color);
 }
 
-.dashboard .right .alertas .list > .card {
+.dashboard .right .alertas .list .card {
     width: calc(100% - 50px);
     border-radius: 12px;
     padding: 16px 24px;
@@ -141,7 +137,7 @@
     margin-bottom: 12px;
 }
 
-.dashboard .right .alertas .list > .card .icon {
+.dashboard .right .alertas .list .card .icon {
     width: 32px;
     height: 32px;
     background: var(--primary-color);
@@ -155,11 +151,11 @@
     float: left;
 }
 
-.dashboard .right .alertas .list > .card .icon span {
+.dashboard .right .alertas .list .card .icon span {
     color: #E7F2FE;
 }
 
-.dashboard .right .alertas .list > .card .title {
+.dashboard .right .alertas .list .card .title {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -167,13 +163,13 @@
     margin-bottom: 16px;
 }
 
-.dashboard .right .alertas .list > .card .line {
+.dashboard .right .alertas .list .card .line-hr {
     width: 100%;
     height: 1px;
     background: var(--border-color);
     margin-bottom: 16px;
 }
-.dashboard .right .alertas .list > .card .time p {
+.dashboard .right .alertas .list .card .time p {
     font-size: var(--body_2_font_size);
     white-space: nowrap;
     position: absolute;
@@ -181,9 +177,9 @@
     top: 12px;
 }
 
-.dashboard .right .alertas .list >.card .title .description h4 {
+.dashboard .right .alertas .list .card .title .description h4 {
     text-overflow: ellipsis;
-    width: 60%;
+    max-width: 120px;
     height: 1em;
     overflow: hidden; 
     white-space: nowrap;

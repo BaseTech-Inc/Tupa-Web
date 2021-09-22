@@ -9,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.WebPages;
 
 namespace Tupa_Web.Common.Models
 {
@@ -68,12 +69,17 @@ namespace Tupa_Web.Common.Models
         public static async Task<T> ProcessHttpClientGet<T>(
             string url,
             JsonSerializerOptions options = null,
-            string mediaType = "application/json")
+            string mediaType = "application/json",
+            string bearerToken = "")
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue(mediaType));
+
+            if (!bearerToken.IsEmpty())
+                client.DefaultRequestHeaders.Add(
+                    "Authorization", String.Format("Bearer {0}", bearerToken));
 
             var streamTask = client.GetStreamAsync(url);
             var objectResult = await JsonSerializer.DeserializeAsync<T>(await streamTask);
@@ -83,12 +89,17 @@ namespace Tupa_Web.Common.Models
 
         public static async Task<String> ProcessHttpClientGet(
             string url,
-            string mediaType = "application/json")
+            string mediaType = "application/json",
+            string bearerToken = "")
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue(mediaType));
+
+            if (!bearerToken.IsEmpty())
+                client.DefaultRequestHeaders.Add(
+                    "Authorization", String.Format("Bearer {0}", bearerToken));
 
             var streamTask = client.GetStringAsync(url);
 
@@ -98,12 +109,17 @@ namespace Tupa_Web.Common.Models
         public static async Task<string> ProcessHttpClientPost(
             string url,
             JsonSerializerOptions options = null,
-            string mediaType = "application/json")
+            string mediaType = "application/json",
+            string bearerToken = "")
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue(mediaType));
+
+            if (!bearerToken.IsEmpty())
+                client.DefaultRequestHeaders.Add(
+                    "Authorization", String.Format("Bearer {0}", bearerToken));
 
             var content = new StringContent("", Encoding.UTF8, "text/json");
 

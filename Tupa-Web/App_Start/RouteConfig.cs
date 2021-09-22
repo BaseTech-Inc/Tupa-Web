@@ -32,7 +32,7 @@ namespace Tupa_Web.App_Start
             // Dashboard
             routes.MapPageRoute(
                 "Dashboard",
-                "Dashboard/{locale}",
+                "Dashboard",
                 "~/View/Dashboard/Dashboard.aspx");
 
             // Locate

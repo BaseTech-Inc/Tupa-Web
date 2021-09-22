@@ -457,6 +457,24 @@ footer .container_wrapper .down ul li a {
     display: none
 }
 
-.close_button {
+.error-message-absolute .error_wrapper p {
+    margin-right: 12px;
+}
+
+.error_wrapper .close_button {
     cursor: pointer
+}
+
+.error-message-absolute {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+
+.error-message-absolute .error-message {
+    box-shadow: 0 3px 6px var(--shadow-variant-color);    
+}
+
+.error-message-absolute .error-message {
+    min-width: 240px
 }
