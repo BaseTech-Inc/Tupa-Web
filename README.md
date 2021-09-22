@@ -32,9 +32,9 @@ $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
 
 ### Configurando ambiente
 
-- Para inicializar os [valores secretos](https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-add-app-config-file?view=vs-2019) é nescessário criar o arquivo `secrets.xml` dentro da pasta `App_Data`.
+- Para inicializar os [valores secretos](https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-add-app-config-file?view=vs-2019) é nescessário criar o arquivo `secrets.xml` dentro da pasta `App_Data` (às vezes pode ser nescessário apagar a pasta `App_Data` e recriá-la).
 
-    É nescessário inserir os seguindes valores:
+    É nescessário inserir os seguindes valores, dentro do arquivo `secrets.xml`:
 
     ```xml
     <?xml version="1.0" encoding="utf-8" ?>
@@ -47,6 +47,8 @@ $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
       </secrets>
     </root>
     ```
+
+    Para gerar o `client_id` e o `client_secret` é necessário [criar projeto do Console de APIs Google](https://developers.google.com/workspace/guides/create-project).
 
 <img src="https://github.githubassets.com/images/mona-whisper.gif" align="right" />
 
