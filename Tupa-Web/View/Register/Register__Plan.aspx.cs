@@ -13,7 +13,7 @@ namespace Tupa_Web.View.Register
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Request.QueryString["uid"]))
+            if (!string.IsNullOrEmpty(Request.QueryString["uid"]))
             {
                 uid = Request.QueryString["uid"];
 
