@@ -12,6 +12,10 @@ namespace Tupa_Web.View.Login
 {
     public partial class Login_Verify : System.Web.UI.Page
     {
+        private string userId { get; set; }
+
+        private string tokenEmail { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack)
@@ -21,12 +25,12 @@ namespace Tupa_Web.View.Login
                 !string.IsNullOrEmpty(Request.QueryString["userId"]) && 
                 !string.IsNullOrEmpty(Request.QueryString["tokenEmail"]))
             {
-                string userId = Request.QueryString["userId"];
-                string tokenEmail = Request.QueryString["tokenEmail"];
+                userId = Request.QueryString["userId"];
+                tokenEmail = Request.QueryString["tokenEmail"];
 
                 try
                 {
-                    var resultTask = Task.Run(() => PostVerifyEmail(userId, tokenEmail));
+                    var resultTask = Task.Run(() => PostVerifyEmail());
                     resultTask.Wait();
 
                     var result = resultTask.GetAwaiter().GetResult();
@@ -43,9 +47,7 @@ namespace Tupa_Web.View.Login
             }
         }
 
-        private async Task<Response<string>> PostVerifyEmail(
-            string userId,
-            string tokenEmail)
+        private async Task<Response<string>> PostVerifyEmail()
         {
             // criando a url para comunicar entre o servidor
             string url = "https://tupaserver.azurewebsites.net/api/Account/verify-email?userId=" + HttpUtility.UrlEncode(userId) + " &tokenEmail=" + HttpUtility.UrlEncode(tokenEmail);

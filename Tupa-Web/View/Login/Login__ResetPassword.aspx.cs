@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
@@ -14,9 +15,9 @@ namespace Tupa_Web.View.Login
 {
     public partial class Login__ResetPassword : System.Web.UI.Page
     {
-        private string password { get; set; }
+        private string senha { get; set; }
 
-        private string confirmPassword { get; set; }
+        private string confirmarSenha { get; set; }
 
         private string email { get; set; }
 
@@ -34,42 +35,55 @@ namespace Tupa_Web.View.Login
                 email = Request.QueryString["email"];
                 token = Request.QueryString["token"];
 
-                password = txtSenha.Text.ToString();
-                confirmPassword = txtConfirmarSenha.Text.ToString();
+                senha = txtSenha.Text.ToString();
+                confirmarSenha = txtConfirmarSenha.Text.ToString();
 
-                if (password == confirmPassword)
+                // verificação se os campos estão vazios
+                if (!senha.IsEmpty() && !confirmarSenha.IsEmpty())
                 {
-                    try
+                    if (senha == confirmarSenha)
                     {
-                        var resultTask = Task.Run(() => PostChangePassword());
-                        resultTask.Wait();
-
-                        var result = resultTask.GetAwaiter().GetResult();
-
-                        if (result.succeeded)
+                        try
                         {
-                            // Redirect to verify email page
-                            Response.Redirect("~/Login");
+                            var resultTask = Task.Run(() => PostChangePassword());
+                            resultTask.Wait();
+
+                            var result = resultTask.GetAwaiter().GetResult();
+
+                            if (result.succeeded)
+                            {
+                                // Redirect to verify email page
+                                Response.Redirect("~/Login");
+                            }
+                            else
+                            {
+                                // Mostra uma mensagem de erro
+                                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                    EnumTypeError.error,
+                                    result.message);
+                            }
                         }
-                        else
+                        catch (Exception)
                         {
                             // Mostra uma mensagem de erro
                             errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                                 EnumTypeError.error,
-                                result.message);
+                                "Ocorreu um erro, tente novamente mais tarde.");
                         }
-                    } catch (Exception) {
+                    }
+                    else
+                    {
                         // Mostra uma mensagem de erro
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                            EnumTypeError.error,
-                            "Ocorreu um erro, tente novamente mais tarde.");
+                            EnumTypeError.warning,
+                            "Os valores dos campos de senha diferem.");
                     }
                 } else {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.warning,
-                        "Os valores dos campos de senha diferem.");
-                }
+                        "Insira os valores no campo");
+                }  
             } else {
                 Response.Redirect("~/");
             }
@@ -84,7 +98,7 @@ namespace Tupa_Web.View.Login
                 {
                     email = email,
                     token = token,
-                    password = password
+                    password = senha
                 });
 
             // resultado da comunicação
