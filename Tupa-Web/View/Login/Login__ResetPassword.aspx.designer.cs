@@ -51,13 +51,13 @@ namespace Tupa_Web.View.Login
         protected global::System.Web.UI.WebControls.TextBox txtConfirmarSenha;
 
         /// <summary>
-        /// Controle btnLogin.
+        /// Controle btnChangePassword.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogin;
+        protected global::System.Web.UI.WebControls.Button btnChangePassword;
 
         /// <summary>
         /// Controle HyperLink2.

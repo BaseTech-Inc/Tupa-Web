@@ -34,58 +34,63 @@ namespace Tupa_Web.View.Login
             {
                 email = Request.QueryString["email"];
                 token = Request.QueryString["token"];
+            } else {
+                Response.Redirect("~/");
+            }
+        }
 
-                senha = txtSenha.Text.ToString();
-                confirmarSenha = txtConfirmarSenha.Text.ToString();
+        protected void btnChangePassword_Click(object sender, EventArgs e)
+        {
+            senha = txtSenha.Text.ToString();
+            confirmarSenha = txtConfirmarSenha.Text.ToString();
 
-                // verificação se os campos estão vazios
-                if (!senha.IsEmpty() && !confirmarSenha.IsEmpty())
+            // verificação se os campos estão vazios
+            if (!senha.IsEmpty() && !confirmarSenha.IsEmpty())
+            {
+                if (senha == confirmarSenha)
                 {
-                    if (senha == confirmarSenha)
+                    try
                     {
-                        try
+                        var resultTask = Task.Run(() => PostChangePassword());
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
                         {
-                            var resultTask = Task.Run(() => PostChangePassword());
-                            resultTask.Wait();
-
-                            var result = resultTask.GetAwaiter().GetResult();
-
-                            if (result.succeeded)
-                            {
-                                // Redirect to verify email page
-                                Response.Redirect("~/Login");
-                            }
-                            else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.error,
-                                    result.message);
-                            }
+                            // Redirect to verify email page
+                            Response.Redirect("~/Login");
                         }
-                        catch (Exception)
+                        else
                         {
                             // Mostra uma mensagem de erro
                             errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                                 EnumTypeError.error,
-                                "Ocorreu um erro, tente novamente mais tarde.");
+                                result.message);
                         }
                     }
-                    else
+                    catch (Exception)
                     {
                         // Mostra uma mensagem de erro
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                            EnumTypeError.warning,
-                            "Os valores dos campos de senha diferem.");
+                            EnumTypeError.error,
+                            "Ocorreu um erro, tente novamente mais tarde.");
                     }
-                } else {
+                }
+                else
+                {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.warning,
-                        "Insira os valores no campo");
-                }  
-            } else {
-                Response.Redirect("~/");
+                        "Os valores dos campos de senha diferem.");
+                }
+            }
+            else
+            {
+                // Mostra uma mensagem de erro
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.warning,
+                    "Insira os valores no campo");
             }
         }
 
