@@ -25,9 +25,6 @@ namespace Tupa_Web.View.Login
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack)
-                return;
-
             if (
                 !string.IsNullOrEmpty(Request.QueryString["email"]) &&
                 !string.IsNullOrEmpty(Request.QueryString["token"]))
@@ -71,10 +68,12 @@ namespace Tupa_Web.View.Login
                     }
                     catch (Exception)
                     {
+                        string url = "https://tupaserver.azurewebsites.net/api/Account/change-password?email=" + HttpUtility.UrlEncode(email) + " &token=" + HttpUtility.UrlEncode(token) + "&password=" + HttpUtility.UrlEncode(senha);
+
                         // Mostra uma mensagem de erro
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                             EnumTypeError.error,
-                            "Ocorreu um erro, tente novamente mais tarde.");
+                            "Ocorreu um erro, tente novamente mais tarde." + url);
                     }
                 }
                 else
