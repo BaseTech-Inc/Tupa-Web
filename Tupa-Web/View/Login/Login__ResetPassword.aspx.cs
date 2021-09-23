@@ -92,14 +92,7 @@ namespace Tupa_Web.View.Login
         private async Task<Response<string>> PostChangePassword()
         {
             // criando a url para comunicar entre o servidor
-            string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/Account/change-password")
-                .SetQueryParams(new
-                {
-                    email = email,
-                    token = token,
-                    password = senha
-                });
+            string url = "https://tupaserver.azurewebsites.net/api/Account/change-password?email=" + HttpUtility.UrlEncode(email) + " &token=" + HttpUtility.UrlEncode(token) + " &password=" + HttpUtility.UrlEncode(senha);
 
             // resultado da comunicação
             var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
