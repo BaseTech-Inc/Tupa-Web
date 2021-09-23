@@ -54,7 +54,7 @@ namespace Tupa_Web.App_Start
 
             routes.MapPageRoute(
                 "Login_Reset-Password",
-                "Login/Reset - Password",
+                "Login/Reset-Password",
                 "~/View/Login/Login__ResetPassword.aspx");
 
             // Map
