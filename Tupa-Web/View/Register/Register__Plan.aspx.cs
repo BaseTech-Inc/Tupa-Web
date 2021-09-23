@@ -12,8 +12,15 @@ namespace Tupa_Web.View.Register
         private string uid { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        { 
-            uid = Request.QueryString["uid"];
+        {
+            if (string.IsNullOrEmpty(Request.QueryString["uid"]))
+            {
+                uid = Request.QueryString["uid"];
+
+            } else
+            {
+                Response.Redirect("~/");
+            }                
         }
 
         protected void btnContinuar_Click(object sender, EventArgs e)

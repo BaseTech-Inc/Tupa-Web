@@ -13,7 +13,15 @@ namespace Tupa_Web.View.Register
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            uid = Request.QueryString["uid"];
+            if (!string.IsNullOrEmpty(Request.QueryString["uid"]))
+            {
+                uid = Request.QueryString["uid"];
+
+            }
+            else
+            {
+                Response.Redirect("~/");
+            }
         }
 
         protected void btnAbrirLogin_Click(object sender, EventArgs e)

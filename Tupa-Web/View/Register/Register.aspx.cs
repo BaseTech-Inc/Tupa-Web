@@ -34,7 +34,7 @@ namespace Tupa_Web.View.Register
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Post Back usando Javascript evento
+            // Post Back usando um evento Javascript
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
             string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
