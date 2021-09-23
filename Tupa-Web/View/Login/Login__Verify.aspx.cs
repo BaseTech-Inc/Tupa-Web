@@ -38,6 +38,8 @@ namespace Tupa_Web.View.Login
                     {
                     }
                 } catch (Exception) { }
+            } else {
+                Response.Redirect("~/");
             }
         }
 

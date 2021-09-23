@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login_Verify.aspx.cs" Inherits="Tupa_Web.View.Login.Login_Verify" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login__Verify.aspx.cs" Inherits="Tupa_Web.View.Login.Login_Verify" %>
 
 <!DOCTYPE html>
 

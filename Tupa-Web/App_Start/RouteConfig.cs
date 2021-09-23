@@ -50,7 +50,12 @@ namespace Tupa_Web.App_Start
             routes.MapPageRoute(
                 "Login_Verify",
                 "Login/Verfiy",
-                "~/View/Login/Login_Verify.aspx");
+                "~/View/Login/Login__Verify.aspx");
+
+            routes.MapPageRoute(
+                "Login_Reset-Password",
+                "Login/Reset - Password",
+                "~/View/Login/Login__ResetPassword.aspx");
 
             // Map
             routes.MapPageRoute(

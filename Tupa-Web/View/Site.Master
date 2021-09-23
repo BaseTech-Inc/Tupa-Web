@@ -40,7 +40,7 @@
 </head>
 <body data-theme="white">
     <!-- Header -->
-    <% if(Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Planos" && Page.Title != "Verificar") { %>
+    <% if(Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Planos" && Page.Title != "Verificar" && Page.Title != "Trocar Senha") { %>
     <header class="home container card">
         <div class="menu container_wrapper">
             <div class="logo">
@@ -173,7 +173,7 @@
     </form>
 
     <!-- Footer -->    
-    <% if (Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Mapa" && Page.Title != "Planos"  && Page.Title != "Verificar") { %>
+    <% if (Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Mapa" && Page.Title != "Planos"  && Page.Title != "Verificar" && Page.Title != "Trocar Senha") { %>
     <footer class="container">
         <div class="container_wrapper">
             <div class="up">

@@ -11,6 +11,10 @@
     justify-content: space-around;
 }
 
+.login_content .login.full {
+    width: 100%
+}
+
 .login_content .login .form {
     width: 360px;
 }
