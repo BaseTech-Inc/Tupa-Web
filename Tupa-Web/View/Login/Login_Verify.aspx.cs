@@ -34,10 +34,10 @@ namespace Tupa_Web.View.Login
                     if (result.succeeded)
                     {
                         Response.Redirect("~/Login");
+                    } else
+                    {
                     }
-                } catch (Exception) {
-                    
-                }
+                } catch (Exception) { }
             }
         }
 
@@ -46,13 +46,7 @@ namespace Tupa_Web.View.Login
             string tokenEmail)
         {
             // criando a url para comunicar entre o servidor
-            string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/Account/verify-email")
-                .SetQueryParams(new
-                {
-                    userId = userId,
-                    tokenEmail = tokenEmail
-                });
+            string url = "https://tupaserver.azurewebsites.net/api/Account/verify-email?userId=" + HttpUtility.UrlEncode(userId) + " &tokenEmail=" + HttpUtility.UrlEncode(tokenEmail);
 
             // resultado da comunicação
             var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
