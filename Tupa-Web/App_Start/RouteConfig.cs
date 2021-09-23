@@ -47,6 +47,11 @@ namespace Tupa_Web.App_Start
                 "Login",
                 "~/View/Login/Login.aspx");
 
+            routes.MapPageRoute(
+                "Login_Verify",
+                "Login/Verfiy",
+                "~/View/Login/Login_Verify.aspx");
+
             // Map
             routes.MapPageRoute(
                 "Map",

@@ -221,6 +221,7 @@
     <Content Include="View\Home\Home.aspx" />
     <Content Include="View\Locais\Locais.aspx" />
     <Content Include="View\Login\Login.aspx" />
+    <Content Include="View\Login\Login_Verify.aspx" />
     <Content Include="View\Mapa\Mapa.aspx" />
     <Content Include="View\Privacy\Privacy.aspx" />
     <Content Include="View\Register\Register.aspx" />
@@ -293,6 +294,13 @@
     </Compile>
     <Compile Include="View\Login\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\Login_Verify.aspx.cs">
+      <DependentUpon>Login_Verify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Login\Login_Verify.aspx.designer.cs">
+      <DependentUpon>Login_Verify.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Mapa\Mapa.aspx.cs">
       <DependentUpon>Mapa.aspx</DependentUpon>

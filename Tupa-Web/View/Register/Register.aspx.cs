@@ -94,11 +94,11 @@ namespace Tupa_Web.View.Register
                         EnumTypeError.error,
                         resultLogin.message);
                 }
-            } catch (Exception ex) {
+            } catch (Exception) {
                 // Mostra uma mensagem de erro
                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                     EnumTypeError.error,
-                    "Ocorreu um erro, tente novamente mais tarde. " + ex);
+                    "Ocorreu um erro, tente novamente mais tarde.");
             }
         }
 
