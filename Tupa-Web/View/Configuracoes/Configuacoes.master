@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Configuacoes.master.cs" Inherits="Tupa_Web.View.Configuracoes.Configuacoes" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="/Content/Css/configuracoes.css" />
+    <link rel="stylesheet" href="/Content/Css/form.css">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="config_wrapper container_wrapper">
+        <div class="config_options">
+            <h3>Configurações</h3>
+            <ul>
+                <li>
+                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="target">Perfil</asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="HyperLink2" runat="server">Conta</asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="HyperLink6" runat="server">Temas</asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="HyperLink4" runat="server">Sessões</asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="HyperLink5" runat="server">Planos</asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="HyperLink3" runat="server">Notificações</asp:HyperLink>
+                </li>
+                <li>
+                    <asp:HyperLink ID="HyperLink7" runat="server">Configurações de Desenvolvedor</asp:HyperLink>
+                </li>
+            </ul>
+        </div>
+        <div class="config_container">
+            <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
+        </div>
+    </div>
+</asp:Content>

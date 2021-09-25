@@ -1,1 +1,50 @@
-﻿
+﻿.config_wrapper {
+    display: flex;
+    max-width: 878px;
+    padding: 32px 0;
+    overflow: auto;
+}
+
+.config_wrapper .config_options {
+    width: 24%;
+    padding-right: 24px;
+    margin-bottom: 20px
+}
+
+.config_wrapper .config_options ul {
+    position: relative
+}
+
+.config_wrapper .config_options ul li {
+    position: relative;
+    padding: 7px 0;
+}
+
+.config_wrapper .config_options ul {
+    margin-left: 7px
+}
+
+.config_wrapper .config_options ul a:hover {
+    color: var(--high_emphasis_color)
+}
+
+.config_wrapper .config_options ul a.target {
+    font-weight: var(--semi_bold_font);
+    color: var(--high_emphasis_color)
+}
+
+.config_wrapper .config_options h3 {
+    margin-bottom: 7px
+}
+
+.config_wrapper .config_container {
+    width: 100%
+}
+
+.config_wrapper .config_container h1 {
+    margin-bottom: 8px
+}
+
+.config_wrapper .config_container hr {
+    border-color: #f1f1f1
+}

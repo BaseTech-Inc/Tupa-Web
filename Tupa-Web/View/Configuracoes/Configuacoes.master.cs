@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Tupa_Web.View.Configuracoes
 {
-    public partial class Nos : System.Web.UI.Page
+    public partial class Configuacoes : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

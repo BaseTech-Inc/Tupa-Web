@@ -20,13 +20,13 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
     - [ ] Alertas
     - [ ] Gráfico
 - [ ] Configurações de Usuário
-    - [] Editar Info
-        - [] Alterar Nome
-        - [] Alterar Senha
-        - [] Alterar foto
-    - [] Tema
-    - [] Assinar Premium
-    - [] Notifications
+    - [ ] Editar Info
+        - [ ] Alterar Nome
+        - [ ] Alterar Senha
+        - [ ] Alterar foto
+    - [ ] Tema
+    - [ ] Assinar Premium
+    - [ ] Notifications
 
 ## Começando
 

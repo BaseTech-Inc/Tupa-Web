@@ -216,8 +216,7 @@
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\PasswordEyes.js" />
     <Content Include="Scripts\TermsPrivacy.js" />
-    <Content Include="View\Configuracoes\Configuracoes.aspx" />
-    <Content Include="View\Configuracoes\Nos.aspx" />
+    <Content Include="View\Configuracoes\Perfil.aspx" />
     <Content Include="View\Dashboard\Dashboard.aspx" />
     <Content Include="View\Error\Error.aspx" />
     <Content Include="View\Home\Home.aspx" />
@@ -256,19 +255,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="View\Configuracoes\Configuracoes.aspx.cs">
-      <DependentUpon>Configuracoes.aspx</DependentUpon>
+    <Compile Include="View\Configuracoes\Configuacoes.master.cs">
+      <DependentUpon>Configuacoes.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View\Configuracoes\Configuracoes.aspx.designer.cs">
-      <DependentUpon>Configuracoes.aspx</DependentUpon>
+    <Compile Include="View\Configuracoes\Configuacoes.master.designer.cs">
+      <DependentUpon>Configuacoes.master</DependentUpon>
     </Compile>
-    <Compile Include="View\Configuracoes\Nos.aspx.cs">
-      <DependentUpon>Nos.aspx</DependentUpon>
+    <Compile Include="View\Configuracoes\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="View\Configuracoes\Nos.aspx.designer.cs">
-      <DependentUpon>Nos.aspx</DependentUpon>
+    <Compile Include="View\Configuracoes\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Dashboard\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -377,6 +376,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="View\Configuracoes\Configuacoes.master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

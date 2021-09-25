@@ -27,7 +27,12 @@ namespace Tupa_Web.App_Start
             routes.MapPageRoute(
                 "Settings",
                 "Settings",
-                "~/View/Configuracoes/Configuracoes.aspx");
+                "~/View/Configuracoes/Perfil.aspx");
+
+            routes.MapPageRoute(
+                "Perfil",
+                "Perfil",
+                "~/View/Configuracoes/Perfil.aspx");
 
             // Dashboard
             routes.MapPageRoute(
