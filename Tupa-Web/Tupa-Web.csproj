@@ -173,6 +173,7 @@
   <ItemGroup>
     <Content Include="App_Data\secrets.xml" />
     <Content Include="Content\Audios\clown-horn.mp3" />
+    <Content Include="Content\Css\configuracoes.css" />
     <Content Include="Content\Css\dashboard.css" />
     <Content Include="Content\Css\error.css" />
     <Content Include="Content\Css\form.css" />
@@ -216,6 +217,7 @@
     <Content Include="Scripts\PasswordEyes.js" />
     <Content Include="Scripts\TermsPrivacy.js" />
     <Content Include="View\Configuracoes\Configuracoes.aspx" />
+    <Content Include="View\Configuracoes\Nos.aspx" />
     <Content Include="View\Dashboard\Dashboard.aspx" />
     <Content Include="View\Error\Error.aspx" />
     <Content Include="View\Home\Home.aspx" />
@@ -260,6 +262,13 @@
     </Compile>
     <Compile Include="View\Configuracoes\Configuracoes.aspx.designer.cs">
       <DependentUpon>Configuracoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Nos.aspx.cs">
+      <DependentUpon>Nos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Nos.aspx.designer.cs">
+      <DependentUpon>Nos.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Dashboard\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
