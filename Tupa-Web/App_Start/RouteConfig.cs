@@ -34,6 +34,36 @@ namespace Tupa_Web.App_Start
                 "Perfil",
                 "~/View/Configuracoes/Perfil.aspx");
 
+            routes.MapPageRoute(
+                "Account",
+                "Account",
+                "~/View/Configuracoes/Account.aspx");
+
+            routes.MapPageRoute(
+                "Themes",
+                "Themes",
+                "~/View/Configuracoes/Themes.aspx");
+
+            routes.MapPageRoute(
+                "Sessoes",
+                "Sessoes",
+                "~/View/Configuracoes/Sessoes.aspx");
+
+            routes.MapPageRoute(
+                "Plans",
+                "Plans",
+                "~/View/Configuracoes/Plans.aspx");
+
+            routes.MapPageRoute(
+                "Notifications",
+                "Notifications",
+                "~/View/Configuracoes/Notifications.aspx");
+
+            routes.MapPageRoute(
+                "Developer",
+                "Developer",
+                "~/View/Configuracoes/Developer.aspx");
+
             // Dashboard
             routes.MapPageRoute(
                 "Dashboard",

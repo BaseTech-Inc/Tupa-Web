@@ -7,34 +7,49 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="config_wrapper container_wrapper">
-        <div class="config_options">
-            <h3>Configurações</h3>
-            <ul>
-                <li>
-                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="target">Perfil</asp:HyperLink>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HyperLink2" runat="server">Conta</asp:HyperLink>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HyperLink6" runat="server">Temas</asp:HyperLink>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HyperLink4" runat="server">Sessões</asp:HyperLink>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HyperLink5" runat="server">Planos</asp:HyperLink>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HyperLink3" runat="server">Notificações</asp:HyperLink>
-                </li>
-                <li>
-                    <asp:HyperLink ID="HyperLink7" runat="server">Configurações de Desenvolvedor</asp:HyperLink>
-                </li>
-            </ul>
+        <div class="group">
+            <div class="account-header">
+                <asp:Image ID="imgPictureHeader" runat="server" ImageUrl="~/Content/Images/abraham.jpg" />
+                <div class="details">
+                    <h2><span class="blue">Nome de usuário</span> <span class="sep">/</span> <%= Page.Title %></h2>
+                    <p><%= Page.MetaDescription %></p>
+                </div>
+            </div>
         </div>
-        <div class="config_container">
-            <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
-        </div>
+        <main>
+            <div class="config_options">
+                <nav class="card">
+                    <ul>
+                        <li>
+                            <span class="menu-heading">Configurações</span>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Perfil">Perfil</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Account">Conta</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Themes">Temas</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Sessoes">Sessões</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Notifications">Notificações</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Developer">Desenvolvedor</asp:HyperLink>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="config_container">
+                <asp:ContentPlaceHolder ID="ChildContent1" runat="server" />
+            </div>
+        </main>
     </div>
 </asp:Content>

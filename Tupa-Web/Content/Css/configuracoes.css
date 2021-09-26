@@ -1,40 +1,90 @@
 ﻿.config_wrapper {
-    display: flex;
     max-width: 878px;
     padding: 32px 0;
     overflow: auto;
 }
 
+.config_wrapper .group .account-header {
+    display: flex;
+    min-height: 40px;
+    margin-bottom: 54px;
+}
+
+.config_wrapper .group .account-header img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100%
+}
+
+h2 span.blue {
+    font-size: var(--h2_font_size);
+    font-family: var(--title_font);
+    font-weight: var(--semi_bold_font);
+    color: var(--primary-variant-color);
+}
+
+h2 span.sep {
+    font-size: var(--h2_font_size);
+    font-family: var(--title_font);
+    font-weight: var(--regular_font);
+    color: var(--disabled-color);
+}
+
+.config_wrapper .group .account-header .details {
+    margin-left: 32px;
+}
+
+.config_wrapper .group .account-header .details h2 {
+    margin-bottom: 2px
+}
+
+.config_wrapper main {
+    display: flex;
+}
+
 .config_wrapper .config_options {
-    width: 24%;
-    padding-right: 24px;
-    margin-bottom: 20px
+    width: 32%;
+    padding-right: 48px;    
+}
+
+.config_wrapper .config_options nav {
+    margin-bottom: 20px;
+    border-radius: 6px
+}
+
+nav .menu-heading {    
+    font-weight: var(--semi_bold_font);
+    color: var(--high_emphasis_color);
 }
 
 .config_wrapper .config_options ul {
-    position: relative
+    position: relative;
 }
 
 .config_wrapper .config_options ul li {
     position: relative;
-    padding: 7px 0;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex
 }
 
-.config_wrapper .config_options ul {
-    margin-left: 7px
+.config_wrapper .config_options ul li:hover {
+    background: var(--background_color);
 }
 
-.config_wrapper .config_options ul a:hover {
+.config_wrapper .config_options ul a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%
+}
+
+.config_wrapper .config_options ul li:hover a {
     color: var(--high_emphasis_color)
 }
 
 .config_wrapper .config_options ul a.target {
     font-weight: var(--semi_bold_font);
     color: var(--high_emphasis_color)
-}
-
-.config_wrapper .config_options h3 {
-    margin-bottom: 7px
 }
 
 .config_wrapper .config_container {
@@ -47,4 +97,65 @@
 
 .config_wrapper .config_container hr {
     border-color: #f1f1f1
+}
+
+.inputs .input {
+    margin: 15px 0
+}
+
+.inputs .input span:nth-child(1) {
+    font-weight: var(--semi_bold_font);
+    color: var(--high_emphasis_color)
+}
+
+.inputs .input input {
+    border: 1px solid var(--border-color) !important;
+    width: calc(100% - 26px) !important;
+    border-radius: 6px;
+    margin-top: 6px;
+}
+
+.inputs .input span.caption {
+    font-size: var(--caption_font_size);
+    margin: 4px 0
+}
+
+.inputs .input input:focus {
+    border-radius: 6px;
+    border: 1px solid var(--primary-variant-color) !important;
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
+    position: relative;
+    z-index: 1000
+}
+
+.perfil-section .picture {
+    display: flex;
+    align-items: center;
+    margin: 15px 0
+}
+
+.perfil-section .picture img {
+    width: 74px;
+    height: 74px;
+    border-radius: 100%;
+}
+
+.perfil-section .picture > * {
+     margin-right: 12px
+}
+
+.config_wrapper .config_container .form {
+    margin-bottom: 42px
+}
+
+.delete-section > p {
+    margin-bottom: 8px
+}
+
+.danger {
+    color: var(--error_color)
+}
+
+.primary-button.danger {
+    border: 1px solid var(--error_color);
 }

@@ -216,7 +216,13 @@
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\PasswordEyes.js" />
     <Content Include="Scripts\TermsPrivacy.js" />
+    <Content Include="View\Configuracoes\Account.aspx" />
+    <Content Include="View\Configuracoes\Developer.aspx" />
+    <Content Include="View\Configuracoes\Notifications.aspx" />
     <Content Include="View\Configuracoes\Perfil.aspx" />
+    <Content Include="View\Configuracoes\Plans.aspx" />
+    <Content Include="View\Configuracoes\Sessoes.aspx" />
+    <Content Include="View\Configuracoes\Themes.aspx" />
     <Content Include="View\Dashboard\Dashboard.aspx" />
     <Content Include="View\Error\Error.aspx" />
     <Content Include="View\Home\Home.aspx" />
@@ -255,6 +261,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="View\Configuracoes\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Configuracoes\Configuacoes.master.cs">
       <DependentUpon>Configuacoes.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -262,12 +275,47 @@
     <Compile Include="View\Configuracoes\Configuacoes.master.designer.cs">
       <DependentUpon>Configuacoes.master</DependentUpon>
     </Compile>
+    <Compile Include="View\Configuracoes\Developer.aspx.cs">
+      <DependentUpon>Developer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Developer.aspx.designer.cs">
+      <DependentUpon>Developer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Notifications.aspx.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Notifications.aspx.designer.cs">
+      <DependentUpon>Notifications.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Configuracoes\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\Configuracoes\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Plans.aspx.cs">
+      <DependentUpon>Plans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Plans.aspx.designer.cs">
+      <DependentUpon>Plans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Sessoes.aspx.cs">
+      <DependentUpon>Sessoes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Sessoes.aspx.designer.cs">
+      <DependentUpon>Sessoes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Themes.aspx.cs">
+      <DependentUpon>Themes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Themes.aspx.designer.cs">
+      <DependentUpon>Themes.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Dashboard\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>

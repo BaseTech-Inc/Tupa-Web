@@ -58,7 +58,7 @@ textarea {
     background: var(--background_color);
     border: 1px solid var(--primary-variant-color);
     color: var(--primary-variant-color);
-    padding: 10px 12px;
+    padding: 10px 16px;
     border-radius: 6px;
     transition: .2s ease-in-out;
 }
@@ -71,7 +71,7 @@ textarea {
     background: var(--primary-variant-color);
     border: 1px solid #1F72D1;
     color: #ffffff;
-    padding: 10px 12px;
+    padding: 10px 16px;
     border-radius: 6px;
     transition: .2s ease-in-out;
     outline: none
