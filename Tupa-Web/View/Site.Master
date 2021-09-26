@@ -68,24 +68,74 @@
                 <% } %>
             </div>
             <nav>
+                <%
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie == null)
+                    { 
+                %>
                 <ul>
-                    <li>
-                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
+                    <li> 
+                        <% if (Page.Title == "Inicío") {%>
+                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/" CssClass="target">Início</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink25" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
+                        <%}%>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
+                        <% if (Page.Title == "Mapa") {%>
+                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Map" CssClass="target">Mapa</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink26" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
+                        <%}%>
                     </li>
-                     <%var cookie = Request.Cookies["token"];
+                    <li>
+                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/">Planos</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/">Sobre nós</asp:HyperLink>
+                    </li>
+                </ul>
+                <%
+                    } else { 
+                %>
+                <ul>
+                    <li> 
+                        <% if (Page.Title == "Inicío") {%>
+                        <asp:HyperLink ID="HyperLink29" runat="server" NavigateUrl="~/" CssClass="target">Início</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink30" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
+                        <%}%>
+                    </li>
+                    <li>
+                        <% if (Page.Title == "Mapa") {%>
+                        <asp:HyperLink ID="HyperLink31" runat="server" NavigateUrl="~/Map" CssClass="target">Mapa</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink32" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
+                        <%}%>
+                    </li>
+                     <%
                        if (cookie != null)
                        { %>
                     <li>
-                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Locate">Locais</asp:HyperLink>
+                        <% if (Page.Title == "Locais") {%>
+                        <asp:HyperLink ID="HyperLink33" runat="server" NavigateUrl="~/Locate" CssClass="target">Locais</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink34" runat="server" NavigateUrl="~/Locate">Locais</asp:HyperLink>
+                        <%}%>
                     </li>
                     <% } %>
                     <li>
-                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
+                        <% if (Page.Title == "Dashboard") {%>
+                        <asp:HyperLink ID="HyperLink35" runat="server" NavigateUrl="~/Dashboard" CssClass="target">Dashboard</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink36" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
+                        <%}%>
                     </li>
                 </ul>
+                <%
+                    }
+                %>
             </nav>
             <div class="user">
                 <% if (cookie == null)
@@ -179,7 +229,11 @@
             <div class="up">
                 <div class="logo">
                     <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/">
-                        <asp:Image ID="imgLogoWhite" runat="server" ImageUrl="~/Content/Images/logo-white.png" />
+                        <% if (Page.Title == "Inicío") {%>
+                        <asp:Image ID="imgLogoWhite" runat="server" ImageUrl="~/Content/Images/logo.png" />
+                        <% } else {%>
+                        <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/logo-white.png" />
+                        <% } %>
                     </asp:HyperLink>
                 </div>
                 <nav>

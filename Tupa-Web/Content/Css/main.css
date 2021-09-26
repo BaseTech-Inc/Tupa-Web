@@ -159,7 +159,7 @@ header nav ul li a:hover {
     color: var(--medium_emphasis_color);
 }
 
-header nav ul li.target a {
+header nav ul li a.target {
     color: var(--primary-variant-color)
 }
 
