@@ -20,7 +20,25 @@
                 <span class="caption">Seu nome é somente visto por você.</span>
             </div>
         </div>
-        <button type="button" class="secondary-button">Atualizar perfil</button>
+            <asp:Button ID="btnAlterarNome" runat="server" Cssclass="secondary-button" Text="Atualizar Nome" OnClick="btnAlterarNome_Click"/>
+        <div class="inputs">
+            <div class="input">
+                <asp:Label ID="lblEmail" runat="server" >Email</asp:Label>
+                <asp:TextBox ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
+                <span class="caption">Digite sua senha antiga para alterá-la</span>
+            </div>
+         </div>
+        <asp:Button ID="btnMudarSenha" runat="server" Cssclass="secondary-button" Text="Atualizar Senha" OnClick="btnMudarSenha_Click"/>
+    </div>
+    <div class="error error-message-absolute" runat="server" id="errorMessage">                
+  <!-- ErrorMessageHelpers -->
+</div>
+    <h1 class="danger">Apagar conta</h1>
+    <hr />
+
+    <div class="delete-section form">
+        <p>Excluir a sua conta e seus dados.</p>
+        <asp:Button runat="server" ID="btnExcluir" Cssclass="primary-button danger" Text="Apagar"/>        
     </div>
     
 </asp:Content>
