@@ -123,6 +123,7 @@
     align-items: center;
     justify-content:center;
     background: var(--primary-variant-color);
+    border: 1px solid var(--primary-variant-color) !important;
     border-radius: 50%;
     font-size: 18px;
     opacity: 0;

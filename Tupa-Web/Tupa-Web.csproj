@@ -205,6 +205,7 @@
     <Content Include="Content\Images\oprah.jpg" />
     <Content Include="Content\Images\orbit.svg" />
     <Content Include="Content\Images\phone.png" />
+    <Content Include="Content\Images\preview_light.svg" />
     <Content Include="Content\Images\tupa-social.png" />
     <Content Include="Content\Images\twitter-brands.svg" />
     <Content Include="Content\Images\walt.jpg" />

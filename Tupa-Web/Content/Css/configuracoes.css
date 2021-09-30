@@ -145,7 +145,7 @@ nav .menu-heading {
 }
 
 .config_wrapper .config_container .form {
-    margin-bottom: 42px
+    margin: 24px 0;
 }
 
 .delete-section > p {
@@ -158,4 +158,75 @@ nav .menu-heading {
 
 .primary-button.danger {
     border: 1px solid var(--error_color);
+}
+
+.radio-buttons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap
+}
+
+.radio-buttons > div {
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 16px;
+    min-width: 30%
+}
+
+.radio-buttons label {
+    margin: 0 !important;
+    position: relative
+}
+
+.radio-buttons .option {
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow:hidden
+}
+
+.radio-buttons .option .img {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px solid var(--border-color);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+.radio-buttons .option main {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 48px);
+    padding: 12px 24px;
+}
+
+.radio-buttons .option main .dot {
+    margin-right: 8px;
+    background-color: var(--background_color);
+    border: 1px solid var(--border-color);
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.radio-buttons .option main h3 {
+    margin-bottom: 0 !important
+}
+
+.radio-buttons .option .dot::before {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.radio-buttons .option .img.light {
+    background-image: url('/Content/Images/preview_light.svg');
+}
+
+.radio-buttons .option .img.dark {
+    background-image: url('/Content/Images/preview_dark.svg');
+}
+
+.radio-buttons .option .img.dark-dimmed {
+    background-image: url('/Content/Images/preview_dark_dimmed.svg');
 }

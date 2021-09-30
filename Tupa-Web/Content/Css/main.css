@@ -47,6 +47,7 @@ textarea {
 
 .bold {
     font-weight: var(--semi_bold_font);
+    color: var(--high_emphasis_color);
 }
 
 .link:hover {
