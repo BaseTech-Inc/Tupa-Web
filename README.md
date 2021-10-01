@@ -17,13 +17,12 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
     - [ ] Histórico
 - [ ] Dashboard
     - [ ] Forecast
-    - [ ] Alertas
+    - [X] Alertas
     - [ ] Gráfico
 - [ ] Configurações de Usuário
     - [ ] Editar Info
         - [ ] Alterar Nome
-        - [ ] Alterar Senha
-        - [ ] Alterar foto
+        - [X] Alterar Senha
     - [ ] Tema
     - [ ] Assinar Premium
     - [ ] Notifications
