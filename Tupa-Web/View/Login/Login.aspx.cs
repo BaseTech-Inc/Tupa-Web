@@ -173,7 +173,7 @@ namespace Tupa_Web.View.Login
                             cookie.Values.Add("expiration", data.expiration.ToString());
                             cookie.HttpOnly = true;
 
-                            this.Page.Response.AppendCookie(cookie);
+                            Response.Cookies.Add(cookie);
                         }
 
                         Response.Redirect("~/");

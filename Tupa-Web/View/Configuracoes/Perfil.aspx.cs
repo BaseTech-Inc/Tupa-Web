@@ -17,7 +17,12 @@ namespace Tupa_Web.View.Configuracoes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var cookie = Request.Cookies["token"];
 
+            if (cookie == null)
+            {
+                Response.Redirect("~/");
+            }
         }
         private async Task<Response<string>> postChangePassword(
             string oldPassword, string newPassword, string bearerToken)
@@ -54,10 +59,10 @@ namespace Tupa_Web.View.Configuracoes
                 try{
                     var cookie = Request.Cookies["token"];
                     if (cookie != null)
-                    // cookie.Values[0]
                     {
-
-                        var resultTask = Task.Run(() => postChangePassword(txtOld.Text.ToString(), txtSenha.Text.ToString(), 
+                        var resultTask = Task.Run(() => postChangePassword(
+                            txtOld.Text.ToString(), 
+                            txtSenha.Text.ToString(), 
                             cookie.Values[0]));
                         resultTask.Wait();
 
@@ -69,7 +74,7 @@ namespace Tupa_Web.View.Configuracoes
                             txtSenha.Text = "";
                             errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                               EnumTypeError.information,
-                              "Confirmação de troca enviada ao email");
+                              "Sucesso, Bro!");
                         }
                         else
                         {
@@ -83,9 +88,6 @@ namespace Tupa_Web.View.Configuracoes
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(EnumTypeError.warning,
                             "Você não está autenticado, mané.");
                     }
-
-                    
-
                 }
                 catch (Exception)
                 {
@@ -93,7 +95,6 @@ namespace Tupa_Web.View.Configuracoes
                       EnumTypeError.warning,
                       "É, deu ruim, mais sorte na próxima, amigão");
                 }
-
             }
             else
             {
@@ -101,8 +102,6 @@ namespace Tupa_Web.View.Configuracoes
                       EnumTypeError.warning,
                       "Insira uma senha, bobão");
             }
-            
-            
         }
     }
 }

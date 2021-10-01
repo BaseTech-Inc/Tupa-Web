@@ -9,6 +9,14 @@ namespace Tupa_Web.View.Configuracoes
 {
     public partial class Configuacoes : System.Web.UI.MasterPage
     {
+        private string userName;
+        public string UserName { 
+            get 
+            { 
+                return userName; 
+            } 
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 

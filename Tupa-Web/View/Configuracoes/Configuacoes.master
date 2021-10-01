@@ -11,7 +11,7 @@
             <div class="account-header">
                 <asp:Image ID="imgPictureHeader" runat="server" ImageUrl="~/Content/Images/abraham.jpg" />
                 <div class="details">
-                    <h2><span class="blue">Nome de usuário</span> <span class="sep">/</span> <%= Page.Title %></h2>
+                    <h2><span class="blue"><%= UserName %></span> <span class="sep">/</span> <%= Page.Title %></h2>
                     <p><%= Page.MetaDescription %></p>
                 </div>
             </div>

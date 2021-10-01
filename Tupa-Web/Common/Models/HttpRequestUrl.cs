@@ -114,8 +114,6 @@ namespace Tupa_Web.Common.Models
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue(mediaType));
 
             if (!bearerToken.IsEmpty())
                 client.DefaultRequestHeaders.Add(
@@ -123,10 +121,12 @@ namespace Tupa_Web.Common.Models
 
             var content = new StringContent("", Encoding.UTF8, "text/json");
 
-            var response = Task.Run(() => client.PostAsync(url, content));
-            response.Wait();
+            var responseTask = Task.Run(() => client.PostAsync(url, content));
+            responseTask.Wait();
 
-            var streamTask = await response.Result.Content.ReadAsStringAsync();
+            var response = responseTask.GetAwaiter().GetResult();
+
+            var streamTask = await response.Content.ReadAsStringAsync();
 
             return streamTask;
         }

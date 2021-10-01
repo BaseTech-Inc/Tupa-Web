@@ -20,30 +20,34 @@
                 <span class="caption">Seu nome é somente visto por você.</span>
             </div>
         </div>
+
             <asp:Button ID="btnAlterarNome" runat="server" Cssclass="secondary-button" Text="Atualizar Nome" OnClick="btnAlterarNome_Click"/>
+        
         <div class="inputs">
             <div class="input_icon_right input">
-                        <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
-                            <span class="material-icons-outlined">
-                                visibility
-                            </span>
-                        </label>
-                        <asp:TextBox ID="txtOld" name="txtSenha" runat="server" placeholder="Senha Antiga" TextMode="Password"></asp:TextBox>
-                    </div>
+                <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
+                    <span class="material-icons-outlined">
+                        visibility
+                    </span>
+                </label>
+                <asp:TextBox ID="txtOld" name="txtSenha" runat="server" placeholder="Senha Antiga" TextMode="Password"></asp:TextBox>
+            </div>
             <div class="input_icon_right input">
-                        <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
-                            <span class="material-icons-outlined">
-                                visibility
-                            </span>
-                        </label>
-                        <asp:TextBox ID="txtSenha" name="txtSenha" runat="server" placeholder="Senha Nova" TextMode="Password"></asp:TextBox>
-                    </div>
+                <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
+                    <span class="material-icons-outlined">
+                        visibility
+                    </span>
+                </label>
+                <asp:TextBox ID="txtSenha" name="txtSenha" runat="server" placeholder="Senha Nova" TextMode="Password"></asp:TextBox>
+            </div>
          </div>
+
         <asp:Button ID="btnMudarSenha" runat="server" Cssclass="secondary-button" Text="Atualizar Senha" OnClick="btnMudarSenha_Click"/>
     </div>
     <div class="error error-message-absolute" runat="server" id="errorMessage">                
-  <!-- ErrorMessageHelpers -->
-</div>
+        <!-- ErrorMessageHelpers -->
+    </div>
+
     <h1 class="danger">Apagar conta</h1>
     <hr />
 
