@@ -20,18 +20,20 @@ namespace Tupa_Web.View.Configuracoes
 
         }
         private async Task<Response<string>> postChangePassword(
-            string email)
+            string oldPassword, string newPassword, string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/Account/generate-password-reset")
+                .AddPath("api/Account/change-password/id")
                 .SetQueryParams(new
                 {
-                    email = email
+                    newPassword = newPassword,
+                    oldPassword = oldPassword
                 }); ;
 
             // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url, bearerToken: bearerToken);
+            
 
             var jsonResult = JsonSerializer.Deserialize<Response<string>>(stringResult);
 
@@ -45,29 +47,44 @@ namespace Tupa_Web.View.Configuracoes
 
         protected void btnMudarSenha_Click(object sender, EventArgs e)
         {
-            if(!txtEmail.Text.IsEmpty())
+
+            if (!txtOld.Text.IsEmpty() && !txtSenha.Text.IsEmpty())
             {
                 
                 try{
-                    var resultTask = Task.Run(() => postChangePassword(txtEmail.Text.ToString()));
-                    resultTask.Wait();
-
-                    var result = resultTask.GetAwaiter().GetResult();
-
-                    if (result.succeeded)
+                    var cookie = Request.Cookies["token"];
+                    if (cookie != null)
+                    // cookie.Values[0]
                     {
-                        // TODO ...
-                        txtEmail.Text = "";
-                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                          EnumTypeError.information,
-                          "Confirmação de troca enviada ao email");
+
+                        var resultTask = Task.Run(() => postChangePassword(txtOld.Text.ToString(), txtSenha.Text.ToString(), 
+                            cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            // TODO ...
+                            txtSenha.Text = "";
+                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                              EnumTypeError.information,
+                              "Confirmação de troca enviada ao email");
+                        }
+                        else
+                        {
+                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                              EnumTypeError.error,
+                              result.message);
+                        }
                     }
                     else
                     {
-                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                          EnumTypeError.error,
-                          result.message);
+                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(EnumTypeError.warning,
+                            "Você não está autenticado, mané.");
                     }
+
+                    
 
                 }
                 catch (Exception)
@@ -82,7 +99,7 @@ namespace Tupa_Web.View.Configuracoes
             {
                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                       EnumTypeError.warning,
-                      "Insira um email, bobão");
+                      "Insira uma senha, bobão");
             }
             
             

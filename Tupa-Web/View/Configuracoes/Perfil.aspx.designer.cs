@@ -51,22 +51,22 @@ namespace Tupa_Web.View.Configuracoes
         protected global::System.Web.UI.WebControls.Button btnAlterarNome;
 
         /// <summary>
-        /// Controle lblEmail.
+        /// Controle txtOld.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtOld;
 
         /// <summary>
-        /// Controle txtEmail.
+        /// Controle txtSenha.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtSenha;
 
         /// <summary>
         /// Controle btnMudarSenha.
