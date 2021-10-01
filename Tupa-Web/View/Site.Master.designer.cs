@@ -222,15 +222,6 @@ namespace Tupa_Web.View
         protected global::System.Web.UI.WebControls.HyperLink HyperLink9;
 
         /// <summary>
-        /// Controle HyperLink10.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink10;
-
-        /// <summary>
         /// Controle HyperLink11.
         /// </summary>
         /// <remarks>

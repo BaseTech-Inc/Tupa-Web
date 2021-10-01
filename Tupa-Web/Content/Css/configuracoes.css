@@ -1,7 +1,6 @@
 ﻿.config_wrapper {
-    max-width: 878px;
+    max-width: 924x;
     padding: 32px 0;
-    overflow: auto;
 }
 
 .config_wrapper .group .account-header {
@@ -13,7 +12,8 @@
 .config_wrapper .group .account-header img {
     width: 48px;
     height: 48px;
-    border-radius: 100%
+    border-radius: 100%;
+    margin-right: 32px;
 }
 
 h2 span.blue {
@@ -28,10 +28,6 @@ h2 span.sep {
     font-family: var(--title_font);
     font-weight: var(--regular_font);
     color: var(--disabled-color);
-}
-
-.config_wrapper .group .account-header .details {
-    margin-left: 32px;
 }
 
 .config_wrapper .group .account-header .details h2 {
@@ -103,7 +99,7 @@ nav .menu-heading {
     margin: 15px 0
 }
 
-.inputs .input span:nth-child(1) {
+.inputs .input .label {
     font-weight: var(--semi_bold_font);
     color: var(--high_emphasis_color)
 }
@@ -229,4 +225,130 @@ nav .menu-heading {
 
 .radio-buttons .option .img.dark-dimmed {
     background-image: url('/Content/Images/preview_dark_dimmed.svg');
+}
+
+.plans-user-section {
+    width: 100%;
+}
+
+
+.plans-user-section .card {
+    border-radius: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden
+}
+
+.plans-user-section .currency {
+    font-size: var(--caption_font_size);
+}
+
+
+.plans-user-section .money {
+    font-size: var(--h2_font_size);
+    color: var(--high_emphasis_color);
+}
+
+.plans-user-section .card .title {
+    padding: 24px;
+    background: var(--background_color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.plans-user-section .card .features {
+    padding: 24px;
+    margin: 0;
+}
+
+.plans-user-section .card > a {
+    text-decoration: none;
+    text-align: center;
+}
+
+.plans-user-section .card .price-section {
+    padding: 12px 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.plans-section .cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.plans-section .cards .card {
+    margin: 4px;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 255px;
+    transition: .2s ease-in-out;
+}
+
+.features .dot {
+    content: "done";
+    width: 21px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    background: var(--primary-variant-color);
+    border-radius: 50%;
+    font-size: 12px;
+    color: #fff;
+    margin-right: 8px;
+}
+
+.features ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.features ul li:last-child {
+    margin: 0
+}
+
+.plans-section .cards .card:hover {
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
+    border: 1px solid #1F72D1;
+}
+
+.plans-section .cards .card .price {
+    position: relative;
+    margin-bottom: 2px;
+}
+
+.plans-section .cards .card .price .currency {
+    font-size: var(--caption_font_size);
+}
+
+
+.plans-section .cards .card .price .money {
+    font-size: var(--h2_font_size);
+    color: var(--high_emphasis_color);
+}
+
+.plans-section .cards .card > h2 {
+    margin-bottom: 6px;
+    color: var(--primary-variant-color);
+}
+
+.plans-section .cards .card .features {
+    padding: 48px 0;
+    margin: 0;
+}
+
+.plans-section .cards .card > a {
+    text-decoration: none;
+    text-align: center;
+}
+
+.form .input_icon_right input {
+    width: calc(100% - 56px) !important;
 }

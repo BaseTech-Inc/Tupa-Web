@@ -15,7 +15,7 @@
         </div>
         <div class="inputs">
             <div class="input">
-                <asp:Label ID="lblNome" runat="server" >Nome</asp:Label>
+                <asp:Label ID="lblNome" runat="server" CssClass="label">Nome</asp:Label>
                 <asp:TextBox ID="txtNome" runat="server" placeholder="Nome"></asp:TextBox>
                 <span class="caption">Seu nome é somente visto por você.</span>
             </div>

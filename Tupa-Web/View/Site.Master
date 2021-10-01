@@ -164,20 +164,17 @@
                         <% if (cookie != null)
                         { %>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">Editar Perfil</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">
+                                <span class="material-icons-outlined">
+                                    settings
+                                </span>
+                                Configurar Perfil
+                            </asp:HyperLink>
                         </li>
                         <hr>
                         <% } %>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Settings">
-                                <span class="material-icons-outlined">
-                                    settings
-                                </span>
-                                Editar configurações
-                            </asp:HyperLink>
-                        </li>
-                        <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings">
+                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Themes">
                                 <span class="material-icons-outlined">
                                     dark_mode
                                 </span>
@@ -186,7 +183,7 @@
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Settings" CssClass="blue">Planos</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Plans" CssClass="blue">Planos</asp:HyperLink>
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
