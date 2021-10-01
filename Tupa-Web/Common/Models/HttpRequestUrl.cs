@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
@@ -110,7 +112,8 @@ namespace Tupa_Web.Common.Models
             string url,
             JsonSerializerOptions options = null,
             string mediaType = "application/json",
-            string bearerToken = "")
+            string bearerToken = "",
+            HttpResponse responsePage = null)
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
@@ -126,9 +129,35 @@ namespace Tupa_Web.Common.Models
 
             var response = responseTask.GetAwaiter().GetResult();
 
+            fixCookies(response, responsePage);
+
             var streamTask = await response.Content.ReadAsStringAsync();
 
             return streamTask;
+        }
+
+        private static void fixCookies(HttpResponseMessage response, HttpResponse responsePage)
+        {
+            var headers = response.Headers.ToList();
+
+            foreach (var header in headers)
+            {
+                if (header.Key == "Set-Cookie")
+                {
+                    Match match = Regex.Match(header.Value.FirstOrDefault(), "(.+?)=(.+?);");
+                    if (match.Captures.Count > 0)
+                    {
+                        HttpCookie cookie = responsePage.Cookies.Get(match.Groups[1].Value);
+
+                        if (cookie != null)
+                        {
+                            cookie = new HttpCookie(match.Groups[1].Value);
+                            cookie.Value = HttpUtility.UrlDecode(match.Groups[2].Value);
+                            responsePage.Cookies.Add(cookie);
+                        }
+                    }
+                }
+            }
         }
     }
 }

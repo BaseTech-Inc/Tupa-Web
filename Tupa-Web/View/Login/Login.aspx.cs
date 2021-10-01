@@ -211,7 +211,7 @@ namespace Tupa_Web.View.Login
                 });
 
             // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url, responsePage: Response);
 
             var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(stringResult);
 
