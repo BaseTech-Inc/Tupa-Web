@@ -127,9 +127,9 @@
                     <% } %>
                     <li>
                         <% if (Page.Title == "Dashboard") {%>
-                        <asp:HyperLink ID="HyperLink35" runat="server" NavigateUrl="~/Dashboard" CssClass="target">Dashboard</asp:HyperLink>
+                        <asp:HyperLink runat="server" ID="HyperLink35" Text="Dashboard" CssClass="target" NavigateUrl="~/Dashboard" />
                         <%} else {%>
-                        <asp:HyperLink ID="HyperLink36" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
+                        <asp:HyperLink runat="server" ID="HyperLink10" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
                         <%}%>
                     </li>
                 </ul>

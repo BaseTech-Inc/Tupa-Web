@@ -8,6 +8,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <div class="container_wrapper">
         <div class="search">
             <label for="search">
@@ -23,10 +25,26 @@
             <div class="left">
                 <div class="atual card">
                     <div>
-                        <p>Atual</p>
-                        <h2>Ermelino Matarazzo, São Paulo</h2>
-                        <h1>19º</h1>
-                        <span class="tag">Nublado</span>
+                        <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
+                        <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel2_Load">
+                            <ContentTemplate>
+                                <asp:UpdateProgress ID="UpdateProgress3" runat="server">
+                                    <ProgressTemplate>
+                                        Atualizando localização
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                                <asp:Repeater ID="RepeaterForecast" runat="server">
+                                    <ItemTemplate>
+                                        <p>Atual</p>
+                                        <h2><%# DataBinder.Eval(Container, "Locate") %></h2>
+                                        <h1><%# DataBinder.Eval(Container, "Temperature") %></h1>
+                                        <span class="tag"><%# DataBinder.Eval(Container, "CurrentCondition") %></span>   
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <asp:HiddenField ID="queryStringLat" runat="server" />
+                                <asp:HiddenField ID="queryStringLon" runat="server" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                         
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/day_cloudy.png" />
@@ -103,13 +121,13 @@
                             </div>
                         </div>
                         --%>
-                        <asp:ScriptManager ID="ScriptManager1" runat="server" />
+                        <asp:ScriptManagerProxy ID="ScriptManagerProxy2" runat="server"></asp:ScriptManagerProxy>
                         <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel1_Load">
                             <ContentTemplate>
                                 <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                                     <ProgressTemplate>
                                         <div class="error-message-absolute">
-                                            <div class="error-message information" runat="server" id="errorMessage">
+                                            <div class="error-message information" runat="server">
                                                 <div class="error_wrapper">
                                                     <p id="textErrorMessage" title="Atualizando Alertas...">Atualizando Alertas...</p>
                                                     <span class="close_button">
@@ -118,10 +136,13 @@
                                                         </span>
                                                     </span>
                                                 </div>
-                                            </div>                                                                     
+                                            </div>
                                         </div>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
+                                <div class="error-message-absolute">
+                                    <div ID="errorMessage" CssClass="error" runat="server"></div>
+                                </div>
                                 <asp:Panel ID="SkeletonLoadingPanel" runat="server">
                                     <div class="card loading">
                                         <div class="avatar"></div>
@@ -212,5 +233,13 @@
         window.onload = function () {
             __doPostBack('<%=UpdatePanel1.ClientID %>');
         }
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            var hiddenFieldLat = document.querySelector('#<%= queryStringLat.ClientID %>')
+            var hiddenFieldLon = document.querySelector('#<%= queryStringLon.ClientID %>')
+
+            hiddenFieldLat.value = position.coords.latitude
+            hiddenFieldLon.value = position.coords.longitude
+        });
     </script>
 </asp:Content>

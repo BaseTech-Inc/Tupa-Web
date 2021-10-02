@@ -103,9 +103,9 @@ namespace Tupa_Web.Common.Models
                 client.DefaultRequestHeaders.Add(
                     "Authorization", String.Format("Bearer {0}", bearerToken));
 
-            var streamTask = client.GetStringAsync(url);
+            var streamTask = await client.GetStringAsync(url);
 
-            return await streamTask;
+            return streamTask;
         }
 
         public static async Task<string> ProcessHttpClientPost(

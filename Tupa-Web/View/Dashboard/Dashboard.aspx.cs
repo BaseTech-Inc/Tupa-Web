@@ -2,14 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Device.Location;
 using System.Globalization;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Tupa_Web.Common.Enumerations;
+using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
 using Tupa_Web.Model;
 
@@ -19,6 +23,29 @@ namespace Tupa_Web.View.Dashboard
     {
         protected void Page_Load(object sender, EventArgs e)
         { }
+
+        private async Task<Response<Forecast>> GetForecastByCoord(
+            string lat,
+            string lon,
+            string bearerToken
+            )
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Forecast/coord")
+                .SetQueryParams(new
+                {
+                    lat = lat,
+                    lon = lon
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult);
+
+            return jsonResult;            
+        }
 
         private async Task<Response<IList<Alertas>>> GetAlertas(
             string year,
@@ -44,14 +71,14 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
-        ICollection CreateDataSource(IList<Alertas> listAlertas)
+        ICollection CreateDataSourceAlertas(IList<Alertas> listAlertas)
         {
             ArrayList values = new ArrayList();
 
             foreach (var alertas in listAlertas)
             {
                 values.Add(
-                new PositionData(
+                new PositionDataAlertas(
                     alertas.distrito.nome,
                     "12°C",
                     alertas.descricao,
@@ -67,14 +94,14 @@ namespace Tupa_Web.View.Dashboard
             return values;
         }
 
-        public class PositionData
+        public class PositionDataAlertas
         {
             private string locale;
             private string temperature;
             private string description;
             private string time;
 
-            public PositionData(
+            public PositionDataAlertas(
                 string locale,
                 string temperature,
                 string description,
@@ -104,22 +131,97 @@ namespace Tupa_Web.View.Dashboard
                 if (cookie != null)
                 {
                     // Repeater Source
+                    var datetime = DateTime.Now;
 
-                    var resultTask = Task.Run(() => GetAlertas("2021", "01", "01", cookie.Values[0]));
+                    var resultTask = Task.Run(() => GetAlertas(
+                        datetime.Year.ToString(),
+                        datetime.Month.ToString(),
+                        datetime.Day.ToString(),
+                        cookie.Values[0]));
                     resultTask.Wait();
 
                     var result = resultTask.GetAwaiter().GetResult();
 
                     if (result.succeeded)
                     {
-                        RepeaterAlertas.DataSource = CreateDataSource(result.data);
+                        if (result.data.Count > 0)
+                        {
+                            RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data);
 
-                        SkeletonLoadingPanel.Visible = false;
+                            SkeletonLoadingPanel.Visible = false;
 
-                        RepeaterAlertas.DataBind();
+                            RepeaterAlertas.DataBind();
+                        } else
+                        {
+                            SkeletonLoadingPanel.Visible = false;
+
+                            // Mostra uma mensagem de erro
+                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                EnumTypeError.warning,
+                                "Não foi possível encontrar nenhum alerta hoje");
+                        }
                     }
                 }
             }            
+        }
+
+        ICollection CreateDataSourceForecast(Forecast forecast)
+        {
+            ArrayList values = new ArrayList();
+
+            values.Add(
+            new PositionDataForecast(
+                forecast.name,
+                forecast.main.temp.ToString()));
+
+            return values;
+        }
+
+        public class PositionDataForecast
+        {
+            private string locale;
+            private string temperature;
+
+            public PositionDataForecast(
+                string locale,
+                string temperature)
+            {
+                this.locale = locale;
+                this.temperature = temperature;
+            }
+
+            public string Locale => locale;
+
+            public string Temperature => temperature;
+        }
+
+        protected void UpdatePanel2_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                var cookie = Request.Cookies["token"];
+
+                if (cookie != null)
+                {
+                    string lat = queryStringLat.Value;
+                    string lon = queryStringLon.Value;
+
+                    var resultTask = Task.Run(() => GetForecastByCoord(
+                        lat,
+                        lon,
+                        cookie.Values[0]));
+                    resultTask.Wait();
+
+                    var result = resultTask.GetAwaiter().GetResult();
+
+                    if (result.succeeded)
+                    {
+                        RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
+
+                        RepeaterForecast.DataBind();
+                    }
+                }
+            }
         }
     }
 }
