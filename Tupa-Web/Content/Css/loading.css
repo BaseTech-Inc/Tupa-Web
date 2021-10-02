@@ -1,4 +1,14 @@
-﻿.loading .avatar {
+﻿.loading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.loading {
+    display: flex;
+    justify-content: initial
+}
+
+.loading .avatar {
     float: left;
     width: 36px;
     height: 36px;
@@ -10,13 +20,23 @@
     animation: shine-avatar 1.6s infinite linear;
 }
 
+.loading .img {
+    width: 120px;
+    height: 120px;
+    background-color: #ccc;
+    border-radius: 100%;
+    margin-left: 8px;
+    background-image: linear-gradient(90deg, #ddd 0px, #e8e8e8 40px, #ddd 80px);
+    background-size: 600px;
+    animation: shine-avatar 1.6s infinite linear;
+}
+
 .loading .lines {
     display: flex;
     flex-direction: column;
 }
 
 .loading .lines .line {
-    float: left;
     width: 140px;
     height: 16px;
     margin-bottom: 12px;

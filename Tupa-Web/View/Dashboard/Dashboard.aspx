@@ -8,6 +8,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <div class="container_wrapper">
         <div class="search">
             <label for="search">
@@ -21,30 +23,41 @@
 
         <div class="dashboard">
             <div class="left">
-                <div class="atual card">
-                    <div>
-                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                        <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel2_Load">
-                            <ContentTemplate>
-                                <asp:UpdateProgress ID="UpdateProgress3" runat="server">
-                                    <ProgressTemplate>
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                                <p>Atual</p>
-                                <asp:Repeater ID="RepeaterForecast" runat="server">
-                                    <ItemTemplate>
+                <div class="card">      
+                    <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Always" runat="server" OnLoad="UpdatePanel2_Load">
+                        <ContentTemplate>
+                            <asp:UpdateProgress ID="UpdateProgress3" runat="server">
+                                <ProgressTemplate>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+                            <p class="tag_card">Atual</p>
+                            <asp:Panel ID="SkeletonLoadingPanelForecast" runat="server">
+                                <div class="loading">
+                                    <div class="lines">
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                    </div>
+
+                                    <div class="img"></div>
+                                </div>
+                            </asp:Panel>
+                            <asp:Repeater ID="RepeaterForecast" runat="server">
+                                <ItemTemplate>
+                                    <div class="atual">
+                                        <div>
                                         <h2><%# DataBinder.Eval(Container.DataItem, "Locale") %></h2>
                                         <h1><%# DataBinder.Eval(Container.DataItem, "Temperature") %></h1>
-                                        <span class="tag"><%# DataBinder.Eval(Container.DataItem, "Condition") %></span>   
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                                <asp:HiddenField ID="queryStringLat" runat="server" />
-                                <asp:HiddenField ID="queryStringLon" runat="server" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
-                        
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/day_cloudy.png" />
+                                        <span class="tag"><%# DataBinder.Eval(Container.DataItem, "Condition") %></span>  
+                                        </div>
+                                        
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/day_cloudy.png" />
+                                    </div>                                    
+                                </ItemTemplate>
+                            </asp:Repeater>
+                            <asp:HiddenField ID="queryStringLat" runat="server" />
+                            <asp:HiddenField ID="queryStringLon" runat="server" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
                 <div class="previsao card">
                     <header>
@@ -89,36 +102,7 @@
 
                      <%-- Lista de alertas --%>
                     <div class="list">
-                        <%-- Template
-                        <div class="card">
-                            <div class="left">
-                                <div class="icon">
-                                    <span class="material-icons-outlined">
-                                        schedule
-                                    </span>
-                                </div>  
-                            </div>
-                            <div class="right">
-                                <div class="title">    
-                                    <div class="description">
-                                        <h4>{ Localização }</h4>
-                                        <p>{ Temperatura }</p>
-                                    </div>  
-                                </div>
-
-                                <div class="line"></div>
-
-                                <div class="body">
-                                    <p>{ Descrição }</p>
-                                </div>
-                            </div>
-
-                            <div class="time">
-                                <p>{ Tempo }</p>
-                            </div>
-                        </div>
-                        --%>
-                        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Always" runat="server" OnLoad="UpdatePanel1_Load">
+                        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel1_Load">
                             <ContentTemplate>
                                 <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                                     <ProgressTemplate>
@@ -227,7 +211,7 @@
 
     <script>
         window.onload = function () {
-            __doPostBack('<%=UpdatePanel2.ClientID %>');
+            __doPostBack('<%= UpdatePanel1.ClientID %>');
         }
 
         navigator.geolocation.getCurrentPosition((position) => {

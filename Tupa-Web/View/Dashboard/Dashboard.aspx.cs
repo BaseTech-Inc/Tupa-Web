@@ -22,7 +22,22 @@ namespace Tupa_Web.View.Dashboard
     public partial class Dashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        { }
+        {
+            // Post Back usando um evento Javascript
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
+            string parameter = Request["__EVENTARGUMENT"];
+
+            if (targetCtrl != null && targetCtrl != string.Empty)
+            {
+                if (IsPostBack)
+                {
+                    LoadForecast();
+                    LoadAlertas();
+                }
+            }
+        }
 
         private async Task<Response<Forecast>> GetForecastByCoord(
             string lat,
@@ -124,45 +139,63 @@ namespace Tupa_Web.View.Dashboard
 
         protected void UpdatePanel1_Load(object sender, EventArgs e)
         {
+            LoadAlertas();
+        }
+
+        private void LoadAlertas()
+        {
             if (IsPostBack)
             {
-                var cookie = Request.Cookies["token"];
-
-                if (cookie != null)
+                try
                 {
-                    // Repeater Source
-                    var datetime = DateTime.Now;
+                    var cookie = Request.Cookies["token"];
 
-                    var resultTask = Task.Run(() => GetAlertas(
-                        datetime.Year.ToString(),
-                        datetime.Month.ToString(),
-                        datetime.Day.ToString(),
-                        cookie.Values[0]));
-                    resultTask.Wait();
-
-                    var result = resultTask.GetAwaiter().GetResult();
-
-                    if (result.succeeded)
+                    if (cookie != null)
                     {
-                        if (result.data.Count > 0)
+                        // Repeater Source
+                        var datetime = DateTime.Now;
+
+                        var resultTask = Task.Run(() => GetAlertas(
+                            datetime.Year.ToString(),
+                            datetime.Month.ToString(),
+                            datetime.Day.ToString(),
+                            cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
                         {
-                            RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data);
+                            if (result.data.Count > 0)
+                            {
+                                RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data);
 
-                            SkeletonLoadingPanel.Visible = false;
+                                SkeletonLoadingPanel.Visible = false;
 
-                            RepeaterAlertas.DataBind();
-                        } else
-                        {
-                            SkeletonLoadingPanel.Visible = false;
+                                RepeaterAlertas.DataBind();
+                            }
+                            else
+                            {
+                                SkeletonLoadingPanel.Visible = false;
 
-                            // Mostra uma mensagem de erro
-                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                                EnumTypeError.warning,
-                                "Não foi possível encontrar nenhum alerta hoje");
+                                // Mostra uma mensagem de erro
+                                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                    EnumTypeError.warning,
+                                    result.message);
+                            }
                         }
+                    } else
+                    {
+                        Response.Redirect("~/");
                     }
-                }
-            }            
+                } catch
+                {
+                    // Mostra uma mensagem de erro
+                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                        EnumTypeError.error,
+                        "Ocorreu um erro, tente novamente mais tarde.");
+                }                
+            }
         }
 
         ICollection CreateDataSourceForecast(Forecast forecast)
@@ -203,30 +236,57 @@ namespace Tupa_Web.View.Dashboard
 
         protected void UpdatePanel2_Load(object sender, EventArgs e)
         {
+            LoadForecast();
+        }
+
+        private void LoadForecast()
+        {
             if (IsPostBack)
             {
-                var cookie = Request.Cookies["token"];
-
-                if (cookie != null)
+                try
                 {
-                    string lat = queryStringLat.Value;
-                    string lon = queryStringLon.Value;
+                    var cookie = Request.Cookies["token"];
 
-                    var resultTask = Task.Run(() => GetForecastByCoord(
-                        lat,
-                        lon,
-                        cookie.Values[0]));
-                    resultTask.Wait();
-
-                    var result = resultTask.GetAwaiter().GetResult();
-
-                    if (result.succeeded)
+                    if (cookie != null)
                     {
-                        RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
+                        string lat = queryStringLat.Value;
+                        string lon = queryStringLon.Value;
 
-                        RepeaterForecast.DataBind();
+                        var resultTask = Task.Run(() => GetForecastByCoord(
+                            lat,
+                            lon,
+                            cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
+
+                            SkeletonLoadingPanelForecast.Visible = false;
+
+                            RepeaterForecast.DataBind();
+                        } else
+                        {
+                            SkeletonLoadingPanel.Visible = false;
+
+                            // Mostra uma mensagem de erro
+                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                EnumTypeError.warning,
+                                result.message);
+                        }
+                    } else
+                    {
+                        Response.Redirect("~/");
                     }
-                }
+                } catch
+                {
+                    // Mostra uma mensagem de erro
+                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                        EnumTypeError.error,
+                        "Ocorreu um erro, tente novamente mais tarde.");
+                }                
             }
         }
     }

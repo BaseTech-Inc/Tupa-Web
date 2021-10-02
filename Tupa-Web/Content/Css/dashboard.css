@@ -22,7 +22,7 @@
     justify-content: space-between;
 }
 
-.dashboard .left .atual p {
+.dashboard .left .tag_card {
     font-size: var(--body_2_font_size);
     margin-bottom: 8px;
 }
