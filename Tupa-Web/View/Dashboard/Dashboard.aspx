@@ -186,7 +186,6 @@
                                                 <div class="title">    
                                                     <div class="description">
                                                         <h4><%# DataBinder.Eval(Container.DataItem, "Locale") %></h4>
-                                                        <p><%# DataBinder.Eval(Container.DataItem, "Temperature") %></p>
                                                     </div>  
                                                 </div>
 

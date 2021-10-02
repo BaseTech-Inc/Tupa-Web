@@ -95,7 +95,6 @@ namespace Tupa_Web.View.Dashboard
                 values.Add(
                 new PositionDataAlertas(
                     alertas.distrito.nome,
-                    "12°C",
                     alertas.descricao,
                     String.Format("{0} - {1}",
                         alertas.tempoInicio.ToString(
@@ -112,25 +111,20 @@ namespace Tupa_Web.View.Dashboard
         public class PositionDataAlertas
         {
             private string locale;
-            private string temperature;
             private string description;
             private string time;
 
             public PositionDataAlertas(
                 string locale,
-                string temperature,
                 string description,
                 string time)
             {
                 this.locale = locale;
-                this.temperature = temperature;
                 this.description = description;
                 this.time = time;
             }
 
             public string Locale => locale;
-
-            public string Temperature => temperature;
 
             public string Description => description;
 
