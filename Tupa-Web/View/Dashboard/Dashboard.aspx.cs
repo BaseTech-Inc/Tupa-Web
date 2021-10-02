@@ -171,9 +171,9 @@ namespace Tupa_Web.View.Dashboard
 
             values.Add(
             new PositionDataForecast(
-                forecast.name,
+                forecast.q,
                 forecast.main.temp.ToString() + "°",
-                forecast.weather.FirstOrDefault().description));
+                forecast.weather.description));
 
             return values;
         }

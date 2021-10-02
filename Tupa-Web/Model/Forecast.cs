@@ -9,11 +9,11 @@ namespace Tupa_Web.Model
     {
         public Coord coord { get; set; }
 
-        public IList<Weather> weather { get; set; }
+        public Weather weather { get; set; }
 
         public Main main { get; set; }
 
-        public string name { get; set; }
+        public string q { get; set; }
     }
 
     public class Coord
