@@ -23,24 +23,26 @@
 
         <div class="dashboard">
             <div class="left">
-                <div class="card">      
+                <div class="card forecast">      
                     <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Always" runat="server" OnLoad="UpdatePanel2_Load">
                         <ContentTemplate>
+                            <p class="tag_card">Atual</p>
+
                             <asp:UpdateProgress ID="UpdateProgress3" runat="server">
                                 <ProgressTemplate>
+                                    <asp:Panel ID="SkeletonLoadingPanelForecast" runat="server">
+                                        <div class="loading">
+                                            <div class="lines">
+                                                <div class="line"></div>
+                                                <div class="line"></div>
+                                            </div>
+
+                                            <div class="img"></div>
+                                        </div>
+                                    </asp:Panel>
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
-                            <p class="tag_card">Atual</p>
-                            <asp:Panel ID="SkeletonLoadingPanelForecast" runat="server">
-                                <div class="loading">
-                                    <div class="lines">
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                    </div>
 
-                                    <div class="img"></div>
-                                </div>
-                            </asp:Panel>
                             <asp:Repeater ID="RepeaterForecast" runat="server">
                                 <ItemTemplate>
                                     <div class="atual">
@@ -54,6 +56,7 @@
                                     </div>                                    
                                 </ItemTemplate>
                             </asp:Repeater>
+
                             <asp:HiddenField ID="queryStringLat" runat="server" />
                             <asp:HiddenField ID="queryStringLon" runat="server" />
                         </ContentTemplate>
@@ -97,9 +100,8 @@
                             </span>
                         </label>
                             
-                        <input type="text" name="search" id="search" placeholder="Pesquisar..." class="card">
+                        <asp:TextBox ID="txtSearchDate" type="date" runat="server" placeholder="Pesquisar..." CssClass="card" AutoPostBack="True" OnTextChanged="txtSearchDate_TextChanged"></asp:TextBox>
                     </div>
-
                      <%-- Lista de alertas --%>
                     <div class="list">
                         <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel1_Load">
@@ -118,58 +120,58 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <asp:Panel ID="SkeletonLoadingPanel" runat="server">
+                                            <div class="card loading">
+                                                <div class="avatar"></div>
+
+                                                <div class="lines">
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card loading">
+                                                <div class="avatar"></div>
+
+                                                <div class="lines">
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card loading">
+                                                <div class="avatar"></div>
+
+                                                <div class="lines">
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card loading">
+                                                <div class="avatar"></div>
+
+                                                <div class="lines">
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card loading">
+                                                <div class="avatar"></div>
+
+                                                <div class="lines">
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                    <div class="line"></div>
+                                                </div>
+                                            </div>
+                                        </asp:Panel>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
                                 <div class="error-message-absolute">
                                     <div ID="errorMessage" CssClass="error" runat="server"></div>
                                 </div>
-                                <asp:Panel ID="SkeletonLoadingPanel" runat="server">
-                                    <div class="card loading">
-                                        <div class="avatar"></div>
-
-                                        <div class="lines">
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card loading">
-                                        <div class="avatar"></div>
-
-                                        <div class="lines">
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card loading">
-                                        <div class="avatar"></div>
-
-                                        <div class="lines">
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card loading">
-                                        <div class="avatar"></div>
-
-                                        <div class="lines">
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                        </div>
-                                    </div>
-                                    <div class="card loading">
-                                        <div class="avatar"></div>
-
-                                        <div class="lines">
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                            <div class="line"></div>
-                                        </div>
-                                    </div>
-                                </asp:Panel>
                                 <asp:Repeater ID="RepeaterAlertas" runat="server">
                                     <ItemTemplate>
                                         <div class="card">
@@ -202,6 +204,9 @@
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </ContentTemplate>
+                            <triggers>
+                                <asp:AsyncPostBackTrigger ControlID="txtSearchDate" EventName="TextChanged" />
+                            </triggers>
                         </asp:UpdatePanel>
                     </div>                    
                 </div>

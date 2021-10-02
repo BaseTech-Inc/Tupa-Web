@@ -77,6 +77,10 @@
     width: 100%;
 }
 
+.forecast .loading {
+    height: 200px
+}
+
 .dashboard .right .search {
     width: calc(100% - 76px);
     position: relative;
@@ -88,6 +92,12 @@
     margin: 0 20px;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+.card.forecast {
+    min-height: 200px;
+    max-height: 200px;
+    overflow: hidden
 }
 
 .dashboard .right .search input {

@@ -42,15 +42,6 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.UpdateProgress UpdateProgress3;
 
         /// <summary>
-        /// Controle SkeletonLoadingPanelForecast.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel SkeletonLoadingPanelForecast;
-
-        /// <summary>
         /// Controle RepeaterForecast.
         /// </summary>
         /// <remarks>
@@ -78,6 +69,15 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.HiddenField queryStringLon;
 
         /// <summary>
+        /// Controle txtSearchDate.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchDate;
+
+        /// <summary>
         /// Controle UpdatePanel1.
         /// </summary>
         /// <remarks>
@@ -103,15 +103,6 @@ namespace Tupa_Web.View.Dashboard
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
-
-        /// <summary>
-        /// Controle SkeletonLoadingPanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel SkeletonLoadingPanel;
 
         /// <summary>
         /// Controle RepeaterAlertas.

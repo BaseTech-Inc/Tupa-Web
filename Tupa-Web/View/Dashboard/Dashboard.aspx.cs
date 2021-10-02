@@ -34,7 +34,7 @@ namespace Tupa_Web.View.Dashboard
                 if (IsPostBack)
                 {
                     LoadForecast();
-                    LoadAlertas();
+                    LoadAlertas(DateTime.Now);
                 }
             }
         }
@@ -139,10 +139,10 @@ namespace Tupa_Web.View.Dashboard
 
         protected void UpdatePanel1_Load(object sender, EventArgs e)
         {
-            LoadAlertas();
+            LoadAlertas(DateTime.Now);
         }
 
-        private void LoadAlertas()
+        private void LoadAlertas(DateTime datetime)
         {
             if (IsPostBack)
             {
@@ -153,8 +153,6 @@ namespace Tupa_Web.View.Dashboard
                     if (cookie != null)
                     {
                         // Repeater Source
-                        var datetime = DateTime.Now;
-
                         var resultTask = Task.Run(() => GetAlertas(
                             datetime.Year.ToString(),
                             datetime.Month.ToString(),
@@ -170,18 +168,14 @@ namespace Tupa_Web.View.Dashboard
                             {
                                 RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data);
 
-                                SkeletonLoadingPanel.Visible = false;
-
                                 RepeaterAlertas.DataBind();
                             }
                             else
                             {
-                                SkeletonLoadingPanel.Visible = false;
-
                                 // Mostra uma mensagem de erro
                                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                                     EnumTypeError.warning,
-                                    result.message);
+                                    "Não foi possível encontrar nenhum alerta.");
                             }
                         }
                     } else
@@ -264,13 +258,9 @@ namespace Tupa_Web.View.Dashboard
                         {
                             RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
 
-                            SkeletonLoadingPanelForecast.Visible = false;
-
                             RepeaterForecast.DataBind();
                         } else
                         {
-                            SkeletonLoadingPanel.Visible = false;
-
                             // Mostra uma mensagem de erro
                             errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                                 EnumTypeError.warning,
@@ -288,6 +278,13 @@ namespace Tupa_Web.View.Dashboard
                         "Ocorreu um erro, tente novamente mais tarde.");
                 }                
             }
+        }
+
+        protected void txtSearchDate_TextChanged(object sender, EventArgs e)
+        {
+            var date = txtSearchDate.Text.Split('-');
+
+            LoadAlertas(new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2])));
         }
     }
 }
