@@ -8,8 +8,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
     <div class="container_wrapper">
         <div class="search">
             <label for="search">
@@ -25,20 +23,19 @@
             <div class="left">
                 <div class="atual card">
                     <div>
-                        <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
+                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                         <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel2_Load">
                             <ContentTemplate>
                                 <asp:UpdateProgress ID="UpdateProgress3" runat="server">
                                     <ProgressTemplate>
-                                        Atualizando localização
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
+                                <p>Atual</p>
                                 <asp:Repeater ID="RepeaterForecast" runat="server">
                                     <ItemTemplate>
-                                        <p>Atual</p>
-                                        <h2><%# DataBinder.Eval(Container, "Locate") %></h2>
-                                        <h1><%# DataBinder.Eval(Container, "Temperature") %></h1>
-                                        <span class="tag"><%# DataBinder.Eval(Container, "CurrentCondition") %></span>   
+                                        <h2><%# DataBinder.Eval(Container.DataItem, "Locale") %></h2>
+                                        <h1><%# DataBinder.Eval(Container.DataItem, "Temperature") %></h1>
+                                        <span class="tag"><%# DataBinder.Eval(Container.DataItem, "Condition") %></span>   
                                     </ItemTemplate>
                                 </asp:Repeater>
                                 <asp:HiddenField ID="queryStringLat" runat="server" />
@@ -121,8 +118,7 @@
                             </div>
                         </div>
                         --%>
-                        <asp:ScriptManagerProxy ID="ScriptManagerProxy2" runat="server"></asp:ScriptManagerProxy>
-                        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel1_Load">
+                        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Always" runat="server" OnLoad="UpdatePanel1_Load">
                             <ContentTemplate>
                                 <asp:UpdateProgress ID="UpdateProgress1" runat="server">
                                     <ProgressTemplate>
@@ -148,45 +144,45 @@
                                         <div class="avatar"></div>
 
                                         <div class="lines">
-                                            <div class="line"><!-- Locale --></div>
-                                            <div class="line"><!-- Temperature --></div>
-                                            <div class="line"><!-- Description --></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
                                         </div>
                                     </div>
                                     <div class="card loading">
                                         <div class="avatar"></div>
 
                                         <div class="lines">
-                                            <div class="line"><!-- Locale --></div>
-                                            <div class="line"><!-- Temperature --></div>
-                                            <div class="line"><!-- Description --></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
                                         </div>
                                     </div>
                                     <div class="card loading">
                                         <div class="avatar"></div>
 
                                         <div class="lines">
-                                            <div class="line"><!-- Locale --></div>
-                                            <div class="line"><!-- Temperature --></div>
-                                            <div class="line"><!-- Description --></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
                                         </div>
                                     </div>
                                     <div class="card loading">
                                         <div class="avatar"></div>
 
                                         <div class="lines">
-                                            <div class="line"><!-- Locale --></div>
-                                            <div class="line"><!-- Temperature --></div>
-                                            <div class="line"><!-- Description --></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
                                         </div>
                                     </div>
                                     <div class="card loading">
                                         <div class="avatar"></div>
 
                                         <div class="lines">
-                                            <div class="line"><!-- Locale --></div>
-                                            <div class="line"><!-- Temperature --></div>
-                                            <div class="line"><!-- Description --></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
+                                            <div class="line"></div>
                                         </div>
                                     </div>
                                 </asp:Panel>
@@ -231,7 +227,7 @@
 
     <script>
         window.onload = function () {
-            __doPostBack('<%=UpdatePanel1.ClientID %>');
+            __doPostBack('<%=UpdatePanel2.ClientID %>');
         }
 
         navigator.geolocation.getCurrentPosition((position) => {

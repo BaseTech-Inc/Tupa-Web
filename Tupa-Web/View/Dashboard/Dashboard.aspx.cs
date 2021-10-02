@@ -172,7 +172,8 @@ namespace Tupa_Web.View.Dashboard
             values.Add(
             new PositionDataForecast(
                 forecast.name,
-                forecast.main.temp.ToString()));
+                forecast.main.temp.ToString() + "°",
+                forecast.weather.FirstOrDefault().description));
 
             return values;
         }
@@ -181,18 +182,23 @@ namespace Tupa_Web.View.Dashboard
         {
             private string locale;
             private string temperature;
+            private string condition;
 
             public PositionDataForecast(
                 string locale,
-                string temperature)
+                string temperature,
+                string condition)
             {
                 this.locale = locale;
                 this.temperature = temperature;
+                this.condition = condition;
             }
 
             public string Locale => locale;
 
             public string Temperature => temperature;
+
+            public string Condition => condition;
         }
 
         protected void UpdatePanel2_Load(object sender, EventArgs e)
