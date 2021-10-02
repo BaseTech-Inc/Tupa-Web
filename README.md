@@ -16,7 +16,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
     - [ ] Mais pesquisados
     - [ ] Histórico
 - [ ] Dashboard
-    - [ ] Forecast
+    - [X] Forecast
     - [X] Alertas
     - [ ] Gráfico
 - [ ] Configurações de Usuário
