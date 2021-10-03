@@ -90,10 +90,18 @@
                         <%}%>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
+                        <% if (Page.Title == "Plans") {%>
+                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Plans" CssClass="target">Planos</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink28" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
+                        <%}%>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
+                        <% if (Page.Title == "About") {%>
+                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/About" CssClass="target">Sobre nós</asp:HyperLink>
+                        <%} else {%>
+                        <asp:HyperLink ID="HyperLink36" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
+                        <%}%>
                     </li>
                 </ul>
                 <%
