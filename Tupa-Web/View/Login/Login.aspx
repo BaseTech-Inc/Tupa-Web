@@ -47,7 +47,7 @@
 
                 <div class="inputs">
                     <div class="input">
-                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" runat="server" placeholder="Email" autocomplete="off"></asp:TextBox>
                     </div>
 
                     <div class="input_icon_right input">
