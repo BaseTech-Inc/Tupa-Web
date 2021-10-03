@@ -220,6 +220,7 @@
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\PasswordEyes.js" />
     <Content Include="Scripts\TermsPrivacy.js" />
+    <Content Include="View\About\About.aspx" />
     <Content Include="View\Configuracoes\Notifications.aspx" />
     <Content Include="View\Configuracoes\Perfil.aspx" />
     <Content Include="View\Configuracoes\Plans.aspx" />
@@ -232,6 +233,7 @@
     <Content Include="View\Login\Login__Verify.aspx" />
     <Content Include="View\Login\Login__ResetPassword.aspx" />
     <Content Include="View\Mapa\Mapa.aspx" />
+    <Content Include="View\Plans\Plans.aspx" />
     <Content Include="View\Privacy\Privacy.aspx" />
     <Content Include="View\Register\Register.aspx" />
     <Content Include="View\Register\Register__Plan.aspx" />
@@ -262,6 +264,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="View\About\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\About\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Configuracoes\Configuacoes.master.cs">
       <DependentUpon>Configuacoes.master</DependentUpon>
@@ -353,6 +362,13 @@
     </Compile>
     <Compile Include="View\Mapa\Mapa.aspx.designer.cs">
       <DependentUpon>Mapa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Plans\Plans.aspx.cs">
+      <DependentUpon>Plans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Plans\Plans.aspx.designer.cs">
+      <DependentUpon>Plans.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Privacy\Privacy.aspx.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>

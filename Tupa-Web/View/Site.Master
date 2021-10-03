@@ -90,10 +90,10 @@
                         <%}%>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/">Planos</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/">Sobre nós</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
                     </li>
                 </ul>
                 <%
@@ -131,6 +131,9 @@
                         <%} else {%>
                         <asp:HyperLink runat="server" ID="HyperLink10" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
                         <%}%>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="HyperLink27" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
                     </li>
                 </ul>
                 <%
@@ -174,7 +177,7 @@
                         <hr>
                         <% } %>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Themes">
+                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings/Themes">
                                 <span class="material-icons-outlined">
                                     dark_mode
                                 </span>
@@ -183,7 +186,7 @@
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">
-                            <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Plans" CssClass="blue">Planos</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Settings/Plans" CssClass="blue">Planos</asp:HyperLink>
                         </li>
                         <hr>
                         <li class="menu-dropdown-item">

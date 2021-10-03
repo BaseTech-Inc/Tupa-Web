@@ -46,13 +46,13 @@
                             <span class="menu-heading">Configurações</span>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Themes">Temas</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Settings/Themes">Temas</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Settings/Plans">Planos</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Notifications">Notificações</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
                         </li>
                     </ul>
                     <%
@@ -63,16 +63,16 @@
                             <span class="menu-heading">Configurações</span>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Perfil">Perfil</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Settings/Perfil">Perfil</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Themes">Temas</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Settings/Themes">Temas</asp:HyperLink>
                         </li>
                         <li>
                             <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Notifications">Notificações</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
                         </li>
                     </ul>
                     <%
