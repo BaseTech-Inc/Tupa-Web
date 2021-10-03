@@ -96,28 +96,24 @@ nav .menu-heading {
     border-color: #f1f1f1
 }
 
-.inputs .input {
-    margin: 15px 0
-}
-
-.inputs .input .label {
+.form-group .input .label {
     font-weight: var(--semi_bold_font);
     color: var(--high_emphasis_color)
 }
 
-.inputs .input input {
+.form-group .input input {
     border: 1px solid var(--border-color) !important;
     width: calc(100% - 26px) !important;
     border-radius: 6px;
     margin-top: 6px;
 }
 
-.inputs .input span.caption {
+.form-group .input span.caption {
     font-size: var(--caption_font_size);
     margin: 4px 0
 }
 
-.inputs .input input:focus {
+.form-group .input input:focus {
     border-radius: 6px;
     border: 1px solid var(--primary-variant-color) !important;
     box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
@@ -352,4 +348,12 @@ nav .menu-heading {
 
 .form .input_icon_right input {
     width: calc(100% - 56px) !important;
+}
+
+.form-group {
+    margin: 15px 0
+}
+
+.form input[type=submit] {
+    margin-bottom: 15px
 }
