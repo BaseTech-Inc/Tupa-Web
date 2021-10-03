@@ -18,8 +18,8 @@
         </div>
         <div class="form-group">
             <div class="input">
-                <asp:Label ID="lblNome" runat="server" CssClass="label">Nome</asp:Label>
-                <asp:TextBox ID="txtNome" runat="server" placeholder="Nome"></asp:TextBox>
+                <asp:Label ID="lblNome" runat="server" CssClass="label">Alterar Nome</asp:Label>
+                <asp:TextBox ID="txtNome" runat="server" placeholder="Digite um novo nome" autocomplete="off"></asp:TextBox>
                 <span class="caption">Seu nome é somente visto por você.</span>
             </div>
         </div>
@@ -43,7 +43,6 @@
                     </label>
                     <asp:TextBox ID="txtSenha" name="txtSenha" runat="server" placeholder="*****" TextMode="Password"></asp:TextBox>
                 </div>
-                <span class="caption">Tenta não esquecer dessa vez 😉.</span>
             </div>
         </div>
 

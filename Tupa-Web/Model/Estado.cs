@@ -7,7 +7,7 @@ namespace Tupa_Web.Model
 {
     public class Estado
     {
-        public string od { get; set; }
+        public string id { get; set; }
 
         public string nome { get; set; }
 

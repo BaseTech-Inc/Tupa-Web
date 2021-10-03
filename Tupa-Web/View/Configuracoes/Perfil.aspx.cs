@@ -10,6 +10,7 @@ using System.Web.WebPages;
 using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
+using Tupa_Web.Model;
 
 namespace Tupa_Web.View.Configuracoes
 {
@@ -45,9 +46,90 @@ namespace Tupa_Web.View.Configuracoes
             return jsonResult;
         }
 
+        private async Task<Response<Usuario>> GetBasicProfile(
+              string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa 
+              .AddPath("api/Account/basic-profile")
+              .SetQueryParams(new
+              {
+
+              });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<Usuario>>(stringResult);
+
+            return jsonResult;
+        }
+        private async Task<Response<String>> PutBasicProfile(
+              string userName,
+              string tipoUser,
+              string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account/basic-profile")
+              .SetQueryParams(new
+              {
+                  UserName = userName,
+                  TipoUsuario = tipoUser
+              });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPut(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<String>>(stringResult);
+
+            return jsonResult;
+        }
+
         protected void btnAlterarNome_Click(object sender, EventArgs e)
         {
+            if (!txtNome.Text.IsEmpty())
+            {
+                try
+                {
+                    var cookie = Request.Cookies["token"];
+                    if (cookie != null)
+                    {
+                        var resultTaskGet = Task.Run(() => GetBasicProfile(
+                            bearerToken: cookie.Values[0]));
+                        resultTaskGet.Wait();
 
+                        var resultGet = resultTaskGet.GetAwaiter().GetResult();
+                        if (resultGet.succeeded)
+                        {
+
+                            var resultTask = Task.Run(() => PutBasicProfile(
+                            txtNome.Text.ToString(), resultGet.data.TipoUsuario,
+                            bearerToken: cookie.Values[0]));
+                            resultTask.Wait();
+
+                            var result = resultTaskGet.GetAwaiter().GetResult();
+                            if (result.succeeded)
+                            {
+                                Response.Redirect("~/Settings/Perfil");
+                            }
+                        }
+                        else
+                        {
+                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                      EnumTypeError.warning,
+                      "Cu de pia");
+                        }
+                                                
+                    }
+                }
+                catch (Exception)
+                {
+                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                      EnumTypeError.warning,
+                      "😥 Deu ruim, bro! Tente de novo");
+                }
+            }
         }
 
         protected void btnMudarSenha_Click(object sender, EventArgs e)

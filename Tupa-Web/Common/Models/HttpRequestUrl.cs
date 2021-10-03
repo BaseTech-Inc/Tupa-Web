@@ -108,6 +108,29 @@ namespace Tupa_Web.Common.Models
             return streamTask;
         }
 
+        public static async Task<String> ProcessHttpClientPut(
+            string url,
+            string mediaType = "application/json",
+            string bearerToken = "")
+        {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue(mediaType));
+
+            if (!bearerToken.IsEmpty())
+                client.DefaultRequestHeaders.Add(
+                    "Authorization", String.Format("Bearer {0}", bearerToken));
+
+            var content = new StringContent("", Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(url, content);
+
+
+            var streamTask = await response.Content.ReadAsStringAsync();
+
+            return streamTask;
+        }
+
         public static async Task<string> ProcessHttpClientPost(
             string url,
             JsonSerializerOptions options = null,

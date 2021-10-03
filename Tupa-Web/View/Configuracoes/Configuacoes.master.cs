@@ -23,31 +23,30 @@ namespace Tupa_Web.View.Configuracoes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            
+            var cookie = Request.Cookies["token"];
+
+            if (cookie != null)
             {
-                var cookie = Request.Cookies["token"];
+                var resultTask = Task.Run(() => GetBasicProfile(cookie.Values[0]));
+                resultTask.Wait();
 
-                if (cookie != null)
+                var result = resultTask.GetAwaiter().GetResult();
+
+                if (result.succeeded)
                 {
-                    var resultTask = Task.Run(() => GetBasicProfile(cookie.Values[0]));
-                    resultTask.Wait();
+                    var basicProfile = result.data;
 
-                    var result = resultTask.GetAwaiter().GetResult();
-
-                    if (result.succeeded)
+                    foreach (var info in basicProfile)
                     {
-                        var basicProfile = result.data;
-
-                        foreach (var info in basicProfile)
+                        if (info.Key == "Nome")
                         {
-                            if (info.Key == "Nome")
-                            {
-                                userName = info.Value;
-                            }
-                        }                        
+                            userName = info.Value;
+                        }
                     }
                 }
             }
+            
         }
 
         private async Task<Response<IDictionary<string, string>>> GetBasicProfile(
