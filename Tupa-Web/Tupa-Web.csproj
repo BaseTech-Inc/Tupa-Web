@@ -230,6 +230,7 @@
     <Content Include="View\Home\Home.aspx" />
     <Content Include="View\Locais\Locais.aspx" />
     <Content Include="View\Login\Login.aspx" />
+    <Content Include="View\Login\Login_GeneratePasswordReset.aspx" />
     <Content Include="View\Login\Login__Verify.aspx" />
     <Content Include="View\Login\Login__ResetPassword.aspx" />
     <Content Include="View\Mapa\Mapa.aspx" />
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="View\Login\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Login\Login_GeneratePasswordReset.aspx.cs">
+      <DependentUpon>Login_GeneratePasswordReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Login\Login_GeneratePasswordReset.aspx.designer.cs">
+      <DependentUpon>Login_GeneratePasswordReset.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Login\Login__Verify.aspx.cs">
       <DependentUpon>Login__Verify.aspx</DependentUpon>
