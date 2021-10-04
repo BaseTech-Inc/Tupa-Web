@@ -95,8 +95,8 @@
             </nav>
             <div class="user">
                 <% if (!IsLogged()) { %>
-                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Login">Entrar</asp:HyperLink>
-                <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Register" CssClass="primary-button">Seja um Bro!</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Entrar</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' CssClass="primary-button">Seja um Bro!</asp:HyperLink>
                 <% } else { %>
                 <div class="photo_user"></div>
                 <% } %>

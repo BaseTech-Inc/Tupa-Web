@@ -170,7 +170,7 @@ namespace Tupa_Web.Common.Models
                     Match match = Regex.Match(header.Value.FirstOrDefault(), "(.+?)=(.+?);");
                     if (match.Captures.Count > 0)
                     {
-                        if (match.Groups[1].Value == "RefreshToken")
+                        if (match.Groups[1].Value == "refreshToken")
                         {
                             HttpCookie cookie = responsePage.Cookies.Get(match.Groups[1].Value);
 

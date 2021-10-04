@@ -40,6 +40,13 @@ namespace Tupa_Web.View.Login
                 // Fire event
                 btnRegisterGoogle2_Click(this, new EventArgs());
             }
+
+            var ReturnUrl = Request.QueryString["ReturnUrl"];
+
+            if (ReturnUrl != null)
+            {
+                btnReturn.NavigateUrl = ReturnUrl;
+            }
         }
 
         protected void btnRegisterGoogle2_Click(object sender, EventArgs e)

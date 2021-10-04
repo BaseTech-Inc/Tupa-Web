@@ -14,10 +14,15 @@
     <div class="login_content">
         <div class="login">
             <div class="menu">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/"> <div class="return">
+                <asp:HyperLink ID="btnReturn" runat="server" NavigateUrl="~/"> 
+                    <div class="return">
                         <div class="icon card">
                             <span class="material-icons-outlined">
-                                chevron_left </span></div></div></asp:HyperLink>         
+                                chevron_left 
+                            </span>
+                        </div>
+                    </div>
+                </asp:HyperLink>         
 
                 <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl="~/Content/Images/logo.png"/>
 

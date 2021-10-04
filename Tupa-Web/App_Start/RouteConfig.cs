@@ -111,7 +111,8 @@ namespace Tupa_Web.App_Start
             routes.MapPageRoute(
                 "Register",
                 "Register",
-                "~/View/Register/Register.aspx");
+                "~/View/Register/Register.aspx",
+                false);
 
             routes.MapPageRoute(
                 "Register_Plan",

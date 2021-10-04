@@ -14,7 +14,7 @@
     <div class="login_content">
         <div class="login">
             <div class="menu">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/">
+                <asp:HyperLink ID="btnReturn" runat="server">
                     <div class="return">
                         <div class="icon card">
                             <span class="material-icons-outlined">
