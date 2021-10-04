@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Tupa_Web.View.Register.Register" %>
+﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="Tupa_Web.View.Register.Register" 
+    MetaKeywords="NoHeader, NoFooter" %>
 <%@ Import Namespace="System.Web.Configuration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

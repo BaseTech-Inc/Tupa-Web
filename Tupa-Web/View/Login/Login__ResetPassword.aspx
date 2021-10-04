@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Trocar Senha" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login__ResetPassword.aspx.cs" Inherits="Tupa_Web.View.Login.Login__ResetPassword" %>
+﻿<%@ Page Title="Trocar Senha" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login__ResetPassword.aspx.cs" Inherits="Tupa_Web.View.Login.Login__ResetPassword"
+    MetaKeywords="NoHeader, NoFooter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/login.css">

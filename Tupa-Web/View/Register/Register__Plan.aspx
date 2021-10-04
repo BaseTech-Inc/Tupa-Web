@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Planos" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register__Plan.aspx.cs" Inherits="Tupa_Web.View.Register.Register__Plan" %>
+﻿<%@ Page Title="Planos" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register__Plan.aspx.cs" Inherits="Tupa_Web.View.Register.Register__Plan" 
+    MetaKeywords="NoHeader, NoFooter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/login.css">

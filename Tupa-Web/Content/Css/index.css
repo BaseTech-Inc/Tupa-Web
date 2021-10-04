@@ -2,7 +2,6 @@
 
 header {
     margin-bottom: 0;
-    height: 100px;
 }
 
 header.card {
@@ -48,6 +47,7 @@ header.card {
 .header .description h1 {
     font-size: 48px;
     margin-bottom: 12px;
+    line-height: 1.125em;
 }
 
 .header .description p {

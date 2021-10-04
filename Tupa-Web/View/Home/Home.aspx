@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Inicío" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Tupa_Web.View.Home.Home" %>
+﻿<%@ Page Title="Início" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Tupa_Web.View.Home.Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/intlTelInput.min.css">

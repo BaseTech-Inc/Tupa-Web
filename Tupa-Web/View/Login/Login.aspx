@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Tupa_Web.View.Login.Login" %>
+﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Tupa_Web.View.Login.Login"
+        MetaKeywords="NoHeader, NoFooter" %>
 <%@ Import Namespace="System.Web.Configuration" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -60,7 +61,7 @@
                     </div>                    
                 </div>
 
-                <p class="caption">Você tem <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Register" class="caption">Cadastro</asp:HyperLink>?</p>
+                <p class="caption">Esqueceu sua <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Login/GeneratePasswordReset" class="caption">Senha</asp:HyperLink>?</p>
                 
                 <asp:Button 
                     ID="btnLogin"

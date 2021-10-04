@@ -170,13 +170,16 @@ namespace Tupa_Web.Common.Models
                     Match match = Regex.Match(header.Value.FirstOrDefault(), "(.+?)=(.+?);");
                     if (match.Captures.Count > 0)
                     {
-                        HttpCookie cookie = responsePage.Cookies.Get(match.Groups[1].Value);
-
-                        if (cookie != null)
+                        if (match.Groups[1].Value == "RefreshToken")
                         {
-                            cookie = new HttpCookie(match.Groups[1].Value);
-                            cookie.Value = HttpUtility.UrlDecode(match.Groups[2].Value);
-                            responsePage.Cookies.Add(cookie);
+                            HttpCookie cookie = responsePage.Cookies.Get(match.Groups[1].Value);
+
+                            if (cookie != null)
+                            {
+                                cookie = new HttpCookie(match.Groups[1].Value);
+                                cookie.Value = HttpUtility.UrlDecode(match.Groups[2].Value);
+                                responsePage.Cookies.Add(cookie);
+                            }
                         }
                     }
                 }

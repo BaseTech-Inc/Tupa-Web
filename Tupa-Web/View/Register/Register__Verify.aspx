@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Verificar" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register__Verify.aspx.cs" Inherits="Tupa_Web.View.Register.Register__Verify" %>
+﻿<%@ Page Title="Verificar" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Register__Verify.aspx.cs" Inherits="Tupa_Web.View.Register.Register__Verify" 
+    MetaKeywords="NoHeader, NoFooter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/login.css">

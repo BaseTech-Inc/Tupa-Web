@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Mapa" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Mapa.aspx.cs" Inherits="Tupa_Web.View.Mapa.Mapa" %>
+﻿<%@ Page Title="Mapa" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Mapa.aspx.cs" Inherits="Tupa_Web.View.Mapa.Mapa" 
+    MetaKeywords="NoFooter"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/Content/Css/mapa.css">

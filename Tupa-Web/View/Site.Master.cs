@@ -18,6 +18,66 @@ namespace Tupa_Web.View
 
                 Page.Title = fileName;
             }
+
+            Page.DataBind();
+        }
+
+        public static bool IsLogged()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["token"];
+
+            if (cookie == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool ContainsHeader()
+        {
+            Page page = HttpContext.Current.Handler as Page;
+
+            if (page != null)
+            {
+                if (page.MetaKeywords != null)
+                {
+                    var keywords = page.MetaKeywords.Split(',');
+
+                    foreach (var keyword in keywords)
+                    {
+                        if (keyword.Trim() == "NoHeader")
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static bool ContainsFooter()
+        {
+            Page page = HttpContext.Current.Handler as Page;
+
+            if (page != null)
+            {
+                if (page.MetaKeywords != null)
+                {
+                    var keywords = page.MetaKeywords.Split(',');
+
+                    foreach (var keyword in keywords)
+                    {
+                        if (keyword.Trim() == "NoFooter")
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

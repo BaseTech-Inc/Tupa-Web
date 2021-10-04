@@ -40,125 +40,65 @@
 </head>
 <body data-theme="white">
     <!-- Header -->
-    <% if(Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Planos" && Page.Title != "Verificar" && Page.Title != "Trocar Senha") { %>
-    <header class="home container card">
+    <% if (ContainsHeader()) { %>
+    <header class="home container card" id="menuHeader">
         <div class="menu container_wrapper">
             <div class="logo">
-                <% if (Page.Title == "Inicío")
-                    { %>
                 <asp:HyperLink 
-                    ID="HyperLink24" 
-                    runat="server">                    
+                    ID="HyperLink2" 
+                    runat="server" 
+                    NavigateUrl='<%# Page.Title == "Início" ? "" : "~/" %>' >                    
                         <asp:Image 
-                            ID="imgLogo" 
+                            ID="PlayAudio"
                             runat="server" 
                             ImageUrl="~/Content/Images/logo.png"
-                            CssClass="PlayAudio"/>   
+                            CssClass='<%# Page.Title == "Início" ? "PlayAudio" : "" %>' />   
                 </asp:HyperLink>
-                <% } else { %>
-                <asp:HyperLink 
-                    ID="HyperLink1" 
-                    runat="server" 
-                    NavigateUrl="~/">                    
-                        <asp:Image 
-                            ID="Image1" 
-                            runat="server" 
-                            ImageUrl="~/Content/Images/logo.png"/>   
-                </asp:HyperLink>
-                <% } %>
             </div>
             <nav>
-                <%
-                    var cookie = Request.Cookies["token"];
-
-                    if (cookie == null)
-                    { 
-                %>
+                <% if (!IsLogged()) { %>
+                <%-- Menu de usuários não logados --%>
                 <ul>
                     <li> 
-                        <% if (Page.Title == "Inicío") {%>
-                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/" CssClass="target">Início</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink25" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
-                        <%}%>
+                        <asp:HyperLink ID="hlkInicio" NavigateUrl="~/" CssClass='<%# Page.Title == hlkInicio.Text ? "target" : "" %>' runat="server">Início</asp:HyperLink>
                     </li>
                     <li>
-                        <% if (Page.Title == "Mapa") {%>
-                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Map" CssClass="target">Mapa</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink26" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
-                        <%}%>
+                        <asp:HyperLink ID="hlkMapa" NavigateUrl="~/Map" CssClass='<%# Page.Title == hlkMapa.Text ? "target" : "" %>' runat="server">Mapa</asp:HyperLink>
                     </li>
                     <li>
-                        <% if (Page.Title == "Plans") {%>
-                        <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Plans" CssClass="target">Planos</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink28" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
-                        <%}%>
+                        <asp:HyperLink ID="hlkPlanos" runat="server" NavigateUrl="~/Plans" CssClass='<%# Page.Title == hlkPlanos.Text ? "target" : "" %>'>Planos</asp:HyperLink>
                     </li>
                     <li>
-                        <% if (Page.Title == "About") {%>
-                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/About" CssClass="target">Sobre nós</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink36" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
-                        <%}%>
+                        <asp:HyperLink ID="hlkAbout" runat="server" NavigateUrl="~/About" CssClass='<%# Page.Title == hlkAbout.Text ? "target" : "" %>'>Sobre nós</asp:HyperLink>
                     </li>
                 </ul>
-                <%
-                    } else { 
-                %>
+                <% } else { %>
+                <%-- Menu de usuários logados --%>
                 <ul>
                     <li> 
-                        <% if (Page.Title == "Inicío") {%>
-                        <asp:HyperLink ID="HyperLink29" runat="server" NavigateUrl="~/" CssClass="target">Início</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink30" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
-                        <%}%>
+                        <asp:HyperLink ID="hlkInicioLogged" runat="server" NavigateUrl="~/" CssClass='<%# Page.Title == hlkInicioLogged.Text ? "target" : "" %>'>Início</asp:HyperLink>
                     </li>
                     <li>
-                        <% if (Page.Title == "Mapa") {%>
-                        <asp:HyperLink ID="HyperLink31" runat="server" NavigateUrl="~/Map" CssClass="target">Mapa</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink32" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
-                        <%}%>
-                    </li>
-                     <%
-                       if (cookie != null)
-                       { %>
-                    <li>
-                        <% if (Page.Title == "Locais") {%>
-                        <asp:HyperLink ID="HyperLink33" runat="server" NavigateUrl="~/Locate" CssClass="target">Locais</asp:HyperLink>
-                        <%} else {%>
-                        <asp:HyperLink ID="HyperLink34" runat="server" NavigateUrl="~/Locate">Locais</asp:HyperLink>
-                        <%}%>
-                    </li>
-                    <% } %>
-                    <li>
-                        <% if (Page.Title == "Dashboard") {%>
-                        <asp:HyperLink runat="server" ID="HyperLink35" Text="Dashboard" CssClass="target" NavigateUrl="~/Dashboard" />
-                        <%} else {%>
-                        <asp:HyperLink runat="server" ID="HyperLink10" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
-                        <%}%>
+                        <asp:HyperLink ID="hlkMapaLogged" runat="server" NavigateUrl="~/Map" CssClass='<%# Page.Title == hlkMapaLogged.Text ? "target" : "" %>'>Mapa</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HyperLink27" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
+                        <asp:HyperLink ID="hlkLocaisLogged" runat="server" NavigateUrl="~/Locate" CssClass='<%# Page.Title == hlkLocaisLogged.Text ? "target" : "" %>'>Locais</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink runat="server" ID="hlkDashboardsLogged" Text="Dashboard" CssClass='<%# Page.Title == hlkDashboardsLogged.Text ? "target" : "" %>' NavigateUrl="~/Dashboard" />
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="hlkAboutLogged" runat="server" NavigateUrl="~/About" CssClass='<%# Page.Title == hlkAboutLogged.Text ? "target" : "" %>'>Sobre nós</asp:HyperLink>
                     </li>
                 </ul>
-                <%
-                    }
-                %>
+                <%  } %>
             </nav>
             <div class="user">
-                <% if (cookie == null)
-                   { %>
-
+                <% if (!IsLogged()) { %>
                 <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Login">Entrar</asp:HyperLink>
                 <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Register" CssClass="primary-button">Seja um Bro!</asp:HyperLink>
-                
                 <% } else { %>
-
                 <div class="photo_user"></div>
-
                 <% } %>
                 <div class="menu-bar">
                     <span class="material-icons">
@@ -166,14 +106,10 @@
                     </span>
 
                     <ul class="menu-dropdown card">
-                        <% if (cookie != null)
-                        { %>
+                        <% if (IsLogged()) { %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Settings">Perfil</asp:HyperLink>
                         </li>
-                        <% } %>
-                        <% if (cookie != null)
-                        { %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">
                                 <span class="material-icons-outlined">
@@ -182,7 +118,7 @@
                                 Configurar Perfil
                             </asp:HyperLink>
                         </li>
-                        <hr>
+                        <hr>                        
                         <% } %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings/Themes">
@@ -203,8 +139,7 @@
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/Privacy">Política de privacidade</asp:HyperLink>
                         </li>
-                        <% if (cookie != null)
-                        { %>
+                        <% if (IsLogged()) { %>
                         <hr>
                         <li class="menu-dropdown-item">
                             <a href="#">Sair</a>
@@ -231,7 +166,7 @@
     </form>
 
     <!-- Footer -->    
-    <% if (Page.Title != "Login" && Page.Title != "Register" && Page.Title != "Mapa" && Page.Title != "Planos"  && Page.Title != "Verificar" && Page.Title != "Trocar Senha") { %>
+    <% if (ContainsFooter()) { %>
     <footer class="container">
         <div class="container_wrapper">
             <div class="up">
