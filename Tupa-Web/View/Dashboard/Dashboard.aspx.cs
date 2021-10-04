@@ -193,7 +193,7 @@ namespace Tupa_Web.View.Dashboard
             values.Add(
             new PositionDataForecast(
                 forecast.q,
-                forecast.main.temp.ToString() + "°",
+                Math.Round(forecast.main.temp, 1).ToString() + "°",
                 forecast.weather.description));
 
             return values;
