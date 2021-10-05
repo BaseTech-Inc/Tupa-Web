@@ -172,7 +172,7 @@
             <div class="up">
                 <div class="logo">
                     <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/">
-                        <% if (Page.Title == "Inicío") {%>
+                        <% if (Page.Title == "Início") {%>
                         <asp:Image ID="imgLogoWhite" runat="server" ImageUrl="~/Content/Images/logo.png" />
                         <% } else {%>
                         <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/logo-white.png" />
