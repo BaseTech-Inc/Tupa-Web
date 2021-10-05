@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login_GeneratePasswordReset.aspx.cs" Inherits="Tupa_Web.View.Login.Login_GeneratePasswordReset" 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Login__GeneratePasswordReset.aspx.cs" Inherits="Tupa_Web.View.Login.Login_GeneratePasswordReset" 
     MetaKeywords="NoHeader, NoFooter" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -10,7 +10,15 @@
     <div class="login_content">
         <div class="login full">
             <div class="menu">
-                <div></div>       
+                <asp:HyperLink ID="btnReturn" runat="server">
+                    <div class="return">
+                        <div class="icon card">
+                            <span class="material-icons-outlined">
+                                chevron_left
+                            </span>
+                        </div>  
+                    </div>
+                </asp:HyperLink>         
 
                 <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl="~/Content/Images/logo.png"/>
 
@@ -18,29 +26,16 @@
             </div>           
 
             <div class="form">
-                <h1>Escolha uma nova senha!</h1>
+                <h1>Enviar email para trocar senha!</h1>
 
                 <div class="error" runat="server" id="errorMessage">                  
                 </div>
 
                 <div class="inputs">
 
-                    <div class="input_icon_right input">
-                        <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
-                            <span class="material-icons-outlined">
-                                visibility
-                            </span>
-                        </label>
-                        <asp:TextBox ID="txtSenha" name="txtSenha" runat="server" placeholder="Senha" TextMode="Password"></asp:TextBox>
-                    </div>    
-                    
-                    <div class="input_icon_right input">
-                        <label for="txtSenha" onClick="PasswordEyes.PasswordEyesEvent(this)" >
-                            <span class="material-icons-outlined">
-                                visibility
-                            </span>
-                        </label>
-                        <asp:TextBox ID="txtConfirmarSenha" name="txtSenha" runat="server" placeholder="Confimar Senha" TextMode="Password"></asp:TextBox>
+                    <div class="input">
+                        <asp:Label ID="lblEmail" runat="server" CssClass="label">Email</asp:Label>
+                        <asp:TextBox ID="txtEmail" name="email" runat="server" placeholder="example@example.com"></asp:TextBox>
                     </div>   
                 </div>
                 
@@ -48,7 +43,7 @@
                     ID="btnChangePassword"
                     Text="Enviar"
                     runat="server"
-                    CssClass="button secondary-button" OnClick="btnChangePassword_Click"  />
+                    CssClass="button secondary-button"  />
             </div>            
 
             <div></div>

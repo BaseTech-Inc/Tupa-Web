@@ -89,6 +89,11 @@ namespace Tupa_Web.App_Start
                 "Login/Reset-Password",
                 "~/View/Login/Login__ResetPassword.aspx");
 
+            routes.MapPageRoute(
+                "Login_GeneratePasswordReset",
+                "Login/GeneratePasswordReset",
+                "~/View/Login/Login__GeneratePasswordReset.aspx");
+
             // Map
             routes.MapPageRoute(
                 "Map",

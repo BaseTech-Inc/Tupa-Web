@@ -15,6 +15,15 @@ namespace Tupa_Web.View.Login
     {
 
         /// <summary>
+        /// Controle btnReturn.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink btnReturn;
+
+        /// <summary>
         /// Controle Image1.
         /// </summary>
         /// <remarks>
@@ -33,22 +42,22 @@ namespace Tupa_Web.View.Login
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
 
         /// <summary>
-        /// Controle txtSenha.
+        /// Controle lblEmail.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSenha;
+        protected global::System.Web.UI.WebControls.Label lblEmail;
 
         /// <summary>
-        /// Controle txtConfirmarSenha.
+        /// Controle txtEmail.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmarSenha;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
         /// Controle btnChangePassword.

@@ -20,7 +20,17 @@
     color: var(--high_emphasis_color)
 }
 
-.login_content .login .form .inputs .input:first-child input
+.login_content .login .form .inputs .input .label {
+    
+    font-weight: var(--semi_bold_font);
+    color: var(--high_emphasis_color)
+}
+
+.login_content .login .form .inputs .input .label ~ input {
+    margin-top: 6px;
+}
+
+.login_content .login .form .inputs .input:first-child input,
 .login_content .login .form .form-group .input:first-child input {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;

@@ -11,7 +11,12 @@ namespace Tupa_Web.View.Login
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var ReturnUrl = Request.QueryString["ReturnUrl"];
 
+            if (ReturnUrl != null)
+            {
+                btnReturn.NavigateUrl = ReturnUrl;
+            }
         }
     }
 }

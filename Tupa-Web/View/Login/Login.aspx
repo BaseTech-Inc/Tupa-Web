@@ -61,7 +61,7 @@
                     </div>                    
                 </div>
 
-                <p class="caption">Esqueceu sua <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Login/GeneratePasswordReset" class="caption">Senha</asp:HyperLink>?</p>
+                <p class="caption">Esqueceu sua <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login_GeneratePasswordReset", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' class="caption">Senha</asp:HyperLink>?</p>
                 
                 <asp:Button 
                     ID="btnLogin"
