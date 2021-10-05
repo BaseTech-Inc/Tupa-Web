@@ -43,7 +43,8 @@
                     ID="btnChangePassword"
                     Text="Enviar"
                     runat="server"
-                    CssClass="button secondary-button"  />
+                    CssClass="button secondary-button"
+                    OnClick="btnChangePassword_Click" />
             </div>            
 
             <div></div>
