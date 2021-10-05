@@ -205,6 +205,7 @@
     <Content Include="Content\Images\nelson.jpg" />
     <Content Include="Content\Images\oprah.jpg" />
     <Content Include="Content\Images\orbit.svg" />
+    <Content Include="Content\Images\paper-plane-gray.svg" />
     <Content Include="Content\Images\phone.png" />
     <Content Include="Content\Images\preview_dark.svg" />
     <Content Include="Content\Images\preview_dark_dimmed.svg" />

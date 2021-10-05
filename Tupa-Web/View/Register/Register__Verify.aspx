@@ -26,13 +26,16 @@
                     <div class="ball target card">
                         <h3>2</h3>
                     </div>
-                    <div class="line target target-full"></div>
+                    <div class="line target target-full"></div> 
                     <div class="ball card target">
                         <h3>3</h3>
                     </div>
                 </div>
 
                 <h1>Verificar E-mail</h1>
+
+                <asp:Image ID="Image2" runat="server" CssClass="paperPlane" ImageUrl="~/Content/Images/paper-plane-gray.svg" />
+
                 <p class="center">Para usar o Tupã, clique no botão de verificação no e-mail que enviamos para você.</p>
 
                 <div class="error" runat="server" id="errorMessage">                  

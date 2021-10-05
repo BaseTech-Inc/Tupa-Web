@@ -380,3 +380,11 @@ footer p {
     visibility: visible;
     opacity: 1;
 }
+
+.paperPlane {
+    width: 10rem !important;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    margin-bottom: 24px;
+}
