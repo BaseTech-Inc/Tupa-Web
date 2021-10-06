@@ -14,7 +14,7 @@ namespace Tupa_Web.Common.Helpers
                 @"<div class=""error-message {0}"" runat=""server"" id=""errorMessage"">
                     <div class=""error_wrapper"">
                         <p runat = ""server"" id=""textErrorMessage"" title=""{1}"">{1}</p>
-                        <span class=""close_button"">
+                        <span class=""close_button"" onclick=""OnClick_CloseError(this)"">
                             <span class=""material-icons"">
                             close
                             </span>

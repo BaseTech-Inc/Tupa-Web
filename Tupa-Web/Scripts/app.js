@@ -1,10 +1,8 @@
-﻿/*let close_button = document.querySelector('.close_button')
-let errorMessage = document.querySelector('.error-message')
+﻿function OnClick_CloseError(element) {
+    
+    element.parentNode.parentNode.className += " disabled"
+}
 
-close_button.addEventListener('click', () => {
-    errorMessage.className += " disabled"
-})
-*/
 window.onscroll = () => {
     let top = window.pageYOffset || document.documentElement.scrollTop
     let menuHeader = document.querySelector('#menuHeader')
