@@ -312,7 +312,7 @@ header .menu-bar .menu-dropdown hr {
 
 /* Footer */
 
-footer {
+footer.footer_normal {
     background-color: var(--surface_color);
     border-top: 1px solid var(--border-color);
     box-shadow: 3px 0px 6px var(--shadow-variant-color);

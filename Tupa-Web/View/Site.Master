@@ -167,7 +167,7 @@
 
     <!-- Footer -->    
     <% if (ContainsFooter()) { %>
-    <footer class="container">
+    <footer class="container footer_normal">
         <nav class="container_wrapper">
             <div class="footer_group">
                 <ul class="footer_list">
@@ -200,6 +200,11 @@
                         <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Register">Registrar</asp:HyperLink>
                     </li>
                     <li class="footer_item">
+                        <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
+                    </li>
+                    <% if (IsLogged()) { %>
+                    <%-- Parte do rodapé para usuários cadastrados --%>
+                    <li class="footer_item">
                         <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Settings/Perfil">Editar perfil</asp:HyperLink>
                     </li>
                     <li class="footer_item">
@@ -208,9 +213,7 @@
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/Settings">Privacidade</asp:HyperLink>
                     </li>
-                    <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
-                    </li>
+                    <% } %>
                 </ul>
             </div>
             <div class="footer_group">
@@ -221,6 +224,8 @@
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink20" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
                     </li>
+                    <% if (IsLogged()) { %>
+                    <%-- Parte do rodapé para usuários cadastrados --%>
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
                     </li>
@@ -233,6 +238,7 @@
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink24" runat="server" NavigateUrl="~/Dashboard">Previsões</asp:HyperLink>
                     </li>
+                    <% } %>
                 </ul>
             </div>
             <div class="footer_group">
