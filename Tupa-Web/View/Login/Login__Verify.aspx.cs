@@ -20,7 +20,7 @@ namespace Tupa_Web.View.Login
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
-                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+                return;
 
             if (
                 !string.IsNullOrEmpty(Request.QueryString["userId"]) && 
@@ -42,11 +42,10 @@ namespace Tupa_Web.View.Login
                     } else
                     {
                     }
-                } catch (Exception) {
-                    Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "500" } });
+                } catch (Exception ex) {
                 }
             } else {
-                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+                Response.Redirect("~/");
             }
         }
 
