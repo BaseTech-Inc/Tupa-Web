@@ -33,13 +33,31 @@ namespace Tupa_Web.View.Home
         protected global::System.Web.UI.WebControls.Image Image4;
 
         /// <summary>
-        /// Controle imgPhone.
+        /// Controle imgPhonee.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPhone;
+        protected global::System.Web.UI.WebControls.Image imgPhonee;
+
+        /// <summary>
+        /// Controle Image2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image2;
+
+        /// <summary>
+        /// Controle Image3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image3;
 
         /// <summary>
         /// Controle HyperLink1.

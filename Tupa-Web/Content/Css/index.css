@@ -156,123 +156,6 @@ header.card {
     margin-bottom: 16px;
 }
 
-/* PHONE */
-
-.phone {
-    margin-top: 140px;
-    margin-bottom: 140px;
-}
-
-.phone > .card {
-    display: flex;
-    flex-direction:row-reverse;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    border-radius: 32px;
-    padding: 0 94px;
-}
-
-.phone .card img {
-    width: 320px;
-    margin-top: -80px;
-    margin-bottom: -80px;
-}
-
-.phone .card > div {
-   margin-right: 120px;
-}
-
-.phone .slider_arrows {
-    display: flex;
-    z-index: 100
-}
-
-.phone .slider_arrows > div {
-    margin-right: 12px;
-}
-
-.phone .slider_arrows > div .card {
-    box-shadow: none;
-}
-
-.icon {
-    cursor: pointer;
-    width: 42px;
-    height: 42px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    float: left;
-}
-
-.icon span {
-    color: var(--high_emphasis_color);
-}
-
-@media only screen and (max-width: 960px) {
-    .phone {
-        display: none;
-    }
-
-    .phone {
-        margin-top: 0;
-        margin-bottom: 24px;
-    }
-
-    .phone .card {
-        padding: 12px 12px;
-        background: none;
-        border: none;
-        box-shadow: none;
-        text-align: center;
-        max-width: 320px;
-        margin: 0 auto;
-        width: 100%;
-    }
-
-    .phone .card img {
-        display: none;
-    }
-
-    .phone .card > div {
-        margin-left: 0;
-    }
-
-    .progress {
-        justify-content: center;
-    }
-}
-
-.phone .card > div h1 {
-    margin-bottom: 32px;
-}
-
-.phone .card > div p {
-    margin-bottom: 24px;
-}
-
-.progress > div {
-    width: 12px;
-    height: 12px;
-    background: var(--border-color);
-    border-radius: 16px;
-    margin-right: 8px;
-}
-
-.progress > div.target {
-    width: 18px;
-    background: var(--primary-variant-color);
-    border-radius: 16px;
-}
-
-.progress {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-}
-
 /* PLANS */
 
 .plans > h1 {
@@ -583,4 +466,158 @@ header.card {
 
 footer {
     z-index: -100;
+}
+
+/* PHONE */
+
+.phone {
+    margin-top: 140px;
+    margin-bottom: 140px;
+}
+
+.phone > .card {
+    position: relative;
+    border-radius: 32px;
+    padding: 0 94px;
+}
+
+.slider {
+    z-index: 100
+}
+
+.carousel-wrapper * {
+    box-sizing: border-box;
+}
+
+.carousel {
+    transform-style: preserve-3d;
+}
+
+.slide_inner {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: auto;
+    z-index: 100;
+    transition: transform .5s, opacity .5s, z-index .5s;
+}
+
+.phone > .card .slide_inner {
+    display: flex;
+    flex-direction:row-reverse;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.phone .slide_inner > div {
+    margin-right: 15rem
+}
+
+.slide_inner.initial,
+.slide_inner.active {
+    opacity: 1;
+    position: relative;
+    z-index: 900;
+}
+
+.phone .card img {
+    width: 300px;
+    margin-top: -80px;
+    margin-bottom: -80px;
+}
+
+.phone .slider_buttons {
+    z-index: 100;
+    position: absolute;
+    bottom: 40px
+}
+
+.phone .slider_arrows {
+    display: flex;
+}
+
+.phone .slider_arrows > div {
+    margin-right: 12px;
+}
+
+.phone .slider_arrows > div .card {
+    box-shadow: none;
+}
+
+.icon {
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+}
+
+.icon span {
+    color: var(--high_emphasis_color);
+}
+
+@media only screen and (max-width: 960px) {
+    .phone {
+        display: none;
+    }
+
+    .phone {
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+
+    .phone .card {
+        padding: 12px 12px;
+        background: none;
+        border: none;
+        box-shadow: none;
+        text-align: center;
+        max-width: 320px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .phone .card img {
+        display: none;
+    }
+
+    .phone .card > div {
+        margin-left: 0;
+    }
+
+    .progress {
+        justify-content: center;
+    }
+}
+
+.phone .card > div h1 {
+    margin-bottom: 32px;
+}
+
+.phone .card > div p {
+    margin-bottom: 24px;
+}
+
+.progress > div {
+    width: 12px;
+    height: 12px;
+    background: var(--border-color);
+    border-radius: 16px;
+    margin-right: 8px;
+}
+
+.progress > div.target {
+    width: 18px;
+    background: var(--primary-variant-color);
+    border-radius: 16px;
+}
+
+.progress {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
 }

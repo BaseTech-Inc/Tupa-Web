@@ -256,36 +256,57 @@
 
     <div class="container_wrapper phone">
         <div class="card">
-            <asp:Image ID="imgPhone" runat="server" ImageUrl="~/Content/Images/phone.png" />
+            <div class="slider">
+                <div class="carousel-wrapper">
+                    <div class="carousel">
+                        <div class="slide_inner initial">
+                            <asp:Image ID="imgPhonee" runat="server" ImageUrl="~/Content/Images/map-phone.png" />
 
-            <div>
-                <h1>Mapa meteorologico</h1>
-                <p>Previsões meteorologicas de até 5 dias baseadas na sua localização atual ou regiões buscadas.Previsões meteorologicas de até 5 dias baseadas na sua localização atual ou regiões buscadas.</p>
-                
-                <div class="progress">
-                    <div></div>
-                    <div class="target"></div>
-                    <div></div>
-                    <div></div>
+                            <div>
+                                <h1>Mapa meteorologico</h1>
+                                <p>Previsões meteorologicas de até 5 dias baseadas na sua localização atual ou regiões buscadas.Previsões meteorologicas de até 5 dias baseadas na sua localização atual ou regiões buscadas.</p>
+                            </div>
+                        </div>
+                        <div class="slide_inner">
+                            <asp:Image ID="Image2" runat="server" ImageUrl="~/Content/Images/forecast-phone.png" />
+
+                            <div>
+                                <h1>Previsões Meteorologicas</h1>
+                                <p>Previsões meteorologicas de até 5 dias baseadas na sua localização atual ou regiões buscadas.</p>
+                            </div>
+                        </div>
+                        <div class="slide_inner">
+                            <asp:Image ID="Image3" runat="server" ImageUrl="~/Content/Images/alert-phone.png" />
+
+                            <div>
+                                <h1>Alertas de Enchentes</h1>
+                                <p>Alertas de enchentes em locais de risco e alterações climáticas, com monitoriamento da sua localização atual ou regiões salvadas como favoritas.</p>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
 
-                <div class="slider_arrows">
-                    <div class="left slide__button--prev">
-                        <div class="icon card">
-                            <span class="material-icons-outlined">
-                                chevron_left
-                            </span>
-                        </div>  
+                <div class="slider_buttons">
+                    <div class="slider_progress">
                     </div>
-                    <div class="right slide__button--next">
-                        <div class="icon card">
-                            <span class="material-icons-outlined">
-                                chevron_right
-                            </span>
-                        </div>  
+                    <div class="slider_arrows">
+                        <div class="left slide__button--prev">
+                            <div class="icon card">
+                                <span class="material-icons-outlined">
+                                    chevron_left
+                                </span>
+                            </div>  
+                        </div>
+                        <div class="right slide__button--next">
+                            <div class="icon card">
+                                <span class="material-icons-outlined">
+                                    chevron_right
+                                </span>
+                            </div>  
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>                
+            </div>  
         </div>
     </div>
 
@@ -450,7 +471,12 @@
 
     <script src="/Scripts/intlTelInput.min.js"></script>
     <script src="/Scripts/AudioHorn.js"></script>
+    <script src="/Scripts/Carousel.js"></script>        
     <script>
+        Carousel.Setup(
+            Carousel.types.Opacity,
+            true)
+
         var input = document.querySelector("#phone")
 
         window.intlTelInput(input, {
