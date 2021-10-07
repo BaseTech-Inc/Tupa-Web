@@ -47,6 +47,23 @@ namespace Tupa_Web.View.Dashboard
                 Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
         }
 
+        private async Task<Response<IList<Distrito>>> GetDistritos(
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Distritos")
+                .SetQueryParams(new
+                { });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<IList<Distrito>>>(stringResult);
+
+            return jsonResult;
+        }
+
         private async Task<Response<IList<Alertas>>> GetAlertas(
             string year,
             string month,
@@ -288,6 +305,98 @@ namespace Tupa_Web.View.Dashboard
                         EnumTypeError.error,
                         "Ocorreu um erro, tente novamente mais tarde.");
                 }                
+            }
+        }
+
+        public static IList<Distrito> listDistritos = new List<Distrito>();
+
+        private void LoadDistritos()
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    var txtSearchDistrict = txtSearch.Text.ToString();
+
+                    var listAutoComplete = listDistritos
+                        .Where(x => x.nome.Contains(txtSearchDistrict) || x.nome.StartsWith(txtSearchDistrict) || x.nome.EndsWith(txtSearchDistrict))
+                            .Distinct()
+                                .OrderBy(i => i.nome)
+                                    .Take(5)
+                                        .ToList();
+
+                    AutoCompleteList.Visible = true;
+                    SearchBar.CssClass += " autoCompleteActived";
+
+                    RepeaterAutoComplete.DataSource = CreateDataSourceDistritos(listAutoComplete);
+
+                    RepeaterAutoComplete.DataBind();
+                } catch
+                {
+
+                }
+            }
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadDistritos();
+        }
+
+        ICollection CreateDataSourceDistritos(IList<Distrito> distritos)
+        {
+            ArrayList values = new ArrayList();
+
+            foreach (var distrito in distritos)
+            {
+                values.Add(
+                    new PositionDataDistritos(
+                        distrito.nome));
+            }            
+
+            return values;
+        }
+
+        public class PositionDataDistritos
+        {
+            private string nome;
+
+            public PositionDataDistritos(
+                string nome)
+            {
+                this.nome = nome;
+            }
+
+            public string Nome => nome;
+        }
+
+        protected void UpdatePanel3_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    var cookie = Request.Cookies["token"];
+
+                    var resultTask = Task.Run(() => GetDistritos(
+                                cookie.Values[0]));
+                    resultTask.Wait();
+
+                    var result = resultTask.GetAwaiter().GetResult();
+
+                    if (result.succeeded)
+                    {
+                        listDistritos = result.data;
+                    }
+                    else
+                    {
+
+                    }
+                } catch (Exception)
+                {
+
+                }
+                
             }
         }
     }

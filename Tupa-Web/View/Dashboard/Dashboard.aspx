@@ -9,21 +9,42 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container_wrapper">
-        <div class="search">
-            <label for="search">
-                <span class="material-icons">
-                search
-                </span>
-            </label>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel3_Load">
+            <ContentTemplate>
+                <asp:UpdateProgress ID="UpdateProgress3" runat="server">
+                </asp:UpdateProgress>    
                 
-            <input type="text" name="search" id="search" placeholder="Pesquisar..." class="card">
-        </div>
+                <asp:Panel ID="SearchBar" CssClass="SeachBar" runat="server">
+                    <div class="search">
+                        <label for="search">
+                            <span class="material-icons">
+                            search
+                            </span>
+                        </label>
+               
+                        <asp:TextBox ID="txtSearch" type="text" runat="server" AutoPostBack="True" placeholder="Pesquisar por bairros..." CssClass="card" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>  
+                    </div>
+                    <asp:Panel ID="AutoCompleteList" Visible="false" runat="server" CssClass="autoCompleteList card">
+                        <div>
+                            <asp:Repeater ID="RepeaterAutoComplete" runat="server">
+                                <ItemTemplate>
+                                    <span><%# DataBinder.Eval(Container.DataItem, "Nome") %></span>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>                        
+                    </asp:Panel>
+                </asp:Panel>            
+            </ContentTemplate>
+            <triggers>
+                <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
+            </triggers>
+        </asp:UpdatePanel>
 
         <div class="dashboard">
             <div class="left">
                 <div class="card forecast"> 
                     <%-- FORECAST --%>
-                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                     <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel2_Load">
                         <ContentTemplate>
                             <p class="tag_card">Atual</p>

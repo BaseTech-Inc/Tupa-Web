@@ -84,7 +84,10 @@
 .dashboard .right .search {
     width: calc(100% - 76px);
     position: relative;
-    margin-bottom: 12px;
+}
+
+.SeachBar .search {
+    margin-bottom: 0px !important;
 }
 
 .dashboard .right .search label {
@@ -194,4 +197,39 @@
     overflow: hidden; 
     white-space: nowrap;
     margin-bottom: 4px;
+}
+
+.autoCompleteList {
+    max-width: 388px;
+    width: 100%;
+    position: absolute;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.autoCompleteList span {
+    padding: 6px 20px 6px 56px;
+    cursor: pointer
+}
+
+.autoCompleteList span:hover {
+    background: var(--background_color);
+}
+
+.autoCompleteList > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.SeachBar {
+    margin-bottom: 24px
+}
+
+.SeachBar .search {
+    z-index: 100
+}
+
+.autoCompleteActived .search input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
