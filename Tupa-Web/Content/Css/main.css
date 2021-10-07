@@ -105,7 +105,7 @@ body {
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .container_wrapper {
@@ -313,80 +313,65 @@ header .menu-bar .menu-dropdown hr {
 /* Footer */
 
 footer {
-    background-color: #000000;
-    width: 100%;
+    background-color: var(--surface_color);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 3px 0px 6px var(--shadow-variant-color);
+    padding: 12px 0
 }
 
-footer .container_wrapper > div {
+footer > nav {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+footer > nav .footer_group {
+    margin-right: 24px;
+}
+
+footer > nav .footer_group:last-child {
+    margin-right: 0;
+}
+
+footer > nav .footer_group ul {
+    list-style-type: none;
+}
+
+footer > nav .footer_group ul .footer_list_title {
+    padding: 12px 0;
+}
+
+footer > nav .footer_group ul li {
+    padding: 8px 0;
+}
+
+footer > nav .footer_group a {
+    text-decoration: none;
+}
+
+footer section {
+    margin-top: 24px !important;
+}
+
+footer .footer_logo {
+    padding-top: 12px;
+}
+
+footer .footer_logo img {
+    height: 50px;
+}
+
+footer .footer_wrapper {
+    padding: 24px 0;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
 }
 
-footer .container_wrapper .up {
-    border-bottom: 1px solid #1F1F1F;
-}
-
-footer .container_wrapper .up .logo img {
-    width: 80px;
-    margin-right: 12px;
-    padding: 0 32px;
-}
-
-footer .container_wrapper .up nav {
-    overflow-x: auto;
-    padding: 32px;
-}
-
-footer .container_wrapper .up nav ul {
-    display: flex;
-    align-items: center;
-}
-
-footer .container_wrapper .up nav ul li {
-    margin: 0 16px;
-}
-
-footer .container_wrapper .up nav ul li a {
-    text-decoration: none;
-    color: #E3E3E3;
-    font-size: 14px;
-}
-
-footer .container_wrapper .up nav ul li a:hover {
+footer > nav .footer_group a:hover {
     color: var(--primary-variant-color);
-    text-decoration: underline;
-}
-
-footer .container_wrapper .down ul li a:hover {
-    color: var(--primary-variant-color);
-    text-decoration: underline;
-}
-
-footer .container_wrapper .down {
-    padding: 12px 32px;
-}
-
-footer .container_wrapper .down p {
-    color: #E3E3E3;
-    font-size: 12px;
-}
-
-footer .container_wrapper .down ul {
-    display: flex;
-    align-items: center;
-}
-
-
-footer .container_wrapper .down ul li {
-    margin: 0 16px;
-}
-
-footer .container_wrapper .down ul li a {
-    text-decoration: none;
-    color: #E3E3E3;
-    font-size: 12px;
+    border-bottom: 1px solid var(--primary-variant-color);
 }
 
 /* search input */

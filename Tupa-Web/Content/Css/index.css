@@ -583,22 +583,4 @@ header.card {
 
 footer {
     z-index: -100;
-    background: none;
-    background: #fff;
-}
-
-footer .container_wrapper .up {
-    border-bottom: 1px solid var(--border-color);
-}
-
-footer .container_wrapper .up nav ul li a {
-    color: var(--medium_emphasis_color);
-}
-
-footer .container_wrapper .down p {
-    color: var(--medium_emphasis_color);
-}
-
-footer .container_wrapper .down ul li a {
-    color: var(--medium_emphasis_color);
 }
