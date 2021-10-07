@@ -440,6 +440,7 @@ footer > nav .footer_group a:hover {
 }
 
 .error-message.disabled {
+    opacity: 0;
     display: none
 }
 
@@ -459,8 +460,14 @@ footer > nav .footer_group a:hover {
 
 .error-message-absolute .error-message {
     box-shadow: 0 3px 6px var(--shadow-variant-color);    
+    min-width: 240px;
+    margin-right: 0;
+    max-width: 320px;
+    transition: .2s ease-in-out;
+    margin-bottom: 12px
 }
 
-.error-message-absolute .error-message {
-    min-width: 240px
+.error-message-absolute .error-message.disabled {
+    opacity: 0;
+    display: block
 }

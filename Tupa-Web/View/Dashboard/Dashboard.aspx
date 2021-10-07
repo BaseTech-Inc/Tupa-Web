@@ -111,7 +111,7 @@
                                             <div class="error-message information" runat="server">
                                                 <div class="error_wrapper">
                                                     <p id="textErrorMessage" title="Atualizando Alertas...">Atualizando Alertas...</p>
-                                                    <span class="close_button">
+                                                    <span class="close_button" onclick="OnClick_CloseError(this)">
                                                         <span class="material-icons">
                                                         close
                                                         </span>
@@ -214,13 +214,17 @@
 
     <script>
         navigator.geolocation.getCurrentPosition((position) => {
+
             var hiddenFieldLat = document.querySelector('#<%= queryStringLat.ClientID %>')
             var hiddenFieldLon = document.querySelector('#<%= queryStringLon.ClientID %>')
 
             hiddenFieldLat.value = position.coords.latitude
             hiddenFieldLon.value = position.coords.longitude
+
         }, (error) => {
+
             console.error(error)
+
         })
 
         window.onload = () => {

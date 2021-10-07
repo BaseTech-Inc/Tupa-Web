@@ -36,32 +36,15 @@ namespace Tupa_Web.View.Dashboard
             {
                 if (IsPostBack)
                 {
-                    UpdatePanel1.Update();
+                    //UpdatePanel1.Update();
+                    //UpdatePanel2.Update();
                 }
             }
-        }
 
-        private async Task<Response<Forecast>> GetForecastByCoord(
-            string lat,
-            string lon,
-            string bearerToken
-            )
-        {
-            // criando a url para comunicar entre o servidor
-            string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Forecast/coord")
-                .SetQueryParams(new
-                {
-                    lat = lat,
-                    lon = lon
-                });
+            var cookie = Request.Cookies["token"];
 
-            // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
-
-            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult);
-
-            return jsonResult;            
+            if (cookie == null)
+                Response.Redirect("~/");
         }
 
         private async Task<Response<IList<Alertas>>> GetAlertas(
@@ -169,7 +152,7 @@ namespace Tupa_Web.View.Dashboard
                             else
                             {
                                 // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                                     EnumTypeError.warning,
                                     "Não foi possível encontrar nenhum alerta.");
                             }
@@ -181,11 +164,43 @@ namespace Tupa_Web.View.Dashboard
                 } catch
                 {
                     // Mostra uma mensagem de erro
-                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
                         "Ocorreu um erro, tente novamente mais tarde.");
                 }                
             }
+        }
+
+        protected void txtSearchDate_TextChanged(object sender, EventArgs e)
+        {
+            var date = txtSearchDate.Text.Split('-');
+
+            var dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
+
+            LoadAlertas(dateTime);
+        }
+
+        private async Task<Response<Forecast>> GetForecastByCoord(
+            string lat,
+            string lon,
+            string bearerToken
+            )
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Forecast/coord")
+                .SetQueryParams(new
+                {
+                    lat = lat,
+                    lon = lon
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult);
+
+            return jsonResult;
         }
 
         ICollection CreateDataSourceForecast(Forecast forecast)
@@ -258,7 +273,7 @@ namespace Tupa_Web.View.Dashboard
                         } else
                         {
                             // Mostra uma mensagem de erro
-                            errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                            errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                                 EnumTypeError.warning,
                                 result.message);
                         }
@@ -269,22 +284,11 @@ namespace Tupa_Web.View.Dashboard
                 } catch
                 {
                     // Mostra uma mensagem de erro
-                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
                         "Ocorreu um erro, tente novamente mais tarde.");
                 }                
             }
-        }
-
-        protected void txtSearchDate_TextChanged(object sender, EventArgs e)
-        {
-            var date = txtSearchDate.Text.Split('-');
-
-            var dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
-
-            LoadAlertas(dateTime);
-
-            UpdatePanel1.Update();
         }
     }
 }
