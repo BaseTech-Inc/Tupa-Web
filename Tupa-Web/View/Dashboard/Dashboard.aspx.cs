@@ -36,7 +36,7 @@ namespace Tupa_Web.View.Dashboard
             {
                 if (IsPostBack)
                 {
-                    //UpdatePanel1.Update();
+                    UpdatePanel1.Update();
                     //UpdatePanel2.Update();
                 }
             }
