@@ -44,7 +44,7 @@ namespace Tupa_Web.View.Dashboard
             var cookie = Request.Cookies["token"];
 
             if (cookie == null)
-                Response.Redirect("~/");
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
         }
 
         private async Task<Response<IList<Alertas>>> GetAlertas(

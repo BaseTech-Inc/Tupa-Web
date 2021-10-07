@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -20,7 +21,7 @@ namespace Tupa_Web.View.Register
             }
             else
             {
-                Response.Redirect("~/");
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
             }
         }
 

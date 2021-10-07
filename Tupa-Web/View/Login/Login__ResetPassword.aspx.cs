@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.WebPages;
@@ -32,7 +33,7 @@ namespace Tupa_Web.View.Login
                 email = Request.QueryString["email"];
                 token = Request.QueryString["token"];
             } else {
-                Response.Redirect("~/");
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
             }
         }
 

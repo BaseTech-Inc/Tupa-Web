@@ -9,8 +9,10 @@
         <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/globe.png" />
 
             <div class="description">
-                <h1>OPS!! PAGE NOT FOUND, BRO!!</h1>
-                <p>Acho que você escolheu a página errada, porque eu não consegui dar uma olhada na que você está procurando.</p>
+                <h1 ID="titleError" runat="server"></h1>
+                <p ID="descriptionError" runat="server"></p>
+                <!--<h1>OPS!! PAGE NOT FOUND, BRO!!</h1>-->
+                <!--<p>Acho que você escolheu a página errada, porque eu não consegui dar uma olhada na que você está procurando.</p>-->
                 <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/" CssClass="primary-button">Voltar ao Inicío</asp:HyperLink>
             </div>
         </div>

@@ -20,8 +20,10 @@ namespace Tupa_Web.App_Start
             // Error
             routes.MapPageRoute(
                 "Error",
-                "Error",
-                "~/View/Error/Error.aspx");
+                "Error/{codStatus}/{*queryvalues}",
+                "~/View/Error/Error.aspx",
+                false,
+                new RouteValueDictionary{ { "codStatus", "([1-9]){3}" } });
 
             // Settings
             routes.MapPageRoute(

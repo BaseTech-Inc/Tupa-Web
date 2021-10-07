@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Tupa_Web.Common.Models;
@@ -19,7 +20,7 @@ namespace Tupa_Web.View.Login
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
-                return;
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
 
             if (
                 !string.IsNullOrEmpty(Request.QueryString["userId"]) && 
@@ -41,9 +42,11 @@ namespace Tupa_Web.View.Login
                     } else
                     {
                     }
-                } catch (Exception) { }
+                } catch (Exception) {
+                    Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "500" } });
+                }
             } else {
-                Response.Redirect("~/");
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
             }
         }
 
