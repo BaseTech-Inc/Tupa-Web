@@ -33,13 +33,13 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// Controle UpdateProgress3.
+        /// Controle UpdateProgress2.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress3;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
 
         /// <summary>
         /// Controle RepeaterForecast.

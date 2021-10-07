@@ -23,18 +23,20 @@ namespace Tupa_Web.View.Dashboard
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            UpdateProgress2.AssociatedUpdatePanelID = UpdatePanel2.UniqueID;
+            //UpdateProgress1.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+
             // Post Back usando um evento Javascript
             ClientScript.GetPostBackEventReference(this, string.Empty);
 
             string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
-            string parameter = Request["__EVENTARGUMENT"];
+            string parameter = Page.Request.Params.Get("__EVENTARGUMENT");
 
             if (targetCtrl != null && targetCtrl != string.Empty)
             {
                 if (IsPostBack)
                 {
-                    LoadForecast();
-                    LoadAlertas(DateTime.Now);
+                    UpdatePanel1.Update();
                 }
             }
         }
@@ -278,7 +280,11 @@ namespace Tupa_Web.View.Dashboard
         {
             var date = txtSearchDate.Text.Split('-');
 
-            LoadAlertas(new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2])));
+            var dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
+
+            LoadAlertas(dateTime);
+
+            UpdatePanel1.Update();
         }
     }
 }

@@ -8,8 +8,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
     <div class="container_wrapper">
         <div class="search">
             <label for="search">
@@ -23,12 +21,14 @@
 
         <div class="dashboard">
             <div class="left">
-                <div class="card forecast">      
-                    <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Always" runat="server" OnLoad="UpdatePanel2_Load">
+                <div class="card forecast"> 
+                    <%-- FORECAST --%>
+                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                    <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel2_Load">
                         <ContentTemplate>
                             <p class="tag_card">Atual</p>
 
-                            <asp:UpdateProgress ID="UpdateProgress3" runat="server">
+                            <asp:UpdateProgress ID="UpdateProgress2" runat="server">
                                 <ProgressTemplate>
                                     <asp:Panel ID="SkeletonLoadingPanelForecast" runat="server">
                                         <div class="loading">
@@ -92,7 +92,6 @@
                 <div class="alertas card">
                     <p>Alertas</p>
 
-                    <%-- Search Bar --%>
                     <div class="search">
                         <label for="search">
                             <span class="material-icons">
@@ -102,8 +101,8 @@
                             
                         <asp:TextBox ID="txtSearchDate" type="date" runat="server" placeholder="Pesquisar..." CssClass="card" AutoPostBack="True" OnTextChanged="txtSearchDate_TextChanged"></asp:TextBox>
                     </div>
-                     <%-- Lista de alertas --%>
                     <div class="list">
+                        <%-- ALERTS --%>
                         <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel1_Load">
                             <ContentTemplate>
                                 <asp:UpdateProgress ID="UpdateProgress1" runat="server">
@@ -214,16 +213,18 @@
     </div>
 
     <script>
-        window.onload = function () {
-            __doPostBack('<%= UpdatePanel1.ClientID %>');
-        }
-
         navigator.geolocation.getCurrentPosition((position) => {
             var hiddenFieldLat = document.querySelector('#<%= queryStringLat.ClientID %>')
             var hiddenFieldLon = document.querySelector('#<%= queryStringLon.ClientID %>')
 
             hiddenFieldLat.value = position.coords.latitude
             hiddenFieldLon.value = position.coords.longitude
-        });
+        }, (error) => {
+            console.error(error)
+        })
+
+        window.onload = () => {
+            __doPostBack('<%= UpdatePanel2.ClientID %>')
+        }
     </script>
 </asp:Content>
