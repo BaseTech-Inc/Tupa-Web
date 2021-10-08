@@ -24,7 +24,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
         - [X] Alterar Nome
         - [X] Alterar Senha
         - [X] Deletar Conta
-    - [ ] Tema
+    - [X] Tema
     - [X] Planos
     - [ ] Notificações
 
