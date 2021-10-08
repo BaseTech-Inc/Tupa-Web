@@ -6,7 +6,7 @@
         var cookie = Request.Cookies["token"];
 
         if (cookie != null)
-        { 
+        {
     %>
     <h1>Plano atual</h1>
 
@@ -15,7 +15,14 @@
     <div class="plans-user-section form">
         <div class="card">
             <div class="title">
-                <h2>Plano Based</h2>
+                <% if (IsPremium())
+                { %>
+                        <h2>Plano Poggers</h2>
+                <%}
+                else
+                { %>
+                    <h2> Plano Based</h2>
+                <%} %>
             </div>
             
             <div class="features">
@@ -42,15 +49,25 @@
                         Histórico de viagens.</li>
                 </ul>
             </div>
+            <%if (IsPremium())
+                { %>
+            <div class="price-section">
+                <span class="currency">R$</span>
+                <span class="money bold">99,00</span>
+            </div>
+
+            <%}
+            else
+            { %>
             <div class="price-section">
                 <span class="currency">R$</span>
                 <span class="money bold">FREE</span>
+            </div><%} %>
+                </div>
             </div>
-        </div>
-    </div>
-    <%
-        } 
-    %>
+            <%
+            }
+            %>
 
     <h1>Planos</h1>
 
