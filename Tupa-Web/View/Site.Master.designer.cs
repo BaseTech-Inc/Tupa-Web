@@ -24,6 +24,15 @@ namespace Tupa_Web.View
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
         /// <summary>
+        /// Controle bodyElement.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bodyElement;
+
+        /// <summary>
         /// Controle HyperLink2.
         /// </summary>
         /// <remarks>

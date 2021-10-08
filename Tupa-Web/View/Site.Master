@@ -38,7 +38,7 @@
         
     </asp:ContentPlaceHolder>
 </head>
-<body data-theme="white">
+<body data-theme="white" ID="bodyElement" runat="server">
     <!-- Header -->
     <% if (ContainsHeader()) { %>
     <header class="home container card" id="menuHeader">

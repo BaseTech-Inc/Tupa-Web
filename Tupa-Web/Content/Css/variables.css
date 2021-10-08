@@ -62,7 +62,7 @@ body[data-theme='dark'] {
 }
 
 /* dark dimmed theme */
-body[data-theme='dark-dimmed'] {
+body[data-theme='dark_dimmed'] {
     /* color schema */
     --primary-color: #2485F3;
     --primary-variant-color: #3B91F3;

@@ -5,11 +5,20 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Tupa_Web.Common.Enumerations;
 
 namespace Tupa_Web.View
 {
     public partial class Site : System.Web.UI.MasterPage
     {
+        public string BodyAttributes
+        {
+            set
+            {
+                bodyElement.Attributes.Add("data-theme", value);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Page.Title) || Page.Title == "Untitled Page")
@@ -17,6 +26,17 @@ namespace Tupa_Web.View
                 string fileName = System.IO.Path.GetFileNameWithoutExtension(Request.PhysicalPath);
 
                 Page.Title = fileName;
+            }
+
+            var cookie = Request.Cookies["theme"];
+
+            if (cookie != null)
+            {
+                BodyAttributes = cookie.Value;
+            }
+            else
+            {
+                BodyAttributes = EnumColorTheme.white.ToString();
             }
 
             Page.DataBind();

@@ -9,8 +9,8 @@
     <div class="form">
         <div class="radio-buttons">
             <div>
-                <input type="radio" name="select" id="optWhite" checked>
-                <label for="optWhite" class="option">
+                <asp:RadioButton ID="optWhite" runat="server" AutoPostBack="true" GroupName="ThemeMenu" OnCheckedChanged="optWhite_CheckedChanged" />
+                <label for='<%# optWhite.ClientID %>' class="option">
                     <div class="img light"></div>
                     <main>
                         <div class="dot material-icons-outlined"></div>
@@ -21,9 +21,9 @@
                 </label>
             </div>
             <div>
-                <input type="radio" name="select" id="optDark">
+                <asp:RadioButton ID="optDark" runat="server" AutoPostBack="true" GroupName="ThemeMenu" OnCheckedChanged="optDark_CheckedChanged" />
                     
-                <label for="optDark" class="option">
+                <label for='<%# optDark.ClientID %>' class="option">
                     <div class="img dark"></div>
                     <main>
                         <div class="dot material-icons-outlined"></div>
@@ -34,9 +34,9 @@
                 </label>
             </div>     
             <div>
-                <input type="radio" name="select" id="optDarkDimmed">
+                <asp:RadioButton ID="optDarkDimmed" runat="server" AutoPostBack="true" GroupName="ThemeMenu" OnCheckedChanged="optDarkDimmed_CheckedChanged" />
                     
-                <label for="optDarkDimmed" class="option">
+                <label for='<%# optDarkDimmed.ClientID %>' class="option">
                     <div class="img dark-dimmed"></div>
                     <main>
                         <div class="dot material-icons-outlined"></div>
