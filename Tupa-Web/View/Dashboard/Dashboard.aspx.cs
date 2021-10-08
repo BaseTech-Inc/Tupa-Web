@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
@@ -23,8 +24,13 @@ namespace Tupa_Web.View.Dashboard
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            UpdateProgress2.AssociatedUpdatePanelID = UpdatePanel2.UniqueID;
-            //UpdateProgress1.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+            var cookie = Request.Cookies["token"];
+
+            if (cookie == null)
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+
+            UpdateProgressForecast.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+            UpdateProgressAlertas.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
 
             // Post Back usando um evento Javascript
             ClientScript.GetPostBackEventReference(this, string.Empty);
@@ -35,34 +41,22 @@ namespace Tupa_Web.View.Dashboard
             if (targetCtrl != null && targetCtrl != string.Empty)
             {
                 if (IsPostBack)
-                {
-                    UpdatePanel1.Update();
-                    //UpdatePanel2.Update();
-                }
+                { }
             }
-
-            var cookie = Request.Cookies["token"];
-
-            if (cookie == null)
-                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
         }
 
-        private async Task<Response<IList<Distrito>>> GetDistritos(
-            string bearerToken)
+        protected void Timer1_Tick(object sender, EventArgs e)
         {
-            // criando a url para comunicar entre o servidor
-            string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Distritos")
-                .SetQueryParams(new
-                { });
+            timer1.Enabled = false;
 
-            // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+            UpdatePanelForecast.Update();
+            UpdatePanelAlertas.Update();
 
-            var jsonResult = JsonSerializer.Deserialize<Response<IList<Distrito>>>(stringResult);
-
-            return jsonResult;
+            UpdateProgressForecast.AssociatedUpdatePanelID = UpdatePanelForecast.UniqueID;
+            UpdateProgressAlertas.AssociatedUpdatePanelID = UpdatePanelAlertas.UniqueID;
         }
+
+        #region Alertas
 
         private async Task<Response<IList<Alertas>>> GetAlertas(
             string year,
@@ -88,7 +82,7 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
-        ICollection CreateDataSourceAlertas(IList<Alertas> listAlertas)
+        private ICollection CreateDataSourceAlertas(IList<Alertas> listAlertas)
         {
             ArrayList values = new ArrayList();
 
@@ -105,12 +99,12 @@ namespace Tupa_Web.View.Dashboard
                         alertas.tempoFinal.ToString(
                             "t",
                             CultureInfo.CreateSpecificCulture("de-DE")))));
-            }                
+            }
 
             return values;
         }
 
-        public class PositionDataAlertas
+        private class PositionDataAlertas
         {
             private string locale;
             private string description;
@@ -133,12 +127,17 @@ namespace Tupa_Web.View.Dashboard
             public string Time => time;
         }
 
-        protected void UpdatePanel1_Load(object sender, EventArgs e)
+        protected void UpdatePanelAlertas_Load(object sender, EventArgs e)
         {
-            LoadAlertas(DateTime.Now);
+            LoadAlertas();
         }
 
-        private void LoadAlertas(DateTime datetime)
+        protected void txtSearchDate_TextChanged(object sender, EventArgs e)
+        {
+            UpdatePanelAlertas.Update();
+        }
+
+        private void LoadAlertas()
         {
             if (IsPostBack)
             {
@@ -148,11 +147,24 @@ namespace Tupa_Web.View.Dashboard
 
                     if (cookie != null)
                     {
+                        DateTime dateTime;
+
+                        var searchDate = txtSearchDate.Text;
+
+                        if (!searchDate.IsEmpty())
+                        {
+                            var date = searchDate.Split('-');
+                            dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
+                        } else
+                        {
+                            dateTime = DateTime.Now;
+                        }
+
                         // Repeater Source
                         var resultTask = Task.Run(() => GetAlertas(
-                            datetime.Year.ToString(),
-                            datetime.Month.ToString(),
-                            datetime.Day.ToString(),
+                            dateTime.Year.ToString(),
+                            dateTime.Month.ToString(),
+                            dateTime.Day.ToString(),
                             cookie.Values[0]));
                         resultTask.Wait();
 
@@ -174,34 +186,31 @@ namespace Tupa_Web.View.Dashboard
                                     "Não foi possível encontrar nenhum alerta.");
                             }
                         }
-                    } else
+                    }
+                    else
                     {
                         Response.Redirect("~/");
                     }
-                } catch
+                }
+                catch
                 {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
                         "Ocorreu um erro, tente novamente mais tarde.");
-                }                
+                }
             }
         }
 
-        protected void txtSearchDate_TextChanged(object sender, EventArgs e)
-        {
-            var date = txtSearchDate.Text.Split('-');
+        #endregion
 
-            var dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
-
-            LoadAlertas(dateTime);
-        }
+        #region Forecast
 
         private async Task<Response<Forecast>> GetForecastByCoord(
-            string lat,
-            string lon,
-            string bearerToken
-            )
+           string lat,
+           string lon,
+           string bearerToken
+           )
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -220,7 +229,7 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
-        ICollection CreateDataSourceForecast(Forecast forecast)
+        private ICollection CreateDataSourceForecast(Forecast forecast)
         {
             ArrayList values = new ArrayList();
 
@@ -233,7 +242,7 @@ namespace Tupa_Web.View.Dashboard
             return values;
         }
 
-        public class PositionDataForecast
+        private class PositionDataForecast
         {
             private string locale;
             private string temperature;
@@ -256,7 +265,7 @@ namespace Tupa_Web.View.Dashboard
             public string Condition => condition;
         }
 
-        protected void UpdatePanel2_Load(object sender, EventArgs e)
+        protected void UpdatePanelForecast_Load(object sender, EventArgs e)
         {
             LoadForecast();
         }
@@ -287,28 +296,52 @@ namespace Tupa_Web.View.Dashboard
                             RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
 
                             RepeaterForecast.DataBind();
-                        } else
+                        }
+                        else
                         {
                             // Mostra uma mensagem de erro
                             errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                                 EnumTypeError.warning,
                                 result.message);
                         }
-                    } else
+                    }
+                    else
                     {
                         Response.Redirect("~/");
                     }
-                } catch
+                }
+                catch
                 {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
                         "Ocorreu um erro, tente novamente mais tarde.");
-                }                
+                }
             }
         }
 
-        public static IList<Distrito> listDistritos = new List<Distrito>();
+        #endregion
+
+        #region Search
+
+        private async Task<Response<IList<Distrito>>> GetDistritos(
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Distritos")
+                .SetQueryParams(new
+                { });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<IList<Distrito>>>(stringResult);
+
+            return jsonResult;
+        }
+
+        private static IList<Distrito> listDistritos = new List<Distrito>();
 
         private void LoadDistritos()
         {
@@ -316,34 +349,48 @@ namespace Tupa_Web.View.Dashboard
             {
                 try
                 {
-                    var txtSearchDistrict = txtSearch.Text.ToString();
+                    var cookie = Request.Cookies["token"];
 
-                    var listAutoComplete = listDistritos
-                        .Where(x => x.nome.Contains(txtSearchDistrict) || x.nome.StartsWith(txtSearchDistrict) || x.nome.EndsWith(txtSearchDistrict))
-                            .Distinct()
+                    if (listDistritos.Count <= 0)
+                    {
+                        var resultTask = Task.Run(() => GetDistritos(
+                            cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            listDistritos = result.data;
+                        }
+                        else
+                        { }
+                    }
+
+                    if (!txtSearch.Text.IsEmpty())
+                    {
+                        var txtSearchDistrict = txtSearch.Text.ToString();
+
+                        var listAutoComplete = listDistritos
+                            .Where(x => x.nome.Contains(txtSearchDistrict) || x.nome.StartsWith(txtSearchDistrict) || x.nome.EndsWith(txtSearchDistrict))
                                 .OrderBy(i => i.nome)
                                     .Take(5)
                                         .ToList();
 
-                    AutoCompleteList.Visible = true;
-                    SearchBar.CssClass += " autoCompleteActived";
+                        AutoCompleteList.Visible = true;
+                        SearchBar.CssClass += " autoCompleteActived";
 
-                    RepeaterAutoComplete.DataSource = CreateDataSourceDistritos(listAutoComplete);
+                        RepeaterAutoComplete.DataSource = CreateDataSourceDistritos(listAutoComplete);
 
-                    RepeaterAutoComplete.DataBind();
-                } catch
-                {
-
+                        RepeaterAutoComplete.DataBind();
+                    }
                 }
+                catch (Exception)
+                { }
             }
         }
 
-        protected void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            LoadDistritos();
-        }
-
-        ICollection CreateDataSourceDistritos(IList<Distrito> distritos)
+        private ICollection CreateDataSourceDistritos(IList<Distrito> distritos)
         {
             ArrayList values = new ArrayList();
 
@@ -352,12 +399,12 @@ namespace Tupa_Web.View.Dashboard
                 values.Add(
                     new PositionDataDistritos(
                         distrito.nome));
-            }            
+            }
 
             return values;
         }
 
-        public class PositionDataDistritos
+        private class PositionDataDistritos
         {
             private string nome;
 
@@ -370,34 +417,16 @@ namespace Tupa_Web.View.Dashboard
             public string Nome => nome;
         }
 
-        protected void UpdatePanel3_Load(object sender, EventArgs e)
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-                try
-                {
-                    var cookie = Request.Cookies["token"];
-
-                    var resultTask = Task.Run(() => GetDistritos(
-                                cookie.Values[0]));
-                    resultTask.Wait();
-
-                    var result = resultTask.GetAwaiter().GetResult();
-
-                    if (result.succeeded)
-                    {
-                        listDistritos = result.data;
-                    }
-                    else
-                    {
-
-                    }
-                } catch (Exception)
-                {
-
-                }
-                
-            }
+            UpdatePanelSearch.Update();
         }
+
+        protected void UpdatePanelSearch_Load(object sender, EventArgs e)
+        {
+            LoadDistritos();
+        }
+
+        #endregion
     }
 }

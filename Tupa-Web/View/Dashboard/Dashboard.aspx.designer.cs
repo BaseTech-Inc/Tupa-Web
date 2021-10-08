@@ -24,22 +24,13 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Controle UpdatePanel3.
+        /// Controle UpdatePanelSearch.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-
-        /// <summary>
-        /// Controle UpdateProgress3.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress3;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelSearch;
 
         /// <summary>
         /// Controle SearchBar.
@@ -78,22 +69,22 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.Repeater RepeaterAutoComplete;
 
         /// <summary>
-        /// Controle UpdatePanel2.
+        /// Controle UpdatePanelForecast.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelForecast;
 
         /// <summary>
-        /// Controle UpdateProgress2.
+        /// Controle UpdateProgressForecast.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
+        protected global::System.Web.UI.UpdateProgress UpdateProgressForecast;
 
         /// <summary>
         /// Controle RepeaterForecast.
@@ -123,6 +114,15 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.HiddenField queryStringLon;
 
         /// <summary>
+        /// Controle UpdatePanelAlertas.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelAlertas;
+
+        /// <summary>
         /// Controle txtSearchDate.
         /// </summary>
         /// <remarks>
@@ -130,6 +130,24 @@ namespace Tupa_Web.View.Dashboard
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearchDate;
+
+        /// <summary>
+        /// Controle UpdateProgressAlertas.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressAlertas;
+
+        /// <summary>
+        /// Controle RepeaterAlertas.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterAlertas;
 
         /// <summary>
         /// Controle UpdatePanel1.
@@ -141,15 +159,6 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Controle UpdateProgress1.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
-
-        /// <summary>
         /// Controle errorMessage.
         /// </summary>
         /// <remarks>
@@ -159,12 +168,12 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
 
         /// <summary>
-        /// Controle RepeaterAlertas.
+        /// Controle timer1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RepeaterAlertas;
+        protected global::System.Web.UI.Timer timer1;
     }
 }

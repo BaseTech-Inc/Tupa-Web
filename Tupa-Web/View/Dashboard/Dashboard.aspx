@@ -10,11 +10,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container_wrapper">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanel3" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel3_Load">
-            <ContentTemplate>
-                <asp:UpdateProgress ID="UpdateProgress3" runat="server">
-                </asp:UpdateProgress>    
-                
+
+        <asp:UpdatePanel ID="UpdatePanelSearch" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelSearch_Load">
+            <ContentTemplate>                
                 <asp:Panel ID="SearchBar" CssClass="SeachBar" runat="server">
                     <div class="search">
                         <label for="search">
@@ -44,13 +42,15 @@
         <div class="dashboard">
             <div class="left">
                 <div class="card forecast"> 
-                    <%-- FORECAST --%>
-                    <asp:UpdatePanel ID="UpdatePanel2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel2_Load">
+                    <%-- Update Panel Forecast --%>
+                    <asp:UpdatePanel ID="UpdatePanelForecast" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelForecast_Load">
                         <ContentTemplate>
                             <p class="tag_card">Atual</p>
 
-                            <asp:UpdateProgress ID="UpdateProgress2" runat="server">
+                            <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                            <asp:UpdateProgress ID="UpdateProgressForecast" runat="server">
                                 <ProgressTemplate>
+                                    <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
                                     <asp:Panel ID="SkeletonLoadingPanelForecast" runat="server">
                                         <div class="loading">
                                             <div class="lines">
@@ -64,6 +64,7 @@
                                 </ProgressTemplate>
                             </asp:UpdateProgress>
 
+                            <%-- Conteúdo --%>
                             <asp:Repeater ID="RepeaterForecast" runat="server">
                                 <ItemTemplate>
                                     <div class="atual">
@@ -78,9 +79,13 @@
                                 </ItemTemplate>
                             </asp:Repeater>
 
+                             <%-- LanLog --%>
                             <asp:HiddenField ID="queryStringLat" runat="server" />
                             <asp:HiddenField ID="queryStringLon" runat="server" />
                         </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="timer1" EventName="Tick" />
+                        </Triggers>
                     </asp:UpdatePanel>
                 </div>
                 <div class="previsao card">
@@ -113,33 +118,23 @@
                 <div class="alertas card">
                     <p>Alertas</p>
 
-                    <div class="search">
-                        <label for="search">
-                            <span class="material-icons">
-                            search
-                            </span>
-                        </label>
+                    <%-- Update Panel Alertas --%>
+                    <asp:UpdatePanel ID="UpdatePanelAlertas" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelAlertas_Load">
+                        <ContentTemplate>
+                            <div class="search">
+                                <label for="search">
+                                    <span class="material-icons">
+                                    search
+                                    </span>
+                                </label>
                             
-                        <asp:TextBox ID="txtSearchDate" type="date" runat="server" placeholder="Pesquisar..." CssClass="card" AutoPostBack="True" OnTextChanged="txtSearchDate_TextChanged"></asp:TextBox>
-                    </div>
-                    <div class="list">
-                        <%-- ALERTS --%>
-                        <asp:UpdatePanel ID="UpdatePanel1" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanel1_Load">
-                            <ContentTemplate>
-                                <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                                <asp:TextBox ID="txtSearchDate" type="date" runat="server" placeholder="Pesquisar..." CssClass="card" AutoPostBack="True" OnTextChanged="txtSearchDate_TextChanged"></asp:TextBox>
+                            </div>
+                            <div class="list">
+                                <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                                <asp:UpdateProgress ID="UpdateProgressAlertas" runat="server">
                                     <ProgressTemplate>
-                                        <div class="error-message-absolute">
-                                            <div class="error-message information" runat="server">
-                                                <div class="error_wrapper">
-                                                    <p id="textErrorMessage" title="Atualizando Alertas...">Atualizando Alertas...</p>
-                                                    <span class="close_button" onclick="OnClick_CloseError(this)">
-                                                        <span class="material-icons">
-                                                        close
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
                                         <asp:Panel ID="SkeletonLoadingPanel" runat="server">
                                             <div class="card loading">
                                                 <div class="avatar"></div>
@@ -189,9 +184,7 @@
                                         </asp:Panel>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
-                                <div class="error-message-absolute">
-                                    <div ID="errorMessage" CssClass="error" runat="server"></div>
-                                </div>
+                                <%-- Conteúdo --%>
                                 <asp:Repeater ID="RepeaterAlertas" runat="server">
                                     <ItemTemplate>
                                         <div class="card">
@@ -222,16 +215,29 @@
                                         </div>                               
                                     </ItemTemplate>
                                 </asp:Repeater>
-                            </ContentTemplate>
-                            <triggers>
-                                <asp:AsyncPostBackTrigger ControlID="txtSearchDate" EventName="TextChanged" />
-                            </triggers>
-                        </asp:UpdatePanel>
-                    </div>                    
+                            </div>
+                        </ContentTemplate>
+                        <%-- Triggers --%>
+                        <triggers>
+                            <%-- Quando o conteúdo do TextBox for alterado executar o evento --%>
+                            <asp:AsyncPostBackTrigger ControlID="txtSearchDate" EventName="TextChanged" />
+                            <asp:AsyncPostBackTrigger ControlID="timer1" EventName="Tick" />
+                        </triggers>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>
     </div>
+
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="error-message-absolute">
+                <div ID="errorMessage" CssClass="error" runat="server"></div>
+            </div>
+
+            <asp:Timer ID="timer1" runat="server" Interval="1" OnTick="Timer1_Tick"></asp:Timer>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <script>
         navigator.geolocation.getCurrentPosition((position) => {
@@ -249,7 +255,7 @@
         })
 
         window.onload = () => {
-            __doPostBack('<%= UpdatePanel2.ClientID %>')
+            //__doPostBack('<%= UpdatePanel1.ClientID %>', 'Update-Both')
         }
     </script>
 </asp:Content>
