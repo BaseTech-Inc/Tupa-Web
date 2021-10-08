@@ -87,6 +87,25 @@ namespace Tupa_Web.View.Configuracoes
             return jsonResult;
         }
 
+        private async Task<Response<String>> DeleteAccount(
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account")
+              .SetQueryParams(new
+              {
+                  
+              });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpDeleteAccount(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<String>>(stringResult);
+
+            return jsonResult;
+        }
+
         protected void btnAlterarNome_Click(object sender, EventArgs e)
         {
             if (!txtNome.Text.IsEmpty())
@@ -119,7 +138,7 @@ namespace Tupa_Web.View.Configuracoes
                         {
                             errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                       EnumTypeError.warning,
-                      "Cu de pia");
+                      "Algo deu errado, tente novamente mais tarde.");
                         }
                                                 
                     }
@@ -185,6 +204,41 @@ namespace Tupa_Web.View.Configuracoes
                       EnumTypeError.warning,
                       "Insira uma senha, bobão");
             }
+        }
+
+        protected void btnApagarConta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var cookie = Request.Cookies["token"];
+                if (cookie != null)
+                {
+                    var resultTaskGet = Task.Run(() => DeleteAccount(
+                                bearerToken: cookie.Values[0]));
+                    resultTaskGet.Wait();
+
+                    var resultGet = resultTaskGet.GetAwaiter().GetResult();
+                    if (resultGet.succeeded)
+                    {
+                        cookie.Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies.Add(cookie);
+                        Response.Redirect("~/");
+                    }
+                    else
+                    {
+                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                      EnumTypeError.error,
+                                      "🤑 não apagou, pena");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                      EnumTypeError.error,
+                                      "Jogue sua conta no lixo🗑, vulgo Gabriel");
+            }
+            
         }
     }
 }

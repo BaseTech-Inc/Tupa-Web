@@ -105,12 +105,12 @@ namespace Tupa_Web.View.Configuracoes
         protected global::System.Web.UI.WebControls.Button btnMudarSenha;
 
         /// <summary>
-        /// Controle btnExcluir.
+        /// Controle btnApagarConta.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExcluir;
+        protected global::System.Web.UI.WebControls.Button btnApagarConta;
     }
 }

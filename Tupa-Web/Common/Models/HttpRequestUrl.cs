@@ -159,6 +159,27 @@ namespace Tupa_Web.Common.Models
             return streamTask;
         }
 
+        public static async Task<String> ProcessHttpDeleteAccount(
+            string url,
+            string mediaType = "application/json",
+            string bearerToken = "")
+        {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue(mediaType));
+
+            if (!bearerToken.IsEmpty())
+                client.DefaultRequestHeaders.Add(
+                    "Authorization", String.Format("Bearer {0}", bearerToken));
+
+            var response = await client.DeleteAsync(url);
+
+
+            var streamTask = await response.Content.ReadAsStringAsync();
+
+            return streamTask;
+        }
         private static void fixCookies(HttpResponseMessage response, HttpResponse responsePage)
         {
             var headers = response.Headers.ToList();

@@ -55,7 +55,7 @@
     <div class="delete-section form">
 
         <p>Excluir a sua conta e seus dados.</p>
-        <asp:Button runat="server" ID="btnExcluir" Cssclass="primary-button danger" Text="Apagar"/>  
+        <asp:Button runat="server" ID="btnApagarConta" Cssclass="primary-button danger" Text="Apagar" OnClick="btnApagarConta_Click"/>  
     </div>
 
     <script src="/Scripts/PasswordEyes.js"></script>
