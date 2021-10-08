@@ -26,6 +26,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
         - [X] Deletar Conta
     - [X] Tema
     - [X] Planos
+    - [X] Sair
     - [ ] Notificações
 
 ## Começando

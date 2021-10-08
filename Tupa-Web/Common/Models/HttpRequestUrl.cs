@@ -199,6 +199,8 @@ namespace Tupa_Web.Common.Models
                             {
                                 cookie = new HttpCookie(match.Groups[1].Value);
                                 cookie.Value = HttpUtility.UrlDecode(match.Groups[2].Value);
+                                cookie.Expires = DateTime.MaxValue;
+                                cookie.Domain = response.RequestMessage.RequestUri.AbsoluteUri.ToString();
                                 responsePage.Cookies.Add(cookie);
                             }
                         }

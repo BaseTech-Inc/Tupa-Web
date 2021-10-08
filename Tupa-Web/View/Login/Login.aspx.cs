@@ -177,8 +177,8 @@ namespace Tupa_Web.View.Login
 
                             cookie.Values.Add("access_token", data.access_token);
                             cookie.Values.Add("token_type", data.token_type);
-                            cookie.Values.Add("expiration", data.expiration.ToString());
                             cookie.HttpOnly = true;
+                            cookie.Expires = data.expiration;
 
                             Response.Cookies.Add(cookie);
                         }

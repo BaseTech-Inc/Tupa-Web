@@ -39,6 +39,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body data-theme="white" ID="bodyElement" runat="server">
+    <form id="Form1" runat="server" autocomplete="off">
     <!-- Header -->
     <% if (ContainsHeader()) { %>
     <header class="home container card" id="menuHeader">
@@ -142,7 +143,7 @@
                         <% if (IsLogged()) { %>
                         <hr>
                         <li class="menu-dropdown-item">
-                            <a href="#">Sair</a>
+                            <asp:LinkButton ID="lbtnSair" runat="server" OnClick="lbtnSair_Click">Sair</asp:LinkButton>
                         </li>
                         <% } %>
                     </ul>
@@ -158,12 +159,10 @@
     <% } %>
 
     <!-- Content -->
-    <form id="frmContentPlaceHolder" runat="server" autocomplete="off">
-        <main class="container">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-        </main>
-    </form>
+    <main class="container">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </main>
 
     <!-- Footer -->    
     <% if (ContainsFooter()) { %>
@@ -275,6 +274,7 @@
         </section>
     </footer>
     <% } %>
+    </form>
 
     <script src="/Scripts/app.js"></script>
     <script>

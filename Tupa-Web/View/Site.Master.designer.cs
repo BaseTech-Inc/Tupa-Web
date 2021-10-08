@@ -33,6 +33,15 @@ namespace Tupa_Web.View
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl bodyElement;
 
         /// <summary>
+        /// Controle Form1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
+
+        /// <summary>
         /// Controle HyperLink2.
         /// </summary>
         /// <remarks>
@@ -204,13 +213,13 @@ namespace Tupa_Web.View
         protected global::System.Web.UI.WebControls.HyperLink HyperLink14;
 
         /// <summary>
-        /// Controle frmContentPlaceHolder.
+        /// Controle lbtnSair.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmContentPlaceHolder;
+        protected global::System.Web.UI.WebControls.LinkButton lbtnSair;
 
         /// <summary>
         /// Controle ContentPlaceHolder1.
