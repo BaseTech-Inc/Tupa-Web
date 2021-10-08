@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Models;
+using Tupa_Web.Common.Security;
 
 namespace Tupa_Web.View
 {
@@ -31,15 +32,37 @@ namespace Tupa_Web.View
                 Page.Title = fileName;
             }
 
-            var cookie = Request.Cookies["theme"];
+            var cookieTheme = Request.Cookies["theme"];
 
-            if (cookie != null)
+            if (cookieTheme != null)
             {
-                BodyAttributes = cookie.Value;
+                BodyAttributes = cookieTheme.Value;
             }
             else
             {
                 BodyAttributes = EnumColorTheme.white.ToString();
+            }
+
+            var cookieToken = Request.Cookies["token"];
+
+            if (cookieToken != null)
+            {
+                var expires = cookieToken.Values["expires"];
+
+                var dateExpires = Convert.ToDateTime(expires);
+
+                if (dateExpires <= DateTime.Now)
+                {
+                    var resultTask = Task.Run(() => RefreshTokenAccount());
+                    resultTask.Wait();
+
+                    var result = resultTask.GetAwaiter().GetResult();
+
+                    if (result.succeeded)
+                    {
+
+                    }
+                }
             }
 
             Page.DataBind();
@@ -128,6 +151,8 @@ namespace Tupa_Web.View
                     }
                 }
             }
+
+            Response.Redirect("~/");
         }
 
         private async Task<Response<String>> LogoutAccount()
@@ -144,6 +169,24 @@ namespace Tupa_Web.View
             var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
 
             var jsonResult = JsonSerializer.Deserialize<Response<String>>(stringResult);
+
+            return jsonResult;
+        }
+
+        private async Task<Response<LoginResponse>> RefreshTokenAccount()
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account/refresh-token")
+              .SetQueryParams(new
+              {
+
+              });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(stringResult);
 
             return jsonResult;
         }
