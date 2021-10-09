@@ -53,7 +53,7 @@
                 </div>                   
             </div>
             <!-- Esta semana -->
-            <div class="week">
+            <!--<div class="week">
                 <p>Esta semana</p>
 
                 <div class="list">
@@ -87,9 +87,9 @@
                         </div>
                     </div>
                 </div>                   
-            </div>
+            </div> -->
             <!-- Este mês -->
-            <div class="month">
+            <!--<div class="month">
                 <p>Este mês</p>
 
                 <div class="list">
@@ -210,9 +210,9 @@
                         </div>
                     </div>
                 </div>       
-            </div>
+            </div> -->
             <!-- Este ano -->
-            <div class="year">
+            <!--<div class="year">
                 <p>Este ano</p>
 
                 <div class="list">
@@ -246,6 +246,46 @@
                         </div>
                     </div>
                 </div>      
+            </div> -->
+            <div class="week">
+                <p>Esta semana</p>
+                <div class="list">
+                    <asp:Repeater ID="rep" runat="server">
+                        <ItemTemplate>
+                            <div class="card">
+                                <div class="title">
+                                    <div class="icon">
+                                        <span class="material-icons-outlined">
+                                            directions_car
+                                        </span>
+                                    </div>                                
+    
+                                    <div class="description">
+                                        <h4><%# DataBinder.Eval(Container.DataItem, "DistanciaPercurso") %></h4>
+                                        <p><%# DataBinder.Eval(Container.DataItem, "IntervaloDeTempo") %> (
+                                            <%# DataBinder.Eval(Container.DataItem, "TempoTotal") %>)</p>
+    
+                                    </div>
+                                </div>
+                                <div class="body">
+                                    <div class="map card">
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7315.530739935054!2d-46.592731779951585!3d-23.54093991255083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5ed74407178f%3A0x8815f43931e081f7!2zQmVsw6lt!5e0!3m2!1spt-BR!2sbr!4v1629536225465!5m2!1spt-BR!2sbr" width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <div>
+                                        <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
+                                        <p>Eventos</p>
+                                    </div>
+                                    <div>
+                                        <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
+                                        <p>Enchentes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
             </div>
         </div>
     </div>

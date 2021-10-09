@@ -180,6 +180,7 @@ namespace Tupa_Web.Common.Models
 
             return streamTask;
         }
+
         private static void fixCookies(HttpResponseMessage response, HttpResponse responsePage)
         {
             var headers = response.Headers.ToList();

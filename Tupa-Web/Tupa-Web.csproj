@@ -256,6 +256,7 @@
     <Compile Include="Common\Models\Response.cs" />
     <Compile Include="Common\Security\GoogleResponse.cs" />
     <Compile Include="Common\Security\LoginResponse.cs" />
+    <Compile Include="Common\Security\PaginatedList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -264,6 +265,7 @@
     <Compile Include="Model\Distrito.cs" />
     <Compile Include="Model\Estado.cs" />
     <Compile Include="Model\Forecast.cs" />
+    <Compile Include="Model\HistoricoUsuario.cs" />
     <Compile Include="Model\Ponto.cs" />
     <Compile Include="Model\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

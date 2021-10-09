@@ -22,5 +22,6 @@ namespace Tupa_Web.Model
         public bool transitividade { get; set; }
 
         public bool atividade { get; set; }
+
     }
 }
