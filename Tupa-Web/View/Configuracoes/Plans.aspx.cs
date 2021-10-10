@@ -19,14 +19,10 @@ namespace Tupa_Web.View.Configuracoes
         {
             var cookie = Request.Cookies["token"];
 
-            if (cookie == null)
-            {
-                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
-            }
-            else
+            if (cookie != null)
             {
                 var resultTaskGet = Task.Run(() => GetBasicProfile(
-                            bearerToken: cookie.Values[0]));
+                             bearerToken: cookie.Values[0]));
                 resultTaskGet.Wait();
 
                 var resultGet = resultTaskGet.GetAwaiter().GetResult();
