@@ -193,10 +193,10 @@
                         <p class="bold">Usuário</p>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Login">Login</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Login</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Register">Registrar</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Registrar</asp:HyperLink>
                     </li>
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
