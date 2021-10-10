@@ -214,14 +214,23 @@
                                             </div>
                                         </div>                               
                                     </ItemTemplate>
-                                </asp:Repeater>
-                                <%-- Parte de carregamento enquanto o conteúdo é processado --%>
-                                <asp:UpdateProgress ID="UpdateProgressMoreInformation" runat="server">
-                                    <ProgressTemplate>
-                                        <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
-                                        <p>Carregando</p>                                            
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
+                                </asp:Repeater>   
+                                
+                                <%-- Update Panel Alertas --%>
+                                <asp:UpdatePanel ID="UpdatePanelAlertsMorePages" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelAlertsMorePages_Load">
+                                    <ContentTemplate>
+                                        <%-- Conteúdo --%>
+                                        <div ID="repeatersMorePages" runat="server"></div>
+
+                                        <asp:UpdateProgress ID="UpdateProgressAlertasMorePages" runat="server">
+                                            <ProgressTemplate>
+                                                <img class="loading" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading" />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>  
+
+                                        <div ID="morePagesInformation" runat="server"></div>
+                                    </ContentTemplate>                       
+                                </asp:UpdatePanel>
                             </div>
                         </ContentTemplate>
                         <%-- Triggers --%>
@@ -257,27 +266,25 @@
 
         }, (error) => {
             console.error(error)
-        })
+        })        
 
-        let value = true;
+        let value = true
 
-        function scrollAlertas(element) {
-            if ((element.scrollHeight - element.clientHeight) <= element.scrollTop) {
-
-                console.log('Chegou no final!')
-
-                if (value) {
-                    console.log('Está procurando!')
-
-                    value = false
-
-                    __doPostBack('<%= UpdatePanelAlertas.ClientID %>', 'PageNumber')
-                }                
-            }
+        function pageLoad() {
+            value = true
         }
 
-        function toggleValue() {
-            console.log('a')
+        function scrollAlertas(element) {
+            if (((element.scrollHeight - element.clientHeight) - 10) <= element.scrollTop) {
+
+                if (value) {
+                    value = false
+
+                    __doPostBack('<%= UpdatePanelAlertsMorePages.ClientID %>', 'PageNumber')
+
+                    setTimeout(() => { element.scrollBy(0, 100) }, 500)                    
+                }  
+            }
         }
 
         window.onload = () => {

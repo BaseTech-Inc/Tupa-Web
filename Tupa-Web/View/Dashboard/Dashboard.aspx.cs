@@ -34,6 +34,9 @@ namespace Tupa_Web.View.Dashboard
             {
                 UpdateProgressForecast.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
                 UpdateProgressAlertas.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+                UpdateProgressAlertasMorePages.AssociatedUpdatePanelID = UpdatePanelAlertsMorePages.UniqueID;
+
+                PageNumberAlertas = 1;
             }
 
             // Post Back usando um evento Javascript
@@ -49,6 +52,8 @@ namespace Tupa_Web.View.Dashboard
                     if (parameter == "PageNumber")
                     {
                         PageNumberAlertas++;
+
+                        UpdatePanelAlertsMorePages.Update();
                     }
                 }
             }
@@ -66,8 +71,6 @@ namespace Tupa_Web.View.Dashboard
         }
 
         #region Alertas
-
-        private static int PageNumberAlertas { get; set; } = 1;
 
         private async Task<Response<IList<Alertas>>> GetAlertas(
             string year,
@@ -178,7 +181,8 @@ namespace Tupa_Web.View.Dashboard
             UpdatePanelAlertas.Update();
         }
 
-        private static List<Alertas> ValuesRepeater = new List<Alertas>();
+        private static int PageNumberAlertas { get; set; } = 1;
+        private static IList<Repeater> lastReapeater = new List<Repeater>();
 
         private void LoadAlertas()
         {
@@ -203,49 +207,41 @@ namespace Tupa_Web.View.Dashboard
                             dateTime = DateTime.Now;
                         }
 
-                        // Repeater Source
-                        var resultTask = Task.Run(() => GetAlertasWithPagination(
+                        if (PageNumberAlertas == 1)
+                        {
+                            // Repeater Source
+                            var resultTask = Task.Run(() => GetAlertasWithPagination(
                             dateTime.Year.ToString(),
                             dateTime.Month.ToString(),
                             dateTime.Day.ToString(),
                             PageNumberAlertas,
                             6,
                             cookie.Values[0]));
-                        resultTask.Wait();
+                            resultTask.Wait();
 
-                        var result = resultTask.GetAwaiter().GetResult();
+                            var result = resultTask.GetAwaiter().GetResult();
 
-                        if (result.succeeded)
-                        {
-                            if (result.data.items.Count > 0)
+                            if (result.succeeded)
                             {
-                                if (PageNumberAlertas == 1)
+                                if (result.data.items.Count > 0)
                                 {
-                                    ValuesRepeater = new List<Alertas>();
 
-                                    ValuesRepeater.AddRange(result.data.items);
-                                }
-                                else if (result.data.totalPages < PageNumberAlertas)
-                                { 
-                                    
+                                    listAlertas.Attributes["class"] += " scroll";
+
+                                    RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data.items);
+                                    RepeaterAlertas.DataBind();
                                 }
                                 else
                                 {
-                                    ValuesRepeater.AddRange(result.data.items);
+                                    // Mostra uma mensagem de erro
+                                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                                        EnumTypeError.warning,
+                                        "Não foi possível encontrar nenhum alerta.");
                                 }
-
-                                listAlertas.Attributes["class"] += " scroll";
-
-                                RepeaterAlertas.DataSource = CreateDataSourceAlertas(ValuesRepeater);
-                                RepeaterAlertas.DataBind();
                             }
-                            else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.warning,
-                                    "Não foi possível encontrar nenhum alerta.");
-                            }
+                        } else
+                        {
+                            UpdatePanelAlertsMorePages.Update();
                         }
                     }
                     else
@@ -259,6 +255,84 @@ namespace Tupa_Web.View.Dashboard
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
                         "Ocorreu um erro, tente novamente mais tarde.");
+                }
+            }
+        }
+
+        protected void UpdatePanelAlertsMorePages_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie != null)
+                    {
+                        DateTime dateTime;
+
+                        var searchDate = txtSearchDate.Text;
+
+                        if (!searchDate.IsEmpty())
+                        {
+                            var date = searchDate.Split('-');
+                            dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
+                        }
+                        else
+                        {
+                            dateTime = DateTime.Now;
+                        }
+
+                        if (PageNumberAlertas > 1)
+                        {
+                            // Repeater Source
+                            var resultTask = Task.Run(() => GetAlertasWithPagination(
+                            dateTime.Year.ToString(),
+                            dateTime.Month.ToString(),
+                            dateTime.Day.ToString(),
+                            PageNumberAlertas,
+                            6,
+                            cookie.Values[0]));
+                            resultTask.Wait();
+
+                            var result = resultTask.GetAwaiter().GetResult();
+
+                            if (result.succeeded)
+                            {
+                                foreach (var element in lastReapeater)
+                                {
+                                    repeatersMorePages.Controls.Add(element);
+                                }
+
+                                if (result.data.totalPages >= PageNumberAlertas)
+                                {
+                                    var repeaterMorePages = new Repeater()
+                                    {
+                                        ID = $"RepeaterAlertas_Page{ PageNumberAlertas }",
+                                        ItemTemplate = RepeaterAlertas.ItemTemplate
+                                    };
+
+                                    repeatersMorePages.Controls.Add(repeaterMorePages);
+
+                                    lastReapeater.Add(repeaterMorePages);
+
+                                    repeaterMorePages.DataSource = CreateDataSourceAlertas(result.data.items);
+                                    repeaterMorePages.DataBind();
+                                } else
+                                {
+                                    morePagesInformation.InnerText = "Chegou no final da consulta!";
+
+                                    Thread.Sleep(2000);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/");
+                    }
+                } catch (Exception)
+                {
                 }
             }
         }
@@ -488,6 +562,6 @@ namespace Tupa_Web.View.Dashboard
             LoadDistritos();
         }
 
-        #endregion
+        #endregion  
     }
 }

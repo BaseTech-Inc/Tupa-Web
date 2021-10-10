@@ -159,13 +159,40 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.Repeater RepeaterAlertas;
 
         /// <summary>
-        /// Controle UpdateProgressMoreInformation.
+        /// Controle UpdatePanelAlertsMorePages.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgressMoreInformation;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelAlertsMorePages;
+
+        /// <summary>
+        /// Controle repeatersMorePages.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl repeatersMorePages;
+
+        /// <summary>
+        /// Controle UpdateProgressAlertasMorePages.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressAlertasMorePages;
+
+        /// <summary>
+        /// Controle morePagesInformation.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl morePagesInformation;
 
         /// <summary>
         /// Controle UpdatePanel1.

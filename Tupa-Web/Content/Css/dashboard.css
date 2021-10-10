@@ -237,3 +237,8 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+img.loading {
+    margin: 0 auto;
+    width: 30px
+}
