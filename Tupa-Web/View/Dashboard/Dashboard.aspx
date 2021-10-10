@@ -130,7 +130,7 @@
                             
                                 <asp:TextBox ID="txtSearchDate" type="date" runat="server" placeholder="Pesquisar..." CssClass="card" AutoPostBack="True" OnTextChanged="txtSearchDate_TextChanged"></asp:TextBox>
                             </div>
-                            <div class="list">
+                            <div ID="listAlertas" onscroll="scrollAlertas(this)" runat="server" class="list">
                                 <%-- Parte de carregamento enquanto o conteúdo é processado --%>
                                 <asp:UpdateProgress ID="UpdateProgressAlertas" runat="server">
                                     <ProgressTemplate>
@@ -215,6 +215,13 @@
                                         </div>                               
                                     </ItemTemplate>
                                 </asp:Repeater>
+                                <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                                <asp:UpdateProgress ID="UpdateProgressMoreInformation" runat="server">
+                                    <ProgressTemplate>
+                                        <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
+                                        <p>Carregando</p>                                            
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </ContentTemplate>
                         <%-- Triggers --%>
@@ -239,7 +246,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <script>
+    <script type="text/javascript">
         navigator.geolocation.getCurrentPosition((position) => {
 
             var hiddenFieldLat = document.querySelector('#<%= queryStringLat.ClientID %>')
@@ -249,10 +256,29 @@
             hiddenFieldLon.value = position.coords.longitude
 
         }, (error) => {
-
             console.error(error)
-
         })
+
+        let value = true;
+
+        function scrollAlertas(element) {
+            if ((element.scrollHeight - element.clientHeight) <= element.scrollTop) {
+
+                console.log('Chegou no final!')
+
+                if (value) {
+                    console.log('Está procurando!')
+
+                    value = false
+
+                    __doPostBack('<%= UpdatePanelAlertas.ClientID %>', 'PageNumber')
+                }                
+            }
+        }
+
+        function toggleValue() {
+            console.log('a')
+        }
 
         window.onload = () => {
             //__doPostBack('<%= UpdatePanel1.ClientID %>', 'Update-Both')

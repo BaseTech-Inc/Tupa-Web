@@ -16,6 +16,7 @@ using System.Web.WebPages;
 using Tupa_Web.Common.Enumerations;
 using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
+using Tupa_Web.Common.Security;
 using Tupa_Web.Model;
 
 namespace Tupa_Web.View.Dashboard
@@ -29,8 +30,11 @@ namespace Tupa_Web.View.Dashboard
             if (cookie == null)
                 Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
 
-            UpdateProgressForecast.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
-            UpdateProgressAlertas.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+            if (!IsPostBack)
+            {
+                UpdateProgressForecast.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+                UpdateProgressAlertas.AssociatedUpdatePanelID = UpdatePanel1.UniqueID;
+            }
 
             // Post Back usando um evento Javascript
             ClientScript.GetPostBackEventReference(this, string.Empty);
@@ -41,7 +45,12 @@ namespace Tupa_Web.View.Dashboard
             if (targetCtrl != null && targetCtrl != string.Empty)
             {
                 if (IsPostBack)
-                { }
+                {
+                    if (parameter == "PageNumber")
+                    {
+                        PageNumberAlertas++;
+                    }
+                }
             }
         }
 
@@ -57,6 +66,8 @@ namespace Tupa_Web.View.Dashboard
         }
 
         #region Alertas
+
+        private static int PageNumberAlertas { get; set; } = 1;
 
         private async Task<Response<IList<Alertas>>> GetAlertas(
             string year,
@@ -78,6 +89,34 @@ namespace Tupa_Web.View.Dashboard
             var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
 
             var jsonResult = JsonSerializer.Deserialize<Response<IList<Alertas>>>(stringResult);
+
+            return jsonResult;
+        }
+
+        private async Task<Response<PaginatedList<Alertas>>> GetAlertasWithPagination(
+            string year,
+            string month,
+            string day,
+            int PageNumber,
+            int PageSize,
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Alertas/Pagination")
+                .SetQueryParams(new
+                {
+                    year = year,
+                    month = month,
+                    day = day,
+                    PageNumber = PageNumber,
+                    PageSize = PageSize
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<PaginatedList<Alertas>>>(stringResult);
 
             return jsonResult;
         }
@@ -134,8 +173,12 @@ namespace Tupa_Web.View.Dashboard
 
         protected void txtSearchDate_TextChanged(object sender, EventArgs e)
         {
+            PageNumberAlertas = 1;
+
             UpdatePanelAlertas.Update();
         }
+
+        private static List<Alertas> ValuesRepeater = new List<Alertas>();
 
         private void LoadAlertas()
         {
@@ -161,10 +204,12 @@ namespace Tupa_Web.View.Dashboard
                         }
 
                         // Repeater Source
-                        var resultTask = Task.Run(() => GetAlertas(
+                        var resultTask = Task.Run(() => GetAlertasWithPagination(
                             dateTime.Year.ToString(),
                             dateTime.Month.ToString(),
                             dateTime.Day.ToString(),
+                            PageNumberAlertas,
+                            6,
                             cookie.Values[0]));
                         resultTask.Wait();
 
@@ -172,10 +217,26 @@ namespace Tupa_Web.View.Dashboard
 
                         if (result.succeeded)
                         {
-                            if (result.data.Count > 0)
+                            if (result.data.items.Count > 0)
                             {
-                                RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data);
+                                if (PageNumberAlertas == 1)
+                                {
+                                    ValuesRepeater = new List<Alertas>();
 
+                                    ValuesRepeater.AddRange(result.data.items);
+                                }
+                                else if (result.data.totalPages < PageNumberAlertas)
+                                { 
+                                    
+                                }
+                                else
+                                {
+                                    ValuesRepeater.AddRange(result.data.items);
+                                }
+
+                                listAlertas.Attributes["class"] += " scroll";
+
+                                RepeaterAlertas.DataSource = CreateDataSourceAlertas(ValuesRepeater);
                                 RepeaterAlertas.DataBind();
                             }
                             else

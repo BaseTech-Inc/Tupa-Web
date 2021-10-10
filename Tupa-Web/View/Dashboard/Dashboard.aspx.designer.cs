@@ -132,6 +132,15 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.TextBox txtSearchDate;
 
         /// <summary>
+        /// Controle listAlertas.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl listAlertas;
+
+        /// <summary>
         /// Controle UpdateProgressAlertas.
         /// </summary>
         /// <remarks>
@@ -148,6 +157,15 @@ namespace Tupa_Web.View.Dashboard
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater RepeaterAlertas;
+
+        /// <summary>
+        /// Controle UpdateProgressMoreInformation.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressMoreInformation;
 
         /// <summary>
         /// Controle UpdatePanel1.

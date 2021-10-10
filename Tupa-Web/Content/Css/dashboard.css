@@ -117,6 +117,10 @@
 
 .dashboard .right .alertas .list {
     max-height: 50vh;
+    overflow-y: hidden;
+}
+
+.dashboard .right .alertas .list.scroll {
     overflow-y: auto;
 }
 
