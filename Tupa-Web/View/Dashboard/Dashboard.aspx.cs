@@ -72,29 +72,9 @@ namespace Tupa_Web.View.Dashboard
 
         #region Alertas
 
-        private async Task<Response<IList<Alertas>>> GetAlertas(
-            string year,
-            string month,
-            string day,
-            string bearerToken)
-        {
-            // criando a url para comunicar entre o servidor
-            string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Alertas")
-                .SetQueryParams(new
-                {
-                    year = year,
-                    month = month,
-                    day = day
-                });
+        private static int PageNumberAlertas { get; set; } = 1;
 
-            // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
-
-            var jsonResult = JsonSerializer.Deserialize<Response<IList<Alertas>>>(stringResult);
-
-            return jsonResult;
-        }
+        private static IList<Repeater> lastReapeater = new List<Repeater>();
 
         private async Task<Response<PaginatedList<Alertas>>> GetAlertasWithPagination(
             string year,
@@ -176,13 +156,11 @@ namespace Tupa_Web.View.Dashboard
 
         protected void txtSearchDate_TextChanged(object sender, EventArgs e)
         {
-            PageNumberAlertas = 1;
+            lastReapeater = new List<Repeater>();
+            PageNumberAlertas = 1;            
 
             UpdatePanelAlertas.Update();
         }
-
-        private static int PageNumberAlertas { get; set; } = 1;
-        private static IList<Repeater> lastReapeater = new List<Repeater>();
 
         private void LoadAlertas()
         {
@@ -459,6 +437,8 @@ namespace Tupa_Web.View.Dashboard
 
         #region Search
 
+        private static IList<Distrito> listDistritos = new List<Distrito>();
+
         private async Task<Response<IList<Distrito>>> GetDistritos(
             string bearerToken)
         {
@@ -475,8 +455,6 @@ namespace Tupa_Web.View.Dashboard
 
             return jsonResult;
         }
-
-        private static IList<Distrito> listDistritos = new List<Distrito>();
 
         private void LoadDistritos()
         {
