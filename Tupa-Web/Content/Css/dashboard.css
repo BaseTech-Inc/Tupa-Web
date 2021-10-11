@@ -211,12 +211,14 @@
     border-bottom-right-radius: 16px;
 }
 
-.autoCompleteList span {
-    padding: 6px 20px 6px 56px;
-    cursor: pointer
+.autoCompleteList .suggestion {
+    padding: 6px 0 6px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center
 }
 
-.autoCompleteList span:hover {
+.autoCompleteList .suggestion:hover {
     background: var(--background_color);
 }
 

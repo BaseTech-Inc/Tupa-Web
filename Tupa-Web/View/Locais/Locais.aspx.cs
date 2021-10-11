@@ -151,7 +151,9 @@ namespace Tupa_Web.View.Locais
 
                 if (resultGet.succeeded)
                 {
-                    IList<PositionDataLocais> dataLocais = new List<PositionDataLocais>();
+                    IList<PositionDataLocais> dataLocaisDay = new List<PositionDataLocais>();
+                    IList<PositionDataLocais> dataLocaisMonth = new List<PositionDataLocais>();
+                    IList<PositionDataLocais> dataLocaisYear = new List<PositionDataLocais>();
 
                     foreach (var item in resultGet.data.items)
                     {
@@ -163,19 +165,50 @@ namespace Tupa_Web.View.Locais
 
                         string googleUrl = $"https://www.google.com/maps/embed?pb=!1m11!4m9!3e0!4m3!3m2!1d{ resultDecode[0].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[0].longitude.ToString().Replace(",", ".") }!4m3!3m2!1d{ resultDecode[resultDecode.Count - 1].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[resultDecode.Count - 1].longitude.ToString().Replace(",", ".") }!5e0";
 
-                        dataLocais.Add(
-                          new PositionDataLocais(
-                          item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
-                          item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
-                          item.distanciaPercurso.ToString() + "km",
-                          "Guilherme Ivo",
-                          resultDecode.Count.ToString(),
-                          "",
-                          googleUrl
-                          ));
+                        if (item.tempoPartida > DateTime.Now.AddDays(-7))
+                        {
+                            dataLocaisDay.Add(
+                              new PositionDataLocais(
+                              item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                              item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                              item.distanciaPercurso.ToString() + "km",
+                              "Guilherme Ivo",
+                              resultDecode.Count.ToString(),
+                              "",
+                              googleUrl
+                              ));
+                        } else if (item.tempoPartida > DateTime.Now.AddDays(-30))
+                        {
+                            dataLocaisMonth.Add(
+                              new PositionDataLocais(
+                              item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                              item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                              item.distanciaPercurso.ToString() + "km",
+                              "Guilherme Ivo",
+                              resultDecode.Count.ToString(),
+                              "",
+                              googleUrl
+                              ));
+                        } else
+                        {
+                            dataLocaisYear.Add(
+                             new PositionDataLocais(
+                             item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                             item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                             item.distanciaPercurso.ToString() + "km",
+                             "Guilherme Ivo",
+                             resultDecode.Count.ToString(),
+                             "",
+                             googleUrl
+                             ));
+                        }                        
                     }
 
-                    rep.DataSource = dataLocais;
+                    rep.DataSource = dataLocaisDay;
+                    rep.DataBind();
+                    repMonth.DataSource = dataLocaisMonth;
+                    rep.DataBind();
+                    repYear.DataSource = dataLocaisYear;
                     rep.DataBind();
                 }
             }                

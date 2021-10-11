@@ -27,7 +27,13 @@
                         <div>
                             <asp:Repeater ID="RepeaterAutoComplete" runat="server">
                                 <ItemTemplate>
-                                    <span><%# DataBinder.Eval(Container.DataItem, "Nome") %></span>
+                                    <div class="suggestion">
+                                        <span class="material-icons-outlined">
+                                        search
+                                        </span>
+                                        <span><%# DataBinder.Eval(Container.DataItem, "Nome") %></span>
+                                        <span></span>
+                                    </div>
                                 </ItemTemplate>
                             </asp:Repeater>
                         </div>                        
