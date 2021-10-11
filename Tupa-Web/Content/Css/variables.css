@@ -32,6 +32,7 @@ body[data-theme='white'] {
     --shadow-variant-color: #EDEFF1;
     --background_color: #F7F9FB;
     --surface_color: #FFFFFF;
+    --surface_color_variant: #F7F9FB;
     --error_color: #B00020;
     --border-color: #D9DBDD;
     --border-variant-color: #1F72D1;
@@ -51,6 +52,7 @@ body[data-theme='dark'] {
     --shadow-variant-color: #202020;
     --background_color: #010101;
     --surface_color: #292929;
+    --surface_color_variant: #333333;
     --error_color: #E74C3C;
     --border-color: #434343;
     --border-variant-color: #1F72D1;
@@ -70,12 +72,13 @@ body[data-theme='dark_dimmed'] {
     --shadow-variant-color: #24313E;
     --background_color: #1B2936;
     --surface_color: #233446;
+    --surface_color_variant: #2E3E4F;
     --error_color: #E74C3C;
     --border-color: #37434E;
     --border-variant-color: #1F72D1;
 
     /* emphasis */
-    --high_emphasis_color: #E0E0E0;
-    --medium_emphasis_color: #A0A0A0;
-    --disabled-color: #6C6C6C;  
+    --high_emphasis_color: #E6E7E9;
+    --medium_emphasis_color: #A4A9AF;
+    --disabled-color: #727A83;  
 }

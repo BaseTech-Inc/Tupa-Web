@@ -49,7 +49,7 @@
 .dashboard .left .previsao header .navigation {
     display: flex;
     align-items: center;
-    background: var(--background_color);
+    background: var(--surface_color_variant);
     border-radius: 16px;
     padding: 4px;
 }
@@ -107,7 +107,7 @@
     width: 100%;
     padding: 12px 20px 12px 56px;
     border-radius: 12px;
-    background: var(--background_color);
+    background: var(--surface_color_variant);
 }
 
 .dashboard .right .alertas p {

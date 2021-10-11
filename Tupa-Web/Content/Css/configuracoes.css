@@ -69,7 +69,7 @@ nav .menu-heading {
 }
 
 .config_wrapper .config_options ul li:hover {
-    background: var(--background_color);
+    background: var(--surface_color_variant);
 }
 
 .config_wrapper .config_options ul a {
@@ -253,7 +253,7 @@ nav .menu-heading {
 
 .plans-user-section .card .title {
     padding: 24px;
-    background: var(--background_color);
+    background: var(--surface_color_variant);
     border-bottom: 1px solid var(--border-color);
 }
 
