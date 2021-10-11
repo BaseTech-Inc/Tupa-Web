@@ -432,7 +432,9 @@
     </div>
 
     <div class="orbit">
-        <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/orbit.svg" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 383.722">
+            <path id="orbit" d="M1440,0H0V383.722C114.921,290.2,248.937,205.7,398.2,136.1,771.958-38.191,1155.7,80.858,1440,160.3Z" fill="#f7f9fb" fill-rule="evenodd"/>
+        </svg>
         <div class="play_store">
             <div class="title">
                 <h1>Receba Alertas e faça Monitoramentos de Onde Estiver</h1>

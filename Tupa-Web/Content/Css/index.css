@@ -94,7 +94,7 @@ header.card {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke: #111;
+    stroke: var(--high_emphasis_color);
     stroke-width: 2;
     transform: translateX(-5px);
     transition: all 0.3s ease;
@@ -193,7 +193,7 @@ header.card {
 
 .plans .cards .card:hover {
     box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
-    border: 1px solid #1F72D1;
+    border: 1px solid var(--border-variant-color);
 }
 
 .plans .cards .card .price {
@@ -264,11 +264,12 @@ header.card {
 
 .quote-card:nth-child(2) {
     background-color: none;
-    border: 1px solid black;
+    border: 1px solid var(--high_emphasis_color);
 }
 
 .quote-card:nth-child(3) {
     background: #EAF2FB;
+    color: #000000;
     box-shadow: 0 3px 6px var(--shadow-variant-color);    
 }
 
@@ -276,6 +277,11 @@ header.card {
     background: #2485F3;
     color: #fff;
     box-shadow: 0 3px 6px var(--shadow-variant-color);    
+}
+
+.quote-card:nth-child(3) .comment-author p,
+.quote-card:nth-child(3) .card-author p {
+    color: #000;
 }
 
 .quote-card:nth-child(4) .comment-author p,
@@ -351,16 +357,15 @@ header.card {
 
 /* ORBIT */
 
-
 .orbit {
     position: relative;
     overflow: hidden;
     width: 100%;
-    background: #fff;
+    background: var(--surface_color);
     z-index: 1;
 }
 
-.orbit > img {
+.orbit > svg {
     position: absolute;
     left: 0;
     top: 0;
@@ -368,6 +373,10 @@ header.card {
     bottom: auto;
     width: 100%;
     z-index: -1;
+}
+
+.orbit > svg path {
+    fill: var(--background_color)
 }
 
 /* PLAY STORE */

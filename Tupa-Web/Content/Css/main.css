@@ -70,7 +70,7 @@ textarea {
 
 .secondary-button {
     background: var(--primary-variant-color);
-    border: 1px solid #1F72D1;
+    border: 1px solid var(--border-variant-color);
     color: #ffffff;
     padding: 10px 16px;
     border-radius: 6px;
@@ -398,6 +398,8 @@ footer > nav .footer_group a:hover {
 .search input:focus {
     box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
 }
+
+/* error message */
 
 .error-message {
     margin-bottom: 24px;
