@@ -33,7 +33,7 @@
 }
 .login_content .login .form .google_button button {
     width: 100%;
-    background: #ffffff;
+    background: var(--surface_color);
 }
 
 .login_content .slider_content {
@@ -351,7 +351,7 @@ footer p {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: #555;
+    background-color: #292929;
     color: #fff;
     text-align: center;
     border-radius: 6px;
@@ -373,7 +373,7 @@ footer p {
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: #555 transparent transparent transparent;
+    border-color: #292929 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
