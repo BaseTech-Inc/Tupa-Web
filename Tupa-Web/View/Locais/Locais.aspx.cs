@@ -32,8 +32,33 @@ namespace Tupa_Web.View.Locais
 
                 if (resultGet.succeeded)
                 {
+                    IList<PositionDataLocais> dataLocais = new List<PositionDataLocais>();
+
+                    foreach (var item in resultGet.data.items)
+                    {
+                        var resultTaskDecode = Task.Run(() => DecodeCoordinates(item.rota,
+                            bearerToken: cookie.Values[0]));
+                        resultTaskDecode.Wait();
+
+                        var resultDecode = resultTaskDecode.GetAwaiter().GetResult();
+
+                        dataLocais.Add(
+                          new PositionDataLocais(
+                          item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                          item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                          item.distanciaPercurso.ToString()+"km",
+                          "Guilherme Ivo",
+                          resultDecode.Count.ToString(),
+                          "",
+                          $"https://www.google.com/maps/embed?pb=!1m11!4m9!3e0!4m3!3m2!1d{ resultDecode[0].latitude.ToString().Replace(",",".") }!2d{ resultDecode[0].longitude.ToString().Replace(",", ".") }!4m3!3m2!1d{ resultDecode[resultDecode.Count-1].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[resultDecode.Count-1].longitude.ToString().Replace(",", ".") }!5e0"
+
+                  ));
+
+
+                    }
+
                     var values = CreateDataSourceLocais(resultGet.data.items);
-                    rep.DataSource = values;
+                    rep.DataSource = dataLocais;
                     rep.DataBind();
 
                 }
@@ -46,17 +71,19 @@ namespace Tupa_Web.View.Locais
 
             private string intervaloDeTempo;
             private string distanciaPercurso;
-            private string tempoTotal;
+            private string local;
             private string eventos;
             private string enchentes;
+            private string urlMapas;
 
-            public PositionDataLocais(string intervaloDeTempo, string distanciaPercurso, string tempoTotal, string eventos, string enchentes)
+            public PositionDataLocais(string intervaloDeTempo, string distanciaPercurso, string local, string eventos, string enchentes, string urlMapas)
             {
                 this.intervaloDeTempo = intervaloDeTempo;
                 this.distanciaPercurso = distanciaPercurso;
-                this.tempoTotal = tempoTotal;
+                this.local = local;
                 this.eventos = eventos;
                 this.enchentes = enchentes;
+                this.urlMapas = urlMapas;
 
 
             }
@@ -77,11 +104,11 @@ namespace Tupa_Web.View.Locais
                 }
             }
 
-            public string TempoTotal
+            public string Local
             {
                 get
                 {
-                    return tempoTotal;
+                    return local;
                 }
             }
 
@@ -101,6 +128,14 @@ namespace Tupa_Web.View.Locais
                 }
             }
 
+            public string UrlMapas
+            {
+                get
+                {
+                    return urlMapas;
+                }
+            }
+
             
         }
 
@@ -115,8 +150,7 @@ namespace Tupa_Web.View.Locais
                 hist.tempoPartida.Hour + ":" + hist.tempoPartida.Minute + " - " + 
                 hist.tempoChegada.Hour + ":" + hist.tempoChegada.Minute,
                 hist.distanciaPercurso.ToString(),
-                (hist.tempoChegada - hist.tempoPartida).ToString(),
-                "1", "1"
+                "Localização", "1", "1", ""
 
                     ));
             }
@@ -140,6 +174,26 @@ namespace Tupa_Web.View.Locais
 
 
             var jsonResult = JsonSerializer.Deserialize<Response<PaginatedList<HistoricoUsuario>>>(stringResult);
+
+            return jsonResult;
+        }
+        
+        private async Task<List<Ponto>> DecodeCoordinates(
+            string encodedPoints, string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/GooglePoints/decode-coordinates")
+                .SetQueryParams(new
+                {
+                    encodedPoints = encodedPoints,
+                }); ;
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+
+            var jsonResult = JsonSerializer.Deserialize<List<Ponto>>(stringResult);
 
             return jsonResult;
         }
