@@ -20,55 +20,17 @@ namespace Tupa_Web.View.Locais
         {
             var cookie = Request.Cookies["token"];
 
-            if (cookie == null) { Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
-            }
-            else
+            if (cookie == null) 
+                Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+            
+            if (!IsPostBack)
             {
-                var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(1,
-                            bearerToken: cookie.Values[0]));
-                resultTaskGet.Wait();
-
-                var resultGet = resultTaskGet.GetAwaiter().GetResult();
-
-                if (resultGet.succeeded)
-                {
-                    IList<PositionDataLocais> dataLocais = new List<PositionDataLocais>();
-
-                    foreach (var item in resultGet.data.items)
-                    {
-                        var resultTaskDecode = Task.Run(() => DecodeCoordinates(item.rota,
-                            bearerToken: cookie.Values[0]));
-                        resultTaskDecode.Wait();
-
-                        var resultDecode = resultTaskDecode.GetAwaiter().GetResult();
-
-                        dataLocais.Add(
-                          new PositionDataLocais(
-                          item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
-                          item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
-                          item.distanciaPercurso.ToString()+"km",
-                          "Guilherme Ivo",
-                          resultDecode.Count.ToString(),
-                          "",
-                          $"https://www.google.com/maps/embed?pb=!1m11!4m9!3e0!4m3!3m2!1d{ resultDecode[0].latitude.ToString().Replace(",",".") }!2d{ resultDecode[0].longitude.ToString().Replace(",", ".") }!4m3!3m2!1d{ resultDecode[resultDecode.Count-1].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[resultDecode.Count-1].longitude.ToString().Replace(",", ".") }!5e0"
-
-                  ));
-
-
-                    }
-
-                    var values = CreateDataSourceLocais(resultGet.data.items);
-                    rep.DataSource = dataLocais;
-                    rep.DataBind();
-
-                }
+                LoadHistoricoUsuario();
             }
-  
         }
 
         public class PositionDataLocais
         {
-
             private string intervaloDeTempo;
             private string distanciaPercurso;
             private string local;
@@ -84,8 +46,6 @@ namespace Tupa_Web.View.Locais
                 this.eventos = eventos;
                 this.enchentes = enchentes;
                 this.urlMapas = urlMapas;
-
-
             }
 
             public string IntervaloDeTempo
@@ -134,28 +94,7 @@ namespace Tupa_Web.View.Locais
                 {
                     return urlMapas;
                 }
-            }
-
-            
-        }
-
-        private ICollection CreateDataSourceLocais(IList<HistoricoUsuario> listHist)
-        {
-            ArrayList values = new ArrayList();
-
-            foreach (var hist in listHist)
-            {
-                values.Add(
-                new PositionDataLocais(
-                hist.tempoPartida.Hour + ":" + hist.tempoPartida.Minute + " - " + 
-                hist.tempoChegada.Hour + ":" + hist.tempoChegada.Minute,
-                hist.distanciaPercurso.ToString(),
-                "Localização", "1", "1", ""
-
-                    ));
-            }
-
-            return values;
+            }            
         }
 
         private async Task<Response<PaginatedList<HistoricoUsuario>>> GetHistoricoUsuarioWithPagination(
@@ -196,8 +135,50 @@ namespace Tupa_Web.View.Locais
             var jsonResult = JsonSerializer.Deserialize<List<Ponto>>(stringResult);
 
             return jsonResult;
-        }
+        }        
 
-        
+        private void LoadHistoricoUsuario()
+        {
+            var cookie = Request.Cookies["token"];
+
+            if (cookie != null)
+            {
+                var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(1,
+                            bearerToken: cookie.Values[0]));
+                resultTaskGet.Wait();
+
+                var resultGet = resultTaskGet.GetAwaiter().GetResult();
+
+                if (resultGet.succeeded)
+                {
+                    IList<PositionDataLocais> dataLocais = new List<PositionDataLocais>();
+
+                    foreach (var item in resultGet.data.items)
+                    {
+                        var resultTaskDecode = Task.Run(() => DecodeCoordinates(item.rota,
+                            bearerToken: cookie.Values[0]));
+                        resultTaskDecode.Wait();
+
+                        var resultDecode = resultTaskDecode.GetAwaiter().GetResult();
+
+                        string googleUrl = $"https://www.google.com/maps/embed?pb=!1m11!4m9!3e0!4m3!3m2!1d{ resultDecode[0].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[0].longitude.ToString().Replace(",", ".") }!4m3!3m2!1d{ resultDecode[resultDecode.Count - 1].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[resultDecode.Count - 1].longitude.ToString().Replace(",", ".") }!5e0";
+
+                        dataLocais.Add(
+                          new PositionDataLocais(
+                          item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                          item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                          item.distanciaPercurso.ToString() + "km",
+                          "Guilherme Ivo",
+                          resultDecode.Count.ToString(),
+                          "",
+                          googleUrl
+                          ));
+                    }
+
+                    rep.DataSource = dataLocais;
+                    rep.DataBind();
+                }
+            }                
+        }
     }
 }
