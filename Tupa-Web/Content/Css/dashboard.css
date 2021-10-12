@@ -222,17 +222,32 @@
     position: absolute;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
+    z-index: 99
 }
 
 .autoCompleteList .suggestion {
-    padding: 6px 0 6px 0;
+    padding: 12px 12px 12px 12px;
     cursor: pointer;
     display: flex;
-    align-items: center
+    align-items: center;
+    justify-content: space-between;
 }
 
 .autoCompleteList .suggestion:hover {
     background: var(--background_color);
+}
+
+.autoCompleteList .suggestion .text {
+    margin-left: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 280px;
+}
+
+.autoCompleteList .suggestion > div {
+    display: flex;
+    align-items : center
 }
 
 .autoCompleteList > div {

@@ -23,18 +23,22 @@
                             </span>
                         </label>
                
-                        <asp:TextBox ID="txtSearch" type="text" runat="server" AutoPostBack="True" placeholder="Pesquisar por bairros..." CssClass="card" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>  
+                        <asp:TextBox ID="txtSearch" Name="txtSearchName" onfocus="this.selectionStart = this.selectionEnd = this.value.length" onkeyup="txtSearchKeyUp(this)" type="text" runat="server" AutoPostBack="True" placeholder="Pesquisar por bairros..." CssClass="card" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>  
                     </div>
                     <asp:Panel ID="AutoCompleteList" Visible="false" runat="server" CssClass="autoCompleteList card">
                         <div>
                             <asp:Repeater ID="RepeaterAutoComplete" runat="server">
                                 <ItemTemplate>
-                                    <div class="suggestion">
+                                    <div onclick="btnSuggestionClick(this, '<%# DataBinder.Eval(Container.DataItem, "Nome") %>');" id="btnSuggestion" class="suggestion">
+                                        <div>
+                                            <span class="material-icons-outlined">
+                                            place
+                                            </span>
+                                            <span class="text"><%# DataBinder.Eval(Container.DataItem, "Nome") %></span>
+                                        </div>
                                         <span class="material-icons-outlined">
-                                        search
+                                        north_west
                                         </span>
-                                        <span><%# DataBinder.Eval(Container.DataItem, "Nome") %></span>
-                                        <span></span>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -267,6 +271,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script type="text/javascript">
+        // Geolocation
         navigator.geolocation.getCurrentPosition((position) => {
 
             var hiddenFieldLat = document.querySelector('#<%= queryStringLat.ClientID %>')
@@ -279,6 +284,7 @@
             console.error(error)
         })        
 
+        // ScrollAlertas
         let value = true
 
         function pageLoad() {
@@ -298,6 +304,16 @@
             }
         }
 
+        // TextChanged search
+        function txtSearchKeyUp(element) {
+            __doPostBack('<%= UpdatePanelSearch.ClientID %>')
+        }
+
+        function btnSuggestionClick(element, name) {
+            __doPostBack(element.id, name)
+        }
+
+        // Chart
         window.onload = () => {
             let documentGraphic = document.querySelector('#<%# HiddenFieldGraphic.ClientID %>')
 
