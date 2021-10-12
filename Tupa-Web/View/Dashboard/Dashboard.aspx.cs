@@ -414,7 +414,7 @@ namespace Tupa_Web.View.Dashboard
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Forecast/coord")
+                .AddPath("api/v1/CurrentWeather/coord")
                 .SetQueryParams(new
                 {
                     lat = lat,
@@ -438,7 +438,7 @@ namespace Tupa_Web.View.Dashboard
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Forecast/name")
+                .AddPath("api/v1/CurrentWeather/name")
                 .SetQueryParams(new
                 {
                     district = district,
