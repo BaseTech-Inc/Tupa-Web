@@ -114,6 +114,15 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.HiddenField queryStringLon;
 
         /// <summary>
+        /// Controle HiddenFieldGraphic.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldGraphic;
+
+        /// <summary>
         /// Controle UpdatePanelAlertas.
         /// </summary>
         /// <remarks>

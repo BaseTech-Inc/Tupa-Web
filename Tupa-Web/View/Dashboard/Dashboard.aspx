@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/View/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="Tupa_Web.View.Dashboard.Dashboard" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <%@ Import Namespace="Tupa_Web.Common.Helpers" %>
 <%@ Import Namespace="Tupa_Web.Common.Enumerations" %>
 
@@ -116,7 +118,9 @@
                     </header>   
                         
                     <div class="graphic">
+                        <canvas id="myChart" width="400" height="400"></canvas>
 
+                        <asp:HiddenField ID="HiddenFieldGraphic" runat="server" />
                     </div>
                 </div>
             </div>
@@ -261,6 +265,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script type="text/javascript">
         navigator.geolocation.getCurrentPosition((position) => {
 
@@ -294,7 +299,45 @@
         }
 
         window.onload = () => {
-            //__doPostBack('<%= UpdatePanel1.ClientID %>', 'Update-Both')
+            let documentGraphic = document.querySelector('#<%# HiddenFieldGraphic.ClientID %>')
+
+            let json = JSON.parse(documentGraphic.value)
+
+            let labels = []
+            let data = []
+
+            json.forEach((currentJson) => {
+                labels.push(currentJson.X)
+                data.push(currentJson.Y)
+            })
+            const dataConfig = {
+                labels: labels,
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgb(36, 133, 243)',
+                    borderColor: 'rgb(36, 133, 243)',
+                    data: data,
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: dataConfig,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            };
+            var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
         }
     </script>
 </asp:Content>

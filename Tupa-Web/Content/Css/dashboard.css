@@ -44,6 +44,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    height: initial
 }
 
 .dashboard .left .previsao header .navigation {
@@ -116,7 +117,7 @@
 }
 
 .dashboard .right .alertas .list {
-    max-height: 50vh;
+    max-height: 645px;
     overflow-y: hidden;
 }
 

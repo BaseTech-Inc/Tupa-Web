@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Routing;
 using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using System.Web.WebPages;
 using Tupa_Web.Common.Enumerations;
@@ -37,6 +38,20 @@ namespace Tupa_Web.View.Dashboard
                 UpdateProgressAlertasMorePages.AssociatedUpdatePanelID = UpdatePanelAlertsMorePages.UniqueID;
 
                 PageNumberAlertas = 1;
+
+                ArrayList values = new ArrayList();
+
+                values.Add(new PositionDataChart("19/09", 0));
+                values.Add(new PositionDataChart("20/09", 3));
+                values.Add(new PositionDataChart("21/09", 10));
+                values.Add(new PositionDataChart("23/09", 5));
+                values.Add(new PositionDataChart("24/09", 12));
+                values.Add(new PositionDataChart("25/09", 2));
+                values.Add(new PositionDataChart("26/09", 7));
+
+                string jsonString = JsonSerializer.Serialize(values);
+
+                HiddenFieldGraphic.Value = jsonString;
             }
 
             // Post Back usando um evento Javascript
@@ -57,6 +72,24 @@ namespace Tupa_Web.View.Dashboard
                     }
                 }
             }
+        }
+
+        private class PositionDataChart
+        {
+            private string x;
+            private int y;
+
+            public PositionDataChart(
+                string x,
+                int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public string X => x;
+
+            public int Y => y;
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
