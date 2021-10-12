@@ -379,11 +379,43 @@ namespace Tupa_Web.View.Dashboard
         {
             ArrayList values = new ArrayList();
 
+            string url = "~/Content/Images/";
+
+            Func<string, string> getImageName = iconNumber => {
+                switch (iconNumber)
+                {
+                    case "01": return "clear_sky";
+                    case "02": return "few_clouds";
+                    case "03": 
+                    case "04":
+                        return "scattered_clouds";
+                    case "09": 
+                    case "10": 
+                        return "rain";
+                    case "11": return "thunderstorm";
+                    case "13": return "snow";
+                    default: return "clear_sky";
+                }
+            };
+
+            if (forecast.weather.icon.Contains("d"))
+            {
+                var name = getImageName(forecast.weather.icon.Split('d')[0]);
+
+                url += name + "_day.png";
+            } else if (forecast.weather.icon.Contains("n"))
+            {
+                var name = getImageName(forecast.weather.icon.Split('n')[0]);
+
+                url += name + "_night.png";
+            }
+
             values.Add(
-            new PositionDataForecast(
-                forecast.q,
-                Math.Round(forecast.main.temp, 1).ToString() + "°",
-                forecast.weather.description));
+                new PositionDataForecast(
+                    forecast.q,
+                    Math.Round(forecast.main.temp, 1).ToString() + "°",
+                    forecast.weather.description,
+                    url));
 
             return values;
         }
@@ -393,15 +425,18 @@ namespace Tupa_Web.View.Dashboard
             private string locale;
             private string temperature;
             private string condition;
+            private string urlImage;
 
             public PositionDataForecast(
                 string locale,
                 string temperature,
-                string condition)
+                string condition,
+                string urlImage)
             {
                 this.locale = locale;
                 this.temperature = temperature;
                 this.condition = condition;
+                this.urlImage = urlImage;
             }
 
             public string Locale => locale;
@@ -409,6 +444,8 @@ namespace Tupa_Web.View.Dashboard
             public string Temperature => temperature;
 
             public string Condition => condition;
+
+            public string UrlImage => urlImage;
         }
 
         protected void UpdatePanelForecast_Load(object sender, EventArgs e)

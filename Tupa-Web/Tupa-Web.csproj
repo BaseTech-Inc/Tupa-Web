@@ -192,10 +192,13 @@
     <Content Include="Content\Images\abraham.jpg" />
     <Content Include="Content\Images\alert-phone.png" />
     <Content Include="Content\Images\cellphone_ilustraion_white_theme.svg" />
+    <Content Include="Content\Images\clear_sky_day.png" />
+    <Content Include="Content\Images\clear_sky_night.png" />
     <Content Include="Content\Images\clock_ilustraion_white_theme.svg" />
-    <Content Include="Content\Images\day_cloudy.png" />
+    <Content Include="Content\Images\few_clouds_day.png" />
     <Content Include="Content\Images\draw.svg" />
     <Content Include="Content\Images\features.svg" />
+    <Content Include="Content\Images\few_clouds_night.png" />
     <Content Include="Content\Images\flags%402x.png" />
     <Content Include="Content\Images\flags.png" />
     <Content Include="Content\Images\forecast-phone.png" />
@@ -214,6 +217,12 @@
     <Content Include="Content\Images\preview_dark.svg" />
     <Content Include="Content\Images\preview_dark_dimmed.svg" />
     <Content Include="Content\Images\preview_light.svg" />
+    <Content Include="Content\Images\rain_day.png" />
+    <Content Include="Content\Images\rain_night.png" />
+    <Content Include="Content\Images\scattered_clouds_day.png" />
+    <Content Include="Content\Images\scattered_clouds_night.png" />
+    <Content Include="Content\Images\thunderstorm_day.png" />
+    <Content Include="Content\Images\thunderstorm_night.png" />
     <Content Include="Content\Images\tupa-social.png" />
     <Content Include="Content\Images\twitter-brands.svg" />
     <Content Include="Content\Images\walt.jpg" />

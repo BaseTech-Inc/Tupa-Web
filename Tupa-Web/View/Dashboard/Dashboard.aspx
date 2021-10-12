@@ -82,7 +82,7 @@
                                         <span class="tag"><%# DataBinder.Eval(Container.DataItem, "Condition") %></span>  
                                         </div>
                                         
-                                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/day_cloudy.png" />
+                                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# DataBinder.Eval(Container.DataItem, "UrlImage") %>' />
                                     </div>                                    
                                 </ItemTemplate>
                             </asp:Repeater>
