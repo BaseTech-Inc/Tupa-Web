@@ -274,6 +274,7 @@
     <Compile Include="Model\Cidade.cs" />
     <Compile Include="Model\Distrito.cs" />
     <Compile Include="Model\Estado.cs" />
+    <Compile Include="Model\CurrentWeather.cs" />
     <Compile Include="Model\Forecast.cs" />
     <Compile Include="Model\HistoricoUsuario.cs" />
     <Compile Include="Model\Ponto.cs" />

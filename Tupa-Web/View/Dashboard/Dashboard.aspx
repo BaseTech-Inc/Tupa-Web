@@ -108,10 +108,7 @@
                         <div>
                             <ul class="navigation card">
                                 <li class="target">
-                                    <p>Ano</p>
-                                </li>
-                                <li>
-                                    <p>Mês</p>
+                                    <p>Hora</p>
                                 </li>
                                 <li>
                                     <p>Dia</p>
@@ -122,9 +119,24 @@
                     </header>   
                         
                     <div class="graphic">
-                        <canvas id="myChart" width="400" height="400"></canvas>
+                        <asp:UpdatePanel ID="UpdatePanelChart" runat="server">
+                            <ContentTemplate>
+                                <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                                <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                                    <ProgressTemplate>
+                                        <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
+                                        <p>Carregando</p>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
 
-                        <asp:HiddenField ID="HiddenFieldGraphic" runat="server" />
+                                <div>
+                                    <canvas id="myChart" width="400" height="400"></canvas>
+
+                                    <asp:HiddenField ID="HiddenFieldGraphicTemperatura" runat="server" />
+                                    <asp:HiddenField ID="HiddenFieldGraphicUmidade" runat="server" />
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                     </div>
                 </div>
             </div>
@@ -289,6 +301,8 @@
 
         function pageLoad() {
             value = true
+
+            loadChart()
         }
 
         function scrollAlertas(element) {
@@ -314,46 +328,85 @@
         }
 
         // Chart
-        window.onload = () => {
-            let documentGraphic = document.querySelector('#<%# HiddenFieldGraphic.ClientID %>')
+        function loadChart() {
+            let documentTemperatura = document.querySelector('#<%# HiddenFieldGraphicTemperatura.ClientID %>')
 
-            let json = JSON.parse(documentGraphic.value)
+            if (documentTemperatura.value != "") {
+                let jsonTemperatura = JSON.parse(documentTemperatura.value)
 
-            let labels = []
-            let data = []
+                let labels = []
+                let dataTemperatura = []
 
-            json.forEach((currentJson) => {
-                labels.push(currentJson.X)
-                data.push(currentJson.Y)
-            })
-            const dataConfig = {
-                labels: labels,
-                datasets: [{
-                    label: 'My First dataset',
-                    backgroundColor: 'rgb(36, 133, 243)',
-                    borderColor: 'rgb(36, 133, 243)',
-                    data: data,
-                }]
-            };
-            const config = {
-                type: 'line',
-                data: dataConfig,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
+                jsonTemperatura.forEach((currentJson) => {
+                    labels.push(currentJson.X)
+                    dataTemperatura.push(currentJson.Y)
+                })
+                const dataConfig = {
+                    labels: labels,
+                    datasets: [{
+                        type: 'line',
+                        label: 'Temperatura (c)',
+                        backgroundColor: 'rgb(36, 133, 243)',
+                        borderColor: 'rgb(36, 133, 243)',
+                        data: dataTemperatura,
+                        tension: 0.1
+                    }]
+                };
+                const config = {
+                    data: dataConfig,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }],
+                            x: {
+                                ticks: {
+                                    // Include a dollar sign in the ticks
+                                    callback: function (value, index, values) {
+                                        let dateTime = new Date(this.getLabelForValue(value))
+
+                                        return dateTime.getDate() + "/" + (dateTime.getMonth() + 1) + " " + ("0" + dateTime.getHours()).slice(-2) + ":" + ("0" + dateTime.getMinutes()).slice(-2);
+                                    }
+                                }
                             }
-                        }]
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        console.log(context)
+
+                                        var label = context.dataset.label || '';
+
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += Number.parseFloat(context.parsed.y).toPrecision(3).toString().replace('.', ',') + '°C';
+                                        }
+
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
-            };
-            var myChart = new Chart(
-                document.getElementById('myChart'),
-                config
-            );
+                };
+                var myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                );
+            }
         }
     </script>
 </asp:Content>

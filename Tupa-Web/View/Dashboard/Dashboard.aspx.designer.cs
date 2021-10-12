@@ -114,13 +114,40 @@ namespace Tupa_Web.View.Dashboard
         protected global::System.Web.UI.WebControls.HiddenField queryStringLon;
 
         /// <summary>
-        /// Controle HiddenFieldGraphic.
+        /// Controle UpdatePanelChart.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldGraphic;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelChart;
+
+        /// <summary>
+        /// Controle UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+
+        /// <summary>
+        /// Controle HiddenFieldGraphicTemperatura.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldGraphicTemperatura;
+
+        /// <summary>
+        /// Controle HiddenFieldGraphicUmidade.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldGraphicUmidade;
 
         /// <summary>
         /// Controle UpdatePanelAlertas.

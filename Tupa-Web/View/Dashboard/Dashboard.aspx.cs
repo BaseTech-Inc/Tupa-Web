@@ -40,8 +40,9 @@ namespace Tupa_Web.View.Dashboard
                 PageNumberAlertas = 1;
 
                 searchLocate = "";
-
-                GraphicTemp();
+            } else
+            {
+                LoadGraphic();
             }
 
             // Post Back usando um evento Javascript
@@ -99,11 +100,11 @@ namespace Tupa_Web.View.Dashboard
                 .AddPath("api/v1/Alertas/Pagination")
                 .SetQueryParams(new
                 {
-                    year = year,
-                    month = month,
-                    day = day,
-                    PageNumber = PageNumber,
-                    PageSize = PageSize
+                    year,
+                    month,
+                    day,
+                    PageNumber,
+                    PageSize
                 });
 
             // resultado da comunicação
@@ -126,10 +127,10 @@ namespace Tupa_Web.View.Dashboard
                 .AddPath("api/v1/Alertas/Bairro")
                 .SetQueryParams(new
                 {
-                    year = year,
-                    month = month,
-                    day = day,
-                    district = district
+                    year,
+                    month,
+                    day,
+                    district
                 });
 
             // resultado da comunicação
@@ -404,9 +405,9 @@ namespace Tupa_Web.View.Dashboard
 
         #endregion
 
-        #region Forecast
+        #region CurrentWeather
 
-        private async Task<Response<Forecast>> GetForecastByCoord(
+        private async Task<Response<CurrentWeather>> GetCurrentWeatherByCoord(
            string lat,
            string lon,
            string bearerToken
@@ -417,19 +418,19 @@ namespace Tupa_Web.View.Dashboard
                 .AddPath("api/v1/CurrentWeather/coord")
                 .SetQueryParams(new
                 {
-                    lat = lat,
-                    lon = lon
+                    lat,
+                    lon
                 });
 
             // resultado da comunicação
             var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
 
-            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult);
+            var jsonResult = JsonSerializer.Deserialize<Response<CurrentWeather>>(stringResult);
 
             return jsonResult;
         }
 
-        private async Task<Response<Forecast>> GetForecastByName(
+        private async Task<Response<CurrentWeather>> GetCurrentWeatherByName(
            string district,
            string city,
            string state,
@@ -441,41 +442,42 @@ namespace Tupa_Web.View.Dashboard
                 .AddPath("api/v1/CurrentWeather/name")
                 .SetQueryParams(new
                 {
-                    district = district,
-                    city = city,
-                    state = state
+                    district,
+                    city,
+                    state
                 });
 
             // resultado da comunicação
             var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
 
-            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult);
+            var jsonResult = JsonSerializer.Deserialize<Response<CurrentWeather>>(stringResult);
 
             return jsonResult;
         }
 
-        private ICollection CreateDataSourceForecast(Forecast forecast)
+        private ICollection CreateDataSourceForecast(CurrentWeather forecast)
         {
             ArrayList values = new ArrayList();
 
             string url = "~/Content/Images/";
 
-            Func<string, string> getImageName = iconNumber => {
+            string getImageName(string iconNumber)
+            {
                 switch (iconNumber)
                 {
                     case "01": return "clear_sky";
                     case "02": return "few_clouds";
-                    case "03": 
+                    case "03":
                     case "04":
                         return "scattered_clouds";
-                    case "09": 
-                    case "10": 
+                    case "09":
+                    case "10":
                         return "rain";
                     case "11": return "thunderstorm";
                     case "13": return "snow";
                     default: return "clear_sky";
                 }
-            };
+            }
 
             if (forecast.weather.icon.Contains("d"))
             {
@@ -547,7 +549,7 @@ namespace Tupa_Web.View.Dashboard
                             string lat = queryStringLat.Value;
                             string lon = queryStringLon.Value;
 
-                            var resultTask = Task.Run(() => GetForecastByCoord(
+                            var resultTask = Task.Run(() => GetCurrentWeatherByCoord(
                                 lat,
                                 lon,
                                 cookie.Values[0]));
@@ -574,7 +576,7 @@ namespace Tupa_Web.View.Dashboard
                             var city = searchLocate.Split(',')[1].Split('-')[0].Trim();
                             var state = searchLocate.Split(',')[1].Split('-')[1].Trim();
 
-                            var resultTask = Task.Run(() => GetForecastByName(
+                            var resultTask = Task.Run(() => GetCurrentWeatherByName(
                                 district,
                                 city,
                                 state,
@@ -677,7 +679,10 @@ namespace Tupa_Web.View.Dashboard
                                         .ToList();
 
                         AutoCompleteList.Visible = true;
-                        SearchBar.CssClass += " autoCompleteActived";
+                        if (!SearchBar.CssClass.Contains("autoCompleteActived"))
+                        {
+                            SearchBar.CssClass += " autoCompleteActived";
+                        }
 
                         RepeaterAutoComplete.DataSource = CreateDataSourceDistritos(listAutoComplete);
 
@@ -725,8 +730,6 @@ namespace Tupa_Web.View.Dashboard
 
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            searchLocate = txtSearch.Text;
-
             UpdatePanelSearch.Update();
 
             UpdatePanelForecast.Update();
@@ -746,35 +749,197 @@ namespace Tupa_Web.View.Dashboard
 
             UpdatePanelForecast.Update();
             UpdatePanelAlertas.Update();
+
+            SearchBar.CssClass += SearchBar.CssClass.Replace(" autoCompleteActived", "");
         }
 
         #endregion
 
         #region Chart
 
-        private void GraphicTemp()
+        private async Task<Response<Forecast>> GetForecastByName(
+           string district,
+           string city,
+           string state,
+           string bearerToken)
         {
-            ArrayList values = new ArrayList();
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Forecast/name")
+                .SetQueryParams(new
+                {
+                    district,
+                    city,
+                    state
+                });
 
-            values.Add(new PositionDataChart("19/09", 0));
-            values.Add(new PositionDataChart("20/09", 3));
-            values.Add(new PositionDataChart("21/09", 10));
-            values.Add(new PositionDataChart("23/09", 5));
-            values.Add(new PositionDataChart("24/09", 12));
-            values.Add(new PositionDataChart("25/09", 2));
-            values.Add(new PositionDataChart("26/09", 7));
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
 
-            string jsonString = JsonSerializer.Serialize(values);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult, options);
 
-            HiddenFieldGraphic.Value = jsonString;
+            return jsonResult;
         }
 
-        private class PositionDataChart
+        private async Task<Response<Forecast>> GetForecastByCoord(
+          string lat,
+          string lon,
+          string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/Forecast/coord")
+                .SetQueryParams(new
+                {
+                    lat,
+                    lon
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var jsonResult = JsonSerializer.Deserialize<Response<Forecast>>(stringResult, options);
+
+            return jsonResult;
+        }
+
+        private void LoadGraphic()
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie != null)
+                    {
+                        if (searchLocate.IsEmpty())
+                        {
+                            string lat = queryStringLat.Value;
+                            string lon = queryStringLon.Value;
+
+                            var resultTask = Task.Run(() => GetForecastByCoord(
+                                lat,
+                                lon,
+                                cookie.Values[0]));
+                            resultTask.Wait();
+
+                            var result = resultTask.GetAwaiter().GetResult();
+
+                            if (result.succeeded)
+                            {
+                                var valuesTemperatura = new ArrayList();
+
+                                foreach (var hourly in result.data.Hourly)
+                                {
+                                    // Unix timestamp is seconds past epoch
+                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                    dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
+
+                                    valuesTemperatura.Add(
+                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
+                                }
+
+                                string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
+
+                                HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
+                            }
+                            else
+                            {
+                                // Mostra uma mensagem de erro
+                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                                    EnumTypeError.warning,
+                                    result.message);
+                            }
+                        } else
+                        {
+                            var district = searchLocate.Split(',')[0].Trim();
+                            var city = searchLocate.Split(',')[1].Split('-')[0].Trim();
+                            var state = searchLocate.Split(',')[1].Split('-')[1].Trim();
+
+                            var resultTask = Task.Run(() => GetForecastByName(
+                                district,
+                                city,
+                                state,
+                                cookie.Values[0]));
+                            resultTask.Wait();
+
+                            var result = resultTask.GetAwaiter().GetResult();
+
+                            if (result.succeeded)
+                            {
+                                var valuesTemperatura = new ArrayList();
+
+                                foreach (var hourly in result.data.Hourly)
+                                {
+                                    // Unix timestamp is seconds past epoch
+                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                    dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
+
+                                    valuesTemperatura.Add(
+                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
+                                }
+
+                                string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
+
+                                HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
+                            }
+                            else
+                            {
+                                // Mostra uma mensagem de erro
+                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                                    EnumTypeError.warning,
+                                    result.message);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("~/");
+                    }
+                }
+                catch
+                {
+                    // Mostra uma mensagem de erro
+                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                        EnumTypeError.error,
+                        "Ocorreu um erro, tente novamente mais tarde.");
+                }
+            }
+        }
+
+        private class PositionDataTemperatura
+        {
+            private string x;
+            private float y;
+
+            public PositionDataTemperatura(
+                string x,
+                float y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+
+            public string X => x;
+
+            public float Y => y;
+        }
+
+        private class PositionDataUmidade
         {
             private string x;
             private int y;
 
-            public PositionDataChart(
+            public PositionDataUmidade(
                 string x,
                 int y)
             {
