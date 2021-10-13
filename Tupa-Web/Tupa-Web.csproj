@@ -175,6 +175,7 @@
   <ItemGroup>
     <Content Include="App_Data\secrets.xml" />
     <Content Include="Content\Audios\clown-horn.mp3" />
+    <Content Include="Content\Css\about.css" />
     <Content Include="Content\Css\configuracoes.css" />
     <Content Include="Content\Css\dashboard.css" />
     <Content Include="Content\Css\error.css" />
