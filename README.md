@@ -15,10 +15,10 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
 - [ ] Locais
     - [ ] Mais pesquisados
     - [ ] Histórico
-- [ ] Dashboard
+- [X] Dashboard
     - [X] Forecast
     - [X] Alertas
-    - [ ] Gráfico
+    - [X] Gráfico
 - [ ] Configurações de Usuário
     - [X] Editar Info
         - [X] Alterar Nome
