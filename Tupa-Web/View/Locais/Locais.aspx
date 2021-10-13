@@ -54,44 +54,49 @@
             </div>
 
             <div class="week">
-                <p>Esta semana</p>
-                <div class="list">
-                    <asp:Repeater ID="rep" runat="server">
-                        <ItemTemplate>
-                            <div class="card">
-                                <div class="title">
-                                    <div class="icon">
-                                        <span class="material-icons-outlined">
-                                            directions_car
-                                        </span>
-                                    </div>                                
+                <asp:Repeater ID="rep" runat="server">
+                    <HeaderTemplate>
+                        <p>Esta semana</p>
+
+                        <div class="list">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="card">
+                            <div class="title">
+                                <div class="icon">
+                                    <span class="material-icons-outlined">
+                                        directions_car
+                                    </span>
+                                </div>                                
     
-                                    <div class="description">
-                                        <h4><%# DataBinder.Eval(Container.DataItem, "Local") %></h4>
-                                        <p><%# DataBinder.Eval(Container.DataItem, "IntervaloDeTempo") %> (
-                                            <%# DataBinder.Eval(Container.DataItem, "DistanciaPercurso") %>)</p>
+                                <div class="description">
+                                    <h4><%# DataBinder.Eval(Container.DataItem, "Local") %></h4>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "IntervaloDeTempo") %> (
+                                        <%# DataBinder.Eval(Container.DataItem, "DistanciaPercurso") %>)</p>
     
-                                    </div>
-                                </div>
-                                <div class="body">
-                                    <div class="map card">
-                                        <iframe src='<%# DataBinder.Eval(Container.DataItem,"UrlMapas") %>' width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <div>
-                                        <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
-                                        <p>Eventos</p>
-                                    </div>
-                                    <div>
-                                        <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
-                                        <p>Enchentes</p>
-                                    </div>
                                 </div>
                             </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
+                            <div class="body">
+                                <div class="map card">
+                                    <iframe src='<%# DataBinder.Eval(Container.DataItem,"UrlMapas") %>' width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <div>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
+                                    <p>Eventos</p>
+                                </div>
+                                <div>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
+                                    <p>Enchentes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                        <FooterTemplate>
+                        </div>
+                    </FooterTemplate>
+                </asp:Repeater>
             </div>
             <div class="month">
                 <asp:Repeater ID="repMonth" runat="server">
@@ -139,80 +144,90 @@
                 </asp:Repeater>                
             </div>
             <div class="year">
-            <p>Este ano</p>
-                <div class="list">
-                    <asp:Repeater ID="repYear" runat="server">
-                        <ItemTemplate>
-                            <div class="card">
-                                <div class="title">
-                                    <div class="icon">
-                                        <span class="material-icons-outlined">
-                                            directions_car
-                                        </span>
-                                    </div>                                
+                <asp:Repeater ID="repYear" runat="server">
+                    <HeaderTemplate>
+                        <p>Este ano</p>
+
+                        <div class="list">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="card">
+                            <div class="title">
+                                <div class="icon">
+                                    <span class="material-icons-outlined">
+                                        directions_car
+                                    </span>
+                                </div>                                
     
-                                    <div class="description">
-                                        <h4><%# DataBinder.Eval(Container.DataItem, "Local") %></h4>
-                                        <p><%# DataBinder.Eval(Container.DataItem, "IntervaloDeTempo") %> (
-                                            <%# DataBinder.Eval(Container.DataItem, "DistanciaPercurso") %>)</p>
+                                <div class="description">
+                                    <h4><%# DataBinder.Eval(Container.DataItem, "Local") %></h4>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "IntervaloDeTempo") %> (
+                                        <%# DataBinder.Eval(Container.DataItem, "DistanciaPercurso") %>)</p>
     
-                                    </div>
-                                </div>
-                                <div class="body">
-                                    <div class="map card">
-                                        <iframe src='<%# DataBinder.Eval(Container.DataItem,"UrlMapas") %>' width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <div>
-                                        <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
-                                        <p>Eventos</p>
-                                    </div>
-                                    <div>
-                                        <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
-                                        <p>Enchentes</p>
-                                    </div>
                                 </div>
                             </div>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
+                            <div class="body">
+                                <div class="map card">
+                                    <iframe src='<%# DataBinder.Eval(Container.DataItem,"UrlMapas") %>' width="100%" height="100" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <div>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
+                                    <p>Eventos</p>
+                                </div>
+                                <div>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
+                                    <p>Enchentes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </div>
+                    </FooterTemplate>
+                </asp:Repeater>
             </div>
         </div>
 
         <nav class="pagination">
             <ul>
                 <li>
-                    <a href="#" class="cta left">
+                    <asp:HyperLink ID="HyperLinkBack" runat="server" CssClass="cta left" onclick="BackClick(this)">
                         <svg width="13px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>
                             <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
                         <span>anterior</span>
-                    </a>
+                    </asp:HyperLink>
                 </li>
-                <li class="current">
-                    <a href="#">1</a>
-                </li>
+                <asp:Repeater ID="repeaterPagination" runat="server">
+                    <ItemTemplate>
+                        <li class="current">
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Locate", new { pageNumber = DataBinder.Eval(Container.DataItem, "PageNumber") })%>'><%# DataBinder.Eval(Container.DataItem, "PageNumber") %></asp:HyperLink>
+                        </li>
+                    </ItemTemplate>
+                </asp:Repeater>
                 <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li>
-                    <a href="#">4</a>
-                </li>
-                <li>
-                    <a href="#" class="cta">
+                    <asp:HyperLink ID="HyperLinkNext" runat="server" CssClass="cta" onclick="NextClick(this)">
                         <span>próximo</span>
                         <svg width="13px" height="10px" viewBox="0 0 13 10">
                             <path d="M1,5 L11,5"></path>
                             <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
-                    </a>
+                    </asp:HyperLink>
                 </li>
             </ul>
         </nav>
     </div>
+
+    <script>
+        function NextClick(element) {
+            __doPostBack('<%= HyperLinkNext.ClientID %>')
+        }
+
+        function BackClick(element) {
+            __doPostBack('<%= HyperLinkBack.ClientID %>')
+        }
+    </script>
 </asp:Content>

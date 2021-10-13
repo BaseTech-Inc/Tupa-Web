@@ -16,6 +16,8 @@ namespace Tupa_Web.View.Locais
 {
     public partial class Locais : System.Web.UI.Page
     {
+        private static int PageNumber { get; set; } = 1;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var cookie = Request.Cookies["token"];
@@ -26,6 +28,42 @@ namespace Tupa_Web.View.Locais
             if (!IsPostBack)
             {
                 LoadHistoricoUsuario();
+            }
+
+            if (Page.RouteData.Values["pageNumber"] != null)
+            {
+                PageNumber = Int32.Parse(Page.RouteData.Values["pageNumber"].ToString());
+            }
+
+            // Post Back usando um evento Javascript
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
+            string parameter = Page.Request.Params.Get("__EVENTARGUMENT");
+
+            if (targetCtrl != null && targetCtrl != string.Empty)
+            {
+                if (IsPostBack)
+                {
+                    if (targetCtrl == HyperLinkNext.ClientID)
+                    {
+                        PageNumber++;
+
+                        Response.RedirectToRoute("Locate", new { pageNumber = PageNumber });
+                    }
+                    if (targetCtrl == HyperLinkBack.ClientID)
+                    {
+                        if (PageNumber > 1)
+                        {
+                            PageNumber--;
+
+                            Response.RedirectToRoute("Locate", new { pageNumber = PageNumber });
+                        } else
+                        {
+                            Response.RedirectToRoute("Locate", new { pageNumber = PageNumber });
+                        }
+                    }
+                }
             }
         }
 
@@ -106,11 +144,10 @@ namespace Tupa_Web.View.Locais
                 .SetQueryParams(new
                 {
                     PageNumber = pageNumber,
-                }); ;
+                });
 
             // resultado da comunicação
             var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
-
 
             var jsonResult = JsonSerializer.Deserialize<Response<PaginatedList<HistoricoUsuario>>>(stringResult);
 
@@ -143,8 +180,14 @@ namespace Tupa_Web.View.Locais
 
             if (cookie != null)
             {
-                var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(1,
-                            bearerToken: cookie.Values[0]));
+                if (Page.RouteData.Values["pageNumber"] != null)
+                {
+                    PageNumber = Int32.Parse(Page.RouteData.Values["pageNumber"].ToString());
+                }
+
+                var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(
+                    PageNumber,
+                    bearerToken: cookie.Values[0]));
                 resultTaskGet.Wait();
 
                 var resultGet = resultTaskGet.GetAwaiter().GetResult();
@@ -172,7 +215,7 @@ namespace Tupa_Web.View.Locais
                               item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
                               item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
                               item.distanciaPercurso.ToString() + "km",
-                              "Guilherme Ivo",
+                              item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
                               resultDecode.Count.ToString(),
                               "",
                               googleUrl
@@ -184,7 +227,7 @@ namespace Tupa_Web.View.Locais
                               item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
                               item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
                               item.distanciaPercurso.ToString() + "km",
-                              "Guilherme Ivo",
+                              item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
                               resultDecode.Count.ToString(),
                               "",
                               googleUrl
@@ -196,7 +239,7 @@ namespace Tupa_Web.View.Locais
                              item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
                              item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
                              item.distanciaPercurso.ToString() + "km",
-                             "Guilherme Ivo",
+                             item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
                              resultDecode.Count.ToString(),
                              "",
                              googleUrl
@@ -204,29 +247,42 @@ namespace Tupa_Web.View.Locais
                         }                        
                     }
 
-                    rep.DataSource = dataLocaisDay;
-                    rep.DataBind();
-
                     if (dataLocaisDay.Count > 0)
                         rep.Visible = true;
                     else
                         rep.Visible = false;
-
-                    repMonth.DataSource = dataLocaisMonth;
-                    repMonth.DataBind();
 
                     if (dataLocaisMonth.Count > 0)
                         repMonth.Visible = true;
                     else
                         repMonth.Visible = false;
 
-                    repYear.DataSource = dataLocaisYear;
-                    repYear.DataBind();
-
                     if (dataLocaisYear.Count > 0)
                         repYear.Visible = true;
                     else
                         repYear.Visible = false;
+
+                    rep.DataSource = dataLocaisDay;
+                    rep.DataBind();
+
+                    repMonth.DataSource = dataLocaisMonth;
+                    repMonth.DataBind();
+
+                    repYear.DataSource = dataLocaisYear;
+                    repYear.DataBind();
+
+                    var totalPages = resultGet.data.totalPages;
+                    var array = new ArrayList();
+
+                    for (var i = 1; i <= totalPages; i++)
+                    {
+                        array.Add(new
+                        {
+                            PageNumber = i
+                        });
+                    }
+                    repeaterPagination.DataSource = array;
+                    repeaterPagination.DataBind();
                 }
             }                
         }

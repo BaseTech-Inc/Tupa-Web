@@ -14,7 +14,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
 - [ ] Mapa
 - [ ] Locais
     - [ ] Mais pesquisados
-    - [ ] Histórico
+    - [X] Histórico
 - [X] Dashboard
     - [X] Forecast
     - [X] Alertas

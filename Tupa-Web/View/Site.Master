@@ -81,7 +81,7 @@
                         <asp:HyperLink ID="hlkMapaLogged" runat="server" NavigateUrl="~/Map" CssClass='<%# Page.Title == hlkMapaLogged.Text ? "target" : "" %>'>Mapa</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="hlkLocaisLogged" runat="server" NavigateUrl="~/Locate" CssClass='<%# Page.Title == hlkLocaisLogged.Text ? "target" : "" %>'>Locais</asp:HyperLink>
+                        <asp:HyperLink ID="hlkLocaisLogged" runat="server" CssClass='<%# Page.Title == hlkLocaisLogged.Text ? "target" : "" %>' NavigateUrl='<%# Page.GetRouteUrl("Locate", new { pageNumber = "1" })%>'>Locais</asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink runat="server" ID="hlkDashboardsLogged" Text="Dashboard" CssClass='<%# Page.Title == hlkDashboardsLogged.Text ? "target" : "" %>' NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>' />

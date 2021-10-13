@@ -127,6 +127,7 @@ main .content .list .card .footer div p:nth-child(2) {
 .cta {
     position: relative;
     margin: auto;
+    cursor: pointer
 }
 
 .cta.left svg {

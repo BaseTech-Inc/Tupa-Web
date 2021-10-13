@@ -66,7 +66,7 @@ namespace Tupa_Web.App_Start
             // Locate
             routes.MapPageRoute(
                 "Locate",
-                "Locate",
+                "Locate/{pageNumber}",
                 "~/View/Locais/Locais.aspx");
 
             // Login
