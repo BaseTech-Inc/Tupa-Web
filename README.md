@@ -13,6 +13,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
 - [x] Login/Register
 - [ ] Mapa
 - [ ] Locais
+    - [ ] Sistema de busca
     - [ ] Mais pesquisados
     - [X] Histórico
 - [X] Dashboard
