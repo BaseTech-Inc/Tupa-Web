@@ -38,9 +38,7 @@
 
 .dashboard .left .atual img {
     width: 200px;
-    position: absolute;
-    top: 0;
-    right: 0;
+    margin-top: -20px;
 }
 
 .dashboard .left .atual h1 {

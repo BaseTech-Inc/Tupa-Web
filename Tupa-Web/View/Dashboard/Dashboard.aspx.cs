@@ -45,10 +45,18 @@ namespace Tupa_Web.View.Dashboard
                 UpdateProgressAlertasMorePages.AssociatedUpdatePanelID = UpdatePanelAlertsMorePages.UniqueID;
 
                 PageNumberAlertas = 1;
-                searchLocate = "";
 
                 if (!searchDate.IsEmpty())
                     txtSearchDate.Text = searchDate;
+                if (!searchLocate.IsEmpty())
+                    txtSearch.Text = searchLocate;
+            }
+            if (IsPostBack)
+            {
+                if (!txtSearch.Text.IsEmpty())
+                {
+                    searchLocate = txtSearch.Text;
+                }
             }
 
             // Post Back usando um evento Javascript
@@ -789,6 +797,8 @@ namespace Tupa_Web.View.Dashboard
 
                     if (cookie != null)
                     {
+                        Response<Forecast> result;
+
                         if (searchLocate.IsEmpty())
                         {
                             string lat = queryStringLat.Value;
@@ -800,47 +810,7 @@ namespace Tupa_Web.View.Dashboard
                                 cookie.Values[0]));
                             resultTask.Wait();
 
-                            var result = resultTask.GetAwaiter().GetResult();
-
-                            if (result.succeeded)
-                            {
-                                var valuesTemperatura = new ArrayList();
-
-                                if (Page.RouteData.Values["interval"].ToString() == "Dia")
-                                {
-                                    foreach (var daily in result.data.Daily)
-                                    {
-                                        // Unix timestamp is seconds past epoch
-                                        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                                        dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
-
-                                        valuesTemperatura.Add(
-                                            new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
-                                    }
-                                } else
-                                {
-                                    foreach (var hourly in result.data.Hourly)
-                                    {
-                                        // Unix timestamp is seconds past epoch
-                                        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                                        dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
-
-                                        valuesTemperatura.Add(
-                                            new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
-                                    }
-                                }
-
-                                string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
-
-                                HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
-                            }
-                            else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.warning,
-                                    result.message);
-                            }
+                            result = resultTask.GetAwaiter().GetResult();
                         } else
                         {
                             var district = searchLocate.Split(',')[0].Trim();
@@ -854,12 +824,27 @@ namespace Tupa_Web.View.Dashboard
                                 cookie.Values[0]));
                             resultTask.Wait();
 
-                            var result = resultTask.GetAwaiter().GetResult();
+                            result = resultTask.GetAwaiter().GetResult();
+                        }
 
-                            if (result.succeeded)
+                        if (result.succeeded)
+                        {
+                            var valuesTemperatura = new ArrayList();
+
+                            if (Page.RouteData.Values["interval"].ToString() == "Dia")
                             {
-                                var valuesTemperatura = new ArrayList();
+                                foreach (var daily in result.data.Daily)
+                                {
+                                    // Unix timestamp is seconds past epoch
+                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                    dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
 
+                                    valuesTemperatura.Add(
+                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
+                                }
+                            }
+                            else
+                            {
                                 foreach (var hourly in result.data.Hourly)
                                 {
                                     // Unix timestamp is seconds past epoch
@@ -869,18 +854,17 @@ namespace Tupa_Web.View.Dashboard
                                     valuesTemperatura.Add(
                                         new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
                                 }
-
-                                string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
-
-                                HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
                             }
-                            else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.warning,
-                                    result.message);
-                            }
+
+                            string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
+
+                            HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
+                        } else
+                        {
+                            // Mostra uma mensagem de erro
+                            errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                                EnumTypeError.error,
+                                result.message);
                         }
                     }
                     else
