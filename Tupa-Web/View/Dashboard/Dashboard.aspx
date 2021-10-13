@@ -279,14 +279,15 @@
 
         // ScrollAlertas
         let value = true
-        let temp = true
 
         function pageLoad() {
             value = true
 
-            if (temp) {
-                loadChart()
-            }            
+            if (myChart != null) {
+                myChart.destroy()
+            }
+            
+            loadChart()    
         }
 
         function scrollAlertas(element) {
@@ -301,6 +302,8 @@
                 }  
             }
         }
+
+        var myChart = null
 
         // Chart
         function loadChart() {
@@ -359,8 +362,6 @@
                             tooltip: {
                                 callbacks: {
                                     label: function (context) {
-                                        console.log(context)
-
                                         var label = context.dataset.label || '';
 
                                         if (label) {
@@ -377,12 +378,10 @@
                         }
                     }
                 }
-                var myChart = new Chart(
+                myChart = new Chart(
                     document.getElementById('myChart'),
                     config
                 )
-
-                temp = false
             }
         }
     </script>
