@@ -13,43 +13,15 @@
     <div class="container_wrapper">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-        <asp:UpdatePanel ID="UpdatePanelSearch" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelSearch_Load">
-            <ContentTemplate>                
-                <asp:Panel ID="SearchBar" CssClass="SeachBar" runat="server">
-                    <div class="search">
-                        <label for="search">
-                            <span class="material-icons">
-                            search
-                            </span>
-                        </label>
+        <div class="search">
+            <label for="search">
+                <span class="material-icons">
+                search
+                </span>
+            </label>
                
-                        <asp:TextBox ID="txtSearch" Name="txtSearchName" onfocus="this.selectionStart = this.selectionEnd = this.value.length" onkeyup="txtSearchKeyUp(this)" type="text" runat="server" AutoPostBack="True" placeholder="Pesquisar por bairros..." CssClass="card" OnTextChanged="txtSearch_TextChanged"></asp:TextBox>  
-                    </div>
-                    <asp:Panel ID="AutoCompleteList" Visible="false" runat="server" CssClass="autoCompleteList card">
-                        <div>
-                            <asp:Repeater ID="RepeaterAutoComplete" runat="server">
-                                <ItemTemplate>
-                                    <div onclick="btnSuggestionClick(this, '<%# DataBinder.Eval(Container.DataItem, "Nome") %>');" id="btnSuggestion" class="suggestion">
-                                        <div>
-                                            <span class="material-icons-outlined">
-                                            place
-                                            </span>
-                                            <span class="text"><%# DataBinder.Eval(Container.DataItem, "Nome") %></span>
-                                        </div>
-                                        <span class="material-icons-outlined">
-                                        north_west
-                                        </span>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </div>                        
-                    </asp:Panel>
-                </asp:Panel>            
-            </ContentTemplate>
-            <triggers>
-                <asp:AsyncPostBackTrigger ControlID="txtSearch" EventName="TextChanged" />
-            </triggers>
-        </asp:UpdatePanel>
+            <asp:TextBox ID="txtSearch" type="text" runat="server" placeholder="Pesquisar por bairros..." CssClass="card"></asp:TextBox>  
+        </div>
 
         <div class="dashboard">
             <div class="left">
@@ -119,23 +91,27 @@
                     </header>   
                         
                     <div class="graphic">
-                        <asp:UpdatePanel ID="UpdatePanelChart" runat="server">
+                        <asp:UpdatePanel ID="UpdatePanelChart" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelChart_Load">
                             <ContentTemplate>
                                 <%-- Parte de carregamento enquanto o conteúdo é processado --%>
-                                <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                                <asp:UpdateProgress ID="UpdateProgressChart" runat="server">
                                     <ProgressTemplate>
                                         <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
                                         <p>Carregando</p>
                                     </ProgressTemplate>
                                 </asp:UpdateProgress>
 
-                                <div>
+                                <div id="appendChart">
                                     <canvas id="myChart" width="400" height="400"></canvas>
 
                                     <asp:HiddenField ID="HiddenFieldGraphicTemperatura" runat="server" />
-                                    <asp:HiddenField ID="HiddenFieldGraphicUmidade" runat="server" />
                                 </div>
                             </ContentTemplate>
+                            <%-- Triggers --%>
+                        <triggers>
+                            <%-- Quando o conteúdo do TextBox for alterado executar o evento --%>
+                            <asp:AsyncPostBackTrigger ControlID="timer1" EventName="Tick" />
+                        </triggers>
                         </asp:UpdatePanel>
                     </div>
                 </div>
@@ -298,11 +274,14 @@
 
         // ScrollAlertas
         let value = true
+        let temp = true
 
         function pageLoad() {
             value = true
 
-            loadChart()
+            if (temp) {
+                loadChart()
+            }            
         }
 
         function scrollAlertas(element) {
@@ -316,15 +295,6 @@
                     setTimeout(() => { element.scrollBy(0, 100) }, 500)                    
                 }  
             }
-        }
-
-        // TextChanged search
-        function txtSearchKeyUp(element) {
-            __doPostBack('<%= UpdatePanelSearch.ClientID %>')
-        }
-
-        function btnSuggestionClick(element, name) {
-            __doPostBack(element.id, name)
         }
 
         // Chart
@@ -401,11 +371,13 @@
                             }
                         }
                     }
-                };
+                }
                 var myChart = new Chart(
                     document.getElementById('myChart'),
                     config
-                );
+                )
+
+                temp = false
             }
         }
     </script>
