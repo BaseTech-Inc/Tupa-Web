@@ -57,12 +57,6 @@ namespace Tupa_Web.App_Start
                 "About",
                 "~/View/About/About.aspx");
 
-            // Plans
-            routes.MapPageRoute(
-                "Plans",
-                "Plans",
-                "~/View/Plans/Plans.aspx");
-
             // Dashboard
             routes.MapPageRoute(
                 "Dashboard",

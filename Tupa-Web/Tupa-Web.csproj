@@ -249,7 +249,6 @@
     <Content Include="View\Login\Login__Verify.aspx" />
     <Content Include="View\Login\Login__ResetPassword.aspx" />
     <Content Include="View\Mapa\Mapa.aspx" />
-    <Content Include="View\Plans\Plans.aspx" />
     <Content Include="View\Privacy\Privacy.aspx" />
     <Content Include="View\Register\Register.aspx" />
     <Content Include="View\Register\Register__Plan.aspx" />
@@ -390,13 +389,6 @@
     </Compile>
     <Compile Include="View\Mapa\Mapa.aspx.designer.cs">
       <DependentUpon>Mapa.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="View\Plans\Plans.aspx.cs">
-      <DependentUpon>Plans.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\Plans\Plans.aspx.designer.cs">
-      <DependentUpon>Plans.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Privacy\Privacy.aspx.cs">
       <DependentUpon>Privacy.aspx</DependentUpon>

@@ -68,9 +68,6 @@
                         <asp:HyperLink ID="hlkMapa" NavigateUrl="~/Map" CssClass='<%# Page.Title == hlkMapa.Text ? "target" : "" %>' runat="server">Mapa</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="hlkPlanos" runat="server" NavigateUrl="~/Plans" CssClass='<%# Page.Title == hlkPlanos.Text ? "target" : "" %>'>Planos</asp:HyperLink>
-                    </li>
-                    <li>
                         <asp:HyperLink ID="hlkAbout" runat="server" NavigateUrl="~/About" CssClass='<%# Page.Title == hlkAbout.Text ? "target" : "" %>'>Sobre nós</asp:HyperLink>
                     </li>
                 </ul>
@@ -176,9 +173,6 @@
                     </li>
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
-                    </li>
-                    <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Plans">Planos</asp:HyperLink>
                     </li>
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
