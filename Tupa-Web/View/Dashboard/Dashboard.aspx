@@ -279,15 +279,14 @@
 
         // ScrollAlertas
         let value = true
+        let temp = true
 
         function pageLoad() {
             value = true
 
-            if (myChart != null) {
-                myChart.destroy()
-            }
-            
-            loadChart()    
+            if (temp) {
+                loadChart()
+            }            
         }
 
         function scrollAlertas(element) {
@@ -302,8 +301,6 @@
                 }  
             }
         }
-
-        var myChart = null
 
         // Chart
         function loadChart() {
@@ -378,11 +375,26 @@
                         }
                     }
                 }
-                myChart = new Chart(
+
+                drawChart(
                     document.getElementById('myChart'),
-                    config
-                )
+                    config)
+
+                temp = false
+            } else {
+                temp = true
             }
+        }
+
+        let myChart = null;
+
+        function drawChart(objChart, config) {
+            if (myChart != null) {
+                myChart.destroy();
+            }
+            // Get the context of the canvas element we want to select
+            var ctx = objChart.getContext("2d");
+            myChart = new Chart(ctx, config);
         }
     </script>
 </asp:Content>
