@@ -93,15 +93,18 @@
                     <div class="graphic">
                         <asp:UpdatePanel ID="UpdatePanelChart" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelChart_Load">
                             <ContentTemplate>
-                                <%-- Parte de carregamento enquanto o conteúdo é processado --%>
-                                <asp:UpdateProgress ID="UpdateProgressChart" runat="server">
-                                    <ProgressTemplate>
-                                        <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
-                                        <p>Carregando</p>
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
+                                <div class="appendChart">
+                                    <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                                    <asp:UpdateProgress ID="UpdateProgressChart" runat="server">
+                                        <ProgressTemplate>
+                                            <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
+                                            <div class="skeleton-chart">
+                                                <img class="loading" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="loading" />
+                                                <p>Atualizando com os últimos dados.</p>
+                                            </div>
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
 
-                                <div id="appendChart">
                                     <canvas id="myChart" width="400" height="400"></canvas>
 
                                     <asp:HiddenField ID="HiddenFieldGraphicTemperatura" runat="server" />

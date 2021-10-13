@@ -26,6 +26,8 @@ namespace Tupa_Web.View.Dashboard
     {
         private static string searchLocate { get; set; }
 
+        private static string searchDate { get; set; } = String.Format("{0}", DateTime.Now.ToString("yyyy-MM-dd"));
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Verificar se usuário está autenticado
@@ -44,6 +46,9 @@ namespace Tupa_Web.View.Dashboard
 
                 PageNumberAlertas = 1;
                 searchLocate = "";
+
+                if (!searchDate.IsEmpty())
+                    txtSearchDate.Text = searchDate;
             }
 
             // Post Back usando um evento Javascript
@@ -193,7 +198,7 @@ namespace Tupa_Web.View.Dashboard
         protected void txtSearchDate_TextChanged(object sender, EventArgs e)
         {
             lastReapeater = new List<Repeater>();
-            PageNumberAlertas = 1;            
+            PageNumberAlertas = 1;
 
             UpdatePanelAlertas.Update();
         }
@@ -210,7 +215,7 @@ namespace Tupa_Web.View.Dashboard
                     {
                         DateTime dateTime;
 
-                        var searchDate = txtSearchDate.Text;
+                        searchDate = txtSearchDate.Text;
 
                         if (!searchDate.IsEmpty())
                         {
