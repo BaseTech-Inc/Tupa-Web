@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Tupa_Web.View.Site"  %>
+<%@ Import Namespace="System.Web.Routing" %>
 
 <!DOCTYPE html>
 
@@ -86,7 +87,7 @@
                         <asp:HyperLink ID="hlkLocaisLogged" runat="server" NavigateUrl="~/Locate" CssClass='<%# Page.Title == hlkLocaisLogged.Text ? "target" : "" %>'>Locais</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink runat="server" ID="hlkDashboardsLogged" Text="Dashboard" CssClass='<%# Page.Title == hlkDashboardsLogged.Text ? "target" : "" %>' NavigateUrl="~/Dashboard" />
+                        <asp:HyperLink runat="server" ID="hlkDashboardsLogged" Text="Dashboard" CssClass='<%# Page.Title == hlkDashboardsLogged.Text ? "target" : "" %>' NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>' />
                     </li>
                     <li>
                         <asp:HyperLink ID="hlkAboutLogged" runat="server" NavigateUrl="~/About" CssClass='<%# Page.Title == hlkAboutLogged.Text ? "target" : "" %>'>Sobre nós</asp:HyperLink>
@@ -226,7 +227,7 @@
                     <% if (IsLogged()) { %>
                     <%-- Parte do rodapé para usuários cadastrados --%>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl="~/Dashboard">Dashboard</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>'>Dashboard</asp:HyperLink>
                     </li>
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink22" runat="server" NavigateUrl="~/Locate">Histórico de Viagens</asp:HyperLink>

@@ -68,8 +68,9 @@
     cursor: pointer;
 }
 
-.dashboard .left .previsao header .navigation li p {
+.dashboard .left .previsao header .navigation li a {
     font-size: var(--body_2_font_size);
+    text-decoration: none
 }
 
 .dashboard .left .previsao header .navigation li.target {
@@ -78,7 +79,7 @@
     box-shadow: 0 3px 6px var(--shadow-primary-color);  
 }
 
-.dashboard .left .previsao header .navigation li.target p {
+.dashboard .left .previsao header .navigation li.target a {
     color: #ffffff;
 }
 

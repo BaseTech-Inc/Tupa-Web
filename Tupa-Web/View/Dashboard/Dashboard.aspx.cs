@@ -801,14 +801,28 @@ namespace Tupa_Web.View.Dashboard
                             {
                                 var valuesTemperatura = new ArrayList();
 
-                                foreach (var hourly in result.data.Hourly)
+                                if (Page.RouteData.Values["interval"].ToString() == "Dia")
                                 {
-                                    // Unix timestamp is seconds past epoch
-                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                                    dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
+                                    foreach (var daily in result.data.Daily)
+                                    {
+                                        // Unix timestamp is seconds past epoch
+                                        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                        dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
 
-                                    valuesTemperatura.Add(
-                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
+                                        valuesTemperatura.Add(
+                                            new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
+                                    }
+                                } else
+                                {
+                                    foreach (var hourly in result.data.Hourly)
+                                    {
+                                        // Unix timestamp is seconds past epoch
+                                        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                        dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
+
+                                        valuesTemperatura.Add(
+                                            new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
+                                    }
                                 }
 
                                 string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);

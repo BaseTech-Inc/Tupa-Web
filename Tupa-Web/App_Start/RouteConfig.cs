@@ -66,7 +66,7 @@ namespace Tupa_Web.App_Start
             // Dashboard
             routes.MapPageRoute(
                 "Dashboard",
-                "Dashboard",
+                "Dashboard/{interval}",
                 "~/View/Dashboard/Dashboard.aspx");
 
             // Locate
