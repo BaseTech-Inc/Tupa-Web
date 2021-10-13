@@ -15,6 +15,7 @@
                 <div>
                     <h1>Receba Alertas e Faça Monitoramentos de Onde e Quando Estiver</h1>
                     <p>Tupã facilita a sua busca por enchentes e previsões meteriologicas, garantidando a sua segurança.</p>
+                    <% if (!IsLogged()) { %>
                     <asp:HyperLink ID="HyperLinkCta" runat="server" CssClass="cta" NavigateUrl="~/Register" >
                         <span>Torne-se um bro</span>
                         <svg width="13px" height="10px" viewBox="0 0 13 10">
@@ -22,6 +23,7 @@
                             <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
                     </asp:HyperLink>
+                    <%  } %>
                 </div>
                     
                 <div class="mouse">

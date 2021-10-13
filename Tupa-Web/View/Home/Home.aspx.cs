@@ -13,5 +13,17 @@ namespace Tupa_Web.View.Home
         {
 
         }
+
+        public static bool IsLogged()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["token"];
+
+            if (cookie == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
