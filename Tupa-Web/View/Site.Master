@@ -53,7 +53,7 @@
                         <asp:Image 
                             ID="PlayAudio"
                             runat="server" 
-                            ImageUrl="~/Content/Images/logo.png"
+                            ImageUrl='<%# "~/Content/Images/logo" + ColorTheme() + ".png" %>'
                             CssClass='<%# Page.Title == "Início" ? "PlayAudio" : "" %>' />   
                 </asp:HyperLink>
             </div>
@@ -260,7 +260,7 @@
         </nav>
         <section class="container_wrapper">
             <div class="footer_logo">
-                <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/Images/logo.png" />
+                <asp:Image ID="Image1" runat="server" ImageUrl='<%# "~/Content/Images/logo" + ColorTheme() + ".png" %>' />
             </div>
             <div class="footer_wrapper">
                 <div class="footer_copyright">

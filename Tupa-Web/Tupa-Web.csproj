@@ -205,6 +205,7 @@
     <Content Include="Content\Images\globe.png" />
     <Content Include="Content\Images\google-play-badge.png" />
     <Content Include="Content\Images\google.png" />
+    <Content Include="Content\Images\logo-alternative.png" />
     <Content Include="Content\Images\logo-white.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\map-phone.png" />

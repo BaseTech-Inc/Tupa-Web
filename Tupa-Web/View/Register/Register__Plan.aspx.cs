@@ -28,5 +28,22 @@ namespace Tupa_Web.View.Register
         {
             Response.Redirect("~/Register/Verify?uid=" + uid);
         }
+
+        public static string ColorTheme()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["theme"];
+
+            if (cookie == null)
+            {
+                return "";
+            }
+
+            if (cookie.Value != "white")
+            {
+                return "-alternative";
+            }
+
+            return "";
+        }
     }
 }

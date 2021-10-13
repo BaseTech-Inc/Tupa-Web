@@ -68,6 +68,23 @@ namespace Tupa_Web.View
             Page.DataBind();
         }
 
+        public static string ColorTheme()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["theme"];
+
+            if (cookie == null)
+            {
+                return "";
+            }
+
+            if (cookie.Value != "white")
+            {
+                return "-alternative";
+            }
+
+            return "";
+        }
+
         public static bool IsLogged()
         {
             var cookie = HttpContext.Current.Request.Cookies["token"];

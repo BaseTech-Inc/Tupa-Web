@@ -12,7 +12,7 @@
             <div class="menu">
                 <div></div>       
 
-                <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl="~/Content/Images/logo.png"/>
+                <asp:Image ID="Image1" runat="server" CssClass="logo" ImageUrl='<%# "~/Content/Images/logo" + ColorTheme() + ".png" %>'/>
 
                 <div></div>
             </div>           
