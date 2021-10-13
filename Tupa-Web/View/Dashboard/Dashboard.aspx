@@ -13,14 +13,16 @@
     <div class="container_wrapper">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-        <div class="search">
-            <label for="search">
-                <span class="material-icons">
-                search
-                </span>
-            </label>
+        <div class="input">
+            <div class="search">
+                <label for="search">
+                    <span class="material-icons">
+                    search
+                    </span>
+                </label>
                
-            <asp:TextBox ID="txtSearch" type="text" runat="server" placeholder="Pesquisar por bairros..." CssClass="card"></asp:TextBox>  
+                <asp:TextBox ID="txtSearch" type="text" runat="server" placeholder="Pesquisar por bairros..." CssClass="card"></asp:TextBox>  
+            </div>
         </div>
 
         <div class="dashboard">

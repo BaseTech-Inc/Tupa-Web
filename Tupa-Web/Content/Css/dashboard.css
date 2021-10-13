@@ -289,3 +289,11 @@ img.loading {
 .skeleton-chart img {
     margin-bottom: 12px
 }
+
+.input .search {
+    margin-bottom: 0 !important;
+}
+
+.input {
+    margin-bottom: 24px
+}

@@ -53,10 +53,9 @@ namespace Tupa_Web.View.Dashboard
             }
             if (IsPostBack)
             {
-                if (!txtSearch.Text.IsEmpty())
-                {
-                    searchLocate = txtSearch.Text;
-                }
+                searchLocate = txtSearch.Text;
+
+                errorMessage.InnerHtml = "";
             }
 
             // Post Back usando um evento Javascript
@@ -281,12 +280,22 @@ namespace Tupa_Web.View.Dashboard
                             }
                         } else
                         {
+                            string locates;
+
+                            if (searchLocate.Contains(","))
+                            {
+                                locates = searchLocate.Split(',')[0].Trim();
+                            } else
+                            {
+                                locates = searchLocate.Trim();
+                            }
+
                             // Repeater Source
                             var resultTask = Task.Run(() => GetAlertasByName(
                                 dateTime.Year.ToString(),
                                 dateTime.Month.ToString(),
                                 dateTime.Day.ToString(),
-                                searchLocate.Split(',')[0].Trim(),
+                                locates,
                                 cookie.Values[0]));
                             resultTask.Wait();
 
@@ -597,9 +606,23 @@ namespace Tupa_Web.View.Dashboard
                             }
                         } else
                         {
-                            var district = searchLocate.Split(',')[0].Trim();
-                            var city = searchLocate.Split(',')[1].Split('-')[0].Trim();
-                            var state = searchLocate.Split(',')[1].Split('-')[1].Trim();
+                            string district = "";
+                            string city = "";
+                            string state = "";
+
+                            if (searchLocate.Contains(","))
+                            {
+                                district = searchLocate.Split(',')[0].Trim();
+
+                                if (searchLocate.Contains("-"))
+                                {
+                                    city = searchLocate.Split(',')[1].Split('-')[0].Trim();
+                                    state = searchLocate.Split(',')[1].Split('-')[1].Trim();
+                                }
+                            } else
+                            {
+                                district = searchLocate.Trim();
+                            }
 
                             var resultTask = Task.Run(() => GetCurrentWeatherByName(
                                 district,
@@ -638,96 +661,6 @@ namespace Tupa_Web.View.Dashboard
                 }
             }
         }
-
-        #endregion
-
-        #region Search
-
-        private static IList<Distrito> listDistritos = new List<Distrito>();
-
-        private async Task<Response<IList<Distrito>>> GetDistritos(
-            string bearerToken)
-        {
-            // criando a url para comunicar entre o servidor
-            string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Distritos")
-                .SetQueryParams(new
-                { });
-
-            // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
-
-            var jsonResult = JsonSerializer.Deserialize<Response<IList<Distrito>>>(stringResult);
-
-            return jsonResult;
-        }
-
-        private ICollection CreateDataSourceDistritos(IList<Distrito> distritos)
-        {
-            ArrayList values = new ArrayList();
-
-            foreach (var distrito in distritos)
-            {
-                values.Add(
-                    new PositionDataDistritos(
-                        distrito.nome + ", " + distrito.cidade.nome + " - " + distrito.cidade.estado.nome));
-            }
-
-            return values;
-        }
-
-        private class PositionDataDistritos
-        {
-            private string nome;
-
-            public PositionDataDistritos(
-                string nome)
-            {
-                this.nome = nome;
-            }
-
-            public string Nome => nome;
-        }
-
-        private void LoadDistritos()
-        {
-            if (IsPostBack)
-            {
-                try
-                {
-                    var cookie = Request.Cookies["token"];
-
-                    if (listDistritos.Count <= 0)
-                    {
-                        var resultTask = Task.Run(() => GetDistritos(
-                            cookie.Values[0]));
-                        resultTask.Wait();
-
-                        var result = resultTask.GetAwaiter().GetResult();
-
-                        if (result.succeeded)
-                        {
-                            listDistritos = result.data;
-                        }
-                        else
-                        {
-                            // Mostra uma mensagem de erro
-                            errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                EnumTypeError.error,
-                                result.message);
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    // Mostra uma mensagem de erro
-                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                        EnumTypeError.error,
-                        "Ocorreu um erro, tente novamente mais tarde.");
-                }
-            }
-        }
-
 
         #endregion
 
@@ -813,9 +746,23 @@ namespace Tupa_Web.View.Dashboard
                             result = resultTask.GetAwaiter().GetResult();
                         } else
                         {
-                            var district = searchLocate.Split(',')[0].Trim();
-                            var city = searchLocate.Split(',')[1].Split('-')[0].Trim();
-                            var state = searchLocate.Split(',')[1].Split('-')[1].Trim();
+                            string district = "";
+                            string city = "";
+                            string state = "";
+
+                            if (searchLocate.Contains(","))
+                            {
+                                district = searchLocate.Split(',')[0].Trim();
+
+                                if (searchLocate.Contains("-"))
+                                {
+                                    city = searchLocate.Split(',')[1].Split('-')[0].Trim();
+                                    state = searchLocate.Split(',')[1].Split('-')[1].Trim();
+                                }
+                            } else
+                            {
+                                district = searchLocate.Trim();
+                            }
 
                             var resultTask = Task.Run(() => GetForecastByName(
                                 district,
