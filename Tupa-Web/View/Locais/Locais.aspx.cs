@@ -206,10 +206,27 @@ namespace Tupa_Web.View.Locais
 
                     rep.DataSource = dataLocaisDay;
                     rep.DataBind();
+
+                    if (dataLocaisDay.Count > 0)
+                        rep.Visible = true;
+                    else
+                        rep.Visible = false;
+
                     repMonth.DataSource = dataLocaisMonth;
-                    rep.DataBind();
+                    repMonth.DataBind();
+
+                    if (dataLocaisMonth.Count > 0)
+                        repMonth.Visible = true;
+                    else
+                        repMonth.Visible = false;
+
                     repYear.DataSource = dataLocaisYear;
-                    rep.DataBind();
+                    repYear.DataBind();
+
+                    if (dataLocaisYear.Count > 0)
+                        repYear.Visible = true;
+                    else
+                        repYear.Visible = false;
                 }
             }                
         }
