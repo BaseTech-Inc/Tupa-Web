@@ -23,6 +23,7 @@
                
                 <asp:TextBox ID="txtSearch" type="text" runat="server" placeholder="Pesquisar por bairros..." CssClass="card"></asp:TextBox>  
             </div>
+            <span class="caption">Ex.: Casa Verde, São Paulo - SP</span>
         </div>
 
         <div class="dashboard">
@@ -235,7 +236,7 @@
                                             </ProgressTemplate>
                                         </asp:UpdateProgress>  
 
-                                        <div ID="morePagesInformation" runat="server"></div>
+                                        <div ID="morePagesInformation" runat="server" class="morePagesInformation"></div>
                                     </ContentTemplate>                       
                                 </asp:UpdatePanel>
                             </div>

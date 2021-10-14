@@ -22,11 +22,11 @@ using Tupa_Web.Model;
 
 namespace Tupa_Web.View.Dashboard
 {
-    public partial class Dashboard : System.Web.UI.Page
+    public partial class Dashboard : Page
     {
-        private static string searchLocate { get; set; }
+        private static string SearchLocate { get; set; }
 
-        private static string searchDate { get; set; } = String.Format("{0}", DateTime.Now.ToString("yyyy-MM-dd"));
+        private static string SearchDate { get; set; } = String.Format("{0}", DateTime.Now.ToString("yyyy-MM-dd"));
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,14 +46,14 @@ namespace Tupa_Web.View.Dashboard
 
                 PageNumberAlertas = 1;
 
-                if (!searchDate.IsEmpty())
-                    txtSearchDate.Text = searchDate;
-                if (!searchLocate.IsEmpty())
-                    txtSearch.Text = searchLocate;
-            }
-            if (IsPostBack)
+                if (!SearchDate.IsEmpty())
+                    txtSearchDate.Text = SearchDate;
+                if (!SearchLocate.IsEmpty())
+                    txtSearch.Text = SearchLocate;
+            } else
             {
-                searchLocate = txtSearch.Text;
+                if (txtSearch.Text != SearchLocate)
+                    PageNumberAlertas = 1;
 
                 errorMessage.InnerHtml = "";
             }
@@ -92,19 +92,75 @@ namespace Tupa_Web.View.Dashboard
             UpdateProgressChart.AssociatedUpdatePanelID = UpdatePanelChart.UniqueID;
         }
 
+        private (string district, string city, string state) GetLocale(string address)
+        {
+            SearchLocate = address;
+
+            string district;
+            string city = "";
+            string state = "";
+
+            if (SearchLocate.Contains(","))
+            {
+                district = SearchLocate.Split(',')[0].Trim();
+
+                if (SearchLocate.Contains("-"))
+                {
+                    city = SearchLocate.Split(',')[1].Split('-')[0].Trim();
+
+                    if (SearchLocate.Split(',')[1].Split('-').Length > 1)
+                    {
+                        state = SearchLocate.Split(',')[1].Split('-')[1].Trim();
+                    }
+                    
+                } 
+            }
+            else
+            {
+                district = SearchLocate.Trim();
+            }
+
+            return (district, city, state);
+        }
+
+        private DateTime GetDate()
+        {
+            DateTime dateTime;
+
+            SearchDate = txtSearchDate.Text;
+
+            if (!SearchDate.IsEmpty())
+            {
+                var date = SearchDate.Split('-');
+                dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
+            }
+            else
+            {
+                dateTime = DateTime.Now;
+            }
+
+            return dateTime;
+        }
+
+        private (string latitude, string longitude) GetCoordinates()
+        {
+            string lat = queryStringLat.Value;
+            string lon = queryStringLon.Value;
+
+            return (lat, lon);
+        }
+
         #region Alertas
 
         private static int PageNumberAlertas { get; set; } = 1;
 
         private static IList<Repeater> lastReapeater = new List<Repeater>();
 
+        private readonly int PAGE_SIZE_ALERTS = 6;
+
+        // GET: api/v1/Alertas/Pagination
         private async Task<Response<PaginatedList<Alertas>>> GetAlertasWithPagination(
-            string year,
-            string month,
-            string day,
-            int PageNumber,
-            int PageSize,
-            string bearerToken)
+            string year, string month, string day, int PageNumber, int PageSize, string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -126,77 +182,32 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
-        private async Task<Response<IList<Alertas>>> GetAlertasByName(
-           string year,
-           string month,
-           string day,
-           string district,
-           string bearerToken)
+        // GET: api/v1/Alertas/Bairro/Paginatio
+        private async Task<Response<PaginatedList<Alertas>>> GetAlertasByNameWithPagination(
+            string year, string month, string day, int PageNumber, int PageSize, string district, string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
-                .AddPath("api/v1/Alertas/Bairro")
+                .AddPath("api/v1/Alertas/Bairro/Pagination")
                 .SetQueryParams(new
                 {
                     year,
                     month,
                     day,
-                    district
+                    district,
+                    PageNumber,
+                    PageSize
                 });
 
             // resultado da comunicação
             var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
 
-            var jsonResult = JsonSerializer.Deserialize<Response<IList<Alertas>>>(stringResult);
+            var jsonResult = JsonSerializer.Deserialize<Response<PaginatedList<Alertas>>>(stringResult);
 
             return jsonResult;
         }
 
-        private ICollection CreateDataSourceAlertas(IList<Alertas> listAlertas)
-        {
-            ArrayList values = new ArrayList();
-
-            foreach (var alertas in listAlertas)
-            {
-                values.Add(
-                new PositionDataAlertas(
-                    alertas.distrito.nome,
-                    alertas.descricao,
-                    String.Format("{0} - {1}",
-                        alertas.tempoInicio.ToString(
-                            "t",
-                            CultureInfo.CreateSpecificCulture("de-DE")),
-                        alertas.tempoFinal.ToString(
-                            "t",
-                            CultureInfo.CreateSpecificCulture("de-DE")))));
-            }
-
-            return values;
-        }
-
-        private class PositionDataAlertas
-        {
-            private string locale;
-            private string description;
-            private string time;
-
-            public PositionDataAlertas(
-                string locale,
-                string description,
-                string time)
-            {
-                this.locale = locale;
-                this.description = description;
-                this.time = time;
-            }
-
-            public string Locale => locale;
-
-            public string Description => description;
-
-            public string Time => time;
-        }
-
+        // Events
         protected void UpdatePanelAlertas_Load(object sender, EventArgs e)
         {
             LoadAlertas();
@@ -210,141 +221,101 @@ namespace Tupa_Web.View.Dashboard
             UpdatePanelAlertas.Update();
         }
 
+        protected void UpdatePanelAlertsMorePages_Load(object sender, EventArgs e)
+        {
+            LoadAlertsMorePages();
+        }
+
+        // Loads
         private void LoadAlertas()
         {
             if (IsPostBack)
             {
                 try
                 {
+                    // Verifica se o usuário está autenticado
                     var cookie = Request.Cookies["token"];
 
-                    if (cookie != null)
+                    if (cookie == null)
+                        Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+
+                    var dateTime = GetDate();
+                    var (district, city, state) = GetLocale(txtSearch.Text);
+
+                    Response<PaginatedList<Alertas>> resultAlertas = null;
+
+                    if (PageNumberAlertas == 1)
                     {
-                        DateTime dateTime;
-
-                        searchDate = txtSearchDate.Text;
-
-                        if (!searchDate.IsEmpty())
+                        // Pesquisa todos os alertas ou filtra pelo distrito
+                        if (district.IsEmpty())
                         {
-                            var date = searchDate.Split('-');
-                            dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
-                        } else
-                        {
-                            dateTime = DateTime.Now;
-                        }
-
-                        if (searchLocate.IsEmpty())
-                        {
-                            if (PageNumberAlertas == 1)
-                            {
-                                // Repeater Source
-                                var resultTask = Task.Run(() => GetAlertasWithPagination(
-                                    dateTime.Year.ToString(),
-                                    dateTime.Month.ToString(),
-                                    dateTime.Day.ToString(),
-                                    PageNumberAlertas,
-                                    6,
-                                    cookie.Values[0]));
-                                resultTask.Wait();
-
-                                var result = resultTask.GetAwaiter().GetResult();
-
-                                if (result.succeeded)
-                                {
-                                    if (result.data.items.Count > 0)
-                                    {
-
-                                        listAlertas.Attributes["class"] += " scroll";
-
-                                        RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data.items);
-                                        RepeaterAlertas.DataBind();
-                                    }
-                                    else
-                                    {
-                                        // Mostra uma mensagem de erro
-                                        errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                            EnumTypeError.warning,
-                                            "Não foi possível encontrar nenhum alerta nesse dia.");
-                                    }
-                                } else
-                                {
-                                    // Mostra uma mensagem de erro
-                                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                        EnumTypeError.error,
-                                        "Ocorreu um erro, tente novamente mais tarde.");
-                                }
-                            }
-                            else
-                            {
-                                UpdatePanelAlertsMorePages.Update();
-                            }
-                        } else
-                        {
-                            string locates;
-
-                            if (searchLocate.Contains(","))
-                            {
-                                locates = searchLocate.Split(',')[0].Trim();
-                            } else
-                            {
-                                locates = searchLocate.Trim();
-                            }
-
-                            // Repeater Source
-                            var resultTask = Task.Run(() => GetAlertasByName(
+                            var resultTask = Task.Run(() => GetAlertasWithPagination(
                                 dateTime.Year.ToString(),
                                 dateTime.Month.ToString(),
                                 dateTime.Day.ToString(),
-                                locates,
+                                PageNumberAlertas,
+                                PAGE_SIZE_ALERTS,
                                 cookie.Values[0]));
                             resultTask.Wait();
 
-                            var result = resultTask.GetAwaiter().GetResult();
+                            resultAlertas = resultTask.GetAwaiter().GetResult();
+                        }
+                        else
+                        {
+                            var resultTask = Task.Run(() => GetAlertasByNameWithPagination(
+                                dateTime.Year.ToString(),
+                                dateTime.Month.ToString(),
+                                dateTime.Day.ToString(),
+                                PageNumberAlertas,
+                                PAGE_SIZE_ALERTS,
+                                district,
+                                cookie.Values[0]));
+                            resultTask.Wait();
 
-                            if (result.succeeded)
+                            resultAlertas = resultTask.GetAwaiter().GetResult();
+                        }
+
+                        if (resultAlertas.succeeded)
+                        {
+                            var alertas = resultAlertas.data.items;
+
+                            if (alertas.Count > 0)
                             {
-                                if (result.data.Count > 0)
-                                {
-                                    listAlertas.Attributes["class"] += " scroll";
+                                listAlertas.Attributes["class"] += " scroll";
 
-                                    RepeaterAlertas.DataSource = CreateDataSourceAlertas(result.data);
-                                    RepeaterAlertas.DataBind();
-                                }
-                                else
-                                {
-                                    // Mostra uma mensagem de erro
-                                    errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                        EnumTypeError.warning,
-                                        "Não foi possível encontrar nenhum alerta nesse dia.");
-                                }
+                                RepeaterAlertas.DataSource = CreateDataSource.CreateDataSourceAlertas(alertas);
+                                RepeaterAlertas.DataBind();
                             }
                             else
                             {
                                 // Mostra uma mensagem de erro
                                 errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.error,
-                                    "Ocorreu um erro, tente novamente mais tarde.");
+                                    EnumTypeError.warning,
+                                    "Não foi possível encontrar nenhum alerta nesse dia.");
                             }
+                        }
+                        else
+                        {
+                            // Mostra uma mensagem de erro
+                            errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                                EnumTypeError.error,
+                                resultAlertas.message);
                         }
                     }
                     else
                     {
-                        Response.Redirect("~/");
+                        // Carrega as outras páginas da list de alertas
+                        UpdatePanelAlertsMorePages.Update();
                     }
                 }
-                catch
+                catch (Exception)
                 {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
-                        "Ocorreu um erro, tente novamente mais tarde.");
+                        "Ocorreu um erro ao carregar os alertas, tente novamente mais tarde.");
                 }
             }
-        }
-
-        protected void UpdatePanelAlertsMorePages_Load(object sender, EventArgs e)
-        {
-            LoadAlertsMorePages();
         }
 
         private void LoadAlertsMorePages()
@@ -353,78 +324,63 @@ namespace Tupa_Web.View.Dashboard
             {
                 try
                 {
+                    // Verifica se o usuário está autenticado
                     var cookie = Request.Cookies["token"];
 
-                    if (cookie != null)
+                    if (cookie == null)
+                        Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+
+                    var dateTime = GetDate();
+
+                    if (PageNumberAlertas > 1)
                     {
-                        DateTime dateTime;
+                        // Repeater Source
+                        var resultTask = Task.Run(() => GetAlertasWithPagination(
+                            dateTime.Year.ToString(),
+                            dateTime.Month.ToString(),
+                            dateTime.Day.ToString(),
+                            PageNumberAlertas,
+                            PAGE_SIZE_ALERTS,
+                            cookie.Values[0]));
+                        resultTask.Wait();
 
-                        var searchDate = txtSearchDate.Text;
+                        var result = resultTask.GetAwaiter().GetResult();
 
-                        if (!searchDate.IsEmpty())
+                        if (result.succeeded)
                         {
-                            var date = searchDate.Split('-');
-                            dateTime = new DateTime(Int32.Parse(date[0]), Int32.Parse(date[1]), Int32.Parse(date[2]));
-                        }
-                        else
-                        {
-                            dateTime = DateTime.Now;
-                        }
-
-                        if (PageNumberAlertas > 1)
-                        {
-                            // Repeater Source
-                            var resultTask = Task.Run(() => GetAlertasWithPagination(
-                                dateTime.Year.ToString(),
-                                dateTime.Month.ToString(),
-                                dateTime.Day.ToString(),
-                                PageNumberAlertas,
-                                6,
-                                cookie.Values[0]));
-                            resultTask.Wait();
-
-                            var result = resultTask.GetAwaiter().GetResult();
-
-                            if (result.succeeded)
+                            foreach (var element in lastReapeater)
                             {
-                                foreach (var element in lastReapeater)
-                                {
-                                    repeatersMorePages.Controls.Add(element);
-                                }
-
-                                if (result.data.totalPages >= PageNumberAlertas)
-                                {
-                                    var repeaterMorePages = new Repeater()
-                                    {
-                                        ID = $"RepeaterAlertas_Page{ PageNumberAlertas }",
-                                        ItemTemplate = RepeaterAlertas.ItemTemplate
-                                    };
-
-                                    repeatersMorePages.Controls.Add(repeaterMorePages);
-
-                                    lastReapeater.Add(repeaterMorePages);
-
-                                    repeaterMorePages.DataSource = CreateDataSourceAlertas(result.data.items);
-                                    repeaterMorePages.DataBind();
-                                }
-                                else
-                                {
-                                    morePagesInformation.InnerText = "Chegou no final da consulta!";
-
-                                    Thread.Sleep(2000);
-                                }
-                            } else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.error,
-                                    result.message);
+                                repeatersMorePages.Controls.Add(element);
                             }
+
+                            if (result.data.totalPages >= PageNumberAlertas)
+                            {
+                                var repeaterMorePages = new Repeater()
+                                {
+                                    ID = $"RepeaterAlertas_Page{ PageNumberAlertas }",
+                                    ItemTemplate = RepeaterAlertas.ItemTemplate
+                                };
+
+                                repeatersMorePages.Controls.Add(repeaterMorePages);
+
+                                lastReapeater.Add(repeaterMorePages);
+
+                                repeaterMorePages.DataSource = CreateDataSource.CreateDataSourceAlertas(result.data.items);
+                                repeaterMorePages.DataBind();
+                            }
+                            else
+                            {
+                                morePagesInformation.InnerHtml = "<p>Chegou no final da consulta!</p>";
+
+                                Thread.Sleep(2000);
+                            }
+                        } else
+                        {
+                            // Mostra uma mensagem de erro
+                            errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                                EnumTypeError.error,
+                                result.message);
                         }
-                    }
-                    else
-                    {
-                        Response.Redirect("~/");
                     }
                 }
                 catch (Exception)
@@ -432,7 +388,7 @@ namespace Tupa_Web.View.Dashboard
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
-                        "Ocorreu um erro, tente novamente mais tarde.");
+                        "Ocorreu um erro ao carregar os alertas, tente novamente mais tarde.");
                 }
             }
         }
@@ -441,11 +397,9 @@ namespace Tupa_Web.View.Dashboard
 
         #region CurrentWeather
 
+        // GET: api/v1/CurrentWeather/coord
         private async Task<Response<CurrentWeather>> GetCurrentWeatherByCoord(
-           string lat,
-           string lon,
-           string bearerToken
-           )
+           string lat, string lon, string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -464,12 +418,9 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
+        // GET: api/v1/CurrentWeather/name
         private async Task<Response<CurrentWeather>> GetCurrentWeatherByName(
-           string district,
-           string city,
-           string state,
-           string bearerToken
-           )
+           string district,string city, string state, string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -489,167 +440,62 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
-        private ICollection CreateDataSourceForecast(CurrentWeather forecast)
-        {
-            ArrayList values = new ArrayList();
-
-            string url = "~/Content/Images/";
-
-            string getImageName(string iconNumber)
-            {
-                switch (iconNumber)
-                {
-                    case "01": return "clear_sky";
-                    case "02": return "few_clouds";
-                    case "03":
-                    case "04":
-                        return "scattered_clouds";
-                    case "09":
-                    case "10":
-                        return "rain";
-                    case "11": return "thunderstorm";
-                    case "13": return "snow";
-                    default: return "clear_sky";
-                }
-            }
-
-            if (forecast.weather.icon.Contains("d"))
-            {
-                var name = getImageName(forecast.weather.icon.Split('d')[0]);
-
-                url += name + "_day.png";
-            } else if (forecast.weather.icon.Contains("n"))
-            {
-                var name = getImageName(forecast.weather.icon.Split('n')[0]);
-
-                url += name + "_night.png";
-            }
-
-            values.Add(
-                new PositionDataForecast(
-                    forecast.q,
-                    Math.Round(forecast.main.temp, 1).ToString() + "°",
-                    forecast.weather.description,
-                    url));
-
-            return values;
-        }
-
-        private class PositionDataForecast
-        {
-            private string locale;
-            private string temperature;
-            private string condition;
-            private string urlImage;
-
-            public PositionDataForecast(
-                string locale,
-                string temperature,
-                string condition,
-                string urlImage)
-            {
-                this.locale = locale;
-                this.temperature = temperature;
-                this.condition = condition;
-                this.urlImage = urlImage;
-            }
-
-            public string Locale => locale;
-
-            public string Temperature => temperature;
-
-            public string Condition => condition;
-
-            public string UrlImage => urlImage;
-        }
-
+        // Events
         protected void UpdatePanelForecast_Load(object sender, EventArgs e)
         {
             LoadForecast();
         }
 
+        // Loads
         private void LoadForecast()
         {
             if (IsPostBack)
             {
-                try
-                {
+                try { 
+                    // Verifica se o usuário está autenticado
                     var cookie = Request.Cookies["token"];
 
-                    if (cookie != null)
+                    if (cookie == null)
+                        Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+
+                    var (district, city, state) = GetLocale(txtSearch.Text);
+                    Response<CurrentWeather> resultCurrentWeather = null;
+
+                    if (district.IsEmpty())
                     {
-                        if (searchLocate.IsEmpty())
-                        {
-                            string lat = queryStringLat.Value;
-                            string lon = queryStringLon.Value;
+                        var (lat, lon) = GetCoordinates();
 
-                            var resultTask = Task.Run(() => GetCurrentWeatherByCoord(
-                                lat,
-                                lon,
-                                cookie.Values[0]));
-                            resultTask.Wait();
+                        var resultTask = Task.Run(() => GetCurrentWeatherByCoord(
+                            lat,
+                            lon,
+                            cookie.Values[0]));
+                        resultTask.Wait();
 
-                            var result = resultTask.GetAwaiter().GetResult();
+                        resultCurrentWeather = resultTask.GetAwaiter().GetResult();
+                    } else
+                    {
+                        var resultTask = Task.Run(() => GetCurrentWeatherByName(
+                            district,
+                            city,
+                            state,
+                            cookie.Values[0]));
+                        resultTask.Wait();
 
-                            if (result.succeeded)
-                            {
-                                RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
+                        resultCurrentWeather = resultTask.GetAwaiter().GetResult();
+                    }
 
-                                RepeaterForecast.DataBind();
-                            }
-                            else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.warning,
-                                    result.message);
-                            }
-                        } else
-                        {
-                            string district = "";
-                            string city = "";
-                            string state = "";
+                    if (resultCurrentWeather.succeeded)
+                    {
+                        RepeaterForecast.DataSource = CreateDataSource.CreateDataSourceForecast(resultCurrentWeather.data);
 
-                            if (searchLocate.Contains(","))
-                            {
-                                district = searchLocate.Split(',')[0].Trim();
-
-                                if (searchLocate.Contains("-"))
-                                {
-                                    city = searchLocate.Split(',')[1].Split('-')[0].Trim();
-                                    state = searchLocate.Split(',')[1].Split('-')[1].Trim();
-                                }
-                            } else
-                            {
-                                district = searchLocate.Trim();
-                            }
-
-                            var resultTask = Task.Run(() => GetCurrentWeatherByName(
-                                district,
-                                city,
-                                state,
-                                cookie.Values[0]));
-                            resultTask.Wait();
-
-                            var result = resultTask.GetAwaiter().GetResult();
-
-                            if (result.succeeded)
-                            {
-                                RepeaterForecast.DataSource = CreateDataSourceForecast(result.data);
-
-                                RepeaterForecast.DataBind();
-                            } else
-                            {
-                                // Mostra uma mensagem de erro
-                                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                    EnumTypeError.warning,
-                                    result.message);
-                            }
-                        }                                                
+                        RepeaterForecast.DataBind();
                     }
                     else
                     {
-                        Response.Redirect("~/");
+                        // Mostra uma mensagem de erro
+                        errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.warning,
+                            resultCurrentWeather.message);
                     }
                 }
                 catch
@@ -657,7 +503,7 @@ namespace Tupa_Web.View.Dashboard
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
-                        "Ocorreu um erro, tente novamente mais tarde.");
+                        "Ocorreu um erro ao carregar as condições atuais, tente novamente mais tarde.");
                 }
             }
         }
@@ -666,11 +512,9 @@ namespace Tupa_Web.View.Dashboard
 
         #region Chart
 
+        // GET: api/v1/Forecast/name
         private async Task<Response<Forecast>> GetForecastByName(
-           string district,
-           string city,
-           string state,
-           string bearerToken)
+           string district, string city, string state, string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -694,10 +538,9 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
+        // GET: api/v1/Forecast/coord
         private async Task<Response<Forecast>> GetForecastByCoord(
-          string lat,
-          string lon,
-          string bearerToken)
+          string lat, string lon,  string bearerToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -720,103 +563,91 @@ namespace Tupa_Web.View.Dashboard
             return jsonResult;
         }
 
+        // Events
+        protected void UpdatePanelChart_Load(object sender, EventArgs e)
+        {
+            LoadGraphic();
+        }
+
+        // Loads
         private void LoadGraphic()
         {
             if (IsPostBack)
             {
                 try
                 {
+                    // Verifica se o usuário está autenticado
                     var cookie = Request.Cookies["token"];
 
-                    if (cookie != null)
+                    if (cookie == null)
+                        Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
+
+                    Response<Forecast> resultForecast = null;
+
+                    var (district, city, state) = GetLocale(txtSearch.Text);
+
+                    if (district.IsEmpty())
                     {
-                        Response<Forecast> result;
+                        var (lat, lon) = GetCoordinates();
 
-                        if (searchLocate.IsEmpty())
+                        var resultTask = Task.Run(() => GetForecastByCoord(
+                            lat,
+                            lon,
+                            cookie.Values[0]));
+                        resultTask.Wait();
+
+                        resultForecast = resultTask.GetAwaiter().GetResult();
+                    } else
+                    {
+                        var resultTask = Task.Run(() => GetForecastByName(
+                            district,
+                            city,
+                            state,
+                            cookie.Values[0]));
+                        resultTask.Wait();
+
+                        resultForecast = resultTask.GetAwaiter().GetResult();
+                    }
+
+                    if (resultForecast.succeeded)
+                    {
+                        var valuesTemperatura = new ArrayList();
+
+                        if (Page.RouteData.Values["interval"].ToString() == "Dia")
                         {
-                            string lat = queryStringLat.Value;
-                            string lon = queryStringLon.Value;
-
-                            var resultTask = Task.Run(() => GetForecastByCoord(
-                                lat,
-                                lon,
-                                cookie.Values[0]));
-                            resultTask.Wait();
-
-                            result = resultTask.GetAwaiter().GetResult();
-                        } else
-                        {
-                            string district = "";
-                            string city = "";
-                            string state = "";
-
-                            if (searchLocate.Contains(","))
+                            foreach (var daily in resultForecast.data.Daily)
                             {
-                                district = searchLocate.Split(',')[0].Trim();
+                                // Unix timestamp is seconds past epoch
+                                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
 
-                                if (searchLocate.Contains("-"))
-                                {
-                                    city = searchLocate.Split(',')[1].Split('-')[0].Trim();
-                                    state = searchLocate.Split(',')[1].Split('-')[1].Trim();
-                                }
-                            } else
-                            {
-                                district = searchLocate.Trim();
+                                valuesTemperatura.Add(
+                                    new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
                             }
+                        }
+                        else
+                        {
+                            foreach (var hourly in resultForecast.data.Hourly)
+                            {
+                                // Unix timestamp is seconds past epoch
+                                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
 
-                            var resultTask = Task.Run(() => GetForecastByName(
-                                district,
-                                city,
-                                state,
-                                cookie.Values[0]));
-                            resultTask.Wait();
-
-                            result = resultTask.GetAwaiter().GetResult();
+                                valuesTemperatura.Add(
+                                    new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
+                            }
                         }
 
-                        if (result.succeeded)
-                        {
-                            var valuesTemperatura = new ArrayList();
+                        string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
 
-                            if (Page.RouteData.Values["interval"].ToString() == "Dia")
-                            {
-                                foreach (var daily in result.data.Daily)
-                                {
-                                    // Unix timestamp is seconds past epoch
-                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                                    dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
-
-                                    valuesTemperatura.Add(
-                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
-                                }
-                            }
-                            else
-                            {
-                                foreach (var hourly in result.data.Hourly)
-                                {
-                                    // Unix timestamp is seconds past epoch
-                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                                    dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
-
-                                    valuesTemperatura.Add(
-                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
-                                }
-                            }
-
-                            string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
-
-                            HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
-                        } else
-                        {
-                            // Mostra uma mensagem de erro
-                            errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
-                                EnumTypeError.error,
-                                result.message);
-                        }
+                        HiddenFieldGraphicTemperatura.Value = jsonStringTemperatura;
                     }
                     else
                     {
-                        Response.Redirect("~/");
+                        // Mostra uma mensagem de erro
+                        errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.error,
+                            resultForecast.message);
                     }
                 }
                 catch
@@ -824,50 +655,9 @@ namespace Tupa_Web.View.Dashboard
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                         EnumTypeError.error,
-                        "Ocorreu um erro, tente novamente mais tarde.");
+                        "Ocorreu um erro ao carregar o gráfico, tente novamente mais tarde.");
                 }
             }
-        }
-
-        protected void UpdatePanelChart_Load(object sender, EventArgs e)
-        {
-            LoadGraphic();
-        }
-
-        private class PositionDataTemperatura
-        {
-            private string x;
-            private float y;
-
-            public PositionDataTemperatura(
-                string x,
-                float y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public string X => x;
-
-            public float Y => y;
-        }
-
-        private class PositionDataUmidade
-        {
-            private string x;
-            private int y;
-
-            public PositionDataUmidade(
-                string x,
-                int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-
-            public string X => x;
-
-            public int Y => y;
         }
 
         #endregion

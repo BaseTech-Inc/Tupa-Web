@@ -297,3 +297,8 @@ img.loading {
 .input {
     margin-bottom: 24px
 }
+
+.morePagesInformation {
+    width: 100%;
+    text-align: center
+}

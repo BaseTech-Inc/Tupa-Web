@@ -328,6 +328,7 @@
     <Compile Include="View\Configuracoes\Themes.aspx.designer.cs">
       <DependentUpon>Themes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Dashboard\CreateDataSource.cs" />
     <Compile Include="View\Dashboard\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -335,6 +336,9 @@
     <Compile Include="View\Dashboard\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Dashboard\PositionDataAlertas.cs" />
+    <Compile Include="View\Dashboard\PositionDataForecast.cs" />
+    <Compile Include="View\Dashboard\PositionDataTemperatura.cs" />
     <Compile Include="View\Error\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
