@@ -498,7 +498,7 @@ namespace Tupa_Web.View.Dashboard
                             resultCurrentWeather.message);
                     }
                 }
-                catch
+                catch (Exception)
                 {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
@@ -650,7 +650,7 @@ namespace Tupa_Web.View.Dashboard
                             resultForecast.message);
                     }
                 }
-                catch
+                catch (Exception)
                 {
                     // Mostra uma mensagem de erro
                     errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
