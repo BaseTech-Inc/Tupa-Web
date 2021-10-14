@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="/Content/Css/reset.css">
     <link rel="stylesheet" href="/Content/Css/main.css">
     <link rel="stylesheet" href="/Content/Css/variables.css">
+    <link rel="stylesheet" href="/Content/Css/loading.css">
     
     <asp:ContentPlaceHolder ID="head" runat="server">
         
@@ -41,6 +42,7 @@
 </head>
 <body data-theme="white" ID="bodyElement" runat="server">
     <form id="Form1" runat="server" autocomplete="off">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <!-- Header -->
     <% if (ContainsHeader()) { %>
     <header class="home container card" id="menuHeader">
@@ -97,7 +99,31 @@
                 <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Entrar</asp:HyperLink>
                 <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' CssClass="primary-button">Seja um Bro!</asp:HyperLink>
                 <% } else { %>
-                <div class="photo_user"></div>
+                <div class="photoUser">
+                    <asp:UpdatePanel ID="UpdatePanelImage" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelImage_Load">
+                        <ContentTemplate>
+                            <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                            <asp:UpdateProgress ID="UpdateProgressImage" runat="server">
+                                <ProgressTemplate>
+                                    <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
+                                    <div class="loading">
+                                        <div class="avatar"></div>
+                                    </div>
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
+
+                            <%-- Conteúdo --%>
+                            <div class="img-wrapper">
+                                <asp:Image ID="imageUser" runat="server" border="0" />
+                            </div>
+
+                            <asp:Timer ID="TimerImage" runat="server" Interval="1" OnTick="TimerImage_Tick"></asp:Timer>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="TimerImage" EventName="Tick" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </div>
                 <% } %>
                 <div class="menu-bar">
                     <span class="material-icons">

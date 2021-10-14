@@ -15,13 +15,13 @@ namespace Tupa_Web.View.Dashboard
     {
 
         /// <summary>
-        /// Controle ScriptManager1.
+        /// Controle ScriptManagerProxy1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
 
         /// <summary>
         /// Controle txtSearch.

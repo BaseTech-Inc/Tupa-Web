@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Routing;
@@ -63,6 +64,12 @@ namespace Tupa_Web.View
 
                     }
                 }
+            }
+
+            if (!IsPostBack)
+            {
+                // Setup
+                UpdateProgressImage.AssociatedUpdatePanelID = UpdatePanelImage.UniqueID;
             }
 
             Page.DataBind();
@@ -206,6 +213,64 @@ namespace Tupa_Web.View
             var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(stringResult);
 
             return jsonResult;
+        }
+
+        private async Task<Response<string>> GetImageProfile(
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account/image-profile")
+              .SetQueryParams(new
+              { });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<string>>(stringResult);
+
+            return jsonResult;
+        }
+
+        protected void UpdatePanelImage_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    // Verifica se o usuário está autenticado
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie != null)
+                    {
+                        var resultTask = Task.Run(() => GetImageProfile(cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            var url = "data:image/png;base64," + result.data;
+
+                            Image ImgUser = (Image)FindControl(imageUser.ClientID);
+
+                            if (ImgUser != null)
+                            {
+                                ImgUser.ImageUrl = url;
+                            }
+                        }
+                    }
+                    
+                } catch (Exception) { }                
+            }
+        }
+
+        protected void TimerImage_Tick(object sender, EventArgs e)
+        {
+            // Setup
+            TimerImage.Enabled = false;
+
+            UpdatePanelImage.Update();
         }
     }
 }

@@ -175,12 +175,47 @@ header .user > * {
     height: 100%;
     
 }
+header .user .photoUser {
+    overflow: hidden;
+}
 
-header .user .photo_user {
+header .user .photoUser > div {
+    height: 100%;
+}
+
+header .user .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+header .user .loading .avatar {
     width: 42px;
     height: 42px;
     border-radius: 100%;
-    background: var(--primary-variant-color)
+    margin-right: 0;
+}
+
+header .user .photoUser #UpdateProgressImage {
+    min-height: 100%;
+    position: relative
+}
+
+header .user .img-wrapper {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .user .img-wrapper img {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #ddd
 }
 
 header .user a {
