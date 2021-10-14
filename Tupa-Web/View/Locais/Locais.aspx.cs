@@ -176,115 +176,123 @@ namespace Tupa_Web.View.Locais
 
         private void LoadHistoricoUsuario()
         {
-            var cookie = Request.Cookies["token"];
-
-            if (cookie != null)
+            try
             {
-                if (Page.RouteData.Values["pageNumber"] != null)
+                var cookie = Request.Cookies["token"];
+
+                if (cookie != null)
                 {
-                    PageNumber = Int32.Parse(Page.RouteData.Values["pageNumber"].ToString());
-                }
-
-                var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(
-                    PageNumber,
-                    bearerToken: cookie.Values[0]));
-                resultTaskGet.Wait();
-
-                var resultGet = resultTaskGet.GetAwaiter().GetResult();
-
-                if (resultGet.succeeded)
-                {
-                    IList<PositionDataLocais> dataLocaisDay = new List<PositionDataLocais>();
-                    IList<PositionDataLocais> dataLocaisMonth = new List<PositionDataLocais>();
-                    IList<PositionDataLocais> dataLocaisYear = new List<PositionDataLocais>();
-
-                    foreach (var item in resultGet.data.items)
+                    if (Page.RouteData.Values["pageNumber"] != null)
                     {
-                        var resultTaskDecode = Task.Run(() => DecodeCoordinates(item.rota,
-                            bearerToken: cookie.Values[0]));
-                        resultTaskDecode.Wait();
-
-                        var resultDecode = resultTaskDecode.GetAwaiter().GetResult();
-
-                        string googleUrl = $"https://www.google.com/maps/embed?pb=!1m11!4m9!3e0!4m3!3m2!1d{ resultDecode[0].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[0].longitude.ToString().Replace(",", ".") }!4m3!3m2!1d{ resultDecode[resultDecode.Count - 1].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[resultDecode.Count - 1].longitude.ToString().Replace(",", ".") }!5e0";
-
-                        if (item.tempoPartida > DateTime.Now.AddDays(-7))
-                        {
-                            dataLocaisDay.Add(
-                              new PositionDataLocais(
-                              item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
-                              item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
-                              item.distanciaPercurso.ToString() + "km",
-                              item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
-                              resultDecode.Count.ToString(),
-                              "",
-                              googleUrl
-                              ));
-                        } else if (item.tempoPartida > DateTime.Now.AddDays(-30))
-                        {
-                            dataLocaisMonth.Add(
-                              new PositionDataLocais(
-                              item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
-                              item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
-                              item.distanciaPercurso.ToString() + "km",
-                              item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
-                              resultDecode.Count.ToString(),
-                              "",
-                              googleUrl
-                              ));
-                        } else
-                        {
-                            dataLocaisYear.Add(
-                             new PositionDataLocais(
-                             item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
-                             item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
-                             item.distanciaPercurso.ToString() + "km",
-                             item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
-                             resultDecode.Count.ToString(),
-                             "",
-                             googleUrl
-                             ));
-                        }                        
+                        PageNumber = Int32.Parse(Page.RouteData.Values["pageNumber"].ToString());
                     }
 
-                    if (dataLocaisDay.Count > 0)
-                        rep.Visible = true;
-                    else
-                        rep.Visible = false;
+                    var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(
+                        PageNumber,
+                        bearerToken: cookie.Values[0]));
+                    resultTaskGet.Wait();
 
-                    if (dataLocaisMonth.Count > 0)
-                        repMonth.Visible = true;
-                    else
-                        repMonth.Visible = false;
+                    var resultGet = resultTaskGet.GetAwaiter().GetResult();
 
-                    if (dataLocaisYear.Count > 0)
-                        repYear.Visible = true;
-                    else
-                        repYear.Visible = false;
-
-                    rep.DataSource = dataLocaisDay;
-                    rep.DataBind();
-
-                    repMonth.DataSource = dataLocaisMonth;
-                    repMonth.DataBind();
-
-                    repYear.DataSource = dataLocaisYear;
-                    repYear.DataBind();
-
-                    var totalPages = resultGet.data.totalPages;
-                    var array = new ArrayList();
-
-                    for (var i = 1; i <= totalPages; i++)
+                    if (resultGet.succeeded)
                     {
-                        array.Add(new
+                        IList<PositionDataLocais> dataLocaisDay = new List<PositionDataLocais>();
+                        IList<PositionDataLocais> dataLocaisMonth = new List<PositionDataLocais>();
+                        IList<PositionDataLocais> dataLocaisYear = new List<PositionDataLocais>();
+
+                        foreach (var item in resultGet.data.items)
                         {
-                            PageNumber = i
-                        });
+                            var resultTaskDecode = Task.Run(() => DecodeCoordinates(item.rota,
+                                bearerToken: cookie.Values[0]));
+                            resultTaskDecode.Wait();
+
+                            var resultDecode = resultTaskDecode.GetAwaiter().GetResult();
+
+                            string googleUrl = $"https://www.google.com/maps/embed?pb=!1m11!4m9!3e0!4m3!3m2!1d{ resultDecode[0].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[0].longitude.ToString().Replace(",", ".") }!4m3!3m2!1d{ resultDecode[resultDecode.Count - 1].latitude.ToString().Replace(",", ".") }!2d{ resultDecode[resultDecode.Count - 1].longitude.ToString().Replace(",", ".") }!5e0";
+
+                            if (item.tempoPartida > DateTime.Now.AddDays(-7))
+                            {
+                                dataLocaisDay.Add(
+                                  new PositionDataLocais(
+                                  item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                                  item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                                  item.distanciaPercurso.ToString() + "km",
+                                  item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
+                                  resultDecode.Count.ToString(),
+                                  "",
+                                  googleUrl
+                                  ));
+                            }
+                            else if (item.tempoPartida > DateTime.Now.AddDays(-30))
+                            {
+                                dataLocaisMonth.Add(
+                                  new PositionDataLocais(
+                                  item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                                  item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                                  item.distanciaPercurso.ToString() + "km",
+                                  item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
+                                  resultDecode.Count.ToString(),
+                                  "",
+                                  googleUrl
+                                  ));
+                            }
+                            else
+                            {
+                                dataLocaisYear.Add(
+                                 new PositionDataLocais(
+                                 item.tempoPartida.Hour + ":" + item.tempoPartida.Minute + " - " +
+                                 item.tempoChegada.Hour + ":" + item.tempoChegada.Minute,
+                                 item.distanciaPercurso.ToString() + "km",
+                                 item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
+                                 resultDecode.Count.ToString(),
+                                 "",
+                                 googleUrl
+                                 ));
+                            }
+                        }
+
+                        if (dataLocaisDay.Count > 0)
+                            rep.Visible = true;
+                        else
+                            rep.Visible = false;
+
+                        if (dataLocaisMonth.Count > 0)
+                            repMonth.Visible = true;
+                        else
+                            repMonth.Visible = false;
+
+                        if (dataLocaisYear.Count > 0)
+                            repYear.Visible = true;
+                        else
+                            repYear.Visible = false;
+
+                        rep.DataSource = dataLocaisDay;
+                        rep.DataBind();
+
+                        repMonth.DataSource = dataLocaisMonth;
+                        repMonth.DataBind();
+
+                        repYear.DataSource = dataLocaisYear;
+                        repYear.DataBind();
+
+                        var totalPages = resultGet.data.totalPages;
+                        var array = new ArrayList();
+
+                        for (var i = 1; i <= totalPages; i++)
+                        {
+                            array.Add(new
+                            {
+                                PageNumber = i
+                            });
+                        }
+                        repeaterPagination.DataSource = array;
+                        repeaterPagination.DataBind();
                     }
-                    repeaterPagination.DataSource = array;
-                    repeaterPagination.DataBind();
                 }
-            }                
+            } catch
+            {
+
+            }                           
         }
     }
 }
