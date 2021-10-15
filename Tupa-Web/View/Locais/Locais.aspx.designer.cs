@@ -15,6 +15,15 @@ namespace Tupa_Web.View.Locais
     {
 
         /// <summary>
+        /// Controle txtSearch.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+
+        /// <summary>
         /// Controle rep.
         /// </summary>
         /// <remarks>

@@ -6,18 +6,21 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container_wrapper">
-        <div class="search">
-            <label for="search">
-                <span class="material-icons">
-                search
-                </span>
-            </label>
-                
-            <input type="text" name="search" id="search" placeholder="Pesquisar..." class="card">
+        <div class="input">
+            <div class="search">
+                <label for="search">
+                    <span class="material-icons">
+                    search
+                    </span>
+                </label>
+               
+                <asp:TextBox ID="txtSearch" type="text" runat="server" placeholder="Pesquisar por bairros..." CssClass="card" OnTextChanged="txtSearch_TextChanged" ></asp:TextBox>  
+            </div>
+            <span class="caption">Ex.: Casa Verde, São Paulo</span>
         </div>
 
         <div class="content">
-            <!-- Mais pesquisados -->
+            <!-- Mais pesquisados 
             <div class="more-search">
                 <p>Mais pesquisados</p>
 
@@ -51,7 +54,7 @@
                         </div>
                     </div>
                 </div>                   
-            </div>
+            </div> -->
 
             <div class="week">
                 <asp:Repeater ID="rep" runat="server">

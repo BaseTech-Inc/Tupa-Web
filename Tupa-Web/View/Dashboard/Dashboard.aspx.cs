@@ -95,7 +95,7 @@ namespace Tupa_Web.View.Dashboard
         private (string district, string city, string state) GetLocale(string address)
         {
             SearchLocate = address;
-
+            
             string district;
             string city = "";
             string state = "";

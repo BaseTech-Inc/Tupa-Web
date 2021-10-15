@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.WebPages;
 using Tupa_Web.Common.Models;
 using Tupa_Web.Common.Security;
 using Tupa_Web.Model;
@@ -17,6 +18,8 @@ namespace Tupa_Web.View.Locais
     public partial class Locais : System.Web.UI.Page
     {
         private static int PageNumber { get; set; } = 1;
+
+        private static string SearchLocate { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +31,14 @@ namespace Tupa_Web.View.Locais
             if (!IsPostBack)
             {
                 LoadHistoricoUsuario();
+
+                if (!SearchLocate.IsEmpty())
+                    txtSearch.Text = SearchLocate;
+            }
+            else
+            {
+                if (txtSearch.Text != SearchLocate)
+                    PageNumber = 1;
             }
 
             if (Page.RouteData.Values["pageNumber"] != null)
@@ -65,6 +76,61 @@ namespace Tupa_Web.View.Locais
                     }
                 }
             }
+        }
+
+        private (string district, string city, string state) GetLocale(string address)
+        {
+            SearchLocate = address;
+
+            string district;
+            string city = "";
+            string state = "";
+
+            if (SearchLocate.Contains(","))
+            {
+                district = SearchLocate.Split(',')[0].Trim();
+
+                if (SearchLocate.Contains("-"))
+                {
+                    city = SearchLocate.Split(',')[1].Split('-')[0].Trim();
+
+                    if (SearchLocate.Split(',')[1].Split('-').Length > 1)
+                    {
+                        state = SearchLocate.Split(',')[1].Split('-')[1].Trim();
+                    }
+
+                }
+            }
+            else
+            {
+                district = SearchLocate.Trim();
+            }
+
+            return (district, city, state);
+        }
+
+        private async Task<Response<PaginatedList<HistoricoUsuario>>> GetHistoricoUsuarioByNameWithPagination(
+            string distrito,string cidade,string estado, int pageNumber, string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/HistoricoUsuario/name/pagination")
+                .SetQueryParams(new
+                {
+                    Distrito = distrito,
+                    PageNumber = pageNumber,
+                    Cidade = cidade,
+                    Estado = estado,
+                    
+
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<PaginatedList<HistoricoUsuario>>>(stringResult);
+
+            return jsonResult;
         }
 
         public class PositionDataLocais
@@ -187,20 +253,36 @@ namespace Tupa_Web.View.Locais
                         PageNumber = Int32.Parse(Page.RouteData.Values["pageNumber"].ToString());
                     }
 
-                    var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(
+                    var (district, city, state) = GetLocale(txtSearch.Text);
+
+                    Response<PaginatedList<HistoricoUsuario>> resultHistorico = null;
+
+                    if (district.IsEmpty())
+                    {
+                        var resultTaskGet = Task.Run(() => GetHistoricoUsuarioWithPagination(
                         PageNumber,
                         bearerToken: cookie.Values[0]));
-                    resultTaskGet.Wait();
+                        resultTaskGet.Wait();
+                        resultHistorico = resultTaskGet.GetAwaiter().GetResult();
+                    }
+                    else
+                    {
+                        var resultTaskGet = Task.Run(() => GetHistoricoUsuarioByNameWithPagination(
+                        district, 
+                        city, state,
+                        PageNumber,
+                        bearerToken: cookie.Values[0]));
+                        resultTaskGet.Wait();
+                        resultHistorico = resultTaskGet.GetAwaiter().GetResult();
+                    }
 
-                    var resultGet = resultTaskGet.GetAwaiter().GetResult();
-
-                    if (resultGet.succeeded)
+                    if (resultHistorico.succeeded)
                     {
                         IList<PositionDataLocais> dataLocaisDay = new List<PositionDataLocais>();
                         IList<PositionDataLocais> dataLocaisMonth = new List<PositionDataLocais>();
                         IList<PositionDataLocais> dataLocaisYear = new List<PositionDataLocais>();
 
-                        foreach (var item in resultGet.data.items)
+                        foreach (var item in resultHistorico.data.items)
                         {
                             var resultTaskDecode = Task.Run(() => DecodeCoordinates(item.rota,
                                 bearerToken: cookie.Values[0]));
@@ -275,7 +357,7 @@ namespace Tupa_Web.View.Locais
                         repYear.DataSource = dataLocaisYear;
                         repYear.DataBind();
 
-                        var totalPages = resultGet.data.totalPages;
+                        var totalPages = resultHistorico.data.totalPages;
                         var array = new ArrayList();
 
                         for (var i = 1; i <= totalPages; i++)
@@ -289,10 +371,15 @@ namespace Tupa_Web.View.Locais
                         repeaterPagination.DataBind();
                     }
                 }
-            } catch
+            } catch(Exception ex)
             {
-
+                 
             }                           
+        }
+
+        protected void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadHistoricoUsuario();
         }
     }
 }

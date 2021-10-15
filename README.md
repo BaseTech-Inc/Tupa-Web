@@ -13,22 +13,29 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão voltada
 - [x] Login/Register
 - [ ] Mapa
 - [ ] Locais
-    - [ ] Sistema de busca
-    - [ ] Mais pesquisados
+    - [x] Sistema de busca
+    - [ ] Sugetão de pesquisa
+    - [ ] Mensagem de nunca pesquisado - HTML
     - [X] Histórico
+    - [ ] Mais pesquisados - Depois
 - [X] Dashboard
     - [X] Forecast
     - [X] Alertas
     - [X] Gráfico
+    - [ ] Sugestão de pesquisa
 - [ ] Configurações de Usuário
     - [X] Editar Info
         - [X] Alterar Nome
         - [X] Alterar Senha
         - [X] Deletar Conta
+            - [ ] Pop up de "tem certeza?"
+        - [ ] Alterar foto
     - [X] Tema
     - [X] Planos
+        - [ ] Linkagem para a página
     - [X] Sair
-    - [ ] Notificações
+    - [ ] Notificações por email
+-[ ] Sobre Nós
 
 ## Começando
 
