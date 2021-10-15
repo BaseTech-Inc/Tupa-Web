@@ -2,55 +2,55 @@
 <img align="center" width="24%" src="./.github/logo.png" />
 <br>
 <i>
-    P·gina Web da empresa Tup„
+    P√°gina Web da empresa Tup√£
 </i>
 </div>
 
 ## Ajustes e melhorias
 
-O projeto ainda est· em desenvolvimento e as prÛximas atualizaÁıes ser„o voltadas nas seguintes tarefas:
+O projeto ainda est√° em desenvolvimento e as pr√≥ximas atualiza√ß√µes ser√£o voltadas nas seguintes tarefas:
 
 - [x] Login/Register
 - [ ] Mapa
 - [ ] Locais
     - [x] Sistema de busca
-    - [ ] Suget„o de pesquisa
-    - [ ] Mensagem de nunca pesquisado - HTML
-    - [X] HistÛrico
-    - [ ] Mais pesquisados - Depois
-- [X] Dashboard
+    - [ ] Sugest√£o de pesquisa
+    - [ ] Mensagem de nunca pesquisado
+    - [X] Hist√≥rico
+    - [ ] Mais pesquisados
+- [] Dashboard
     - [X] Forecast
     - [X] Alertas
-    - [X] Gr·fico
-    - [ ] Sugest„o de pesquisa
-- [ ] ConfiguraÁıes de Usu·rio
-    - [X] Editar Info
+    - [X] Gr√°fico
+    - [ ] Sugest√£o de pesquisa
+- [ ] Configura√ß√µes de Usu√°rio
+    - [] Editar Info
         - [X] Alterar Nome
         - [X] Alterar Senha
         - [X] Deletar Conta
             - [ ] Pop up de "tem certeza?"
         - [ ] Alterar foto
     - [X] Tema
-    - [X] Planos
-        - [ ] Linkagem para a p·gina
+    - [ ] Planos
+        - [ ] Linkagem para a p√°gina
     - [X] Sair
-    - [ ] NotificaÁıes por email
--[ ] Sobre NÛs
+    - [ ] Notifica√ß√µes por email
+- [ ] Sobre N√≥s
 
-## ComeÁando
+## Come√ßando
 
 ### Instalando localmente projeto
 
 ```bash
-# Clone o repositÛrio em sua m·quina
+# Clone o reposit√≥rio em sua m√°quina
 $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
 ```
 
 ### Configurando ambiente
 
-- Para inicializar os [valores secretos](https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-add-app-config-file?view=vs-2019) È nescess·rio criar o arquivo `secrets.xml` dentro da pasta `App_Data` (‡s vezes pode ser nescess·rio apagar a pasta `App_Data` e recri·-la).
+- Para inicializar os [valores secretos](https://docs.microsoft.com/pt-br/visualstudio/ide/how-to-add-app-config-file?view=vs-2019) √© nescess√°rio criar o arquivo `secrets.xml` dentro da pasta `App_Data` (√†s vezes pode ser nescess√°rio apagar a pasta `App_Data` e recri√°-la).
 
-    … nescess·rio inserir os seguindes valores, dentro do arquivo `secrets.xml`:
+    √â nescess√°rio inserir os seguindes valores, dentro do arquivo `secrets.xml`:
 
     ```xml
     <?xml version="1.0" encoding="utf-8" ?>
@@ -65,10 +65,10 @@ $ git clone https://github.com/BaseTech-Inc/Tupa-Web.git
     </root>
     ```
 
-    Para gerar o `client_id` e o `client_secret` È necess·rio [criar projeto do Console de APIs Google](https://developers.google.com/workspace/guides/create-project).
+    Para gerar o `client_id` e o `client_secret` √© necess√°rio [criar projeto do Console de APIs Google](https://developers.google.com/workspace/guides/create-project).
 
 <img src="https://github.githubassets.com/images/mona-whisper.gif" align="right" />
 
-## LicenÁa
+## Licen√ßa
 
-Esse projeto est· sob licenÁa. Veja o arquivo [`LICEN«A`](https://github.com/BaseTech-Inc/Tupa-Web/blob/master/LICENSE) para mais detalhes.
+Esse projeto est√° sob licen√ßa. Veja o arquivo [`LICEN√áA`](https://github.com/BaseTech-Inc/Tupa-Web/blob/master/LICENSE) para mais detalhes.
