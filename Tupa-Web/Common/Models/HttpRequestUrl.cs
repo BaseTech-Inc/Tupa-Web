@@ -136,10 +136,14 @@ namespace Tupa_Web.Common.Models
             JsonSerializerOptions options = null,
             string mediaType = "application/json",
             string bearerToken = "",
+            string refreshCookie = "",
             HttpResponse responsePage = null)
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
+
+            if (!refreshCookie.IsEmpty())
+                client.DefaultRequestHeaders.Add("Cookie", $"refreshToken=" + refreshCookie);
 
             if (!bearerToken.IsEmpty())
                 client.DefaultRequestHeaders.Add(
@@ -201,7 +205,7 @@ namespace Tupa_Web.Common.Models
                                 cookie = new HttpCookie(match.Groups[1].Value);
                                 cookie.Value = HttpUtility.UrlDecode(match.Groups[2].Value);
                                 cookie.Expires = DateTime.MaxValue;
-                                cookie.Domain = response.RequestMessage.RequestUri.AbsoluteUri.ToString();
+                                //cookie.Domain = response.RequestMessage.RequestUri.Host.ToString();
                                 responsePage.Cookies.Add(cookie);
                             }
                         }

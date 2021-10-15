@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,26 +45,46 @@ namespace Tupa_Web.View
                 BodyAttributes = EnumColorTheme.white.ToString();
             }
 
-            var cookieToken = Request.Cookies["token"];
+            var Token = Request.Cookies["token"];
+            var RefreshToken = Request.Cookies["refreshToken"];
 
-            if (cookieToken != null)
+            // Se não existir o Token, porém existir o RefreshToken então o token expirou
+            if (Token == null && RefreshToken != null)
             {
-                var expires = cookieToken.Values["expires"];
-
-                var dateExpires = Convert.ToDateTime(expires);
-
-                if (dateExpires <= DateTime.Now)
+                try
                 {
-                    var resultTask = Task.Run(() => RefreshTokenAccount());
+                    var resultTask = Task.Run(() => RefreshTokenAccount(RefreshToken.Value));
                     resultTask.Wait();
 
                     var result = resultTask.GetAwaiter().GetResult();
 
                     if (result.succeeded)
                     {
+                        var data = result.data;
 
+                        // em caso de sucesso cria-se um Cookie com o access_token, token_type e expiration
+                        var cookie = Request.Cookies["token"];
+
+                        if (cookie == null)
+                        {
+                            cookie = new HttpCookie("token");
+
+                            cookie.Values.Add("access_token", data.access_token);
+                            cookie.Values.Add("token_type", data.token_type);
+                            cookie.Values.Add("expires", data.expiration.ToString());
+                            cookie.HttpOnly = true;
+                            cookie.Expires = data.expiration;
+
+                            Response.Cookies.Add(cookie);
+                        }
+
+                        Response.Redirect("~/");
                     }
+                } catch (Exception ex)
+                {
+
                 }
+                
             }
 
             if (!IsPostBack)
@@ -197,7 +218,8 @@ namespace Tupa_Web.View
             return jsonResult;
         }
 
-        private async Task<Response<LoginResponse>> RefreshTokenAccount()
+        private async Task<Response<LoginResponse>> RefreshTokenAccount(
+            string refreshToken)
         {
             // criando a url para comunicar entre o servidor
             string url = HttpRequestUrl.baseUrlTupa
@@ -208,7 +230,7 @@ namespace Tupa_Web.View
               });
 
             // resultado da comunicação
-            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url);
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPost(url, refreshCookie: refreshToken, responsePage: Response);
 
             var jsonResult = JsonSerializer.Deserialize<Response<LoginResponse>>(stringResult);
 
