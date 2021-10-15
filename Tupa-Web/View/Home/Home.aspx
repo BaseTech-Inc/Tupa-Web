@@ -348,7 +348,7 @@
                             Histórico de viagens.</li>
                     </ul>
                 </div>
-                <asp:HyperLink ID="HyperLink1" runat="server" CssClass="primary-button" NavigateUrl="~/Register">Assinar agora</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink1" runat="server" CssClass="primary-button" NavigateUrl='<%# IsLogged() ? "~/Settings/Plans" : "~/Register" %>'>Assinar agora</asp:HyperLink>
             </div>
             <div class="card target">
                 <div class="price">
@@ -381,7 +381,7 @@
                             Histórico de viagens.</li>
                     </ul>
                 </div>
-                <asp:HyperLink ID="HyperLink2" runat="server" CssClass="secondary-button" NavigateUrl="~/Register">Assinar agora</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink2" runat="server" CssClass="secondary-button" NavigateUrl='<%# IsLogged() ? "~/Settings/Plans" : "~/Register" %>'>Assinar agora</asp:HyperLink>
             </div>
         </div>
     </div>  

@@ -31,8 +31,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
             - [ ] Pop up de "tem certeza?"
         - [ ] Alterar foto
     - [X] Tema
-    - [ ] Planos
-        - [ ] Linkagem para a página
+    - [X] Planos
     - [X] Sair
     - [ ] Notificações por email
 - [ ] Sobre Nós
