@@ -29,7 +29,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
         - [X] Alterar Senha
         - [X] Deletar Conta
             - [ ] Pop up de "tem certeza?"
-        - [ ] Alterar foto
+        - [X] Alterar foto
     - [X] Tema
     - [X] Planos
     - [X] Sair
