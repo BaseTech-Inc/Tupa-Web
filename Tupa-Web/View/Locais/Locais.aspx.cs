@@ -367,8 +367,18 @@ namespace Tupa_Web.View.Locais
                                 PageNumber = i
                             });
                         }
+
                         repeaterPagination.DataSource = array;
                         repeaterPagination.DataBind();
+
+
+                        if (resultHistorico.data.totalCount == 0)
+                        {
+                            morePagesInformation.InnerHtml = "<p>Você não tem nenhum histórico de viagens... por enquanto.</p>";
+                        } else if (resultHistorico.data.totalPages < PageNumber)
+                        {
+                            morePagesInformation.InnerHtml = "<p>O limite é as estrelas, e você conseguiu passar 🖖.</p>";
+                        }
                     }
                 }
             } catch(Exception ex)

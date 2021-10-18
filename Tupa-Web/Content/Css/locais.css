@@ -166,3 +166,12 @@ main .content .list .card .footer div p:nth-child(2) {
 .cta:active {
     transform: scale(0.96);
 }
+
+.content {
+    min-height: 60vh;
+}
+
+.content .morePagesInformation p {
+    text-align: center;
+    padding: 24px 0
+}

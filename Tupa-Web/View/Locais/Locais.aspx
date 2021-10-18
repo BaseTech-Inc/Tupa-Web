@@ -191,6 +191,8 @@
                     </FooterTemplate>
                 </asp:Repeater>
             </div>
+
+            <div ID="morePagesInformation" runat="server" class="morePagesInformation"></div>
         </div>
 
         <nav class="pagination">
