@@ -24,13 +24,76 @@ namespace Tupa_Web.View.Configuracoes
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
 
         /// <summary>
-        /// Controle imgPicture.
+        /// Controle ScriptManagerProxy1.
         /// </summary>
         /// <remarks>
         /// Campo gerado automaticamente.
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPicture;
+        protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
+
+        /// <summary>
+        /// Controle UpdatePanelImage2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelImage2;
+
+        /// <summary>
+        /// Controle UpdateProgressImage2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressImage2;
+
+        /// <summary>
+        /// Controle imageUserTwo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imageUserTwo;
+
+        /// <summary>
+        /// Controle TimerImage2.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.Timer TimerImage2;
+
+        /// <summary>
+        /// Controle selecaoarquivo.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload selecaoarquivo;
+
+        /// <summary>
+        /// Controle btnCarregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCarregar;
+
+        /// <summary>
+        /// Controle txtDeletarFoto.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button txtDeletarFoto;
 
         /// <summary>
         /// Controle lblNome.

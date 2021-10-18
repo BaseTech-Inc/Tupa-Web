@@ -63,5 +63,59 @@ namespace Tupa_Web.View.Configuracoes
 
             return jsonResult;
         }
+
+        protected void TimerImage3_Tick(object sender, EventArgs e)
+        {
+            // Setup
+            TimerImage3.Enabled = false;
+
+            UpdatePanelImage3.Update();
+        }
+
+        protected void UpdatePanelImage3_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    // Verifica se o usuário está autenticado
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie != null)
+                    {
+                        var resultTask = Task.Run(() => GetImageProfile(cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            var url = "data:image/png;base64," + result.data;
+
+                            imgPictureHeader.ImageUrl = url;
+                        }
+                    }
+
+                }
+                catch (Exception) { }
+            }
+        }
+
+        private async Task<Response<string>> GetImageProfile(
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account/image-profile")
+              .SetQueryParams(new
+              { });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<string>>(stringResult);
+
+            return jsonResult;
+        }
     }
 }

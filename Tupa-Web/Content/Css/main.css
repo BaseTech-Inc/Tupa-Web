@@ -33,6 +33,7 @@ a,
 li,
 span,
 input,
+label,
 textarea {
     font-family: var(--body_font);
     font-size: var(--body_font_size);

@@ -15,6 +15,33 @@ namespace Tupa_Web.View.Configuracoes
     {
 
         /// <summary>
+        /// Controle ScriptManagerProxy1.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
+
+        /// <summary>
+        /// Controle UpdatePanelImage3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanelImage3;
+
+        /// <summary>
+        /// Controle UpdateProgressImage3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgressImage3;
+
+        /// <summary>
         /// Controle imgPictureHeader.
         /// </summary>
         /// <remarks>
@@ -22,6 +49,15 @@ namespace Tupa_Web.View.Configuracoes
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgPictureHeader;
+
+        /// <summary>
+        /// Controle TimerImage3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.Timer TimerImage3;
 
         /// <summary>
         /// Controle HyperLink6.

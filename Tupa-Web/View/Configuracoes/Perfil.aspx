@@ -11,10 +11,37 @@
 
     <div class="perfil-section form">
         <div class="picture">
-            <asp:Image ID="imgPicture" runat="server" ImageUrl="~/Content/Images/abraham.jpg" />
+            <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
+            <asp:UpdatePanel ID="UpdatePanelImage2" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelImage2_Load">
+                <ContentTemplate>
+                    <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                    <asp:UpdateProgress ID="UpdateProgressImage2" runat="server">
+                        <ProgressTemplate>
+                            <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
+                            <div class="loading">
+                                <div class="avatar"></div>
+                            </div>
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
 
-            <button type="button" class="secondary-button">Carregar nova imagem</button>
-            <button type="button" class="primary-button">Deletar</button>            
+                    <%-- Conteúdo --%>
+                    <div class="img-wrapper">
+                        <asp:Image ID="imageUserTwo" runat="server" border="0" />
+                    </div>
+
+                    <asp:Timer ID="TimerImage2" runat="server" Interval="1" OnTick="TimerImage2_Tick"></asp:Timer>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="TimerImage2" EventName="Tick" />
+                </Triggers>
+            </asp:UpdatePanel>
+
+            <label for="<%# selecaoarquivo.ClientID %>" class="secondary-button">Selecionar um arquivo</label>
+            <asp:FileUpload id="selecaoarquivo" runat="server" />            
+
+            <asp:Button ID="btnCarregar" runat="server" CssClass="primary-button" Text="Carregar" OnClick="btnCarregar_Click" />
+
+            <asp:Button ID="txtDeletarFoto" runat="server" CssClass="primary-button" Text="Deletar" OnClick="txtDeletarFoto_Click" />
         </div>
         <div class="form-group">
             <div class="input">

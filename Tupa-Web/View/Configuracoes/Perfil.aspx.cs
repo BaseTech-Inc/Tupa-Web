@@ -25,6 +25,12 @@ namespace Tupa_Web.View.Configuracoes
             {
                 Response.RedirectToRoute("Error", new RouteValueDictionary { { "codStatus", "401" } });
             }
+
+            if (!IsPostBack)
+            {
+                // Setup
+                UpdateProgressImage2.AssociatedUpdatePanelID = UpdatePanelImage2.UniqueID;
+            }
         }
         private async Task<Response<string>> postChangePassword(
             string oldPassword, string newPassword, string bearerToken)
@@ -102,6 +108,40 @@ namespace Tupa_Web.View.Configuracoes
             var stringResult = await HttpRequestUrl.ProcessHttpDeleteAccount(url, bearerToken: bearerToken);
 
             var jsonResult = JsonSerializer.Deserialize<Response<String>>(stringResult);
+
+            return jsonResult;
+        }
+
+        private async Task<Response<String>> PutImageProfile(
+            string bearerToken,
+            string strinContent = "")
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account/image-profile")
+              .SetQueryParams(new { });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientPut(url, bearerToken: bearerToken, stringContent: strinContent);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<String>>(stringResult);
+
+            return jsonResult;
+        }
+
+        private async Task<Response<string>> GetImageProfile(
+            string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+              .AddPath("api/Account/image-profile")
+              .SetQueryParams(new
+              { });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<string>>(stringResult);
 
             return jsonResult;
         }
@@ -239,6 +279,187 @@ namespace Tupa_Web.View.Configuracoes
                                       "Jogue sua conta no lixo🗑, vulgo Gabriel");
             }
             
+        }
+
+        protected void txtDeletarFoto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var cookie = Request.Cookies["token"];
+                if (cookie != null)
+                {
+                    var resultTaskGet = Task.Run(() => PutImageProfile(
+                                bearerToken: cookie.Values[0]));
+                    resultTaskGet.Wait();
+
+                    var resultGet = resultTaskGet.GetAwaiter().GetResult();
+                    if (resultGet.succeeded)
+                    {
+                        Response.Redirect("~/Settings");
+                    }
+                    else
+                    {
+                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.error,
+                            "🤑 não apagou, pena");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.error,
+                    "Não foi possível apagar a sua foto, que pena vai continuar vendo ela");
+            }
+        }
+
+        protected void btnCarregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Before attempting to save the file, verify
+                // that the FileUpload control contains a file.
+                if (selecaoarquivo.HasFile)
+                {
+                    // Call a helper method routine to save the file.
+                    var message = SaveFile(selecaoarquivo.PostedFile);
+
+                    if (message.IsEmpty())
+                    {
+                        System.IO.Stream fs = selecaoarquivo.PostedFile.InputStream;
+                        System.IO.BinaryReader br = new System.IO.BinaryReader(fs);
+                        Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+                        string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+
+                        var cookie = Request.Cookies["token"];
+                        if (cookie != null)
+                        {
+                            var resultTaskGet = Task.Run(() => PutImageProfile(
+                                        bearerToken: cookie.Values[0],
+                                        strinContent: base64String));
+                            resultTaskGet.Wait();
+
+                            var resultGet = resultTaskGet.GetAwaiter().GetResult();
+                            if (resultGet.succeeded)
+                            {
+                                Response.Redirect("~/Settings");
+                            }
+                            else
+                            {
+                                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                                   EnumTypeError.error,
+                                   resultGet.message);
+                            }
+                        }
+                    } else
+                    {
+                        errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.error,
+                            message);
+                    }
+                }            
+            } catch (Exception ex)
+            {
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                   EnumTypeError.error,
+                   "Ocorreu um erro, tente novamente mais tarde.");
+            }
+        }
+
+        private string SaveFile(HttpPostedFile file)
+        {
+            // Save the uploaded file to an "Uploads" directory
+            // that already exists in the file system of the 
+            // currently executing ASP.NET application.  
+            // Creating an "Uploads" directory isolates uploaded 
+            // files in a separate directory. This helps prevent
+            // users from overwriting existing application files by
+            // uploading files with names like "Web.config".
+            string saveDir = @"\temp\uploads\";
+
+            // Get the physical file system path for the currently
+            // executing application.
+            string appPath = Request.PhysicalApplicationPath;
+
+            // Before attempting to save the file, verify
+            // that the FileUpload control contains a file.
+            if (selecaoarquivo.HasFile)
+            {
+                string savePath = appPath + saveDir +
+                    Server.HtmlEncode(selecaoarquivo.FileName);
+
+                // Get the name of the file to upload.
+                string fileName = Server.HtmlEncode(selecaoarquivo.FileName);
+
+                // Get the extension of the uploaded file.
+                string extension = System.IO.Path.GetExtension(fileName);
+
+                // Allow only files with .doc or .xls extensions
+                // to be uploaded.
+                if ((extension == ".png") || (extension == ".jpg") || (extension == ".jpeg"))
+                {
+                    // Append the name of the file to upload to the path.
+                    savePath += fileName;
+
+                    // Call the SaveAs method to save the 
+                    // uploaded file to the specified path.
+                    // This example does not perform all
+                    // the necessary error checking.               
+                    // If a file with the same name
+                    // already exists in the specified path,  
+                    // the uploaded file overwrites it.
+                    selecaoarquivo.SaveAs(savePath);
+
+                    // Notify the user that their file was successfully uploaded.
+                    return "";
+                }
+                else
+                {
+                    // Notify the user why their file was not uploaded.
+                    return "Your file was not uploaded because it does not have a .doc or .xls extension.";
+                }
+            }
+            else
+            {
+                return "You did not specify a file to upload.";
+            }
+        }
+
+        protected void UpdatePanelImage2_Load(object sender, EventArgs e)
+        {
+            if (IsPostBack)
+            {
+                try
+                {
+                    // Verifica se o usuário está autenticado
+                    var cookie = Request.Cookies["token"];
+
+                    if (cookie != null)
+                    {
+                        var resultTask = Task.Run(() => GetImageProfile(cookie.Values[0]));
+                        resultTask.Wait();
+
+                        var result = resultTask.GetAwaiter().GetResult();
+
+                        if (result.succeeded)
+                        {
+                            var url = "data:image/png;base64," + result.data;
+
+                            imageUserTwo.ImageUrl = url;
+                        }
+                    }
+
+                }
+                catch (Exception) { }
+            }
+        }
+
+        protected void TimerImage2_Tick(object sender, EventArgs e)
+        {
+            // Setup
+            TimerImage2.Enabled = false;
+
+            UpdatePanelImage2.Update();
         }
     }
 }

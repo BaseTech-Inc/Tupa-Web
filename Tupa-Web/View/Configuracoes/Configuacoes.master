@@ -15,7 +15,30 @@
                     if (cookie != null)
                     { 
                 %>
-                <asp:Image ID="imgPictureHeader" runat="server" ImageUrl="~/Content/Images/abraham.jpg" />
+                <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
+                <asp:UpdatePanel ID="UpdatePanelImage3" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelImage3_Load">
+                    <ContentTemplate>
+                        <%-- Parte de carregamento enquanto o conteúdo é processado --%>
+                        <asp:UpdateProgress ID="UpdateProgressImage3" runat="server">
+                            <ProgressTemplate>
+                                <%-- Carregameto do esqueleto do conteúdo que será mostrado --%>
+                                <div class="loading">
+                                    <div class="avatar"></div>
+                                </div>
+                            </ProgressTemplate>
+                        </asp:UpdateProgress>
+
+                        <%-- Conteúdo --%>
+                        <div class="img-wrapper">
+                            <asp:Image ID="imgPictureHeader" runat="server" border="0" />
+                        </div>
+
+                        <asp:Timer ID="TimerImage3" runat="server" Interval="1" OnTick="TimerImage3_Tick"></asp:Timer>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="TimerImage3" EventName="Tick" />
+                    </Triggers>
+                </asp:UpdatePanel>
                 <%
                     } 
                 %>

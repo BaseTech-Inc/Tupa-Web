@@ -111,7 +111,8 @@ namespace Tupa_Web.Common.Models
         public static async Task<String> ProcessHttpClientPut(
             string url,
             string mediaType = "application/json",
-            string bearerToken = "")
+            string bearerToken = "",
+            string stringContent = "")
         {
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Clear();
@@ -122,9 +123,9 @@ namespace Tupa_Web.Common.Models
                 client.DefaultRequestHeaders.Add(
                     "Authorization", String.Format("Bearer {0}", bearerToken));
 
-            var content = new StringContent("", Encoding.UTF8, "application/json");
+            string json = JsonSerializer.Serialize(stringContent);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PutAsync(url, content);
-
 
             var streamTask = await response.Content.ReadAsStringAsync();
 
@@ -137,6 +138,7 @@ namespace Tupa_Web.Common.Models
             string mediaType = "application/json",
             string bearerToken = "",
             string refreshCookie = "",
+            string stringContent = "",
             HttpResponse responsePage = null)
         {
             client.DefaultRequestHeaders.Clear();
@@ -149,7 +151,7 @@ namespace Tupa_Web.Common.Models
                 client.DefaultRequestHeaders.Add(
                     "Authorization", String.Format("Bearer {0}", bearerToken));
 
-            var content = new StringContent("", Encoding.UTF8, "text/json");
+            var content = new StringContent(stringContent, Encoding.UTF8, "text/json");
 
             var responseTask = Task.Run(() => client.PostAsync(url, content));
             responseTask.Wait();

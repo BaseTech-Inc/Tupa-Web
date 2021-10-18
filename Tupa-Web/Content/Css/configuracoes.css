@@ -137,7 +137,8 @@ nav .menu-heading {
 }
 
 .perfil-section .picture > * {
-     margin-right: 12px
+     margin-right: 12px;
+     margin-bottom: 0 !important;
 }
 
 .config_wrapper .config_container .form {
@@ -359,4 +360,9 @@ nav .menu-heading {
 
 .form input[type=submit] {
     margin-bottom: 15px
+}
+
+/* Esconde o input */
+input[type='file'] {
+    display: none
 }
