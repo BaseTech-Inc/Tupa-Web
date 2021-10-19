@@ -16,8 +16,20 @@ namespace Tupa_Web.View.Dashboard
 
             foreach (var alertas in listAlertas)
             {
+                var nameImage = "icon";
+                if (alertas.transitividade)
+                    nameImage += "_transitavel";
+                else
+                    nameImage += "_intransitavel";
+
+                if (alertas.atividade)
+                    nameImage += "_ativo";
+                else
+                    nameImage = "icon_inativo";
+
                 values.Add(
                 new PositionDataAlertas(
+                    nameImage,
                     alertas.distrito.nome,
                     alertas.descricao,
                     String.Format("{0} - {1}",

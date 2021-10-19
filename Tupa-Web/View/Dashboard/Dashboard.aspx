@@ -197,11 +197,7 @@
                                     <ItemTemplate>
                                         <div class="card">
                                             <div class="left">
-                                                <div class="icon">
-                                                    <span class="material-icons-outlined">
-                                                        schedule
-                                                    </span>
-                                                </div>  
+                                                <img src='/Content/Images/<%# DataBinder.Eval(Container.DataItem, "NameImage") %>.svg' alt="icon_transitavel_ativo" /> 
                                             </div>
                                             <div class="right">
                                                 <div class="title">    
