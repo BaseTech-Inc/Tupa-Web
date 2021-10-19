@@ -14,10 +14,10 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Mapa
 - [ ] Locais
     - [x] Sistema de busca
-    - [ ] Sugestão de pesquisa
     - [X] Mensagem de nunca pesquisado
     - [X] Histórico
     - [ ] Mais pesquisados
+    - [ ] Sugestão de pesquisa
 - [ ] Dashboard
     - [X] Forecast
     - [X] Alertas

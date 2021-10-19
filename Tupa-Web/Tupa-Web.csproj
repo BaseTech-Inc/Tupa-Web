@@ -187,6 +187,7 @@
     <Content Include="Content\Css\login.css" />
     <Content Include="Content\Css\main.css" />
     <Content Include="Content\Css\mapa.css" />
+    <Content Include="Content\Css\popup.css" />
     <Content Include="Content\Css\reset.css" />
     <Content Include="Content\Css\termsPrivacy.css" />
     <Content Include="Content\Css\variables.css" />
@@ -263,6 +264,7 @@
     <Compile Include="Common\Enumerations\EnumColorTheme.cs" />
     <Compile Include="Common\Helpers\ErrorMessageHelpers.cs" />
     <Compile Include="Common\Enumerations\EnumTypeError.cs" />
+    <Compile Include="Common\Helpers\PopUpHelpers.cs" />
     <Compile Include="Common\Models\HttpRequestUrl.cs" />
     <Compile Include="Common\Models\Response.cs" />
     <Compile Include="Common\Security\GoogleResponse.cs" />
