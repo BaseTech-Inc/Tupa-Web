@@ -85,5 +85,34 @@
         <asp:Button runat="server" ID="btnApagarConta" Cssclass="primary-button danger" Text="Apagar" OnClick="btnApagarConta_Click"/>  
     </div>
 
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy3" runat="server"></asp:ScriptManagerProxy>
+    <asp:UpdatePanel ID="UpdatePanelPopUp" UpdateMode="Conditional" runat="server">
+        <ContentTemplate>
+
+            <%-- Conteúdo --%>
+            <div ID="panelPopUp" runat="server">
+
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
     <script src="/Scripts/PasswordEyes.js"></script>
+    <script>
+
+        function OnOuterClick_ClosePopUp(element, event) {
+            if (!element.children[0].contains(event.target)) {
+                OnClick_ClosePopUp(element)
+            }
+        }
+
+        function OnClick_ClosePopUp(element) {
+            element.classList.toggle('disabled')
+
+            __doPostBack('<%= UpdatePanelPopUp.ClientID %>', 'Close')
+        }
+
+        function OnClick_ApagarConta(element) {
+            __doPostBack('<%= btnApagarConta.ClientID %>', '')
+        }
+    </script>
 </asp:Content>

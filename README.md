@@ -24,11 +24,11 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     - [X] Gráfico
     - [ ] Sugestão de pesquisa
 - [ ] Configurações de Usuário
-    - [ ] Editar Info
+    - [X] Editar Info
         - [X] Alterar Nome
         - [X] Alterar Senha
         - [X] Deletar Conta
-            - [ ] Pop up de "tem certeza?"
+            - [X] Pop up de "tem certeza?"
         - [X] Alterar foto
     - [X] Tema
     - [X] Planos

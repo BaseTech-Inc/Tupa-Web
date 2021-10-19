@@ -5,6 +5,8 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 10000;
+    position: fixed
 }
 
 .popup_wrapper.disabled {
@@ -28,8 +30,22 @@
     padding: 24px;
     background: #F7F9FB;
     border-bottom: 1px solid #D9DBDD;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup_wrapper .popup .title .close_button {
+    cursor: pointer
 }
 
 .popup_wrapper .popup .body {
     padding: 24px;
+}
+
+.popup_wrapper .popup .body p {
+    margin-bottom: 12px;
+}
+
+.popup_wrapper .popup .body input[type=button] {
+    width: 100%
 }

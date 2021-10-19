@@ -31,6 +31,28 @@ namespace Tupa_Web.View.Configuracoes
                 // Setup
                 UpdateProgressImage2.AssociatedUpdatePanelID = UpdatePanelImage2.UniqueID;
             }
+
+            // Post Back usando um evento Javascript
+            ClientScript.GetPostBackEventReference(this, string.Empty);
+
+            string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
+            string parameter = Page.Request.Params.Get("__EVENTARGUMENT");
+
+            if (targetCtrl != null && targetCtrl != string.Empty)
+            {
+                if (IsPostBack)
+                {
+                    if (targetCtrl == UpdatePanelPopUp.ClientID && parameter == "Close")
+                    {
+                        panelPopUp.InnerHtml = "";
+                    }
+
+                    if (targetCtrl == btnApagarConta.ClientID)
+                    {
+                        ApagarConta();
+                    }
+                }
+            }
         }
         private async Task<Response<string>> postChangePassword(
             string oldPassword, string newPassword, string bearerToken)
@@ -250,6 +272,25 @@ namespace Tupa_Web.View.Configuracoes
         {
             try
             {
+                if (IsPostBack)
+                {
+                    panelPopUp.InnerHtml = PopUpHelpers.PopUp(
+                        "Você tem certeza absoluta?",
+                        new string[] { "Esta ação não pode ser desfeita. Isso excluirá permanentemente a sua conta, e todos os seus dados.", "Digite SUA_CONTA para confirmar." },
+                        "Eu desejo excluir a conta",
+                        "OnClick_ApagarConta");
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void ApagarConta()
+        {
+            try
+            {
                 var cookie = Request.Cookies["token"];
                 if (cookie != null)
                 {
@@ -267,18 +308,17 @@ namespace Tupa_Web.View.Configuracoes
                     else
                     {
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                                      EnumTypeError.error,
-                                      "🤑 não apagou, pena");
+                            EnumTypeError.error,
+                            "🤑 não apagou, pena");
                     }
                 }
             }
             catch (Exception)
             {
                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                                      EnumTypeError.error,
-                                      "Jogue sua conta no lixo🗑, vulgo Gabriel");
+                    EnumTypeError.error,
+                    "Jogue sua conta no lixo🗑, vulgo Gabriel");
             }
-            
         }
 
         protected void txtDeletarFoto_Click(object sender, EventArgs e)
