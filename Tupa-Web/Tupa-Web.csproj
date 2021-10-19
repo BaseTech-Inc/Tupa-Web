@@ -236,6 +236,7 @@
     <Content Include="Scripts\Carousel.js" />
     <Content Include="Scripts\intlTelInput.min.js" />
     <Content Include="Scripts\PasswordEyes.js" />
+    <Content Include="Scripts\PopUp.js" />
     <Content Include="Scripts\TermsPrivacy.js" />
     <Content Include="View\About\About.aspx" />
     <Content Include="View\Configuracoes\Notifications.aspx" />
