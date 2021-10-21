@@ -24,6 +24,15 @@ namespace Tupa_Web.View.Locais
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
 
         /// <summary>
+        /// Controle RepeaterMoreSearch.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterMoreSearch;
+
+        /// <summary>
         /// Controle rep.
         /// </summary>
         /// <remarks>

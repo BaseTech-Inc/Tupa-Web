@@ -55,6 +55,34 @@
                     </div>
                 </div>                   
             </div> -->
+            <div class="more-search">
+                <asp:Repeater ID="RepeaterMoreSearch" runat="server">
+                    <HeaderTemplate>
+                        <p>Mais pesquisados</p>
+
+                        <div class="list scroll">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="card">
+                            <div class="title">
+                                <div class="icon">
+                                    <span class="material-icons-outlined">
+                                        schedule
+                                    </span>
+                                </div>                                
+    
+                                <div class="description">
+                                    <h4><%# DataBinder.Eval(Container.DataItem, "Local") %></h4>
+                                    <p><%# DataBinder.Eval(Container.DataItem, "Estado") %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                        <FooterTemplate>
+                        </div>
+                    </FooterTemplate>
+                </asp:Repeater>
+            </div>
 
             <div class="week">
                 <asp:Repeater ID="rep" runat="server">
