@@ -1,3 +1,8 @@
+## Ignorar todos os arquivos temporários
+temp/**/*.*
+!.gitkeep
+
+## Ignorar o arquivos com as chaves secretas
 secrets.xml
 
 ## Ignore Visual Studio temporary files, build results, and
