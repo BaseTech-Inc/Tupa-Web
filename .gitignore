@@ -1,5 +1,5 @@
 ## Ignorar todos os arquivos temporários
-temp/**/*.*
+**/[Tt]emp/**/*
 !.gitkeep
 
 ## Ignorar o arquivos com as chaves secretas
