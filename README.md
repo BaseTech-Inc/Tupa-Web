@@ -16,7 +16,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     - [x] Sistema de busca
     - [X] Mensagem de nunca pesquisado
     - [X] Histórico
-    - [ ] Mais pesquisados
+    - [X] Mais pesquisados
     - [ ] Sugestão de pesquisa
 - [ ] Dashboard
     - [X] Forecast
