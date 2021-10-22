@@ -31,6 +31,7 @@ namespace Tupa_Web.View.Locais
             if (!IsPostBack)
             {
                 LoadHistoricoUsuario();
+                LoadMoreSearch();
 
                 if (!SearchLocate.IsEmpty())
                     txtSearch.Text = SearchLocate;
@@ -201,6 +202,34 @@ namespace Tupa_Web.View.Locais
             }            
         }
 
+        public class PositionDataMaisPesquisados
+        {
+            private string local;
+            private string estado;
+
+            public PositionDataMaisPesquisados(string local, string estado)
+            {
+                this.local = local;
+                this.estado = estado;
+            }
+
+            public string Local
+            {
+                get
+                {
+                    return local;
+                }
+            }
+
+            public string Estado
+            {
+                get
+                {
+                    return estado;
+                }
+            }
+        }
+
         private async Task<Response<PaginatedList<HistoricoUsuario>>> GetHistoricoUsuarioWithPagination(
             int pageNumber, string bearerToken)
         {
@@ -238,7 +267,26 @@ namespace Tupa_Web.View.Locais
             var jsonResult = JsonSerializer.Deserialize<List<Ponto>>(stringResult);
 
             return jsonResult;
-        }        
+        }
+
+        private async Task<Response<PaginatedList<DistritoCountDto>>> GetHistoricoUsuarioMoreSearch(
+            int pageNumber, string bearerToken)
+        {
+            // criando a url para comunicar entre o servidor
+            string url = HttpRequestUrl.baseUrlTupa
+                .AddPath("api/v1/HistoricoUsuario/more-search")
+                .SetQueryParams(new
+                {
+                    PageNumber = pageNumber,
+                });
+
+            // resultado da comunicação
+            var stringResult = await HttpRequestUrl.ProcessHttpClientGet(url, bearerToken: bearerToken);
+
+            var jsonResult = JsonSerializer.Deserialize<Response<PaginatedList<DistritoCountDto>>>(stringResult);
+
+            return jsonResult;
+        }
 
         private void LoadHistoricoUsuario()
         {
@@ -371,13 +419,15 @@ namespace Tupa_Web.View.Locais
                         repeaterPagination.DataSource = array;
                         repeaterPagination.DataBind();
 
-
                         if (resultHistorico.data.totalCount == 0)
                         {
                             morePagesInformation.InnerHtml = "<p>Você não tem nenhum histórico de viagens... por enquanto.</p>";
                         } else if (resultHistorico.data.totalPages < PageNumber)
                         {
                             morePagesInformation.InnerHtml = "<p>O limite é as estrelas, e você conseguiu passar 🖖.</p>";
+                        } else
+                        {
+                            morePagesInformation.InnerHtml = "";
                         }
                     }
                 }
@@ -387,9 +437,54 @@ namespace Tupa_Web.View.Locais
             }                           
         }
 
+        private void LoadMoreSearch()
+        {
+            try
+            {
+                var cookie = Request.Cookies["token"];
+
+                if (cookie != null)
+                {
+                    var resultTaskGet = Task.Run(() => GetHistoricoUsuarioMoreSearch(
+                        1,
+                        bearerToken: cookie.Values[0]));
+                    resultTaskGet.Wait();
+                    
+                    var result = resultTaskGet.GetAwaiter().GetResult();
+
+                    if (result.succeeded)
+                    {
+                        IList<PositionDataMaisPesquisados> listDataMaisPesquisados = new List<PositionDataMaisPesquisados>();
+
+                        foreach (var item in result.data.items)
+                        {
+                            listDataMaisPesquisados.Add(new PositionDataMaisPesquisados (
+                                item.distrito.nome + ", " + item.distrito.cidade.nome,
+                                item.distrito.cidade.estado.nome));
+                        }
+
+                        if (listDataMaisPesquisados.Count > 0)
+                            RepeaterMoreSearch.Visible = true;
+                        else
+                            RepeaterMoreSearch.Visible = false;
+
+                        RepeaterMoreSearch.DataSource = listDataMaisPesquisados;
+                        RepeaterMoreSearch.DataBind();
+
+                        txtSearch.Focus();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         protected void txtSearch_TextChanged(object sender, EventArgs e)
         {
             LoadHistoricoUsuario();
+            LoadMoreSearch();
         }
     }
 }

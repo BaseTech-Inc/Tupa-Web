@@ -175,3 +175,7 @@ main .content .list .card .footer div p:nth-child(2) {
     text-align: center;
     padding: 24px 0
 }
+
+.moreSearch .card {
+    cursor: pointer
+}

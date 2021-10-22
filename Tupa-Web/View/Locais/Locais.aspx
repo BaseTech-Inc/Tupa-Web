@@ -20,42 +20,7 @@
         </div>
 
         <div class="content">
-            <!-- Mais pesquisados 
-            <div class="more-search">
-                <p>Mais pesquisados</p>
-
-                <div class="list scroll">
-                    <div class="card">
-                        <div class="title">
-                            <div class="icon">
-                                <span class="material-icons-outlined">
-                                    schedule
-                                </span>
-                            </div>                                
-    
-                            <div class="description">
-                                <h4>Ermelino Matarazzo, São Paulo</h4>
-                                <p>19º</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="title">
-                            <div class="icon">
-                                <span class="material-icons-outlined">
-                                    schedule
-                                </span>
-                            </div>                                
-    
-                            <div class="description">
-                                <h4>Belém, São Paulo</h4>
-                                <p>24º</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>                   
-            </div> -->
-            <div class="more-search">
+            <div class="moreSearch">
                 <asp:Repeater ID="RepeaterMoreSearch" runat="server">
                     <HeaderTemplate>
                         <p>Mais pesquisados</p>
@@ -63,7 +28,7 @@
                         <div class="list scroll">
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div class="card">
+                        <div class="card" onclick="OnClick_MoreSearchCard(this);">
                             <div class="title">
                                 <div class="icon">
                                     <span class="material-icons-outlined">
@@ -261,6 +226,14 @@
 
         function BackClick(element) {
             __doPostBack('<%= HyperLinkBack.ClientID %>')
+        }
+
+        const txtSearch = document.querySelector('#<%# txtSearch.ClientID %>')
+
+        function OnClick_MoreSearchCard(element) {
+            let address = element.children[0].children[1].children[0].innerText + " - " + element.children[0].children[1].children[1].innerText
+
+            txtSearch.value = address
         }
     </script>
 </asp:Content>
