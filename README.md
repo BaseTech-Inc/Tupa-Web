@@ -16,14 +16,14 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     - [x] Sistema de busca
     - [X] Mensagem de nunca pesquisado
     - [X] Histórico
-    - [ ] Mais pesquisados
+    - [X] Mais pesquisados
     - [ ] Sugestão de pesquisa
 - [ ] Dashboard
     - [X] Forecast
     - [X] Alertas
     - [X] Gráfico
     - [ ] Sugestão de pesquisa
-- [ ] Configurações de Usuário
+- [X] Configurações de Usuário
     - [X] Editar Info
         - [X] Alterar Nome
         - [X] Alterar Senha
