@@ -213,6 +213,8 @@
     <Content Include="Content\Images\logo-alternative.png" />
     <Content Include="Content\Images\logo-white.png" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\logo_basetech.svg" />
+    <Content Include="Content\Images\logo_tupa.svg" />
     <Content Include="Content\Images\map-phone.png" />
     <Content Include="Content\Images\map_ilustration_white_theme.svg" />
     <Content Include="Content\Images\nelson.jpg" />

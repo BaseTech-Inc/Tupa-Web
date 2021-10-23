@@ -34,7 +34,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     - [X] Planos
     - [X] Sair
     - [ ] Notificações por email
-- [ ] Sobre Nós
+- [X] Sobre Nós
 
 ## Começando
 
