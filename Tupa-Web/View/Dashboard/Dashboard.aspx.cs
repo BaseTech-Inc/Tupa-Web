@@ -46,6 +46,8 @@ namespace Tupa_Web.View.Dashboard
 
                 PageNumberAlertas = 1;
 
+                SearchLocate = Request.QueryString["q"];
+
                 if (!SearchDate.IsEmpty())
                     txtSearchDate.Text = SearchDate;
                 if (!SearchLocate.IsEmpty())
