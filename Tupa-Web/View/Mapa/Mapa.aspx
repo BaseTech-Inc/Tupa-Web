@@ -6,7 +6,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container_wrapper">
+    <div class="container_wrapper dashboard">
         <div class="search">
             <label for="search">
                 <span class="material-icons">
@@ -15,6 +15,26 @@
             </label>
                 
             <input id="txtSearch" type="text" name="search" id="search" placeholder="Pesquisar..." class="card">
+        </div>
+
+        <div class="buttons">
+            <div class="current-location card button" onclick="CenterMap();">
+                <span class="material-icons">
+                gps_fixed
+                </span>
+            </div>
+            <div class="zoom button card">
+                <div onclick="moreZoom();">
+                    <span class="material-icons">
+                    add
+                    </span>
+                </div>
+                <div onclick="minusZoom();">
+                    <span class="material-icons">
+                    remove
+                    </span>
+                </div>
+            </div>
         </div>
     </div>        
 
@@ -95,15 +115,7 @@
                 customMapStyle: myStyleWhite
             })
 
-            //Request the user's location
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var loc = new Microsoft.Maps.Location(
-                    position.coords.latitude,
-                    position.coords.longitude);
-
-                //Center the map on the user's location.
-                map.setView({ center: loc, zoom: 15 });
-            });
+            CenterMap()
 
             let center = map.getCenter();
             
@@ -141,6 +153,18 @@
             }
         }
 
+        function CenterMap() {
+            //Request the user's location
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var loc = new Microsoft.Maps.Location(
+                    position.coords.latitude,
+                    position.coords.longitude);
+
+                //Center the map on the user's location.
+                map.setView({ center: loc, zoom: 15 });
+            });
+        }
+
         function pushpinClicked(e) {
             //Hide the tooltip
             closeInfobox()
@@ -169,6 +193,20 @@
         function closeInfobox() {
             //Hide the infobox
             infobox.setOptions({ visible: false })
+        }
+
+        function moreZoom() {
+            lastZoomLevel = map.getZoom()
+            lastZoomLevel++
+
+            map.setView({ center: map.getCenter(), zoom: lastZoomLevel });
+        }
+
+        function minusZoom() {
+            lastZoomLevel = map.getZoom()
+            lastZoomLevel--
+
+            map.setView({ center: map.getCenter(), zoom: lastZoomLevel });
         }
     </script>
 </asp:Content>
