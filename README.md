@@ -46,7 +46,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     - [ ] Arrumar estilo da tela de mapas
     - [ ] Tornar plano Premium inativo para selecionar
     - [ ] Criar mensagens de erros customizadas
-- [ ] Tornar páginas responsivas
+- [ ] #20
 
 ## Começando
 
