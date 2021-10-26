@@ -35,7 +35,7 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [ ] Aprimoramentos e ajustes
-- [ ] Tornar páginas responsivas #20
+- [ ] Tornar páginas responsivas
 
 ## Começando
 
