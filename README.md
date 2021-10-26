@@ -35,6 +35,15 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [ ] Aprimoramentos e ajustes
+    - [ ] Tornar carrossel da página inicial infinito  
+    - [ ] Arrumar seção de instalar aplicativo
+    - [ ] Trocar estilo de alguns links
+    - [ ] No menu suspenso deixar o botão sair em destaque
+    - [ ] Organizar tela de configurações
+    - [ ] Organizar carregamento da foto de perfil na tela de configurações
+    - [ ] Na tela de locais deixar criar efeito de hover nos botões de mais pesquisado
+    - [ ] Na tela de locais trocar mapa da Google pelo mapa da Bing
+    - [ ] Arrumar estilo da tela de mapas
 - [ ] Tornar páginas responsivas
 
 ## Começando
