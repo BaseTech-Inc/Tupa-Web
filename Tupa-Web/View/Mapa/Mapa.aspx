@@ -7,7 +7,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container_wrapper dashboard">
-        <div class="search">
+        <div class="search" id="searchBoxContainer">
             <label for="search">
                 <span class="material-icons">
                 search
@@ -117,8 +117,17 @@
 
             CenterMap()
 
+            Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', function () {
+                var manager = new Microsoft.Maps.AutosuggestManager({ map: map });
+                manager.attachAutosuggest('#txtSearch', '#searchBoxContainer', selectedSuggestion);
+            });
+
+            LoadPontosRiscos();
+        }
+
+        function LoadPontosRiscos() {
             let center = map.getCenter();
-            
+
             //Create an infobox for displaying detailed information.
             infobox = new Microsoft.Maps.Infobox(center, {
                 visible: false,
@@ -130,7 +139,7 @@
             infobox.setMap(map)
 
             let jsonPontosDeRisco = JSON.parse(document.querySelector('#jsonPontosDeRisco').value)
-            
+
             for (var i = 0; i < jsonPontosDeRisco.length; i++) {
                 var pin = new Microsoft.Maps.Pushpin(jsonPontosDeRisco[i].ponto, {
                     icon: '/Content/Images/location.svg',
@@ -153,6 +162,18 @@
             }
         }
 
+        function selectedSuggestion(result) {
+            //Remove previously selected suggestions from the map.
+            map.entities.clear();
+
+            //Show the suggestion as a pushpin and center map over it.
+            var pin = new Microsoft.Maps.Pushpin(result.location);
+            map.entities.push(pin);
+            map.setView({ bounds: result.bestView });
+
+            LoadPontosRiscos();
+        }
+
         function CenterMap() {
             //Request the user's location
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -160,8 +181,17 @@
                     position.coords.latitude,
                     position.coords.longitude);
 
+                //Remove previously selected suggestions from the map.
+                map.entities.clear();
+
                 //Center the map on the user's location.
                 map.setView({ center: loc, zoom: 15 });
+
+                //Show the suggestion as a pushpin and center map over it.
+                var pin = new Microsoft.Maps.Pushpin(loc);
+                map.entities.push(pin);
+
+                LoadPontosRiscos();
             });
         }
 
