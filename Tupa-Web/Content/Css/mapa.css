@@ -2,6 +2,48 @@ body {
     overflow: hidden
 }
 
+.inputs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 1
+}
+
+.inputs .routes {
+    border-radius: 16px;
+    padding: 9px;
+    margin-right: 12px;
+    z-index: 1;
+    cursor: pointer
+}
+
+.disabled {
+    display: none
+}
+
+.MicrosoftMap.dirSDK .directionsPanel {
+    width: 340px !important;
+    margin-left: 20px;
+}
+
+.directionsContainer {
+    width: 380px;
+    background: #ffffff;
+    height: calc(100vh - 80px);
+    position: absolute;
+    overflow-y: auto;
+    top: 80px;
+    z-index: 1;
+}
+
+.inputs .routes span {
+    color: var(--primary-color)
+}
+
+.inputs .search {
+    margin-bottom: 0 !important
+}
+
 .MicrosoftMap .as_container_search {
     width: calc(100% + 80px) !important;
 }

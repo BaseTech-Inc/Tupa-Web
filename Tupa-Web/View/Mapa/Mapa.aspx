@@ -7,14 +7,21 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container_wrapper dashboard">
-        <div class="search" id="searchBoxContainer">
-            <label for="search">
+        <div class="inputs">
+             <div class="routes card" onclick="ToogleDirections();">
                 <span class="material-icons">
-                search
+                directions
                 </span>
-            </label>
+            </div>
+            <div class="search" id="searchBoxContainer">
+                <label for="search">
+                    <span class="material-icons">
+                    search
+                    </span>
+                </label>
                 
-            <input id="txtSearch" type="text" name="search" id="search" placeholder="Pesquisar..." class="card">
+                <input id="txtSearch" type="text" name="search" id="search" placeholder="Pesquisar..." class="card">
+            </div>
         </div>
 
         <div class="buttons">
@@ -36,7 +43,12 @@
                 </div>
             </div>
         </div>
-    </div>        
+    </div>  
+    
+    <div class="directionsContainer disabled">
+        <div id="directionsPanel"></div>
+        <div id="directionsItinerary"></div>
+    </div>
 
     <div id="myMap"></div>
 
@@ -123,6 +135,18 @@
             });
 
             LoadPontosRiscos();
+
+            //Load the directions module.
+            Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+                //Create an instance of the directions manager.
+                directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+
+                //Specify where to display the route instructions.
+                directionsManager.setRenderOptions({ itineraryContainer: '#directionsItinerary' });
+
+                //Specify the where to display the input panel
+                directionsManager.showInputPanel('directionsPanel');
+            });
         }
 
         function LoadPontosRiscos() {
@@ -237,6 +261,14 @@
             lastZoomLevel--
 
             map.setView({ center: map.getCenter(), zoom: lastZoomLevel });
+        }
+
+        function ToogleDirections() {
+            let inputs = document.querySelector('.inputs')
+            let directions = document.querySelector('.directionsContainer')
+
+            inputs.classList.toggle('disabled')
+            directions.classList.toggle('disabled')
         }
     </script>
 </asp:Content>
