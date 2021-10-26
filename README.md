@@ -6,35 +6,36 @@
 </i>
 </div>
 
-## Ajustes e melhorias
-
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+## Recursos
 
 - [x] Login/Register
-- [ ] Mapa
-- [ ] Locais
+- [X] Mapa
+- [X] Locais
     - [x] Sistema de busca
     - [X] Mensagem de nunca pesquisado
     - [X] Histórico
     - [X] Mais pesquisados
-    - [ ] Sugestão de pesquisa
-- [ ] Dashboard
+- [X] Dashboard
     - [X] Forecast
     - [X] Alertas
     - [X] Gráfico
-    - [ ] Sugestão de pesquisa
 - [X] Configurações de Usuário
     - [X] Editar Info
         - [X] Alterar Nome
         - [X] Alterar Senha
         - [X] Deletar Conta
-            - [X] Pop up de "tem certeza?"
         - [X] Alterar foto
     - [X] Tema
     - [X] Planos
     - [X] Sair
-    - [ ] Notificações por email
 - [X] Sobre Nós
+
+## Ajustes e melhorias
+
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+
+- [ ] Aprimoramentos e ajustes
+- [ ] Tornar páginas responsivas #20
 
 ## Começando
 
