@@ -308,6 +308,7 @@ footer p {
 @media only screen and (max-width: 960px) {
     .login_content .login {
         width: 100%;
+        justify-content: flex-start;
     }
 
     .login_content .slider_content {
@@ -315,8 +316,8 @@ footer p {
     }
 
     .login_content .login .menu {
-        width: 360px;
-        margin-bottom: 64px;
+        width: 100%;
+        margin-bottom: 32px;
     }
 
     footer ul li a {
@@ -332,11 +333,6 @@ footer p {
         min-height: 100vh;
         padding: 12px;
         margin-bottom: 12px;
-    }
-
-    .login_content .login .menu {
-        margin-top: 32px;
-        width: 100%;
     }
 
     footer {
