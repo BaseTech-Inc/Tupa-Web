@@ -105,7 +105,7 @@
                             <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings">Privacidade</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings/Help">Ajuda</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">Ajuda</asp:HyperLink>
                         </li>
                     </ul>
                     <%
