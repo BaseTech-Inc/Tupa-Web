@@ -108,7 +108,7 @@
                 </div>
                 <asp:HyperLink ID="HyperLink1" runat="server" CssClass="primary-button" NavigateUrl="~/Register">Assinar agora</asp:HyperLink>
             </div>
-            <div class="card target">
+            <div class="card target disabled">
                 <div class="price">
                     <span class="currency">R$</span>
                     <span class="money bold">99</span>
@@ -139,7 +139,7 @@
                             Histórico de viagens.</li>
                     </ul>
                 </div>
-                <asp:HyperLink ID="HyperLink2" runat="server" CssClass="secondary-button" NavigateUrl="~/Register">Assinar agora</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink2" runat="server" CssClass="secondary-button">Assinar agora</asp:HyperLink>
             </div>
         </div>
     </div>

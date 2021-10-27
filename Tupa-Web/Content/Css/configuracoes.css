@@ -232,7 +232,6 @@ nav .menu-heading {
     width: 100%;
 }
 
-
 .plans-user-section .card {
     border-radius: 16px;
     position: relative;
@@ -318,6 +317,23 @@ nav .menu-heading {
 .plans-section .cards .card:hover {
     box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
     border: 1px solid #1F72D1;
+}
+
+.plans-section .cards .card.disabled {
+    cursor: no-drop;
+    color: var(--disabled-color)
+}
+
+.plans-section .cards .card.disabled h2,
+.plans-section .cards .card.disabled p, 
+.plans-section .cards .card.disabled span,
+.plans-section .cards .card.disabled li {
+    color: var(--disabled-color) !important
+}
+
+.plans-section .cards .card.disabled:hover {
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 3px 6px var(--shadow-variant-color) !important;
 }
 
 .plans-section .cards .card .price {
