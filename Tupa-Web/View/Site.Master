@@ -113,9 +113,11 @@
                             </asp:UpdateProgress>
 
                             <%-- Conteúdo --%>
-                            <div class="img-wrapper">
-                                <asp:Image ID="imageUser" runat="server" border="0" />
-                            </div>
+                            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Settings">
+                                <div class="img-wrapper">
+                                    <asp:Image ID="imageUser" runat="server" border="0" />
+                                </div>
+                            </asp:HyperLink>
 
                             <asp:Timer ID="TimerImage" runat="server" Interval="1" OnTick="TimerImage_Tick"></asp:Timer>
                         </ContentTemplate>

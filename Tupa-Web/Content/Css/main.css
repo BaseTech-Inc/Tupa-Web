@@ -56,6 +56,14 @@ textarea {
     text-decoration: underline;
 }
 
+.land__link {
+    color: var(--primary-variant-color);
+    font-weight: 700;
+    border-bottom: 1px solid var(--primary-variant-color);
+    cursor: pointer;
+    text-decoration: none
+}
+
 .primary-button {
     background: var(--surface_color_variant);
     border: 1px solid var(--primary-variant-color);

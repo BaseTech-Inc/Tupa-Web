@@ -35,9 +35,8 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [ ] Aprimoramentos e ajustes
-    - [ ] Tornar carrossel da página inicial infinito  
     - [ ] Arrumar seção de instalar aplicativo
-    - [ ] Trocar estilo de alguns links
+    - [X] Trocar estilo de alguns links
     - [ ] No menu suspenso deixar o botão sair em destaque
     - [ ] Organizar tela de configurações
     - [ ] Organizar carregamento da foto de perfil na tela de configurações
@@ -46,7 +45,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
     - [ ] Arrumar estilo da tela de mapas
     - [ ] Tornar plano Premium inativo para selecionar
     - [ ] Criar mensagens de erros customizadas
-    - [ ] Ir para página de perfil ao clicar na foto de perfil do usuário
 - [ ] Tornar páginas responsivas
 
 ## Começando

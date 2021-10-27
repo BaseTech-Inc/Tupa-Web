@@ -1,11 +1,3 @@
-.land__link {
-    color: var(--primary-variant-color);
-    font-weight: 700;
-    border-bottom: 1px solid var(--primary-variant-color);
-    cursor: pointer;
-    text-decoration: none
-}
-
 .terms .list {
     display: flex;
     flex-direction: column;

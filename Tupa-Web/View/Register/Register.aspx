@@ -89,7 +89,7 @@
                     </div>  
                 </div>
 
-                <p class="caption">Você já tem <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' class="caption">login</asp:HyperLink>?</p>
+                <p class="caption">Você já tem <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' CssClass="caption land__link">login</asp:HyperLink>?</p>
 
                 <asp:Button 
                     ID="btnRegister"

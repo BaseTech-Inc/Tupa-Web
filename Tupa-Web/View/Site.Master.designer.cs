@@ -177,6 +177,15 @@ namespace Tupa_Web.View
         protected global::System.Web.UI.UpdateProgress UpdateProgressImage;
 
         /// <summary>
+        /// Controle HyperLink3.
+        /// </summary>
+        /// <remarks>
+        /// Campo gerado automaticamente.
+        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
+
+        /// <summary>
         /// Controle imageUser.
         /// </summary>
         /// <remarks>
