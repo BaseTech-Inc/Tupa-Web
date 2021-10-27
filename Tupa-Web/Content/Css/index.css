@@ -434,6 +434,7 @@ header.card {
 .play_store .input a {
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer
 }
 
 .play_store .download {
@@ -443,10 +444,15 @@ header.card {
 .play_store .download img {
     width: 180px;
     margin-right: 12px;
+    cursor: pointer
 }
 
 .play_store .download .stars {
     display: flex;
+}
+
+.play_store .download .stars span {
+    cursor: pointer
 }
 
 .play_store .download .stars > span {
@@ -457,6 +463,10 @@ header.card {
     color: var(--primary-variant-color);
 }
 .play_store .download .stars > span:nth-child(2) {
+    color: var(--primary-variant-color);
+}
+
+.play_store .download .stars > span.target {
     color: var(--primary-variant-color);
 }
 

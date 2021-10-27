@@ -443,31 +443,31 @@
             </div> 
             <div class="input">
                 <input type="tel" id="phone" placeholder="Coloque seu número de telefone" class="card">
-                <a href="#" class="secondary-button">Enviar link</a>
+                <a class="secondary-button" onclick="alert('Essa função está inativa no momento :(')">Enviar link</a>
             </div>
             <div class="download">
-                <asp:Image ID="imgGooglePlayBadge" runat="server" ImageUrl="~/Content/Images/google-play-badge.png" />
+                <asp:Image ID="imgGooglePlayBadge" runat="server" ImageUrl="~/Content/Images/google-play-badge.png" onclick="alert('Essa função está inativa no momento :(')" />
 
                 <div class="social">
                     <div class="stars">
-                        <span class="material-icons-outlined">
+                        <span class="material-icons-outlined star-icon" data-star="0">
                             star
                         </span>
-                        <span class="material-icons-outlined">
+                        <span class="material-icons-outlined star-icon" data-star="1">
                             star
                         </span>
-                        <span class="material-icons-outlined">
+                        <span class="material-icons-outlined star-icon" data-star="2">
                             star
                         </span>
-                        <span class="material-icons-outlined">
+                        <span class="material-icons-outlined star-icon" data-star="3">
                             star
                         </span>
-                        <span class="material-icons-outlined">
+                        <span class="material-icons-outlined star-icon" data-star="4">
                             star
                         </span>
                     </div> 
 
-                    <p class="caption">523k visualizações</p>
+                    <p class="caption"><span class="caption" id="random-number"></span>k visualizações</p>
                 </div>                               
             </div>
         </div>
@@ -490,5 +490,35 @@
         let horn = document.querySelector('.PlayAudio')
 
         AudioHorn.Setup(horn)
+
+        // deprecated code :(
+        function starRating() {
+            var star = document.querySelectorAll(".star-icon");
+            for (var i = 0; i < star.length; i++) {
+                star[i].addEventListener("mouseover", () => {
+                    var obj = event.target;
+                    for (var i = 0; i <= Number(obj.dataset.star); i++) {
+                        star[i].classList.add('target')
+                    }
+                    for (var i = star.length - 1; i > Number(obj.dataset.star); i--) {
+                        star[i].classList.remove('target')
+                    }
+                });
+            }
+        }
+
+        window.addEventListener("load", () => {
+            starRating()
+
+            var randomNumber = getRandomInt(0, 1000)
+
+            document.querySelector('#random-number').innerHTML = randomNumber
+        });
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
     </script>
 </asp:Content>
