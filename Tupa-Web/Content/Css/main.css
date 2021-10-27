@@ -422,6 +422,46 @@ footer > nav .footer_group a:hover {
     border-bottom: 1px solid var(--primary-variant-color);
 }
 
+@media only screen and (max-width: 960px) {
+    footer > nav {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    footer > nav .footer_group {
+        min-width: 160px
+    }
+
+    footer > nav .footer_group:last-child {
+        margin-right: 24px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    footer > nav {
+        justify-content: center
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    footer > nav {
+        text-align: center
+    }
+
+    footer .footer_logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    footer .footer_wrapper {
+        flex-direction: column
+    }
+
+    footer .footer_wrapper .footer_copyright {
+        margin-bottom: 8px
+    }
+}
+
 /* search input */
 .search {
     max-width: 312px;

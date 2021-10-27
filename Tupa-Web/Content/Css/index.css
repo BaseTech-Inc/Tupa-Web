@@ -113,6 +113,33 @@ header.card {
     transform: scale(0.96);
 }
 
+@media only screen and (max-width: 960px) {
+    .header .description .mouse {
+        display: none !important
+    }
+
+    .header > div {
+        flex-direction: column-reverse;
+        padding: 0 12px
+    }
+
+    .header .description {
+        min-height: initial;
+        text-align: center;
+        margin-top: 12px
+    }
+
+    .header .illustration svg {
+        max-width: 100%
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header .description h1 {
+        font-size: 32px;
+    }
+}
+
 /* FEATURES */
 
 .features  {
@@ -154,6 +181,21 @@ header.card {
 
 .features .feature p {
     margin-bottom: 16px;
+}
+
+
+@media only screen and (max-width: 960px) {
+    .container_wrapper.features {
+        flex-direction: column-reverse
+    }
+
+    .container_wrapper.features .feature {
+        text-align: center
+    }
+
+    .container_wrapper.features .feature ul li {
+        justify-content: center
+    }
 }
 
 /* PLANS */
@@ -354,6 +396,30 @@ header.card {
     bottom: -18%;
     background-image: url("/Content/Images/oprah.jpg");
 }
+
+@media only screen and (max-width: 960px) {
+    .container_wrapper .layout-grid {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap
+    }
+
+    .quote-card.offset-left {
+        left: 0;
+    }
+
+    .quote-card.offset-right {
+        right: 0;
+    }
+
+    .quote-card .img-author {
+        left: auto !important;
+        top: auto !important;
+        right: 11% !important;
+        bottom: -18% !important;
+    }
+}
+
 
 /* ORBIT */
 

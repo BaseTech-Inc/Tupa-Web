@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="illustration">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="549" height="541" viewBox="0 0 549 541">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="549" viewBox="0 0 549 541">
                     <defs>
                         <style>
                             .cls-1, .cls-10, .cls-11, .cls-7 {
