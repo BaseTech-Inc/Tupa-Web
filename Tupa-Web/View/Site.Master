@@ -144,8 +144,7 @@
                                 </span>
                                 Configurar Perfil
                             </asp:HyperLink>
-                        </li>
-                        <hr>                        
+                        </li>                     
                         <% } %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings/Themes">
@@ -168,7 +167,7 @@
                         </li>
                         <% if (IsLogged()) { %>
                         <hr>
-                        <li class="menu-dropdown-item">
+                        <li class="menu-dropdown-item danger">
                             <asp:LinkButton ID="lbtnSair" runat="server" OnClick="lbtnSair_Click">Sair</asp:LinkButton>
                         </li>
                         <% } %>

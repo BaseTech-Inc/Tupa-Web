@@ -340,6 +340,10 @@ header .menu-bar .menu-dropdown hr {
     display: block;
 }
 
+header .menu-bar .menu-dropdown .danger a {
+    color: var(--error_color)
+}
+
 @media only screen and (max-width: 768px) {
     header .menu .user {
         display: none;
