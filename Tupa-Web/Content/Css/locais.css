@@ -10,6 +10,15 @@ main .search {
     margin-bottom: 0 !important;
 }
 
+.moreSearch .card {
+    transition: .2s ease-in-out;
+}
+
+.moreSearch .card:hover {
+    box-shadow: rgba(59, 145, 243, 45%) 0 0 0 3px !important;
+    border: 1px solid var(--border-variant-color);
+}
+
 main .content {
     margin-bottom: 32px;
 }

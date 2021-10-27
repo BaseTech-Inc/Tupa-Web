@@ -36,11 +36,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - [ ] Aprimoramentos e ajustes
     - [ ] Arrumar seção de instalar aplicativo
-    - [X] Trocar estilo de alguns links
-    - [ ] No menu suspenso deixar o botão sair em destaque
     - [ ] Organizar tela de configurações
     - [ ] Organizar carregamento da foto de perfil na tela de configurações
-    - [ ] Na tela de locais deixar criar efeito de hover nos botões de mais pesquisado
     - [ ] Na tela de locais trocar mapa da Google pelo mapa da Bing
     - [ ] Arrumar estilo da tela de mapas
     - [ ] Tornar plano Premium inativo para selecionar
