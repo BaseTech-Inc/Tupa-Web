@@ -293,7 +293,7 @@ namespace Tupa_Web.View.Dashboard
                                 // Mostra uma mensagem de erro
                                 errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
                                     EnumTypeError.warning,
-                                    "Não foi possível encontrar nenhum alerta nesse dia.");
+                                    "Não foi possível encontrar nenhum alerta nesse dia, por enquanto...");
                             }
                         }
                         else
@@ -372,7 +372,7 @@ namespace Tupa_Web.View.Dashboard
                             }
                             else
                             {
-                                morePagesInformation.InnerHtml = "<p>Chegou no final da consulta!</p>";
+                                morePagesInformation.InnerHtml = "<p>O limite é as estrelas, e você conseguiu passar 🖖.</p>";
 
                                 Thread.Sleep(2000);
                             }

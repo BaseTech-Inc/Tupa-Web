@@ -9,6 +9,8 @@ using System.Web.Routing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.WebPages;
+using Tupa_Web.Common.Enumerations;
+using Tupa_Web.Common.Helpers;
 using Tupa_Web.Common.Models;
 using Tupa_Web.Common.Security;
 using Tupa_Web.Model;
@@ -429,11 +431,20 @@ namespace Tupa_Web.View.Locais
                         {
                             morePagesInformation.InnerHtml = "";
                         }
+                    } else
+                    {
+                        // Mostra uma mensagem de erro
+                        errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.error,
+                            resultHistorico.message);
                     }
                 }
-            } catch(Exception ex)
+            } catch (Exception)
             {
-                 
+                // Mostra uma mensagem de erro
+                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.error,
+                    "Ocorreu um erro, tente novamente mais tarde.");
             }                           
         }
 
@@ -472,12 +483,21 @@ namespace Tupa_Web.View.Locais
                         RepeaterMoreSearch.DataBind();
 
                         txtSearch.Focus();
+                    } else
+                    {
+                        // Mostra uma mensagem de erro
+                        errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                            EnumTypeError.error,
+                            result.message);
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
+                // Mostra uma mensagem de erro
+                errorMessage.InnerHtml += ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.error,
+                    "Ocorreu um erro, tente novamente mais tarde.");
             }
         }
 

@@ -199,8 +199,8 @@ namespace Tupa_Web.View.Configuracoes
                         else
                         {
                             errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                      EnumTypeError.warning,
-                      "Algo deu errado, tente novamente mais tarde.");
+                              EnumTypeError.warning,
+                              "Algo deu errado, tente novamente mais tarde.");
                         }
                                                 
                     }
@@ -209,7 +209,7 @@ namespace Tupa_Web.View.Configuracoes
                 {
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                       EnumTypeError.warning,
-                      "😥 Deu ruim, bro! Tente de novo");
+                      "Ocorreu um erro, tente novamente mais tarde.");
                 }
             }
         }
@@ -222,6 +222,7 @@ namespace Tupa_Web.View.Configuracoes
                 
                 try{
                     var cookie = Request.Cookies["token"];
+
                     if (cookie != null)
                     {
                         var resultTask = Task.Run(() => postChangePassword(
@@ -257,7 +258,7 @@ namespace Tupa_Web.View.Configuracoes
                 {
                     errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                       EnumTypeError.warning,
-                      "É, deu ruim, mais sorte na próxima, amigão");
+                      "Ocorreu um erro, tente novamente mais tarde.");
                 }
             }
             else
@@ -283,7 +284,9 @@ namespace Tupa_Web.View.Configuracoes
             }
             catch
             {
-
+                errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                    EnumTypeError.warning,
+                    "Ocorreu um erro, tente novamente mais tarde.");
             }
         }
 
@@ -316,8 +319,8 @@ namespace Tupa_Web.View.Configuracoes
             catch (Exception)
             {
                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                    EnumTypeError.error,
-                    "Jogue sua conta no lixo🗑, vulgo Gabriel");
+                    EnumTypeError.warning,
+                    "Ocorreu um erro, tente novamente mais tarde.");
             }
         }
 
@@ -341,7 +344,7 @@ namespace Tupa_Web.View.Configuracoes
                     {
                         errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
                             EnumTypeError.error,
-                            "🤑 não apagou, pena");
+                            resultGet.message);
                     }
                 }
             }
@@ -398,11 +401,11 @@ namespace Tupa_Web.View.Configuracoes
                             message);
                     }
                 }            
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
-                   EnumTypeError.error,
-                   "Ocorreu um erro, tente novamente mais tarde.");
+                       EnumTypeError.warning,
+                       "Ocorreu um erro, tente novamente mais tarde.");
             }
         }
 
@@ -456,12 +459,12 @@ namespace Tupa_Web.View.Configuracoes
                 else
                 {
                     // Notify the user why their file was not uploaded.
-                    return "Your file was not uploaded because it does not have a .doc or .xls extension.";
+                    return "Seu arquivo não foi enviado porque não tem extensão .png, .jpg ou .jpeg. 📷";
                 }
             }
             else
             {
-                return "You did not specify a file to upload.";
+                return "Você não especificou um arquivo para upload. 😥";
             }
         }
 
@@ -490,7 +493,11 @@ namespace Tupa_Web.View.Configuracoes
                     }
 
                 }
-                catch (Exception) { }
+                catch (Exception) {
+                    errorMessage.InnerHtml = ErrorMessageHelpers.ErrorMessage(
+                      EnumTypeError.warning,
+                      "Ocorreu um erro, tente novamente mais tarde.");
+                }
             }
         }
 

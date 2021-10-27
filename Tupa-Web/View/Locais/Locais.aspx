@@ -5,6 +5,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="error-message-absolute">
+        <div ID="errorMessage" CssClass="error" runat="server"></div>
+    </div>
+
     <div class="container_wrapper">
         <div class="input">
             <div class="search">
