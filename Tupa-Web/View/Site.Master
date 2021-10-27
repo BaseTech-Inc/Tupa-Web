@@ -174,13 +174,58 @@
                     </ul>
                 </div>
             </div>
-            <div class="responsive">
+            <div class="responsive" onclick="toogleResponsiveMenu();">
                 <span class="material-icons">
                     menu
                 </span>
             </div>
         </div>
     </header>
+    <nav id="responsive_menu" class="responsive_menu_navigation disabled">
+        <% if (!IsLogged()) { %>
+        <%-- Menu de usuários não logados --%>
+        <ul>
+            <li> 
+                <asp:HyperLink ID="HyperLink28" NavigateUrl="~/" runat="server">Início</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink29" NavigateUrl="~/Map" runat="server">Mapa</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink30" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
+            </li>
+        </ul>
+        <% } else { %>
+        <%-- Menu de usuários logados --%>
+        <ul>
+            <li> 
+                <asp:HyperLink ID="HyperLink31" runat="server" NavigateUrl="~/">Início</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink32" runat="server" NavigateUrl="~/Map">Mapa</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink33" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Locate", new { pageNumber = "1" })%>'>Locais</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink runat="server" ID="HyperLink34" Text="Dashboard" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>' />
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink36" runat="server" NavigateUrl="~/Settings">Configurações</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink35" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
+            </li>
+        </ul>
+        <%  } %>
+    </nav>
     <% } %>
 
     <!-- Content -->

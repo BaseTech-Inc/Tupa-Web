@@ -9,6 +9,10 @@ header.card {
     box-shadow: none;
 }
 
+.responsive_menu_navigation {
+    margin-bottom: 0;
+}
+
 /* HEADER */
 
 .header {
@@ -120,7 +124,7 @@ header.card {
 
     .header > div {
         flex-direction: column-reverse;
-        padding: 0 12px
+        padding: 12px 12px
     }
 
     .header .description {
