@@ -615,16 +615,31 @@ namespace Tupa_Web.View.Dashboard
                     {
                         var valuesTemperatura = new ArrayList();
 
-                        if (Page.RouteData.Values["interval"].ToString() == "Dia")
+                        if (Page.RouteData.Values["interval"] != null)
                         {
-                            foreach (var daily in resultForecast.data.Daily)
+                            if (Page.RouteData.Values["interval"].ToString() == "Dia")
                             {
-                                // Unix timestamp is seconds past epoch
-                                DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                                dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
+                                foreach (var daily in resultForecast.data.Daily)
+                                {
+                                    // Unix timestamp is seconds past epoch
+                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                    dateTime = dateTime.AddSeconds(daily.Dt).ToLocalTime();
 
-                                valuesTemperatura.Add(
-                                    new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
+                                    valuesTemperatura.Add(
+                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), daily.Feels_like.Day));
+                                }
+                            }
+                            else
+                            {
+                                foreach (var hourly in resultForecast.data.Hourly)
+                                {
+                                    // Unix timestamp is seconds past epoch
+                                    DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                                    dateTime = dateTime.AddSeconds(hourly.Dt).ToLocalTime();
+
+                                    valuesTemperatura.Add(
+                                        new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
+                                }
                             }
                         }
                         else
@@ -639,6 +654,7 @@ namespace Tupa_Web.View.Dashboard
                                     new PositionDataTemperatura(dateTime.ToString("s", CultureInfo.CreateSpecificCulture("en-US")), hourly.Temp));
                             }
                         }
+
 
                         string jsonStringTemperatura = JsonSerializer.Serialize(valuesTemperatura);
 

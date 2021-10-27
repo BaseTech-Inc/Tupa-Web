@@ -1,6 +1,6 @@
 ﻿.config_wrapper {
     max-width: 924px;
-    padding: 32px 0;
+    padding: 32px 12px;
     min-height: 80vh;
 }
 
@@ -42,6 +42,7 @@ h2 span.sep {
 .config_wrapper .config_options {
     width: 32%;
     padding-right: 48px;    
+    min-width: 220px
 }
 
 .config_wrapper .config_options nav {
@@ -167,7 +168,8 @@ nav .menu-heading {
     padding-left: 8px;
     padding-right: 8px;
     margin-bottom: 16px;
-    min-width: 30%
+    width: 30%;
+    min-width: 200px;
 }
 
 .radio-buttons label {
@@ -381,4 +383,21 @@ nav .menu-heading {
 /* Esconde o input */
 input[type='file'] {
     display: none
+}
+
+@media only screen and (max-width: 960px) {
+    .config_wrapper .config_options {
+        padding-right: 12px;
+    }
+}
+
+@media only screen and (max-width: 765px) {
+    .config_wrapper .config_options {
+        padding-right: 0;
+        width: 100%
+    }
+
+    .config_wrapper > main {
+        flex-direction: column
+    }
 }

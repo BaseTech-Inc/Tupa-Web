@@ -82,10 +82,10 @@
                         </div>
                         <div>
                             <ul class="navigation card">
-                                <li class='<%# Page.RouteData.Values["interval"].ToString() == "Hora" ? "target" : "" %>'>
+                                <li class='<%# Page.RouteData.Values["interval"] != null ? (Page.RouteData.Values["interval"].ToString() == "Hora" ? "target" : "") : "target" %>'>
                                     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>'>Hora</asp:HyperLink>
                                 </li>
-                                <li class='<%# Page.RouteData.Values["interval"].ToString() == "Dia" ? "target" : "" %>'>
+                                <li class='<%# Page.RouteData.Values["interval"] != null ? (Page.RouteData.Values["interval"].ToString() == "Dia" ? "target" : "") : "" %>'>
                                     <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Dia" })%>'>Dia</asp:HyperLink>
                                 </li>
                             </ul>

@@ -251,13 +251,13 @@
                         <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>'>Dashboard</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink22" runat="server" NavigateUrl="~/Locate">Histórico de Viagens</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink22" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Locate", new { pageNumber = "1" })%>'>Histórico de Viagens</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink23" runat="server" NavigateUrl="~/Dashboard">Alertas</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink23" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>'>Alertas</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink24" runat="server" NavigateUrl="~/Dashboard">Previsões</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink24" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Dashboard", new { interval = "Hora" })%>'>Previsões</asp:HyperLink>
                     </li>
                     <% } %>
                 </ul>
