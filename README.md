@@ -35,7 +35,6 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [ ] Organizar carregamento da foto de perfil na tela de configurações
-- [ ] Na tela de locais trocar mapa da Google pelo mapa da Bing
 - [ ] Arrumar estilo da tela de mapas
 
 ## Começando
