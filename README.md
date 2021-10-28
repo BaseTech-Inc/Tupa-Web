@@ -34,7 +34,6 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Arrumar estilo da tela de mapas
 - [ ] Sugestão de pesquisa
 
 ## Começando
