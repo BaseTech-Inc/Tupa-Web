@@ -294,10 +294,10 @@
                         <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Settings/Perfil">Editar perfil</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink17" runat="server" NavigateUrl="~/Settings">Conexões</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink17" runat="server" NavigateUrl="~/Settings/Conexions">Conexões</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/Settings">Privacidade</asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/Settings/Privacy">Privacidade</asp:HyperLink>
                     </li>
                     <% } %>
                 </ul>
@@ -339,7 +339,7 @@
                         <asp:HyperLink ID="HyperLink26" runat="server" NavigateUrl="~/Privacy">Política de privacidade</asp:HyperLink>
                     </li>
                     <li class="footer_item">
-                        <a href="#">Ajuda & FAQ</a>
+                        <asp:HyperLink ID="HyperLink41" runat="server" NavigateUrl="~/Settings/Help">Ajuda</asp:HyperLink>
                     </li>
                 </ul>
             </div>

@@ -76,7 +76,7 @@
                             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Settings/Plans">Planos</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Settings">Ajuda</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Settings/Help">Ajuda</asp:HyperLink>
                         </li>
                     </ul>
                     <%
@@ -99,13 +99,13 @@
                             <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Settings">Conexões</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Settings/Conexions">Conexões</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings">Privacidade</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings/Privacy">Privacidade</asp:HyperLink>
                         </li>
                         <li>
-                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings">Ajuda</asp:HyperLink>
+                            <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Settings/Help">Ajuda</asp:HyperLink>
                         </li>
                     </ul>
                     <%

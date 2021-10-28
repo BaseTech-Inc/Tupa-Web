@@ -244,9 +244,12 @@
     <Content Include="Scripts\PasswordEyes.js" />
     <Content Include="Scripts\TermsPrivacy.js" />
     <Content Include="View\About\About.aspx" />
+    <Content Include="View\Configuracoes\Conexions.aspx" />
+    <Content Include="View\Configuracoes\Help.aspx" />
     <Content Include="View\Configuracoes\Notifications.aspx" />
     <Content Include="View\Configuracoes\Perfil.aspx" />
     <Content Include="View\Configuracoes\Plans.aspx" />
+    <Content Include="View\Configuracoes\Privacy.aspx" />
     <Content Include="View\Configuracoes\Themes.aspx" />
     <Content Include="View\Dashboard\Dashboard.aspx" />
     <Content Include="View\Error\Error.aspx" />
@@ -301,12 +304,26 @@
     <Compile Include="View\About\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
+    <Compile Include="View\Configuracoes\Conexions.aspx.cs">
+      <DependentUpon>Conexions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Conexions.aspx.designer.cs">
+      <DependentUpon>Conexions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="View\Configuracoes\Configuacoes.master.cs">
       <DependentUpon>Configuacoes.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="View\Configuracoes\Configuacoes.master.designer.cs">
       <DependentUpon>Configuacoes.master</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Help.aspx.cs">
+      <DependentUpon>Help.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Help.aspx.designer.cs">
+      <DependentUpon>Help.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Configuracoes\Notifications.aspx.cs">
       <DependentUpon>Notifications.aspx</DependentUpon>
@@ -328,6 +345,13 @@
     </Compile>
     <Compile Include="View\Configuracoes\Plans.aspx.designer.cs">
       <DependentUpon>Plans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Configuracoes\Privacy.aspx.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Configuracoes\Privacy.aspx.designer.cs">
+      <DependentUpon>Privacy.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Configuracoes\Themes.aspx.cs">
       <DependentUpon>Themes.aspx</DependentUpon>

@@ -51,6 +51,21 @@ namespace Tupa_Web.App_Start
                 "Settings/Notifications",
                 "~/View/Configuracoes/Notifications.aspx");
 
+            routes.MapPageRoute(
+                "Settings_Help",
+                "Settings/Help",
+                "~/View/Configuracoes/Help.aspx");
+
+            routes.MapPageRoute(
+                "Settings_Privacy",
+                "Settings/Privacy",
+                "~/View/Configuracoes/Privacy.aspx");
+
+            routes.MapPageRoute(
+                "Settings_Conexions",
+                "Settings/Conexions",
+                "~/View/Configuracoes/Conexions.aspx");
+
             // About
             routes.MapPageRoute(
                 "About",
