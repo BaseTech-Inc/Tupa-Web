@@ -132,14 +132,41 @@ nav .menu-heading {
 }
 
 .perfil-section .picture img {
+    min-width: 74px;
+    min-height: 74px;
     width: 74px;
     height: 74px;
     border-radius: 100%;
+    background: #e8e8e8
+}
+
+.account-header .loading .avatar {
+    width: 48px;
+    height: 48px;
+}
+
+.account-header > * {
+    max-height: 48px;
+    overflow: hidden
+}
+
+.account-header img {
+    background: #e8e8e8
+}
+
+.perfil-section .loading .avatar {
+    width: 74px;
+    height: 74px;
 }
 
 .perfil-section .picture > * {
-     margin-right: 12px;
-     margin-bottom: 0 !important;
+    margin-right: 12px;
+    margin-bottom: 0 !important;
+}
+
+.perfil-section .picture > div {
+    max-height: 74px;
+    overflow: hidden
 }
 
 .config_wrapper .config_container .form {
