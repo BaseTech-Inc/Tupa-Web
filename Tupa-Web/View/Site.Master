@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="pt-br">
 <head runat="server">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -196,6 +196,22 @@
             <li>
                 <asp:HyperLink ID="HyperLink30" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
             </li>
+            <hr />
+            <li>
+                <asp:HyperLink ID="HyperLink39" runat="server" NavigateUrl="~/Settings/Themes">Temas</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:HyperLink ID="HyperLink40" runat="server" NavigateUrl="~/Settings/Plans" CssClass="blue">Planos</asp:HyperLink>
+            </li>
+            <hr />
+            <li>
+                <asp:HyperLink ID="HyperLink37" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Entrar</asp:HyperLink>
+            </li>
+            <hr />
+            <li>
+                <asp:HyperLink ID="HyperLink38" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Seja um Bro!</asp:HyperLink>
+            </li>
         </ul>
         <% } else { %>
         <%-- Menu de usuários logados --%>
@@ -222,6 +238,10 @@
             <hr>
             <li>
                 <asp:HyperLink ID="HyperLink35" runat="server" NavigateUrl="~/About">Sobre nós</asp:HyperLink>
+            </li>
+            <hr>
+            <li>
+                <asp:LinkButton ID="LinkButton1" runat="server" OnClick="lbtnSair_Click">Sair</asp:LinkButton>
             </li>
         </ul>
         <%  } %>
@@ -345,15 +365,7 @@
 
     <script src="/Scripts/app.js"></script>
     <script>
-        navigator.geolocation.getCurrentPosition((position) => {
-
-            console.log(position)
-
-        }, (error) => {
-
-            console.error(error)
-
-        })
+        navigator.geolocation.getCurrentPosition((position) => { }, (error) => { })
     </script>
 </body>
 </html>
