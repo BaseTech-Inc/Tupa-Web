@@ -34,8 +34,6 @@
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [ ] Sugestão de pesquisa
-
 ## Começando
 
 ### Instalando localmente projeto

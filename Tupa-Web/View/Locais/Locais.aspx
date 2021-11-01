@@ -11,16 +11,15 @@
 
     <div class="container_wrapper">
         <div class="input">
-            <div class="search">
+            <div class="search" id="searchBoxContainer">
                 <label for="search">
                     <span class="material-icons">
                     search
                     </span>
                 </label>
-               
+                
                 <asp:TextBox ID="txtSearch" type="text" runat="server" placeholder="Pesquisar por bairros..." CssClass="card" OnTextChanged="txtSearch_TextChanged" ></asp:TextBox>  
-            </div>
-            <span class="caption">Ex.: Casa Verde, São Paulo</span>
+            </div>            
         </div>
 
         <div class="content">
@@ -223,21 +222,44 @@
         </nav>
     </div>
 
-    <script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Ari-cml8va4SytOAMFM4bXFT6r_AvY2Q9ueyPK2wh8SplYx5_4fpC0AtEN5Qpb21' async defer></script>
+
+    <script type="text/javascript">
         function NextClick(element) {
-            __doPostBack('<%= HyperLinkNext.ClientID %>')
+            __doPostBack('<%= HyperLinkNext.ClientID %>', '')
         }
 
         function BackClick(element) {
-            __doPostBack('<%= HyperLinkBack.ClientID %>')
+            __doPostBack('<%= HyperLinkBack.ClientID %>', '')
         }
 
-        const txtSearch = document.querySelector('#<%# txtSearch.ClientID %>')
+        const txtSearch = document.querySelector('#<%= txtSearch.ClientID %>')
 
-        function OnClick_MoreSearchCard(element) {
-            let address = element.children[0].children[1].children[0].innerText + " - " + element.children[0].children[1].children[1].innerText
+        function GetMap() {
+            Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', {
+                callback: function () {
+                    var manager = new Microsoft.Maps.AutosuggestManager({
+                        placeSuggestions: false
+                    })
+                    manager.attachAutosuggest(txtSearch, '#searchBoxContainer', selectedSuggestion)
+                },
+                errorCallback: function (msg) {
+                    alert(msg)
+                }
+            })
+        }
 
-            txtSearch.value = address
+        function selectedSuggestion(result) {
+            //Populate the address textbox values.
+            let address = result.address.addressLine || ''
+            let city = result.address.locality || ''
+            let county = result.address.district || ''
+            let state = result.address.adminDistrict || ''
+            let country = result.address.countryRegion || ''
+
+            setTimeout(() => { txtSearch.value = `${ address }, ${ city } - ${ state }` }, 1)
+
+            __doPostBack(txtSearch.id, `${address}, ${city} - ${state}`)
         }
     </script>
 </asp:Content>

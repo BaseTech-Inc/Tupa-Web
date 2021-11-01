@@ -55,7 +55,7 @@ namespace Tupa_Web.View.Locais
             string targetCtrl = Page.Request.Params.Get("__EVENTTARGET");
             string parameter = Page.Request.Params.Get("__EVENTARGUMENT");
 
-            if (targetCtrl != null && targetCtrl != string.Empty)
+            if (targetCtrl != null && parameter != string.Empty)
             {
                 if (IsPostBack)
                 {
@@ -76,6 +76,13 @@ namespace Tupa_Web.View.Locais
                         {
                             Response.RedirectToRoute("Locate", new { pageNumber = PageNumber });
                         }
+                    }
+                    if (targetCtrl == txtSearch.ClientID)
+                    {
+                        LoadHistoricoUsuario();
+                        LoadMoreSearch();
+
+                        SearchLocate = parameter;
                     }
                 }
             }
@@ -298,6 +305,8 @@ namespace Tupa_Web.View.Locais
 
                 if (cookie != null)
                 {
+                     txtSearch.Text = SearchLocate;
+
                     if (Page.RouteData.Values["pageNumber"] != null)
                     {
                         PageNumber = Int32.Parse(Page.RouteData.Values["pageNumber"].ToString());
