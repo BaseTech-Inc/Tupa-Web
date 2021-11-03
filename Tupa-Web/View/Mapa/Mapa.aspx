@@ -64,13 +64,19 @@
         </div>
     </template>
 
+    <template id="customInfoboxNoButton">
+        <div class="customInfobox card">
+            <h2>{title}</h2>
+        </div>
+    </template>
+
     <template id="tooltipTemplate">
         <div>
             <p>{title}</p>
         </div>
     </template>
 
-    <input type="hidden" id="jsonPontosDeRisco" name="jsonPontosDeRisco" value='[{"id":"03a94f55-93a7-4813-841f-be0f99771768","descricao":"Rua Ricardo Cavatton","ponto":{"id":"1fb9e5cb-c6b5-4f0c-8c48-9d74952a03c9","latitude":-23.51154577099006,"longitude":-46.702789758619346,"count":0}},{"id":"190feab4-1d23-4c26-9eed-b231a6b376fd","descricao":"Avenida Santo Amaro","ponto":{"id":"c3dfdbf2-22f2-480e-9bb0-6d714ee51cf2","latitude":-23.626077715193002,"longitude":-46.68722756134409,"count":0}},{"id":"19c963ec-685c-4bfb-aa71-f2c1e6ffbdb0","descricao":"Avenida Alcântara Machado","ponto":{"id":"174a6e82-b129-45bb-bfbe-531c55d92588","latitude":-23.54435799265057,"longitude":-46.5931803832838,"count":0}},{"id":"1ed79f17-aed6-4d3e-8137-89e0a80746d8","descricao":"Avenida Marquês de São Vicente","ponto":{"id":"a2656133-0dea-4803-b624-da0c36d8fb1b","latitude":-23.519291936748548,"longitude":-46.6746502960441,"count":0}},{"id":"228d8ac1-b88e-4f51-8f66-d4e9aa1883ab","descricao":"Avenida Professor Luiz Ignácio Anhaia Mello","ponto":{"id":"a0d959a0-8409-48d7-905c-7eede0498311","latitude":-23.581698347704315,"longitude":-46.56167553310564,"count":0}},{"id":"55a92e5e-82a6-4127-8e82-532594803579","descricao":"Rua Caio Prado","ponto":{"id":"95d42934-9d59-4727-bada-f9785941db66","latitude":-23.549035278846254,"longitude":-46.64859688222123,"count":0}},{"id":"580f8ff9-c8b0-40c8-aa01-3c6ed520a0a4","descricao":"Avenida Professor Abraão de Morais","ponto":{"id":"8a6975dd-3fb6-47cd-b5ce-419b7e88a8bf","latitude":-23.61844814506177,"longitude":-46.62820989239213,"count":0}},{"id":"59c9448c-660a-4231-a838-fc195b3e9f8f","descricao":"Rua São Francisco","ponto":{"id":"48e69eed-8654-4bff-8d26-3f07103e6914","latitude":-23.549059644370665,"longitude":-46.63796092457814,"count":0}},{"id":"6142b76a-f439-4816-8f31-0f0f953f2b81","descricao":"Avenida Aricanduva","ponto":{"id":"c3a659b9-7f03-4e74-b3e3-3ce59a57d59a","latitude":-23.5637057,"longitude":-46.5136243,"count":0}},{"id":"6a294f75-d519-4042-b803-a33b280c1cc3","descricao":"Avenida do Estado","ponto":{"id":"4b6f4114-c1f8-4ffa-bd0e-c1412c1ab7c5","latitude":-23.55043198166717,"longitude":-46.626502326549996,"count":0}},{"id":"6a7a78f6-7122-4018-9592-f762f4475a2c","descricao":"Avenida Celso Garcia","ponto":{"id":"09ed87ad-2d97-4760-a978-59f3b919b146","latitude":-23.53666103385123,"longitude":-46.58914367537825,"count":0}},{"id":"7c478c20-a641-4ceb-8fef-b9497cb575d2","descricao":"Avenida Sumaré","ponto":{"id":"63b64d8a-d050-4153-aa76-c22b54dd9d65","latitude":-23.5291898,"longitude":-46.6791973,"count":0}},{"id":"9b4b2f6c-44cf-419c-b4d2-63dd033226d4","descricao":"Corredor Norte-Sul","ponto":{"id":"2ae8858d-a3ab-47ef-8687-533c02e82b5d","latitude":-23.5488099,"longitude":-46.639034,"count":0}},{"id":"afcce596-3a3e-4b0b-8d8d-3b8943dccfaa","descricao":"Marginal Pinheiros","ponto":{"id":"bea3d7d7-f0b2-49b2-94a6-c67fdf6b9cdc","latitude":-23.593279141769965,"longitude":-46.694204159345865,"count":0}},{"id":"c435e5d5-9b49-4567-931a-3fd3d805bc00","descricao":"Avenida Antônio Munhoz Bonilha","ponto":{"id":"e536d724-2089-4029-9cbc-fd63f2788e48","latitude":-23.499512255206376,"longitude":-46.683796270303695,"count":0}},{"id":"d2a6bc33-a523-4402-a99a-350055cf60b6","descricao":"Rua Maria Antonia","ponto":{"id":"b7c836d4-0920-484c-88f7-b57b55609d31","latitude":-23.546291599953275,"longitude":-46.65101229874567,"count":0}},{"id":"dcbf8198-d868-4d2a-970e-ae07c0db83aa","descricao":"Marginal Pinheiros","ponto":{"id":"cfbcfdf3-037c-48be-92da-62e49c7e3903","latitude":-23.5652793,"longitude":-46.7027212,"count":0}}]'>
+    <input type="hidden" id="jsonPontosDeRisco" name="jsonPontosDeRisco" value='[{"id":"1aa89a49-b2f3-4b0b-864c-40c9e27bdbf0","descricao":"Avenida Santo Amaro","ponto":{"id":"c0093e38-1524-4e7e-a5e1-f3dba5b5f2a5","latitude":-23.626077715193002,"longitude":-46.68722756134409,"count":0},"distrito":{"id":"fe0c6524-df33-439e-b9c8-40e476d2a6d7","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Santo Amaro"}},{"id":"28cd3813-b1c4-4fa4-a2e2-bc858027bb66","descricao":"Rua Maria Antonia","ponto":{"id":"4987d6ee-9f07-4312-a81d-5fd6d8b8978e","latitude":-23.546291599953275,"longitude":-46.65101229874567,"count":0},"distrito":{"id":"b4b6e3fd-0588-4028-bd88-0d3740f97c89","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Consolação"}},{"id":"6038a4dd-8fca-4af7-9771-68baaef9e984","descricao":"Rua Caio Prado","ponto":{"id":"a7fcbe9a-6a47-4e95-a830-f4f4d010d04f","latitude":-23.549035278846254,"longitude":-46.64859688222123,"count":0},"distrito":{"id":"b4b6e3fd-0588-4028-bd88-0d3740f97c89","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Consolação"}},{"id":"69eceb03-1a97-458d-926d-47cbc5f08872","descricao":"Avenida Professor Luiz Ignácio Anhaia Mello","ponto":{"id":"cde09024-14b3-4a3e-9be0-419fc8bd7d5e","latitude":-23.581698347704315,"longitude":-46.56167553310564,"count":0},"distrito":{"id":"d8260437-84e8-4b2a-8fbb-7d1dc4a17b27","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Vila Prudente"}},{"id":"6f4f0527-d248-4c4b-96a5-a24666112ac5","descricao":"Avenida Antônio Munhoz Bonilha","ponto":{"id":"74794820-490c-4bd1-b995-bc142c0c2acc","latitude":-23.499512255206376,"longitude":-46.683796270303695,"count":0},"distrito":{"id":"c22385db-78ca-418b-95c2-9e126481ff09","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Limão"}},{"id":"b6e1ac06-2ff5-46be-a697-2e7d51a2a310","descricao":"Avenida Celso Garcia","ponto":{"id":"b75ca9c9-4dce-4030-88cb-e37d45e55334","latitude":-23.53666103385123,"longitude":-46.58914367537825,"count":0},"distrito":{"id":"3e892405-8884-4752-9808-12487dc34226","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Belém"}},{"id":"d04e8a18-1a3b-4c11-ba7f-6b70a4d3c61a","descricao":"Avenida Marquês de São Vicente","ponto":{"id":"589a3532-7231-4787-aaba-c40d546b883e","latitude":-23.519291936748548,"longitude":-46.6746502960441,"count":0},"distrito":{"id":"851df22a-60cb-4a32-823b-24d79ee36024","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Barra Funda"}},{"id":"dbe658b2-fdb1-4e01-b721-720e8df63166","descricao":"Rua São Francisco","ponto":{"id":"f54c3ed2-b52e-495c-aa86-ba1253c65d7f","latitude":-23.549059644370665,"longitude":-46.63796092457814,"count":0},"distrito":{"id":"cbe6eb41-cc32-455b-92c1-8086333e1cc4","cidade":{"id":"588ca882-b485-4ea4-8254-fb5e5f6075b7","estado":{"id":"554449d7-4064-437b-811c-7acce3d695ae","pais":{"id":"dd9cff52-8a26-4e93-a50d-a9469c6fbea5","nome":"Brasil","sigla":"BR"},"nome":"São Paulo","sigla":"SP"},"nome":"São Paulo"},"nome":"Sé"}},{"id":"35185bf5-b83d-4d28-af1b-4df6a6fb05da","descricao":"Avenida do Estado","ponto":{"id":"84fddd49-d641-4383-80c3-d6368b7c266b","latitude":-23.55043198166717,"longitude":-46.626502326549996,"count":0},"distrito":null},{"id":"35dbb228-cc90-4067-bb71-11f6b9df0e34","descricao":"Avenida Aricanduva","ponto":{"id":"567959b4-4c84-4615-9d65-31b3d6b908ec","latitude":-23.5637057,"longitude":-46.5136243,"count":0},"distrito":null},{"id":"4d6453a6-9918-47d6-98b4-dbfcf0b47b3e","descricao":"Corredor Norte-Sul","ponto":{"id":"63665f3a-f401-4f0b-adce-79c202e8d043","latitude":-23.5488099,"longitude":-46.639034,"count":0},"distrito":null},{"id":"57a49037-41b3-481a-a4a5-37a97668bbaf","descricao":"Marginal Pinheiros","ponto":{"id":"603d9ec5-6414-4dfd-98ef-87a6ead76366","latitude":-23.5652793,"longitude":-46.7027212,"count":0},"distrito":null},{"id":"5e930a9c-4d8f-4d1b-aafa-5184a5c01435","descricao":"Avenida Sumaré","ponto":{"id":"5ee3b220-f45d-4c57-ae0d-f6fc73cd3957","latitude":-23.5291898,"longitude":-46.6791973,"count":0},"distrito":null},{"id":"787574ea-c5a0-413e-b5ad-acdfe69572e5","descricao":"Rua Ricardo Cavatton","ponto":{"id":"ed263508-bf1b-424a-9f2b-caa1f1f14fb4","latitude":-23.51154577099006,"longitude":-46.702789758619346,"count":0},"distrito":null},{"id":"91b6d73f-9f8d-406e-98ce-3b2b8ac98a37","descricao":"Marginal Pinheiros","ponto":{"id":"c3e220f1-ea95-43f0-b8b1-1757522f1e4e","latitude":-23.593279141769965,"longitude":-46.694204159345865,"count":0},"distrito":null},{"id":"a8eaf912-02dd-4e10-bc8b-7df8f3571463","descricao":"Avenida Alcântara Machado","ponto":{"id":"2d707ca4-f037-4ee9-805d-eda07414ab4d","latitude":-23.54435799265057,"longitude":-46.5931803832838,"count":0},"distrito":null},{"id":"de152d60-41d2-453d-b3fc-cadf725937fa","descricao":"Avenida Professor Abraão de Morais","ponto":{"id":"2cdce908-3786-44fb-9589-bec51b7b2173","latitude":-23.61844814506177,"longitude":-46.62820989239213,"count":0},"distrito":null}]'>
     
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Ari-cml8va4SytOAMFM4bXFT6r_AvY2Q9ueyPK2wh8SplYx5_4fpC0AtEN5Qpb21' async defer></script>
 
@@ -78,11 +84,13 @@
         var map, infobox
 
         let infoboxTemplate = ''
+        let infoboxTemplateNoButton = ''
         let tooltipTemplate = ''
 
         if ('content' in document.createElement('template')) {
             infoboxTemplate = document.querySelector('#customInfobox').innerHTML.toString()
-        }  
+            infoboxTemplateNoButton = document.querySelector('#customInfoboxNoButton').innerHTML.toString()
+        }
 
         const myStyleWhite = {
             "version": "1.0",
@@ -170,10 +178,18 @@
                     anchor: new Microsoft.Maps.Point(28, 56)
                 })
 
-                //Store some metadata with the pushpin.
-                pin.metadata = {
-                    title: 'Casa Verde - SP',
-                    description: jsonPontosDeRisco[i].descricao
+                if (jsonPontosDeRisco[i].distrito != null) {
+                    //Store some metadata with the pushpin.
+                    pin.metadata = {
+                        title: jsonPontosDeRisco[i].distrito.nome + ', ' + jsonPontosDeRisco[i].distrito.cidade.nome + ' - ' + jsonPontosDeRisco[i].distrito.cidade.estado.sigla,
+                        description: jsonPontosDeRisco[i].descricao
+                    }
+                } else {
+                    //Store some metadata with the pushpin.
+                    pin.metadata = {
+                        title: jsonPontosDeRisco[i].descricao,
+                        description: ''
+                    }
                 }
 
                 //Add a mouse events to the pushpin.
@@ -225,17 +241,29 @@
 
             //Make sure the infobox has metadata to display.
             if (e.target.metadata) {
-                //Set the infobox options with the metadata of the pushpin.
-                infobox.setOptions({                    
-                    htmlContent: infoboxTemplate
-                        .replace('{title}', e.target.metadata.title)
-                        .replace('{description}', e.target.metadata.description)
-                        .replace('{link}', 'https://tupaweb.azurewebsites.net/Dashboard/Hora?q=' + e.target.metadata.title),
-                    location: e.target.getLocation(),
-                    title: e.target.metadata.title,
-                    description: e.target.metadata.description,
-                    visible: true
-                })
+                if (e.target.metadata.description != "") {
+                    //Set the infobox options with the metadata of the pushpin.
+                    infobox.setOptions({
+                        htmlContent: infoboxTemplate
+                            .replace('{title}', e.target.metadata.title)
+                            .replace('{description}', e.target.metadata.description)
+                            .replace('{link}', 'https://tupaweb.azurewebsites.net/Dashboard/Hora?q=' + e.target.metadata.title),
+                        location: e.target.getLocation(),
+                        title: e.target.metadata.title,
+                        description: e.target.metadata.description,
+                        visible: true
+                    })
+                } else {
+                    //Set the infobox options with the metadata of the pushpin.
+                    infobox.setOptions({
+                        htmlContent: infoboxTemplateNoButton
+                            .replace('{title}', e.target.metadata.title),
+                        location: e.target.getLocation(),
+                        title: e.target.metadata.title,
+                        description: e.target.metadata.description,
+                        visible: true
+                    })
+                }                
             }
         }
 
