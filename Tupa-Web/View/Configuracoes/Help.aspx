@@ -2,7 +2,9 @@
     MetaDescription="Você precisa de ajuda?" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ChildContent1" runat="server">
-    <h1>Ajuda</h1>
+    <h1>Perguntas frequentes</h1>
 
     <hr />
+
+    <p>Não foi possível encontrar nenhuma pergunta frequente. 😥</p>
 </asp:Content>

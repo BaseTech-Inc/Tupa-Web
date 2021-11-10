@@ -288,16 +288,7 @@
                     <% if (IsLogged()) { %>
                     <%-- Parte do rodapé para usuários cadastrados --%>
                     <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="~/Settings/Notifications">Notificações</asp:HyperLink>
-                    </li>
-                    <li class="footer_item">
                         <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Settings/Perfil">Editar perfil</asp:HyperLink>
-                    </li>
-                    <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink17" runat="server" NavigateUrl="~/Settings/Conexions">Conexões</asp:HyperLink>
-                    </li>
-                    <li class="footer_item">
-                        <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="~/Settings/Privacy">Privacidade</asp:HyperLink>
                     </li>
                     <% } %>
                 </ul>

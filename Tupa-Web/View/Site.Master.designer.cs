@@ -447,15 +447,6 @@ namespace Tupa_Web.View
         protected global::System.Web.UI.WebControls.HyperLink HyperLink15;
 
         /// <summary>
-        /// Controle HyperLink19.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink19;
-
-        /// <summary>
         /// Controle HyperLink16.
         /// </summary>
         /// <remarks>
@@ -463,24 +454,6 @@ namespace Tupa_Web.View
         /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HyperLink16;
-
-        /// <summary>
-        /// Controle HyperLink17.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink17;
-
-        /// <summary>
-        /// Controle HyperLink18.
-        /// </summary>
-        /// <remarks>
-        /// Campo gerado automaticamente.
-        /// Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink18;
 
         /// <summary>
         /// Controle HyperLink20.
