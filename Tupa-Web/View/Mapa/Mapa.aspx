@@ -49,6 +49,11 @@
         <div id="directionsPanel"></div>
         <div id="directionsItinerary"></div>
     </div>
+    <div class="buttonClose card disabled icon" onclick="ToogleDirections();">
+        <span class="material-icons-outlined">
+        close
+        </span>
+    </div>
 
     <div id="myMap"></div>
 
@@ -294,9 +299,11 @@
         function ToogleDirections() {
             let inputs = document.querySelector('.inputs')
             let directions = document.querySelector('.directionsContainer')
+            let closeButton = document.querySelector('.buttonClose')
 
             inputs.classList.toggle('disabled')
             directions.classList.toggle('disabled')
+            closeButton.classList.toggle('disabled')
         }
     </script>
 </asp:Content>
