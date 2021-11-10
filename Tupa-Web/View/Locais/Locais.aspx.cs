@@ -149,16 +149,14 @@ namespace Tupa_Web.View.Locais
             private string distanciaPercurso;
             private string local;
             private string eventos;
-            private string enchentes;
             private string urlMapas;
 
-            public PositionDataLocais(string intervaloDeTempo, string distanciaPercurso, string local, string eventos, string enchentes, string urlMapas)
+            public PositionDataLocais(string intervaloDeTempo, string distanciaPercurso, string local, string eventos, string urlMapas)
             {
                 this.intervaloDeTempo = intervaloDeTempo;
                 this.distanciaPercurso = distanciaPercurso;
                 this.local = local;
                 this.eventos = eventos;
-                this.enchentes = enchentes;
                 this.urlMapas = urlMapas;
             }
 
@@ -191,14 +189,6 @@ namespace Tupa_Web.View.Locais
                 get
                 {
                     return eventos;
-                }
-            }
-
-            public string Enchentes
-            {
-                get
-                {
-                    return enchentes;
                 }
             }
 
@@ -360,7 +350,6 @@ namespace Tupa_Web.View.Locais
                                   item.distanciaPercurso.ToString() + "km",
                                   item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
                                   resultDecode.Count.ToString(),
-                                  "",
                                   googleUrl
                                   ));
                             }
@@ -373,7 +362,6 @@ namespace Tupa_Web.View.Locais
                                   item.distanciaPercurso.ToString() + "km",
                                   item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
                                   resultDecode.Count.ToString(),
-                                  "",
                                   googleUrl
                                   ));
                             }
@@ -386,7 +374,6 @@ namespace Tupa_Web.View.Locais
                                  item.distanciaPercurso.ToString() + "km",
                                  item.distrito.nome + ", " + item.distrito.cidade.nome + " - " + item.distrito.cidade.estado.sigla,
                                  resultDecode.Count.ToString(),
-                                 "",
                                  googleUrl
                                  ));
                             }

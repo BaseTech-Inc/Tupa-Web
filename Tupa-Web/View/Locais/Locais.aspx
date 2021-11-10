@@ -85,10 +85,6 @@
                                     <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
                                     <p>Eventos</p>
                                 </div>
-                                <div>
-                                    <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
-                                    <p>Enchentes</p>
-                                </div>
                             </div>
                         </div>
                     </ItemTemplate>
@@ -130,10 +126,6 @@
                                     <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
                                     <p>Eventos</p>
                                 </div>
-                                <div>
-                                    <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
-                                    <p>Enchentes</p>
-                                </div>
                             </div>
                         </div>
                     </ItemTemplate>
@@ -174,10 +166,6 @@
                                 <div>
                                     <p><%# DataBinder.Eval(Container.DataItem, "Eventos") %></p>
                                     <p>Eventos</p>
-                                </div>
-                                <div>
-                                    <p><%# DataBinder.Eval(Container.DataItem, "Enchentes") %></p>
-                                    <p>Enchentes</p>
                                 </div>
                             </div>
                         </div>

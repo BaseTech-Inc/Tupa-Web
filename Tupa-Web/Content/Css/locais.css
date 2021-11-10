@@ -112,6 +112,7 @@ main .content .list .card .body {
 main .content .list .card .footer {
     display: flex;
     align-items: center;
+    justify-content: center
 }
 
 main .content .list .card .footer div {
