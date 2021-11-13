@@ -471,6 +471,13 @@
                 </div>                               
             </div>
         </div>
+        <div class="discord container_wrapper"> 
+            <h1>A experiência Tupã. <br/> On Discord.</h1>
+
+            <a class="secondary-button" href="https://discord.com/api/oauth2/authorize?client_id=858200373168308224&permissions=0&scope=bot%20applications.commands">Adicionar ao Discord</a>
+                
+            <p>Atendendo <span class="bold">1</span> usuários registrados em <span class="bold">1</span> servidores</p>
+        </div>  
     </div>
 
     <script src="/Scripts/intlTelInput.min.js"></script>
