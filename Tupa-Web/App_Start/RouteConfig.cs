@@ -119,6 +119,11 @@ namespace Tupa_Web.App_Start
                 "Map",
                 "~/View/Mapa/Mapa.aspx");
 
+            routes.MapPageRoute(
+                "MapaAndroid",
+                "MapaAndroid",
+                "~/View/MapaAndroid/MapaAndroid.aspx");
+
             // Privacy
             routes.MapPageRoute(
                 "Privacy",

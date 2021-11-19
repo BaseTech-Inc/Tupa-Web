@@ -259,6 +259,7 @@
     <Content Include="View\Login\Login__GeneratePasswordReset.aspx" />
     <Content Include="View\Login\Login__Verify.aspx" />
     <Content Include="View\Login\Login__ResetPassword.aspx" />
+    <Content Include="View\MapaAndroid\MapaAndroid.aspx" />
     <Content Include="View\Mapa\Mapa.aspx" />
     <Content Include="View\Privacy\Privacy.aspx" />
     <Content Include="View\Register\Register.aspx" />
@@ -420,6 +421,13 @@
     </Compile>
     <Compile Include="View\Login\Login__ResetPassword.aspx.designer.cs">
       <DependentUpon>Login__ResetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\MapaAndroid\MapaAndroid.aspx.cs">
+      <DependentUpon>MapaAndroid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\MapaAndroid\MapaAndroid.aspx.designer.cs">
+      <DependentUpon>MapaAndroid.aspx</DependentUpon>
     </Compile>
     <Compile Include="View\Mapa\Mapa.aspx.cs">
       <DependentUpon>Mapa.aspx</DependentUpon>
