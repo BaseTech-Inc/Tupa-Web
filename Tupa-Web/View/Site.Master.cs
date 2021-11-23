@@ -193,6 +193,8 @@ namespace Tupa_Web.View
                     {
                         cookieRefreshToken.Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies.Add(cookieRefreshToken);
+
+                        Response.Redirect("~/");
                     }
                 }
             }

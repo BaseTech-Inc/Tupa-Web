@@ -306,6 +306,11 @@ namespace Tupa_Web.View.Configuracoes
                     {
                         cookie.Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies.Add(cookie);
+
+                        var refreshToken = Request.Cookies["refreshToken"];
+                        refreshToken.Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies.Add(refreshToken);
+
                         Response.Redirect("~/");
                     }
                     else
