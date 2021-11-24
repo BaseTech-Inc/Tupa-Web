@@ -311,6 +311,14 @@ namespace Tupa_Web.View.Configuracoes
                         refreshToken.Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies.Add(refreshToken);
 
+                        var cookieGoogle = Request.Cookies["google"];
+
+                        if (cookieGoogle != null)
+                        {
+                            cookieGoogle.Expires = DateTime.Now.AddDays(-1);
+                            Response.Cookies.Add(cookieGoogle);
+                        }
+
                         Response.Redirect("~/");
                     }
                     else

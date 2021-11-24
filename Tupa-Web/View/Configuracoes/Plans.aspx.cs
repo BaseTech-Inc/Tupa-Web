@@ -21,15 +21,18 @@ namespace Tupa_Web.View.Configuracoes
 
             if (cookie != null)
             {
-                var resultTaskGet = Task.Run(() => GetBasicProfile(
-                             bearerToken: cookie.Values[0]));
-                resultTaskGet.Wait();
-
-                var resultGet = resultTaskGet.GetAwaiter().GetResult();
-
-                if (resultGet.succeeded)
+                if (!IsLoggedInGoogle())
                 {
-                    tipoUser = resultGet.data.TipoUsuario;
+                    var resultTaskGet = Task.Run(() => GetBasicProfile(
+                        bearerToken: cookie.Values[0]));
+                    resultTaskGet.Wait();
+
+                    var resultGet = resultTaskGet.GetAwaiter().GetResult();
+
+                    if (resultGet.succeeded)
+                    {
+                        tipoUser = resultGet.data.TipoUsuario;
+                    }
                 }
             }
         }
@@ -41,6 +44,18 @@ namespace Tupa_Web.View.Configuracoes
                 return true;
             }
             return false;
+        }
+
+        public static bool IsLoggedInGoogle()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["google"];
+
+            if (cookie == null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private async Task<Response<Usuario>> GetBasicProfile(

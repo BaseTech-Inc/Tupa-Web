@@ -28,25 +28,30 @@ namespace Tupa_Web.View.Configuracoes
 
             if (cookie != null)
             {
-                var resultTask = Task.Run(() => GetBasicProfile(cookie.Values[0]));
-                resultTask.Wait();
-
-                var result = resultTask.GetAwaiter().GetResult();
-
-                if (result.succeeded)
+                try
                 {
-                    var basicProfile = result.data;
+                    var resultTask = Task.Run(() => GetBasicProfile(cookie.Values[0]));
+                    resultTask.Wait();
 
-                    foreach (var info in basicProfile)
+                    var result = resultTask.GetAwaiter().GetResult();
+
+                    if (result.succeeded)
                     {
-                        if (info.Key == "Nome")
+                        var basicProfile = result.data;
+
+                        foreach (var info in basicProfile)
                         {
-                            userName = info.Value;
+                            if (info.Key == "Nome")
+                            {
+                                userName = info.Value;
+                            }
                         }
                     }
+                } catch
+                {
+
                 }
             }
-            
         }
 
         private async Task<Response<IDictionary<string, string>>> GetBasicProfile(

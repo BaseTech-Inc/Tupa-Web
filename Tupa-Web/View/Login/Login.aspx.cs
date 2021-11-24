@@ -80,10 +80,21 @@ namespace Tupa_Web.View.Login
 
                         cookie.Values.Add("access_token", data.access_token);
                         cookie.Values.Add("token_type", data.token_type);
-                        cookie.Values.Add("expiration", data.expiration.ToString());
+                        cookie.Values.Add("expiration", data.expiration.ToString());                        
                         cookie.HttpOnly = true;
 
-                        this.Page.Response.AppendCookie(cookie);
+                        this.Page.Response.Cookies.Add(cookie);
+                    }
+
+                    var cookieGoogle = Request.Cookies["google"];
+
+                    if (cookieGoogle == null)
+                    {
+                        cookieGoogle = new HttpCookie("google");
+
+                        cookieGoogle.Value = "true";
+
+                        this.Page.Response.Cookies.Add(cookieGoogle);
                     }
 
                     Response.Redirect("~/");

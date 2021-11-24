@@ -171,6 +171,18 @@ namespace Tupa_Web.View
             return true;
         }
 
+        public static bool IsLoggedInGoogle()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["google"];
+
+            if (cookie == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         protected void lbtnSair_Click(object sender, EventArgs e)
         {
             var cookie = Request.Cookies["token"];
@@ -192,10 +204,18 @@ namespace Tupa_Web.View
                     if (cookieRefreshToken != null)
                     {
                         cookieRefreshToken.Expires = DateTime.Now.AddDays(-1);
-                        Response.Cookies.Add(cookieRefreshToken);
-
-                        Response.Redirect("~/");
+                        Response.Cookies.Add(cookieRefreshToken);                        
                     }
+
+                    var cookieGoogle = Request.Cookies["google"];
+
+                    if (cookieGoogle != null)
+                    {
+                        cookieGoogle.Expires = DateTime.Now.AddDays(-1);
+                        Response.Cookies.Add(cookieGoogle);
+                    }
+
+                    Response.Redirect("~/");
                 }
             }
 

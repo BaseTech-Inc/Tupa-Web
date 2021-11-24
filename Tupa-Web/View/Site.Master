@@ -99,6 +99,7 @@
                 <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Login", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>'>Entrar</asp:HyperLink>
                 <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' CssClass="primary-button">Seja um Bro!</asp:HyperLink>
                 <% } else { %>
+                <%if (!IsLoggedInGoogle()) { %>
                 <div class="photoUser">
                     <asp:UpdatePanel ID="UpdatePanelImage" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelImage_Load">
                         <ContentTemplate>
@@ -127,6 +128,7 @@
                     </asp:UpdatePanel>
                 </div>
                 <% } %>
+                <% } %>
                 <div class="menu-bar">
                     <span class="material-icons">
                         more_horiz
@@ -134,6 +136,7 @@
 
                     <ul class="menu-dropdown card">
                         <% if (IsLogged()) { %>
+                        <%if (!IsLoggedInGoogle()) { %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Settings">Perfil</asp:HyperLink>
                         </li>
@@ -144,7 +147,8 @@
                                 </span>
                                 Configurar Perfil
                             </asp:HyperLink>
-                        </li>                     
+                        </li>    
+                        <% } %>
                         <% } %>
                         <li class="menu-dropdown-item">
                             <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Settings/Themes">
@@ -287,9 +291,11 @@
                     </li>
                     <% if (IsLogged()) { %>
                     <%-- Parte do rodapé para usuários cadastrados --%>
+                    <% if (!IsLoggedInGoogle()) { %>
                     <li class="footer_item">
                         <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Settings/Perfil">Editar perfil</asp:HyperLink>
                     </li>
+                    <% } %>
                     <% } %>
                 </ul>
             </div>

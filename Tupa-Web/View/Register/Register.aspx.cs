@@ -93,6 +93,17 @@ namespace Tupa_Web.View.Register
                         this.Page.Response.AppendCookie(cookie);
                     }
 
+                    var cookieGoogle = Request.Cookies["google"];
+
+                    if (cookieGoogle == null)
+                    {
+                        cookieGoogle = new HttpCookie("google");
+
+                        cookieGoogle.Value = "true";
+
+                        this.Page.Response.Cookies.Add(cookieGoogle);
+                    }
+
                     Response.Redirect("~/");
                 } else
                 {

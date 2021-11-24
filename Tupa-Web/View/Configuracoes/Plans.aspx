@@ -7,6 +7,8 @@
 
         if (cookie != null)
         {
+            if (!IsLoggedInGoogle())
+            {
     %>
     <h1>Plano atual</h1>
 
@@ -16,11 +18,11 @@
         <div class="card">
             <div class="title">
                 <% if (IsPremium())
-                { %>
+                    { %>
                         <h2>Plano Poggers</h2>
                 <%}
-                else
-                { %>
+                    else
+                    { %>
                     <h2> Plano Based</h2>
                 <%} %>
             </div>
@@ -57,8 +59,8 @@
             </div>
 
             <%}
-            else
-            { %>
+                else
+                { %>
             <div class="price-section">
                 <span class="currency">R$</span>
                 <span class="money bold">FREE</span>
@@ -66,7 +68,8 @@
                 </div>
             </div>
             <%
-            }
+                    }
+                }
             %>
 
     <h1>Planos</h1>
