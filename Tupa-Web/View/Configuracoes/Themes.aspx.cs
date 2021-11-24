@@ -57,6 +57,8 @@ namespace Tupa_Web.View.Configuracoes
 
                     Response.Cookies.Add(cookie);
                 }
+
+                Response.Redirect("~/Settings/Themes");
             }
         }
 
@@ -84,6 +86,8 @@ namespace Tupa_Web.View.Configuracoes
 
                     Response.Cookies.Add(cookie);
                 }
+
+                Response.Redirect("~/Settings/Themes");
             }
         }
 
@@ -111,6 +115,8 @@ namespace Tupa_Web.View.Configuracoes
 
                     Response.Cookies.Add(cookie);
                 }
+
+                Response.Redirect("~/Settings/Themes");
             }
         }
     }
