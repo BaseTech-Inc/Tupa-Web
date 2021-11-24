@@ -28,7 +28,7 @@
 
 .popup_wrapper .popup .title {
     padding: 24px;
-    background: #F7F9FB;
+    background: var(--surface_color_variant);
     border-bottom: 1px solid #D9DBDD;
     display: flex;
     justify-content: space-between;
