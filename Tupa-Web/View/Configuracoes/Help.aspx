@@ -6,5 +6,27 @@
 
     <hr />
 
-    <p>Não foi possível encontrar nenhuma pergunta frequente. 😥</p>
+    <details class="questions">
+        <summary>
+            <h3>Quem somos nós</h3>
+
+            <span class="material-icons">
+            navigate_next
+            </span>
+        </summary>
+
+        <p>Você pode ver um pouco da nosso histórica clicando <asp:HyperLink runat="server" NavigateUrl="~/About" class="land__link">aqui</asp:HyperLink>.</p>
+    </details>
+
+    <details class="questions">
+        <summary>
+            <h3>Como posso me registrar?</h3>
+
+            <span class="material-icons">
+            navigate_next
+            </span>
+        </summary>
+
+        <p>Você pode se registrar inserindo suas informações na <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' class="land__link">página de registro</asp:HyperLink> e aceitando o e-mail que será enviado na sua caixa de mensagens.</p>
+    </details>
 </asp:Content>

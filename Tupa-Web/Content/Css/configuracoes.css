@@ -428,3 +428,25 @@ input[type='file'] {
         flex-direction: column
     }
 }
+
+details {
+    margin-bottom: 12px
+}
+
+details summary {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    cursor: pointer;
+    background-color: var(--surface_color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 6px var(--shadow-variant-color);    
+}
+
+details > p {
+    margin-top: 12px;
+}
+
+details.questions summary {
+    padding: 12px
+}
