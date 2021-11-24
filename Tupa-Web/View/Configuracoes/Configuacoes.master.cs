@@ -106,6 +106,18 @@ namespace Tupa_Web.View.Configuracoes
             }
         }
 
+        public static bool IsLoggedInGoogle()
+        {
+            var cookie = HttpContext.Current.Request.Cookies["google"];
+
+            if (cookie == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         private async Task<Response<string>> GetImageProfile(
             string bearerToken)
         {

@@ -14,7 +14,9 @@
                     var cookie = Request.Cookies["token"];
 
                     if (cookie != null)
-                    { 
+                    {
+                        if (!IsLoggedInGoogle())
+                        {
                 %>
                 <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
                 <asp:UpdatePanel ID="UpdatePanelImage3" UpdateMode="Conditional" runat="server" OnLoad="UpdatePanelImage3_Load">
@@ -41,17 +43,21 @@
                     </Triggers>
                 </asp:UpdatePanel>
                 <%
-                    } 
+                        }
+                    }
                 %>
                 <div class="details">
                     <h2>
                         <%
                             if (cookie != null)
-                            { 
+                            {
+                                if (!IsLoggedInGoogle())
+                                {
                         %>
                         <span class="blue"><%= UserName %></span> <span class="sep">/</span>
                         <%
-                            } 
+                                }
+                            }
                         %>
                         <%= Page.Title %></h2>
                     <p><%= Page.MetaDescription %></p>
