@@ -86,15 +86,17 @@
                         </li>
                     </ul>
                     <%
-                        } else { 
+                        } else {
                     %>
                     <ul>
                         <li>
                             <span class="menu-heading">Configurações</span>
                         </li>
+                        <% if (!IsLoggedInGoogle()) { %>
                         <li>
                             <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Settings/Perfil">Perfil</asp:HyperLink>
                         </li>
+                        <% } %>
                         <li>
                             <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Settings/Themes">Temas</asp:HyperLink>
                         </li>
