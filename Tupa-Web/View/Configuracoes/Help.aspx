@@ -29,4 +29,16 @@
 
         <p>Você pode se registrar inserindo suas informações na <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl='<%# Page.GetRouteUrl("Register", new { }) + "?ReturnUrl=" + HttpContext.Current.Request.Url.AbsoluteUri %>' class="land__link">página de registro</asp:HyperLink> e aceitando o e-mail que será enviado na sua caixa de mensagens.</p>
     </details>
+    
+    <details class="questions">
+        <summary>
+            <h3>Como posso entrar em contato</h3>
+
+            <span class="material-icons">
+            navigate_next
+            </span>
+        </summary>
+
+        <p>Você pode entrar em contato conosco apartir desse email: faq@tupa.tech.</p>
+    </details>
 </asp:Content>
