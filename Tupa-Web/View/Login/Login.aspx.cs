@@ -46,6 +46,33 @@ namespace Tupa_Web.View.Login
             if (ReturnUrl != null)
             {
                 btnReturn.NavigateUrl = ReturnUrl;
+            } else
+            {
+                btnReturn.NavigateUrl = "~/";
+            }
+
+            var cookieToken = Request.Cookies["token"];
+
+            if (cookieToken != null)
+            {
+                cookieToken.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookieToken);
+            }
+
+            var cookieRefreshToken = Request.Cookies["refreshToken"];
+
+            if (cookieRefreshToken != null)
+            {
+                cookieRefreshToken.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookieRefreshToken);
+            }
+
+            var cookieGoogle = Request.Cookies["google"];
+
+            if (cookieGoogle != null)
+            {
+                cookieGoogle.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookieGoogle);
             }
         }
 
