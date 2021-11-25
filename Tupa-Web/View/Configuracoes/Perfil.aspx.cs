@@ -30,6 +30,26 @@ namespace Tupa_Web.View.Configuracoes
             {
                 // Setup
                 UpdateProgressImage2.AssociatedUpdatePanelID = UpdatePanelImage2.UniqueID;
+
+                try
+                {
+                    if (cookie != null)
+                    {
+                        var resultTaskGet = Task.Run(() => GetBasicProfile(
+                                    bearerToken: cookie.Values[0]));
+                        resultTaskGet.Wait();
+
+                        var resultGet = resultTaskGet.GetAwaiter().GetResult();
+                        if (resultGet.succeeded)
+                        {
+                            txtEmail.Text = resultGet.data.Email;
+                        }
+                        else
+                        { }
+                    }
+                }
+                catch (Exception)
+                { }
             }
 
             // Post Back usando um evento Javascript
@@ -54,6 +74,7 @@ namespace Tupa_Web.View.Configuracoes
                 }
             }
         }
+
         private async Task<Response<string>> postChangePassword(
             string oldPassword, string newPassword, string bearerToken)
         {
@@ -93,6 +114,7 @@ namespace Tupa_Web.View.Configuracoes
 
             return jsonResult;
         }
+
         private async Task<Response<String>> PutBasicProfile(
               string userName,
               string tipoUser,

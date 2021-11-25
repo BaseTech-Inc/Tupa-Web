@@ -55,6 +55,13 @@
 
         <div class="form-group">
             <div class="input">
+                <asp:Label ID="Label3" runat="server" CssClass="label">Email</asp:Label>
+                <asp:TextBox ID="txtEmail" runat="server" autocomplete="off" disabled style="cursor: no-drop"></asp:TextBox>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input">
                 <asp:Label ID="Label1" runat="server" CssClass="label">Senha Antiga</asp:Label>
                 <asp:TextBox ID="txtOld" name="txtSenha" runat="server" placeholder="*****" TextMode="Password"></asp:TextBox>
             </div>
