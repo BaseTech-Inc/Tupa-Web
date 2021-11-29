@@ -450,3 +450,7 @@ details > p {
 details.questions summary {
     padding: 12px
 }
+
+details summary::-webkit-details-marker {
+    display: none;
+}
